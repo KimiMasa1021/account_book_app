@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import 'view/routes/app_route.gr.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ,
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routeInformationParser: appRouter.defaultRouteParser(),
+      routerDelegate: appRouter.delegate(),
     );
   }
 }
