@@ -1,4 +1,4 @@
-import 'package:account_book_app/view/account/account.dart';
+import 'package:account_book_app/view/pages/account/account.dart';
 import 'package:account_book_app/view/auth/sign_up.dart';
 import 'package:account_book_app/view/routes/route_path.dart';
 import 'package:auto_route/auto_route.dart';

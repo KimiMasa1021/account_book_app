@@ -11,7 +11,7 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:account_book_app/view/account/account.dart' as _i5;
+import 'package:account_book_app/view/pages/account/account.dart' as _i5;
 import 'package:account_book_app/view/auth/sign_in.dart' as _i4;
 import 'package:account_book_app/view/auth/sign_up.dart' as _i3;
 import 'package:account_book_app/view/auth/top.dart' as _i2;

@@ -1,15 +1,13 @@
 import 'package:account_book_app/provider/general_provider.dart';
-import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../component/auth/border_button.dart';
+import '../../component/auth/icon_textfield.dart';
+import '../../component/auth/painted_button.dart';
+import '../../component/auth/pink_background.dart';
 import '../../constant/hex_color.dart';
-import '../../view_core/auth/border_button.dart';
-import '../../view_core/auth/icon_textfield.dart';
-import '../../view_core/auth/painted_button.dart';
-import '../../view_core/auth/pink_background.dart';
-import '../routes/app_route.gr.dart';
 
 class SignUp extends HookConsumerWidget {
   const SignUp({super.key});
@@ -23,8 +21,8 @@ class SignUp extends HookConsumerWidget {
     final passwordController = useTextEditingController(text: '');
 
     final ValueNotifier<bool> loading = useState(false);
-
     final authState = ref.watch(authControllerProvider);
+
     final authController = ref.watch(authControllerProvider.notifier);
 
     return Scaffold(
@@ -102,7 +100,6 @@ class SignUp extends HookConsumerWidget {
                               title: 'アカウント作成',
                             ),
                             const SizedBox(height: 10),
-                            //Googleで作成
                             BorderButton(
                               function: () {},
                               title: 'Googleで作成',
@@ -131,21 +128,3 @@ class SignUp extends HookConsumerWidget {
     );
   }
 }
-
-
-
-                              // function: () async {
-                              //   FocusScope.of(context).unfocus();
-                              //   loading.value = true;
-                              //   try {
-                              //     final email = emailController.text;
-                              //     final password = passwordController.text;
-                              //     final name = nameController.text;
-
-                              //     await authController.signUp(
-                              //         email, password, name);
-                              //   } catch (e) {
-                              //     debugPrint(e.toString());
-                              //   }
-                              //   loading.value = false;
-                              // },

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../constant/hex_color.dart';
 
-class PaintedButton extends StatelessWidget {
-  const PaintedButton({
+class BorderButton extends StatelessWidget {
+  const BorderButton({
     super.key,
     required this.function,
     required this.title,
@@ -20,16 +18,20 @@ class PaintedButton extends StatelessWidget {
         width: double.infinity,
         height: 58,
         decoration: BoxDecoration(
-          color: HexColor("850E35"),
+          color: Colors.white,
           borderRadius: const BorderRadius.all(
             Radius.circular(123),
+          ),
+          border: Border.all(
+            width: 3,
+            color: HexColor("850E35"),
           ),
         ),
         child: Center(
           child: Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: HexColor("850E35"),
               fontSize: 25,
             ),
           ),

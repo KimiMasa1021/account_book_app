@@ -7,46 +7,69 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthController extends StateNotifier<User?> {
-  final Reader _read;
+  final Reader _reader;
+
   StreamSubscription<User?>? _authStateChangesSubscription;
 
-  AuthController(this._read) : super(null) {
+  AuthController(this._reader) : super(null) {
     _authStateChangesSubscription?.cancel();
-    _authStateChangesSubscription = _read(authRepositoryProvider)
-        .authStateChanges
+    _authStateChangesSubscription = _reader(authRepositoryProvider)
+        .authStateChange
         .listen((user) => state = user);
   }
+
   @override
-  User? get state => _read(authRepositoryProvider).getCurrentUser();
+  void dispose() {
+    _authStateChangesSubscription?.cancel();
+    super.dispose();
+  }
 
-  Future<void> signIn(String email, String password) async {
+  @override
+  User? get state => _reader(authRepositoryProvider).getCurrentUser();
+
+  Future<String?> signIn(String email, String password) async {
     try {
-      if (!validate2(email, password)) return showToast("no-data");
+      if (!validate2(email, password)) {
+        showToast("no-data");
+        return "no-data";
+      }
 
-      final flg =
-          await _read(authRepositoryProvider).signInWithEmail(email, password);
+      final flg = await _reader(authRepositoryProvider)
+          .signInWithEmail(email, password);
+      debugPrint(flg);
       if (flg != null) {
         showToast(flg);
+        return flg;
+      }
+      return null;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<String?> signUp(String email, String password, String name) async {
+    try {
+      if (!validate(email, password, name)) {
+        showToast("no-data");
+        return "no-data";
+      }
+
+      final flg =
+          await _reader(authRepositoryProvider).signUp(email, password, name);
+      if (flg == null) {
+        await _reader(authRepositoryProvider).saveUserData(name);
+        return null;
+      } else {
+        showToast(flg);
+        return flg;
       }
     } catch (e) {
       throw e.toString();
     }
   }
 
-  Future<void> signUp(String email, String password, String name) async {
-    try {
-      if (!validate(email, password, name)) return showToast("no-data");
-
-      final flg =
-          await _read(authRepositoryProvider).signUp(email, password, name);
-      if (flg == null) {
-        await _read(authRepositoryProvider).saveUserData(name);
-      } else {
-        showToast(flg);
-      }
-    } catch (e) {
-      throw e.toString();
-    }
+  Future<void> signOut() async {
+    _reader(authRepositoryProvider).signOut();
   }
 
   void showToast(String flg) {
@@ -56,7 +79,7 @@ class AuthController extends StateNotifier<User?> {
         msg = "そのメールアドレスは既に使われています。";
         break;
       case "invalid-email":
-        msg = "そのメールアドレスは登録済みです";
+        msg = "そのメールアドレスは無効です";
         break;
       case "operation-not-allowed":
         msg = "有効なユーザーではありません。";
@@ -66,6 +89,15 @@ class AuthController extends StateNotifier<User?> {
         break;
       case "no-data":
         msg = "すべて必須項目です。";
+        break;
+      case "wrong-password":
+        msg = "間違ったパスワードです。";
+        break;
+      case "user-disabled":
+        msg = "メールアドレスが無効です。";
+        break;
+      case "user-not-found":
+        msg = "そのメールアドレスは登録されていません。";
         break;
       default:
         msg = "";
@@ -94,11 +126,5 @@ class AuthController extends StateNotifier<User?> {
     if (password.isEmpty) return false;
 
     return true;
-  }
-
-  @override
-  void dispose() {
-    _authStateChangesSubscription?.cancel();
-    super.dispose();
   }
 }

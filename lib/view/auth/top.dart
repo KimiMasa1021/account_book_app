@@ -1,14 +1,19 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:account_book_app/model/page_state.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../component/auth/border_button.dart';
+import '../../component/auth/painted_button.dart';
+import '../../component/auth/pink_background.dart';
 import '../../constant/hex_color.dart';
-import '../../view_core/auth/pink_background.dart';
-import '../routes/app_route.gr.dart';
+import '../../provider/general_provider.dart';
 
-class Top extends StatelessWidget {
+class Top extends HookConsumerWidget {
   const Top({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pageController = ref.watch(pageControllerProvider.notifier);
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: HexColor("FFF5E4"),
@@ -53,29 +58,11 @@ class Top extends StatelessWidget {
                           horizontal: 20, vertical: 30),
                       child: Column(
                         children: [
-                          InkWell(
-                            onTap: () {
-                              AutoRouter.of(context).push(const SignIn());
+                          PaintedButton(
+                            function: () {
+                              pageController.changePage(Pages.signIn);
                             },
-                            child: Container(
-                              width: double.infinity,
-                              height: 58,
-                              decoration: BoxDecoration(
-                                color: HexColor("850E35"),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(123),
-                                ),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "ログイン",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            title: 'ログイン',
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5),
@@ -107,33 +94,11 @@ class Top extends StatelessWidget {
                               ],
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              AutoRouter.of(context).push(const SignUp());
+                          BorderButton(
+                            function: () {
+                              pageController.changePage(Pages.signIn);
                             },
-                            child: Container(
-                              width: double.infinity,
-                              height: 58,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(123),
-                                ),
-                                border: Border.all(
-                                  width: 3,
-                                  color: HexColor("850E35"),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "アカウントを作成",
-                                  style: TextStyle(
-                                    color: HexColor("850E35"),
-                                    fontSize: 25,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            title: 'アカウントを作成',
                           ),
                         ],
                       ),

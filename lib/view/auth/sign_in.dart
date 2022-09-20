@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../component/auth/border_button.dart';
+import '../../component/auth/icon_textfield.dart';
+import '../../component/auth/painted_button.dart';
+import '../../component/auth/pink_background.dart';
 import '../../constant/hex_color.dart';
 import '../../provider/general_provider.dart';
-import '../../view_core/auth/border_button.dart';
-import '../../view_core/auth/icon_textfield.dart';
-import '../../view_core/auth/painted_button.dart';
-import '../../view_core/auth/pink_background.dart';
 
 class SignIn extends HookConsumerWidget {
   const SignIn({super.key});
@@ -76,10 +74,10 @@ class SignIn extends HookConsumerWidget {
                                 try {
                                   FocusScope.of(context).unfocus();
                                   loading.value = true;
-                                  final _email = emailController.text;
-                                  final _passwrod = passwordController.text;
+                                  final email = emailController.text;
+                                  final passwrod = passwordController.text;
 
-                                  authController.signIn(_email, _passwrod);
+                                  await authController.signIn(email, passwrod);
                                 } catch (e) {
                                   debugPrint(e.toString());
                                 }

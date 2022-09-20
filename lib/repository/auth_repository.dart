@@ -7,7 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/firebase_auth_provider.dart';
 import '../provider/firebase_firestore_provider.dart';
 
-final authRepositoryProvider = Provider((ref) => AuthRepositoryImpl(ref.read));
+final authRepositoryProvider =
+    Provider<AuthRepository>((ref) => AuthRepositoryImpl(ref.read));
 
 abstract class AuthRepository {
   //email passwordでログイン
@@ -19,7 +20,7 @@ abstract class AuthRepository {
   //サインアウト
   Future signOut();
   //ログイン状態を監視
-  Stream<User?> get authStateChanges;
+  Stream<User?> get authStateChange;
   //ログイン中のユーザーのデータの取得
   User? getCurrentUser();
 }
@@ -33,9 +34,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Stream<User?> get authStateChange =>
+      _reader(firebaseAuthProvider).authStateChanges();
+
+  @override
   Future<String?> signInWithEmail(String email, String password) async {
     try {
-      _reader(firebaseAuthProvider).signInWithEmailAndPassword(
+      await _reader(firebaseAuthProvider).signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -58,6 +63,7 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
+  @override
   Future<void> saveUserData(String name) async {
     User? user = _reader(firebaseAuthProvider).currentUser;
     try {
@@ -72,13 +78,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future signOut() {
-    throw UnimplementedError();
+  Future signOut() async {
+    try {
+      await _reader(firebaseAuthProvider).signOut();
+    } on FirebaseAuthException catch (e) {
+      throw (e.code);
+    }
   }
-
-  @override
-  Stream<User?> get authStateChanges =>
-      _reader(firebaseAuthProvider).authStateChanges();
 
   @override
   User? getCurrentUser() {
