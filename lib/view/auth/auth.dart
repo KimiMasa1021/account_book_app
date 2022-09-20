@@ -18,7 +18,7 @@ class Auth extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageState = ref.watch(pageControllerProvider);
+    final pageState = ref.watch(authSwitcherControllerProvider);
 
     switch (pageState.page.toString()) {
       case "Pages.top":

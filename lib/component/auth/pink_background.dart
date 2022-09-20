@@ -18,7 +18,7 @@ class PinkBackGround extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final statusSize = MediaQuery.of(context).padding;
-    final pageController = ref.watch(pageControllerProvider.notifier);
+    final pageController = ref.watch(authSwitcherControllerProvider.notifier);
 
     return Align(
       alignment: const Alignment(0, -1),

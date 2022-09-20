@@ -12,7 +12,7 @@ class Top extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageController = ref.watch(pageControllerProvider.notifier);
+    final pageController = ref.watch(authSwitcherControllerProvider.notifier);
 
     final size = MediaQuery.of(context).size;
     return Scaffold(

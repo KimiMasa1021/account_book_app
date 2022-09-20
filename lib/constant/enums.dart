@@ -1,3 +1,4 @@
+// bottombarのenum
 enum PageType {
   account,
   seving,

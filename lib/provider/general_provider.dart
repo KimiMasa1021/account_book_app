@@ -12,7 +12,10 @@ final authControllerProvider = StateNotifierProvider<AuthController, User?>(
 final authControllerprovider = StateNotifierProvider<AuthController, User?>(
     (ref) => AuthController(ref.read));
 
-final pageControllerProvider = StateNotifierProvider<PageController, PageState>(
-    (ref) => PageController(ref.read));
+final authSwitcherControllerProvider =
+    StateNotifierProvider<PageController, PageState>(
+        (ref) => PageController(ref.read));
 
 final pageTypeProvider = StateProvider<PageType>((ref) => PageType.account);
+
+final incomeExpendSwicherProvider = StateProvider<bool>((ref) => false);

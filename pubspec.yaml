@@ -47,6 +47,7 @@ dependencies:
   firebase_analytics: ^9.1.10
   cloud_firestore: ^3.4.8
   fluttertoast: ^8.0.9
+  flutter_neumorphic: ^3.2.0
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 
 import '../auth/sign_in.dart';
 import '../auth/top.dart';
+import '../pages/account/account_add.dart';
 import '../separate.dart';
 // flutter pub run build_runner build --delete-conflicting-outputs
 
@@ -31,6 +32,10 @@ import '../separate.dart';
     AutoRoute(
       path: RoutePath.appRouteAccount,
       page: AccountPage,
+    ),
+    AutoRoute(
+      path: RoutePath.appRouteAccount,
+      page: AccountAdd,
     ),
   ],
 )
