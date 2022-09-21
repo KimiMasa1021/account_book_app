@@ -11,7 +11,7 @@ class Separate extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(authControllerprovider);
+    final state = ref.watch(authControllerProvider);
     if (state == null) {
       return const Auth();
     } else {

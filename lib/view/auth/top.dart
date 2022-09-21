@@ -1,4 +1,4 @@
-import 'package:account_book_app/model/page_state.dart';
+import 'package:account_book_app/constant/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../component/auth/border_button.dart';
@@ -12,7 +12,8 @@ class Top extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageController = ref.watch(authSwitcherControllerProvider.notifier);
+    final switcherState = ref.watch(authSwitcherPriovider);
+    final switcherController = ref.watch(authSwitcherPriovider.notifier);
 
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -60,7 +61,7 @@ class Top extends HookConsumerWidget {
                         children: [
                           PaintedButton(
                             function: () {
-                              pageController.changePage(Pages.signIn);
+                              switcherController.state = Pages.signIn;
                             },
                             title: 'ログイン',
                           ),
@@ -96,7 +97,7 @@ class Top extends HookConsumerWidget {
                           ),
                           BorderButton(
                             function: () {
-                              pageController.changePage(Pages.signIn);
+                              switcherController.state = Pages.signUp;
                             },
                             title: 'アカウントを作成',
                           ),

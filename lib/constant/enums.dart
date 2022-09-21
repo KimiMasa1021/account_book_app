@@ -5,3 +5,9 @@ enum PageType {
   statistic,
   setting,
 }
+
+enum Pages {
+  top,
+  signUp,
+  signIn,
+}

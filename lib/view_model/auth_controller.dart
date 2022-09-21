@@ -49,6 +49,7 @@ class AuthController extends StateNotifier<User?> {
       final flg =
           await _reader(authRepositoryProvider).signUp(email, password, name);
       if (flg == null) {
+        debugPrint(flg);
         await _reader(authRepositoryProvider).saveUserData(name);
       } else {
         showToast(flg);

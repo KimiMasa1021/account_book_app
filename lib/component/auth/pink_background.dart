@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../constant/enums.dart';
 import '../../constant/hex_color.dart';
-import '../../model/page_state.dart';
 import '../../provider/general_provider.dart';
 
 class PinkBackGround extends HookConsumerWidget {
@@ -18,7 +18,7 @@ class PinkBackGround extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final statusSize = MediaQuery.of(context).padding;
-    final pageController = ref.watch(authSwitcherControllerProvider.notifier);
+    final switcherController = ref.watch(authSwitcherPriovider.notifier);
 
     return Align(
       alignment: const Alignment(0, -1),
@@ -44,7 +44,7 @@ class PinkBackGround extends HookConsumerWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        pageController.changePage(Pages.top);
+                        switcherController.state = Pages.top;
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),

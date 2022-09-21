@@ -21,7 +21,6 @@ class SignUp extends HookConsumerWidget {
     final passwordController = useTextEditingController(text: '');
 
     final ValueNotifier<bool> loading = useState(false);
-    final authState = ref.watch(authControllerProvider);
 
     final authController = ref.watch(authControllerProvider.notifier);
 
@@ -95,7 +94,6 @@ class SignUp extends HookConsumerWidget {
                                 } catch (e) {
                                   debugPrint(e.toString());
                                 }
-                                loading.value = false;
                               },
                               title: 'アカウント作成',
                             ),

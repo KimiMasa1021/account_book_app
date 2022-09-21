@@ -81,7 +81,6 @@ class SignIn extends HookConsumerWidget {
                                 } catch (e) {
                                   debugPrint(e.toString());
                                 }
-                                loading.value = false;
                               },
                               title: 'ログイン',
                             ),
