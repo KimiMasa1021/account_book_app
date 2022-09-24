@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../provider/general_provider.dart';
 
-class InputField extends HookConsumerWidget {
-  InputField({
+class InputDateField extends HookConsumerWidget {
+  const InputDateField({
     super.key,
-    this.title,
+    required this.dateController,
     required this.function,
-    required this.type,
-    required this.controller,
-    this.formatter,
   });
-  final String? title;
+
+  final TextEditingController dateController;
   final Function() function;
-  final TextInputType type;
-  final TextEditingController controller;
-  List<TextInputFormatter>? formatter;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,23 +25,14 @@ class InputField extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            title != null
-                ? Text(
-                    title!,
-                    style: const TextStyle(
-                      fontSize: 25,
-                    ),
-                  )
-                : const SizedBox(),
-            const SizedBox(width: 10),
             Expanded(
               child: TextFormField(
-                controller: controller,
-                textAlign: TextAlign.end,
+                autofocus: true,
                 textInputAction: TextInputAction.next,
-                keyboardType: type,
-                inputFormatters: formatter ?? [],
-                onTap: () => function(),
+                controller: dateController,
+                keyboardType: TextInputType.none,
+                readOnly: true,
+                onTap: () async => function(),
                 style: const TextStyle(
                   fontSize: 23,
                 ),

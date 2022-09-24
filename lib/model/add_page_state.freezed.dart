@@ -14,10 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+AddPageState _$AddPageStateFromJson(Map<String, dynamic> json) {
+  return _AddPageState.fromJson(json);
+}
+
 /// @nodoc
 mixin _$AddPageState {
-  List<Map<String, String>> get genre => throw _privateConstructorUsedError;
+  Map<String, String> get genre => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AddPageStateCopyWith<AddPageState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -28,7 +33,7 @@ abstract class $AddPageStateCopyWith<$Res> {
   factory $AddPageStateCopyWith(
           AddPageState value, $Res Function(AddPageState) then) =
       _$AddPageStateCopyWithImpl<$Res>;
-  $Res call({List<Map<String, String>> genre});
+  $Res call({Map<String, String> genre});
 }
 
 /// @nodoc
@@ -47,7 +52,7 @@ class _$AddPageStateCopyWithImpl<$Res> implements $AddPageStateCopyWith<$Res> {
       genre: genre == freezed
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, String>>,
+              as Map<String, String>,
     ));
   }
 }
@@ -59,7 +64,7 @@ abstract class _$$_AddPageStateCopyWith<$Res>
           _$_AddPageState value, $Res Function(_$_AddPageState) then) =
       __$$_AddPageStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Map<String, String>> genre});
+  $Res call({Map<String, String> genre});
 }
 
 /// @nodoc
@@ -81,23 +86,27 @@ class __$$_AddPageStateCopyWithImpl<$Res>
       genre: genre == freezed
           ? _value._genre
           : genre // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, String>>,
+              as Map<String, String>,
     ));
   }
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$_AddPageState extends _AddPageState {
+  _$_AddPageState({final Map<String, String> genre = const {"": ""}})
+      : _genre = genre,
+        super._();
 
-class _$_AddPageState implements _AddPageState {
-  _$_AddPageState({final List<Map<String, String>> genre = const []})
-      : _genre = genre;
+  factory _$_AddPageState.fromJson(Map<String, dynamic> json) =>
+      _$$_AddPageStateFromJson(json);
 
-  final List<Map<String, String>> _genre;
+  final Map<String, String> _genre;
   @override
   @JsonKey()
-  List<Map<String, String>> get genre {
+  Map<String, String> get genre {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_genre);
+    return EqualUnmodifiableMapView(_genre);
   }
 
   @override
@@ -113,6 +122,7 @@ class _$_AddPageState implements _AddPageState {
             const DeepCollectionEquality().equals(other._genre, _genre));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_genre));
@@ -121,14 +131,24 @@ class _$_AddPageState implements _AddPageState {
   @override
   _$$_AddPageStateCopyWith<_$_AddPageState> get copyWith =>
       __$$_AddPageStateCopyWithImpl<_$_AddPageState>(this, _$identity);
-}
-
-abstract class _AddPageState implements AddPageState {
-  factory _AddPageState({final List<Map<String, String>> genre}) =
-      _$_AddPageState;
 
   @override
-  List<Map<String, String>> get genre;
+  Map<String, dynamic> toJson() {
+    return _$$_AddPageStateToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AddPageState extends AddPageState {
+  factory _AddPageState({final Map<String, String> genre}) = _$_AddPageState;
+  _AddPageState._() : super._();
+
+  factory _AddPageState.fromJson(Map<String, dynamic> json) =
+      _$_AddPageState.fromJson;
+
+  @override
+  Map<String, String> get genre;
   @override
   @JsonKey(ignore: true)
   _$$_AddPageStateCopyWith<_$_AddPageState> get copyWith =>

@@ -1,12 +1,14 @@
 import 'package:account_book_app/provider/general_provider.dart';
-import 'package:account_book_app/view_model/add_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../component/account/income_expend_swicher.dart';
+import '../../../component/account_add/genre_panel.dart';
+import '../../../component/account_add/input_date_field.dart';
 import '../../../component/account_add/input_field.dart';
+import '../../../constant/price_formatter.dart';
 
 class AccountAdd extends HookConsumerWidget {
   const AccountAdd({super.key});
@@ -15,14 +17,18 @@ class AccountAdd extends HookConsumerWidget {
     final isShow = useState(false);
     final size = MediaQuery.of(context).size;
     final date = DateFormat('yyyy/MM/dd').format(DateTime.now());
-    final dateController = useTextEditingController(text: date);
-    final testKey = GlobalKey();
     final addPageController = ref.watch(addPageControllerProvider.notifier);
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
+    final dateController = useTextEditingController(text: date);
+    final genreController = useTextEditingController(text: "");
+    final priceController = useTextEditingController(text: "");
+    final memoController = useTextEditingController(text: "");
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "支出",
-          style: TextStyle(
+        title: Text(
+          iESwicherState ? "支出" : "収入",
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),
@@ -40,32 +46,13 @@ class AccountAdd extends HookConsumerWidget {
           Column(
             children: [
               const IncomeExpendSwicher(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SizedBox(
-                  height: 60,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: dateController,
-                          keyboardType: TextInputType.none,
-                          readOnly: true,
-                          onTap: () async {
-                            isShow.value = false;
-                            dateController.text =
-                                await addPageController.selectDate(context);
-                          },
-                          style: const TextStyle(
-                            fontSize: 25,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              InputDateField(
+                dateController: dateController,
+                function: () async {
+                  isShow.value = false;
+                  dateController.text =
+                      await addPageController.selectDate(context);
+                },
               ),
               InputField(
                 title: "分類",
@@ -73,6 +60,7 @@ class AccountAdd extends HookConsumerWidget {
                 function: () {
                   isShow.value = true;
                 },
+                controller: genreController,
               ),
               InputField(
                 title: "金額",
@@ -80,6 +68,10 @@ class AccountAdd extends HookConsumerWidget {
                 function: () {
                   isShow.value = false;
                 },
+                controller: priceController,
+                formatter: [
+                  CustomTextInputFormatter(),
+                ],
               ),
               InputField(
                 title: "メモ",
@@ -87,246 +79,40 @@ class AccountAdd extends HookConsumerWidget {
                 function: () {
                   isShow.value = false;
                 },
+                controller: memoController,
+              ),
+              InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    margin: const EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "保存する",
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
-          isShow.value
-              ? Align(
-                  alignment: Alignment(0, 1),
-                  child: Container(
-                    width: double.infinity,
-                    height: size.height / 2.4,
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          color: Colors.blue,
-                          height: 50,
-                          child: Row(
-                            children: [
-                              SizedBox(width: 20),
-                              Text(
-                                "分類",
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Spacer(),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.edit_note_rounded,
-                                  size: 40,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Container(
-                              color: Colors.white,
-                              width: size.width,
-                              height: size.height / 2.4 - 50,
-                              child: GridView.count(
-                                crossAxisCount: 4,
-                                childAspectRatio: 1.2,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "ああああああああああああ",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        top: 15, left: 5, right: 5, bottom: 0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "食費",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              : SizedBox(),
+          GenrePanel(
+            genreController: genreController,
+            isShow: isShow,
+          ),
         ],
       ),
     );

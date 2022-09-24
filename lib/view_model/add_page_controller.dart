@@ -10,18 +10,25 @@ import '../repository/add_page_repository.dart';
 
 class AddPageController extends StateNotifier<AddPageState> {
   final Reader reader;
+  Map<String, dynamic>? data;
   AddPageController(this.reader) : super(AddPageState()) {
-    reader(addPageRepositoryProvider)
-        .fetchGenreList
-        .listen((QuerySnapshot snapshot) {
-      snapshot.docs.map((doc) {
-        Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
-        final list = data['email'];
-        state = state.copyWith(genre: list);
-      });
-    });
-    debugPrint(state.genre.toString());
+    reader(addPageRepositoryProvider).testList().listen(
+      (data) {
+        state = state.copyWith(
+            genre: data.map((doc) => doc.data()).toList()[0].genre);
+      },
+    );
   }
+
+  // Future<void> test() async {
+  //   final test = await reader(addPageRepositoryProvider).fechGenreList();
+  //   final List<AddPageState?> list = test.map((data) => data.data()).toList();
+
+  //   state = state.copyWith(
+  //     genre: list[0]!.genre,
+  //   );
+  //   debugPrint(state.genre.toString());
+  // }
 
   Future<String> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -32,9 +39,17 @@ class AddPageController extends StateNotifier<AddPageState> {
         const Duration(days: 360),
       ),
     );
-    debugPrint(state.genre.toString());
     if (picked == null) return DateFormat('yyyy/MM/dd').format(DateTime.now());
     final date = DateFormat('yyyy/MM/dd').format(picked);
     return date;
   }
 }
+// Future<void> test() async {
+//   final test = await reader(addPageRepositoryProvider).fechGenreList();
+//   final List<AddPageState?> list = test.map((data) => data.data()).toList();
+
+//   state = state.copyWith(
+//     genre: list[0]!.genre,
+//   );
+//   debugPrint(state.genre.toString());
+// }

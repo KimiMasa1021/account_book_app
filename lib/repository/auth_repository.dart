@@ -71,6 +71,14 @@ class AuthRepositoryImpl implements AuthRepository {
         'uid': user?.uid,
         'email': user?.email,
         'name': name,
+        'genre': {
+          'education': '教育費',
+          'food': '食費',
+          'others': 'その他',
+          'beauty': '美容',
+          'convenience': 'コンビニ',
+          'transportation': '交通費',
+        },
       });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
