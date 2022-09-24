@@ -67,7 +67,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> saveUserData(String name) async {
     User? user = _reader(firebaseAuthProvider).currentUser;
     try {
-      await storeCollectionReference?.add({
+      await storeCollectionReference?.doc(user?.uid).set({
         'uid': user?.uid,
         'email': user?.email,
         'name': name,

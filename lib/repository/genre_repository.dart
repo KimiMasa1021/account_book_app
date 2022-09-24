@@ -1,25 +1,25 @@
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../model/add_page_state.dart';
+import '../model/genre_state.dart';
 
 import '../provider/firebase_firestore_provider.dart';
 
-final addPageRepositoryProvider =
-    Provider<AddPageRepository>((ref) => AddPageRepositoryImple(ref.read));
+final genreRepositoryProvider =
+    Provider<GenreRepository>((ref) => GenreRepositoryImple(ref.read));
 
-abstract class AddPageRepository {
+abstract class GenreRepository {
   // Future<List<QueryDocumentSnapshot<AddPageState>>> fechGenreList();
-  Stream<List<QueryDocumentSnapshot<AddPageState>>> testList();
+  //ジャンル一覧の取得
+  Stream<List<QueryDocumentSnapshot<GenreState>>> feachGenreList();
 }
 
-class AddPageRepositoryImple implements AddPageRepository {
+class GenreRepositoryImple implements GenreRepository {
   CollectionReference? storeCollectionReference;
   final Reader _reader;
   String? userId;
-  AddPageRepositoryImple(this._reader) {
+  GenreRepositoryImple(this._reader) {
     storeCollectionReference =
         _reader(firebaseFireStoreProvider).collection("users");
     userId = _reader(authControllerProvider)!.uid;
@@ -40,12 +40,11 @@ class AddPageRepositoryImple implements AddPageRepository {
   // }
 
   @override
-  Stream<List<QueryDocumentSnapshot<AddPageState>>> testList() async* {
+  Stream<List<QueryDocumentSnapshot<GenreState>>> feachGenreList() async* {
     final stateRef = storeCollectionReference!
         .where("uid", isEqualTo: userId)
-        .withConverter<AddPageState>(
-          fromFirestore: (snapshot, _) =>
-              AddPageState.fromJson(snapshot.data()!),
+        .withConverter<GenreState>(
+          fromFirestore: (snapshot, _) => GenreState.fromJson(snapshot.data()!),
           toFirestore: (data, _) => data.toJson(),
         );
 

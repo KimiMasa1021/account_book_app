@@ -1,18 +1,15 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../model/add_page_state.dart';
-import '../repository/add_page_repository.dart';
+import '../model/genre_state.dart';
+import '../repository/genre_repository.dart';
 
-class AddPageController extends StateNotifier<AddPageState> {
+class GenreController extends StateNotifier<GenreState> {
   final Reader reader;
   Map<String, dynamic>? data;
-  AddPageController(this.reader) : super(AddPageState()) {
-    reader(addPageRepositoryProvider).testList().listen(
+  GenreController(this.reader) : super(GenreState()) {
+    reader(genreRepositoryProvider).feachGenreList().listen(
       (data) {
         state = state.copyWith(
             genre: data.map((doc) => doc.data()).toList()[0].genre);
@@ -30,7 +27,8 @@ class AddPageController extends StateNotifier<AddPageState> {
   //   debugPrint(state.genre.toString());
   // }
 
-  Future<String> selectDate(BuildContext context) async {
+  Future<String> selectDate(
+      BuildContext context, ValueNotifier<DateTime> outputDate) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -39,8 +37,13 @@ class AddPageController extends StateNotifier<AddPageState> {
         const Duration(days: 360),
       ),
     );
-    if (picked == null) return DateFormat('yyyy/MM/dd').format(DateTime.now());
+    if (picked == null) {
+      outputDate.value = DateTime.now();
+      return DateFormat('yyyy/MM/dd').format(DateTime.now());
+    }
+    outputDate.value = picked;
     final date = DateFormat('yyyy/MM/dd').format(picked);
+
     return date;
   }
 }

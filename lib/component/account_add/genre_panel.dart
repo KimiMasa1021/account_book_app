@@ -5,16 +5,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../provider/general_provider.dart';
 
 class GenrePanel extends HookConsumerWidget {
-  GenrePanel({required this.isShow, required this.genreController, super.key});
+  GenrePanel({
+    required this.isShow,
+    required this.genreController,
+    required this.outputGenre,
+    super.key,
+  });
   final ValueNotifier<bool> isShow;
   final TextEditingController genreController;
-
+  final ValueNotifier<String> outputGenre;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final addPageState = ref.watch(addPageControllerProvider)!.genre;
+    final addPageState = ref.watch(genreControllerProvider)!.genre;
 
-    final addPageController = ref.watch(addPageControllerProvider.notifier);
+    final addPageController = ref.watch(genreControllerProvider.notifier);
     return isShow.value
         ? Align(
             alignment: const Alignment(0, 1),
@@ -67,6 +72,8 @@ class GenrePanel extends HookConsumerWidget {
                             onTap: () {
                               genreController.text =
                                   addPageState.values.elementAt(index);
+                              outputGenre!.value =
+                                  addPageState.keys.elementAt(index);
                             },
                             child: Container(
                               margin: const EdgeInsets.only(

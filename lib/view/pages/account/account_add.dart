@@ -17,12 +17,16 @@ class AccountAdd extends HookConsumerWidget {
     final isShow = useState(false);
     final size = MediaQuery.of(context).size;
     final date = DateFormat('yyyy/MM/dd').format(DateTime.now());
-    final addPageController = ref.watch(addPageControllerProvider.notifier);
+    final addPageController = ref.watch(genreControllerProvider.notifier);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
     final dateController = useTextEditingController(text: date);
     final genreController = useTextEditingController(text: "");
     final priceController = useTextEditingController(text: "");
     final memoController = useTextEditingController(text: "");
+    final ValueNotifier<DateTime> outputDate = useState(DateTime.now());
+    final ValueNotifier<String> outputGenre = useState("");
+
+    final accountController = ref.watch(accountControllerPrvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +55,7 @@ class AccountAdd extends HookConsumerWidget {
                 function: () async {
                   isShow.value = false;
                   dateController.text =
-                      await addPageController.selectDate(context);
+                      await addPageController.selectDate(context, outputDate);
                 },
               ),
               InputField(
@@ -81,38 +85,57 @@ class AccountAdd extends HookConsumerWidget {
                 },
                 controller: memoController,
               ),
-              InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    margin: const EdgeInsets.only(top: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "保存する",
-                        style: TextStyle(
-                          fontSize: 22,
+              genreController.text != "" && priceController.text != ""
+                  ? InkWell(
+                      onTap: () async {
+                        final calculatedPrice = iESwicherState
+                            ? int.parse(
+                                    priceController.text.replaceAll(",", "")) *
+                                -1
+                            : int.parse(
+                                priceController.text.replaceAll(",", ""));
+
+                        final flg = await accountController.addAccount(
+                          outputDate.value,
+                          outputGenre.value,
+                          calculatedPrice,
+                          memoController.text,
+                        );
+                        if (flg == true) Navigator.pop(context);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          width: double.infinity,
+                          height: 50,
+                          margin: const EdgeInsets.only(top: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "保存する",
+                              style: TextStyle(
+                                fontSize: 22,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    )
+                  : const SizedBox(),
             ],
           ),
           GenrePanel(
             genreController: genreController,
             isShow: isShow,
-          ),
+            outputGenre: outputGenre,
+          )
         ],
       ),
     );
