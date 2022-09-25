@@ -13,6 +13,7 @@ final accountRepositoryProvider =
 abstract class AccountRepository {
   Future<bool> addAccount(
       DateTime registeTime, String type, int price, String memo);
+  Stream<List<QueryDocumentSnapshot<AccountState>>> test();
 }
 
 class AccountRepositoryImple implements AccountRepository {
@@ -51,5 +52,15 @@ class AccountRepositoryImple implements AccountRepository {
       debugPrint(e.code);
       return false;
     }
+  }
+
+  @override
+  Stream<List<QueryDocumentSnapshot<AccountState>>> test() async* {
+    final stateRef = accountCollectionReference!.withConverter<AccountState>(
+      fromFirestore: (snapshot, _) => AccountState.fromJson(snapshot.data()!),
+      toFirestore: (data, _) => data.toJson(),
+    );
+
+    yield* stateRef.snapshots().map((doc) => doc.docs);
   }
 }

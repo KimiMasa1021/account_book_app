@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../constant/enums.dart';
+import '../model/account_state.dart';
 import '../model/genre_state.dart';
 import '../view_model/genre_controller.dart';
 
@@ -23,4 +24,5 @@ final genreControllerProvider =
     StateNotifierProvider<GenreController, GenreState?>(
         (ref) => GenreController(ref.read));
 final accountControllerPrvider =
-    StateNotifierProvider((ref) => AccountController(ref.read));
+    StateNotifierProvider<AccountController, AsyncValue<List<AccountState>>>(
+        (ref) => AccountController(ref.read));

@@ -27,13 +27,14 @@ class AuthController extends StateNotifier<User?> {
   @override
   User? get state => _reader(authRepositoryProvider).getCurrentUser();
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn(
+      String email, String password, ValueNotifier<bool> loading) async {
     try {
       if (!validate2(email, password)) return showToast("no-data");
 
       final flg = await _reader(authRepositoryProvider)
           .signInWithEmail(email, password);
-      debugPrint(flg);
+      loading.value = false;
       if (flg != null) {
         showToast(flg);
       }
@@ -42,12 +43,14 @@ class AuthController extends StateNotifier<User?> {
     }
   }
 
-  Future<void> signUp(String email, String password, String name) async {
+  Future<void> signUp(String email, String password, String name,
+      ValueNotifier<bool> loading) async {
     try {
       if (!validate(email, password, name)) return showToast("no-data");
 
       final flg =
           await _reader(authRepositoryProvider).signUp(email, password, name);
+      loading.value = false;
       if (flg == null) {
         debugPrint(flg);
         await _reader(authRepositoryProvider).saveUserData(name);

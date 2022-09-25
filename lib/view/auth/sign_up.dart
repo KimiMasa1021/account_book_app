@@ -90,7 +90,9 @@ class SignUp extends HookConsumerWidget {
                                     email,
                                     password,
                                     name,
+                                    loading,
                                   );
+                                  loading.value = false;
                                 } catch (e) {
                                   debugPrint(e.toString());
                                 }

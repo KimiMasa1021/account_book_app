@@ -12,6 +12,17 @@ class IncomeExpendSwicher extends HookConsumerWidget {
     final iESwicherController =
         ref.watch(incomeExpendSwicherProvider.notifier); //　変更と関数の実行
     final size = MediaQuery.of(context).size;
+
+    const focusDecoration = BoxDecoration(
+      color: Colors.blueAccent,
+      borderRadius: BorderRadius.all(Radius.circular(50)),
+    );
+
+    final unFocusDecoration = BoxDecoration(
+      color: Colors.white,
+      borderRadius: const BorderRadius.all(Radius.circular(50)),
+      border: Border.all(width: 2, color: Colors.blueAccent),
+    );
     return Container(
       margin: const EdgeInsets.only(top: 10),
       width: double.infinity,
@@ -22,27 +33,16 @@ class IncomeExpendSwicher extends HookConsumerWidget {
             onTap: () {
               iESwicherController.state = !iESwicherState;
             },
-            child: Neumorphic(
-              style: NeumorphicStyle(
-                shape: NeumorphicShape.concave,
-                boxShape:
-                    NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-                depth: iESwicherState ? 5 : -5,
-                lightSource: LightSource.topRight,
-                color: const Color.fromARGB(255, 0, 0, 0),
-              ),
-              child: Container(
-                width: size.width * 0.25,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: const Center(
-                  child: Text(
-                    "支出",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+            child: Container(
+              width: iESwicherState ? size.width * 0.4 : size.width * 0.25,
+              height: 40,
+              decoration: iESwicherState ? focusDecoration : unFocusDecoration,
+              child: Center(
+                child: Text(
+                  "支出",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: iESwicherState ? Colors.white : Colors.blueAccent,
                   ),
                 ),
               ),
@@ -53,27 +53,16 @@ class IncomeExpendSwicher extends HookConsumerWidget {
             onTap: () {
               iESwicherController.state = !iESwicherState;
             },
-            child: Neumorphic(
-              style: NeumorphicStyle(
-                shape: NeumorphicShape.concave,
-                boxShape:
-                    NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-                depth: iESwicherState ? -5 : 5,
-                lightSource: LightSource.topLeft,
-                color: Colors.grey,
-              ),
-              child: Container(
-                width: size.width * 0.25,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: const Center(
-                  child: Text(
-                    "収入",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+            child: Container(
+              width: !iESwicherState ? size.width * 0.4 : size.width * 0.25,
+              height: 40,
+              decoration: !iESwicherState ? focusDecoration : unFocusDecoration,
+              child: Center(
+                child: Text(
+                  "収入",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: !iESwicherState ? Colors.white : Colors.blueAccent,
                   ),
                 ),
               ),

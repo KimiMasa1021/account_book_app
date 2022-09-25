@@ -72,12 +72,12 @@ class SignIn extends HookConsumerWidget {
                                 FocusScope.of(context).unfocus();
                                 loading.value = true;
                                 try {
-                                  FocusScope.of(context).unfocus();
-                                  loading.value = true;
                                   final email = emailController.text;
                                   final passwrod = passwordController.text;
 
-                                  await authController.signIn(email, passwrod);
+                                  await authController.signIn(
+                                      email, passwrod, loading);
+                                  loading.value = false;
                                 } catch (e) {
                                   debugPrint(e.toString());
                                 }

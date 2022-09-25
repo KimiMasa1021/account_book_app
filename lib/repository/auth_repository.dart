@@ -79,6 +79,13 @@ class AuthRepositoryImpl implements AuthRepository {
           'convenience': 'コンビニ',
           'transportation': '交通費',
         },
+        'genle2': {
+          'salary': '給料',
+          'extraIncome': '副収入',
+          'others': 'その他',
+          'pocketMoney': 'お小遣い',
+          'bonus': 'ボーナス',
+        },
       });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);

@@ -19,7 +19,6 @@ class GenrePanel extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final addPageState = ref.watch(genreControllerProvider)!.genre;
 
-    final addPageController = ref.watch(genreControllerProvider.notifier);
     return isShow.value
         ? Align(
             alignment: const Alignment(0, 1),
@@ -72,7 +71,7 @@ class GenrePanel extends HookConsumerWidget {
                             onTap: () {
                               genreController.text =
                                   addPageState.values.elementAt(index);
-                              outputGenre!.value =
+                              outputGenre.value =
                                   addPageState.keys.elementAt(index);
                             },
                             child: Container(

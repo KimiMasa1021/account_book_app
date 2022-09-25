@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class ExpendBar extends StatelessWidget {
-  const ExpendBar({super.key});
+  const ExpendBar({required this.price, super.key});
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +22,25 @@ class ExpendBar extends StatelessWidget {
       ),
       width: double.infinity,
       height: 60,
-      child: InkWell(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: const [
-              Text(
-                "支出",
-                style: TextStyle(
-                  fontSize: 25,
-                ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            const Text(
+              "支出",
+              style: TextStyle(
+                fontSize: 25,
               ),
-              Spacer(),
-              Text(
-                "120,000",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.redAccent,
-                ),
+            ),
+            const Spacer(),
+            Text(
+              NumberFormat("#,###").format(price),
+              style: const TextStyle(
+                fontSize: 25,
+                color: Colors.redAccent,
               ),
-              Icon(
-                Icons.arrow_forward_ios_outlined,
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

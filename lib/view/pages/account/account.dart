@@ -8,81 +8,183 @@ import '../../../component/account/account_pie_chart.dart';
 import '../../../component/account/expend_bar.dart';
 import '../../../component/account/expend_child_bar.dart';
 import '../../../component/account/income_expend_swicher.dart';
+import '../../../provider/general_provider.dart';
 
 class AccountPage extends HookConsumerWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SafeArea(
-      child: Stack(
-        children: [
-          Column(
+    final size = MediaQuery.of(context).size;
+    final genreController = ref.watch(genreControllerProvider.notifier);
+    final genreState = ref.watch(genreControllerProvider)!.genre;
+
+    final accountController = ref.watch(accountControllerPrvider.notifier);
+    final accountState = ref.watch(accountControllerPrvider);
+
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
+    final iESwicherController =
+        ref.watch(incomeExpendSwicherProvider.notifier); //　変更と関数の実行
+    return accountState.when(
+      data: (state) {
+        List<int> priceList = state.map((e) => e.price).toList();
+        int price = priceList.isNotEmpty
+            ? priceList.reduce((value, element) => value + element)
+            : 0;
+
+        return SafeArea(
+          child: Stack(
             children: [
-              const AccountAppBar(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        const IncomeExpendSwicher(),
-                        const SizedBox(height: 10),
-                        const AccountPieChart(),
-                        const SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Column(
-                            children: const [
-                              Divider(
-                                height: 3,
-                                color: Colors.grey,
+              Column(
+                children: [
+                  AccountAppBar(
+                    expend: price,
+                    income: price,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: iESwicherState
+                            ? Column(
+                                children: [
+                                  const IncomeExpendSwicher(),
+                                  const SizedBox(height: 10),
+                                  AccountPieChart(state: state),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                    child: Column(
+                                      children: [
+                                        const Divider(
+                                          height: 3,
+                                          color: Colors.grey,
+                                        ),
+                                        const SizedBox(height: 20),
+                                        ExpendBar(price: price),
+                                        SizedBox(
+                                          height: 60 *
+                                              (state.length.toDouble() +
+                                                  genreState.length),
+                                          child: ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: genreState.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return ExpendChildBar(
+                                                list: state
+                                                    .where((state) =>
+                                                        state.type ==
+                                                            genreState.keys
+                                                                .elementAt(
+                                                                    index) &&
+                                                        state.price > 0)
+                                                    .toList(),
+                                                title: genreState.values
+                                                    .elementAt(index),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 40)
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  const IncomeExpendSwicher(),
+                                  const SizedBox(height: 10),
+                                  AccountPieChart(state: state),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                    child: Column(
+                                      children: [
+                                        const Divider(
+                                          height: 3,
+                                          color: Colors.grey,
+                                        ),
+                                        const SizedBox(height: 20),
+                                        ExpendBar(price: price),
+                                        SizedBox(
+                                          height: 60 *
+                                              (state.length.toDouble() +
+                                                  genreState.length),
+                                          child: ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: genreState.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              return ExpendChildBar(
+                                                list: state
+                                                    .where((state) =>
+                                                        state.type ==
+                                                            genreState.keys
+                                                                .elementAt(
+                                                                    index) &&
+                                                        state.price < 0)
+                                                    .toList(),
+                                                title: genreState.values
+                                                    .elementAt(index),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 40)
+                                ],
                               ),
-                              SizedBox(height: 20),
-                              ExpendBar(),
-                              ExpendChildBar(),
-                              ExpendChildBar(),
-                              ExpendChildBar(),
-                              ExpendChildBar(),
-                              ExpendChildBar(),
-                              ExpendChildBar(),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 40)
-                      ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                right: 10,
+                bottom: 15,
+                child: InkWell(
+                  onTap: () {
+                    AutoRouter.of(context).push(const AccountAdd());
+                  },
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.lightBlueAccent,
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.add,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
-          Positioned(
-            right: 10,
-            bottom: 15,
-            child: InkWell(
-              onTap: () {
-                AutoRouter.of(context).push(const AccountAdd());
-              },
-              child: Container(
-                width: 60,
-                height: 60,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.lightBlueAccent,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.add,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
+        );
+      },
+      error: (error, stackTrace) {
+        return const Center(
+          child: Text("えらーですねぇえ"),
+        );
+      },
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

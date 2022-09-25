@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class AccountAppBar extends StatelessWidget {
-  const AccountAppBar({super.key});
+  const AccountAppBar({super.key, required this.income, required this.expend});
+  final int income;
+  final int expend;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +49,10 @@ class AccountAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(
-                children: const [
+                children: [
                   Text("収入"),
                   Text(
-                    "450,000",
+                    NumberFormat("#,###").format(income),
                     style: TextStyle(
                       color: Colors.lightGreen,
                     ),
@@ -57,10 +60,10 @@ class AccountAppBar extends StatelessWidget {
                 ],
               ),
               Column(
-                children: const [
-                  Text("収入"),
+                children: [
+                  Text("支出"),
                   Text(
-                    "450,000",
+                    NumberFormat("#,###").format(expend),
                     style: TextStyle(
                       color: Colors.redAccent,
                     ),
@@ -68,9 +71,9 @@ class AccountAppBar extends StatelessWidget {
                 ],
               ),
               Column(
-                children: const [
-                  Text("収入"),
-                  Text("450,000"),
+                children: [
+                  Text("合計"),
+                  Text(NumberFormat("#,###").format(income - expend)),
                 ],
               ),
             ],
