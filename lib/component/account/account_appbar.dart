@@ -50,10 +50,10 @@ class AccountAppBar extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text("収入"),
+                  const Text("収入"),
                   Text(
                     NumberFormat("#,###").format(income),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.lightGreen,
                     ),
                   ),
@@ -61,10 +61,10 @@ class AccountAppBar extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("支出"),
+                  const Text("支出"),
                   Text(
-                    NumberFormat("#,###").format(expend),
-                    style: TextStyle(
+                    NumberFormat("#,###").format(expend * -1),
+                    style: const TextStyle(
                       color: Colors.redAccent,
                     ),
                   ),
@@ -72,8 +72,8 @@ class AccountAppBar extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("合計"),
-                  Text(NumberFormat("#,###").format(income - expend)),
+                  const Text("合計"),
+                  Text(NumberFormat("#,###").format(income + expend)),
                 ],
               ),
             ],

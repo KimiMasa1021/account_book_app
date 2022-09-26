@@ -5,6 +5,8 @@ import 'dart:math';
 import '../../model/account_state.dart';
 import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
+import '../../provider/general_provider.dart';
+
 class ExpendChildBar extends HookConsumerWidget {
   const ExpendChildBar({
     required this.title,
@@ -20,6 +22,7 @@ class ExpendChildBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<int> priceList = list!.map((e) => e!.price).toList();
     final isShow = useState(false);
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
 
     return Column(
       children: [
@@ -61,10 +64,16 @@ class ExpendChildBar extends HookConsumerWidget {
                   const Spacer(),
                   Text(
                     list!.isNotEmpty
-                        ? NumberFormat("#,###").format(
-                            priceList
-                                .reduce((value, element) => value + element),
-                          )
+                        ? iESwicherState
+                            ? NumberFormat("#,###").format(
+                                priceList.reduce(
+                                        (value, element) => value + element) *
+                                    -1,
+                              )
+                            : NumberFormat("#,###").format(
+                                priceList.reduce(
+                                    (value, element) => value + element),
+                              )
                         : "0",
                     style: TextStyle(
                       fontSize: 25,
@@ -114,7 +123,11 @@ class ExpendChildBar extends HookConsumerWidget {
                           ),
                           const Spacer(),
                           Text(
-                            NumberFormat("#,###").format(list![index]!.price),
+                            iESwicherState
+                                ? NumberFormat("#,###")
+                                    .format(list![index]!.price * -1)
+                                : NumberFormat("#,###")
+                                    .format(list![index]!.price),
                             style: TextStyle(
                               fontSize: 20,
                               color: color,

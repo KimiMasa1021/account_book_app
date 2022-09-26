@@ -13,8 +13,8 @@ class AccountPieChart extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genreController = ref.watch(genreControllerProvider.notifier);
-    final genreState = ref.watch(genreControllerProvider)!.genre;
+    final genreState = ref.watch(genreControllerProvider)!;
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -26,17 +26,29 @@ class AccountPieChart extends HookConsumerWidget {
             PieChart(
               PieChartData(
                 sections: List<PieChartSectionData>.generate(
-                  genreState.length,
+                  iESwicherState
+                      ? genreState.genre.length
+                      : genreState.genre2.length,
                   (index) {
-                    final genreList = state
-                        .where((state) =>
-                            state.type == genreState.keys.elementAt(index) &&
-                            state.price > 0)
-                        .toList();
+                    final genreList = iESwicherState
+                        ? state
+                            .where((state) =>
+                                state.type ==
+                                    genreState.genre.keys.elementAt(index) &&
+                                state.price > 0)
+                            .toList()
+                        : state
+                            .where((state) =>
+                                state.type ==
+                                    genreState.genre2.keys.elementAt(index) &&
+                                state.price < 0)
+                            .toList();
                     List<int> priceList =
                         genreList.map((e) => e.price).toList();
                     return PieChartSectionData(
-                      title: genreState.values.elementAt(index),
+                      title: iESwicherState
+                          ? genreState.genre.values.elementAt(index)
+                          : genreState.genre2.values.elementAt(index),
                       value: priceList.isNotEmpty
                           ? priceList
                               .reduce((value, element) => value + element)

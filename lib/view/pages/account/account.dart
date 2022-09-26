@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../component/account/account_appbar.dart';
 import '../../../component/account/account_pie_chart.dart';
-import '../../../component/account/expend_bar.dart';
 import '../../../component/account/expend_child_bar.dart';
 import '../../../component/account/income_expend_swicher.dart';
 import '../../../provider/general_provider.dart';
@@ -16,29 +15,34 @@ class AccountPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final genreController = ref.watch(genreControllerProvider.notifier);
     final genreState = ref.watch(genreControllerProvider);
 
-    final accountController = ref.watch(accountControllerPrvider.notifier);
     final accountState = ref.watch(accountControllerPrvider);
 
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-    final iESwicherController = ref.watch(incomeExpendSwicherProvider.notifier);
     return accountState.when(
       data: (state) {
         List<int> priceList = state.map((e) => e.price).toList();
-        int price = priceList.isNotEmpty
-            ? priceList.reduce((value, element) => value + element)
+        int expend = priceList.isNotEmpty
+            ? priceList
+                .where((p) => p < 0)
+                .toList()
+                .reduce((value, element) => value + element)
             : 0;
-
+        int income = priceList.isNotEmpty
+            ? priceList
+                .where((p) => p > 0)
+                .toList()
+                .reduce((value, element) => value + element)
+            : 0;
         return SafeArea(
           child: Stack(
             children: [
               Column(
                 children: [
                   AccountAppBar(
-                    expend: price,
-                    income: price,
+                    expend: expend,
+                    income: income,
                   ),
                   Expanded(
                     child: SingleChildScrollView(
@@ -79,7 +83,7 @@ class AccountPage extends HookConsumerWidget {
                                                                 .genre.keys
                                                                 .elementAt(
                                                                     index) &&
-                                                        state.price > 0)
+                                                        state.price < 0)
                                                     .toList(),
                                                 title: genreState.genre.values
                                                     .elementAt(index),
@@ -128,7 +132,7 @@ class AccountPage extends HookConsumerWidget {
                                                                 .genre2.keys
                                                                 .elementAt(
                                                                     index) &&
-                                                        state.price < 0)
+                                                        state.price > 0)
                                                     .toList(),
                                                 title: genreState.genre2.values
                                                     .elementAt(index),

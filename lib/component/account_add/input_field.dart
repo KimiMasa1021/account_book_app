@@ -21,7 +21,7 @@ class InputField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
