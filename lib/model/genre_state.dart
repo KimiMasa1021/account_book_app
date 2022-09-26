@@ -9,6 +9,7 @@ class GenreState with _$GenreState {
   const GenreState._();
   factory GenreState({
     @Default({"": ""}) Map<String, String> genre,
+    @Default({"": ""}) Map<String, String> genre2,
   }) = _GenreState;
 
   factory GenreState.fromJson(Map<String, dynamic> json) =>

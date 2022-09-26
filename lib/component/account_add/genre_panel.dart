@@ -17,8 +17,8 @@ class GenrePanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final addPageState = ref.watch(genreControllerProvider)!.genre;
-
+    final addPageState = ref.watch(genreControllerProvider);
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     return isShow.value
         ? Align(
             alignment: const Alignment(0, 1),
@@ -61,7 +61,9 @@ class GenrePanel extends HookConsumerWidget {
                         width: size.width,
                         height: size.height / 2.4 - 50,
                         child: GridView.builder(
-                          itemCount: addPageState.length,
+                          itemCount: iESwicherState
+                              ? addPageState!.genre.length
+                              : addPageState!.genre2.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
@@ -69,10 +71,12 @@ class GenrePanel extends HookConsumerWidget {
                           itemBuilder: (BuildContext context, int index) =>
                               InkWell(
                             onTap: () {
-                              genreController.text =
-                                  addPageState.values.elementAt(index);
-                              outputGenre.value =
-                                  addPageState.keys.elementAt(index);
+                              genreController.text = iESwicherState
+                                  ? addPageState.genre.values.elementAt(index)
+                                  : addPageState.genre2.values.elementAt(index);
+                              outputGenre.value = iESwicherState
+                                  ? addPageState.genre.keys.elementAt(index)
+                                  : addPageState.genre2.keys.elementAt(index);
                             },
                             child: Container(
                               margin: const EdgeInsets.only(
@@ -83,7 +87,11 @@ class GenrePanel extends HookConsumerWidget {
                                       Radius.circular(10))),
                               child: Center(
                                 child: Text(
-                                  addPageState.values.elementAt(index),
+                                  iESwicherState
+                                      ? addPageState.genre.values
+                                          .elementAt(index)
+                                      : addPageState.genre2.values
+                                          .elementAt(index),
                                   style: const TextStyle(fontSize: 20),
                                 ),
                               ),

@@ -12,9 +12,14 @@ _$_GenreState _$$_GenreStateFromJson(Map<String, dynamic> json) =>
             (k, e) => MapEntry(k, e as String),
           ) ??
           const {"": ""},
+      genre2: (json['genre2'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          const {"": ""},
     );
 
 Map<String, dynamic> _$$_GenreStateToJson(_$_GenreState instance) =>
     <String, dynamic>{
       'genre': instance.genre,
+      'genre2': instance.genre2,
     };

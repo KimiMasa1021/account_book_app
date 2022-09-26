@@ -21,6 +21,7 @@ GenreState _$GenreStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GenreState {
   Map<String, String> get genre => throw _privateConstructorUsedError;
+  Map<String, String> get genre2 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $GenreStateCopyWith<$Res> {
   factory $GenreStateCopyWith(
           GenreState value, $Res Function(GenreState) then) =
       _$GenreStateCopyWithImpl<$Res>;
-  $Res call({Map<String, String> genre});
+  $Res call({Map<String, String> genre, Map<String, String> genre2});
 }
 
 /// @nodoc
@@ -47,11 +48,16 @@ class _$GenreStateCopyWithImpl<$Res> implements $GenreStateCopyWith<$Res> {
   @override
   $Res call({
     Object? genre = freezed,
+    Object? genre2 = freezed,
   }) {
     return _then(_value.copyWith(
       genre: genre == freezed
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      genre2: genre2 == freezed
+          ? _value.genre2
+          : genre2 // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
     ));
   }
@@ -64,7 +70,7 @@ abstract class _$$_GenreStateCopyWith<$Res>
           _$_GenreState value, $Res Function(_$_GenreState) then) =
       __$$_GenreStateCopyWithImpl<$Res>;
   @override
-  $Res call({Map<String, String> genre});
+  $Res call({Map<String, String> genre, Map<String, String> genre2});
 }
 
 /// @nodoc
@@ -80,11 +86,16 @@ class __$$_GenreStateCopyWithImpl<$Res> extends _$GenreStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? genre = freezed,
+    Object? genre2 = freezed,
   }) {
     return _then(_$_GenreState(
       genre: genre == freezed
           ? _value._genre
           : genre // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      genre2: genre2 == freezed
+          ? _value._genre2
+          : genre2 // ignore: cast_nullable_to_non_nullable
               as Map<String, String>,
     ));
   }
@@ -93,8 +104,11 @@ class __$$_GenreStateCopyWithImpl<$Res> extends _$GenreStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GenreState extends _GenreState {
-  _$_GenreState({final Map<String, String> genre = const {"": ""}})
+  _$_GenreState(
+      {final Map<String, String> genre = const {"": ""},
+      final Map<String, String> genre2 = const {"": ""}})
       : _genre = genre,
+        _genre2 = genre2,
         super._();
 
   factory _$_GenreState.fromJson(Map<String, dynamic> json) =>
@@ -108,9 +122,17 @@ class _$_GenreState extends _GenreState {
     return EqualUnmodifiableMapView(_genre);
   }
 
+  final Map<String, String> _genre2;
+  @override
+  @JsonKey()
+  Map<String, String> get genre2 {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_genre2);
+  }
+
   @override
   String toString() {
-    return 'GenreState(genre: $genre)';
+    return 'GenreState(genre: $genre, genre2: $genre2)';
   }
 
   @override
@@ -118,13 +140,16 @@ class _$_GenreState extends _GenreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GenreState &&
-            const DeepCollectionEquality().equals(other._genre, _genre));
+            const DeepCollectionEquality().equals(other._genre, _genre) &&
+            const DeepCollectionEquality().equals(other._genre2, _genre2));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_genre));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_genre),
+      const DeepCollectionEquality().hash(_genre2));
 
   @JsonKey(ignore: true)
   @override
@@ -140,7 +165,9 @@ class _$_GenreState extends _GenreState {
 }
 
 abstract class _GenreState extends GenreState {
-  factory _GenreState({final Map<String, String> genre}) = _$_GenreState;
+  factory _GenreState(
+      {final Map<String, String> genre,
+      final Map<String, String> genre2}) = _$_GenreState;
   _GenreState._() : super._();
 
   factory _GenreState.fromJson(Map<String, dynamic> json) =
@@ -148,6 +175,8 @@ abstract class _GenreState extends GenreState {
 
   @override
   Map<String, String> get genre;
+  @override
+  Map<String, String> get genre2;
   @override
   @JsonKey(ignore: true)
   _$$_GenreStateCopyWith<_$_GenreState> get copyWith =>

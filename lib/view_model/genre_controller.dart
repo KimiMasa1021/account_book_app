@@ -12,7 +12,9 @@ class GenreController extends StateNotifier<GenreState> {
     reader(genreRepositoryProvider).feachGenreList().listen(
       (data) {
         state = state.copyWith(
-            genre: data.map((doc) => doc.data()).toList()[0].genre);
+          genre: data.map((doc) => doc.data()).toList()[0].genre,
+          genre2: data.map((doc) => doc.data()).toList()[0].genre2,
+        );
       },
     );
   }
@@ -37,6 +39,7 @@ class GenreController extends StateNotifier<GenreState> {
         const Duration(days: 360),
       ),
     );
+    debugPrint(state.genre2.toString());
     if (picked == null) {
       outputDate.value = DateTime.now();
       return DateFormat('yyyy/MM/dd').format(DateTime.now());

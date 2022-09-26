@@ -6,9 +6,15 @@ import '../../model/account_state.dart';
 import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class ExpendChildBar extends HookConsumerWidget {
-  const ExpendChildBar({required this.title, super.key, required this.list});
+  const ExpendChildBar({
+    required this.title,
+    super.key,
+    required this.list,
+    required this.color,
+  });
   final String title;
   final List<AccountState?>? list;
+  final Color color;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,9 +66,9 @@ class ExpendChildBar extends HookConsumerWidget {
                                 .reduce((value, element) => value + element),
                           )
                         : "0",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 25,
-                      color: Colors.redAccent,
+                      color: color,
                     ),
                   ),
                   !isShow.value
@@ -71,7 +77,7 @@ class ExpendChildBar extends HookConsumerWidget {
                         )
                       : Transform.rotate(
                           angle: 90 * pi / 180,
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_forward_ios_outlined,
                           ),
                         )
@@ -109,9 +115,9 @@ class ExpendChildBar extends HookConsumerWidget {
                           const Spacer(),
                           Text(
                             NumberFormat("#,###").format(list![index]!.price),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 20,
-                              color: Colors.redAccent,
+                              color: color,
                             ),
                           ),
                         ],

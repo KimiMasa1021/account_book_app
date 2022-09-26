@@ -17,14 +17,13 @@ class AccountPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final genreController = ref.watch(genreControllerProvider.notifier);
-    final genreState = ref.watch(genreControllerProvider)!.genre;
+    final genreState = ref.watch(genreControllerProvider);
 
     final accountController = ref.watch(accountControllerPrvider.notifier);
     final accountState = ref.watch(accountControllerPrvider);
 
-    final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
-    final iESwicherController =
-        ref.watch(incomeExpendSwicherProvider.notifier); //　変更と関数の実行
+    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
+    final iESwicherController = ref.watch(incomeExpendSwicherProvider.notifier);
     return accountState.when(
       data: (state) {
         List<int> priceList = state.map((e) => e.price).toList();
@@ -62,28 +61,29 @@ class AccountPage extends HookConsumerWidget {
                                           color: Colors.grey,
                                         ),
                                         const SizedBox(height: 20),
-                                        ExpendBar(price: price),
                                         SizedBox(
                                           height: 60 *
                                               (state.length.toDouble() +
-                                                  genreState.length),
+                                                  genreState!.genre.length),
                                           child: ListView.builder(
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
-                                            itemCount: genreState.length,
+                                            itemCount: genreState.genre.length,
                                             itemBuilder: (BuildContext context,
                                                 int index) {
                                               return ExpendChildBar(
                                                 list: state
                                                     .where((state) =>
                                                         state.type ==
-                                                            genreState.keys
+                                                            genreState
+                                                                .genre.keys
                                                                 .elementAt(
                                                                     index) &&
                                                         state.price > 0)
                                                     .toList(),
-                                                title: genreState.values
+                                                title: genreState.genre.values
                                                     .elementAt(index),
+                                                color: Colors.red,
                                               );
                                             },
                                           ),
@@ -110,28 +110,29 @@ class AccountPage extends HookConsumerWidget {
                                           color: Colors.grey,
                                         ),
                                         const SizedBox(height: 20),
-                                        ExpendBar(price: price),
                                         SizedBox(
                                           height: 60 *
                                               (state.length.toDouble() +
-                                                  genreState.length),
+                                                  genreState!.genre2.length),
                                           child: ListView.builder(
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
-                                            itemCount: genreState.length,
+                                            itemCount: genreState.genre2.length,
                                             itemBuilder: (BuildContext context,
                                                 int index) {
                                               return ExpendChildBar(
                                                 list: state
                                                     .where((state) =>
                                                         state.type ==
-                                                            genreState.keys
+                                                            genreState
+                                                                .genre2.keys
                                                                 .elementAt(
                                                                     index) &&
                                                         state.price < 0)
                                                     .toList(),
-                                                title: genreState.values
+                                                title: genreState.genre2.values
                                                     .elementAt(index),
+                                                color: Colors.green,
                                               );
                                             },
                                           ),

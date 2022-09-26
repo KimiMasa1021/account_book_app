@@ -79,7 +79,7 @@ class AuthRepositoryImpl implements AuthRepository {
           'convenience': 'コンビニ',
           'transportation': '交通費',
         },
-        'genle2': {
+        'genre2': {
           'salary': '給料',
           'extraIncome': '副収入',
           'others': 'その他',

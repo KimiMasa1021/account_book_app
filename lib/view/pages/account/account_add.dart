@@ -90,10 +90,10 @@ class AccountAdd extends HookConsumerWidget {
                       onTap: () async {
                         final calculatedPrice = iESwicherState
                             ? int.parse(
-                                    priceController.text.replaceAll(",", "")) *
-                                -1
+                                priceController.text.replaceAll(",", ""))
                             : int.parse(
-                                priceController.text.replaceAll(",", ""));
+                                    priceController.text.replaceAll(",", "")) *
+                                -1;
 
                         final flg = await accountController.addAccount(
                           outputDate.value,
