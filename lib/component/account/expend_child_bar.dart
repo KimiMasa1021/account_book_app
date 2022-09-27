@@ -1,3 +1,4 @@
+import 'package:account_book_app/constant/color_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,10 +14,12 @@ class ExpendChildBar extends HookConsumerWidget {
     super.key,
     required this.list,
     required this.color,
+    required this.index,
   });
   final String title;
   final List<AccountState?>? list;
   final Color color;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,8 +53,8 @@ class ExpendChildBar extends HookConsumerWidget {
                     margin: const EdgeInsets.only(right: 10),
                     width: 14,
                     height: 14,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
+                    decoration: BoxDecoration(
+                      color: colorType[index],
                       shape: BoxShape.circle,
                     ),
                   ),

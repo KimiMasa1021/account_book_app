@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:account_book_app/constant/color_type.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +14,7 @@ class AccountPieChart extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genreState = ref.watch(genreControllerProvider)!;
+    final genreState = ref.watch(genreControllerProvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
 
     return Padding(
@@ -25,39 +26,32 @@ class AccountPieChart extends HookConsumerWidget {
           children: [
             PieChart(
               PieChartData(
-                sections: List<PieChartSectionData>.generate(
-                  iESwicherState
-                      ? genreState.genre.length
-                      : genreState.genre2.length,
+                sections: List.generate(
+                  state.length,
                   (index) {
                     final genreList = iESwicherState
                         ? state
                             .where((state) =>
                                 state.type ==
-                                    genreState.genre.keys.elementAt(index) &&
-                                state.price > 0)
+                                genreState!.genre.keys.elementAt(index))
                             .toList()
                         : state
                             .where((state) =>
                                 state.type ==
-                                    genreState.genre2.keys.elementAt(index) &&
-                                state.price < 0)
+                                genreState!.genre2.keys.elementAt(index))
                             .toList();
-                    List<int> priceList =
-                        genreList.map((e) => e.price).toList();
+                    double priceList = genreList.isNotEmpty
+                        ? genreList
+                            .map((e) => e.price)
+                            .toList()
+                            .reduce((a, b) => a + b)
+                            .toDouble()
+                        : 0;
                     return PieChartSectionData(
-                      title: iESwicherState
-                          ? genreState.genre.values.elementAt(index)
-                          : genreState.genre2.values.elementAt(index),
-                      value: priceList.isNotEmpty
-                          ? priceList
-                              .reduce((value, element) => value + element)
-                              .toDouble()
-                          : 0,
-                      radius: 30,
-                      color: Color(
-                        (Random().nextDouble() * 0xFFFFFF).toInt() << 0,
-                      ).withOpacity(1.0),
+                      title: "",
+                      value: priceList,
+                      radius: 20,
+                      color: colorType[index],
                       titleStyle: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,

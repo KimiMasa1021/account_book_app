@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:account_book_app/view/routes/app_route.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import '../../../component/account/account_appbar.dart';
 import '../../../component/account/account_pie_chart.dart';
 import '../../../component/account/expend_child_bar.dart';
 import '../../../component/account/income_expend_swicher.dart';
+import '../../../model/account_state.dart';
 import '../../../provider/general_provider.dart';
 
 class AccountPage extends HookConsumerWidget {
@@ -14,15 +17,19 @@ class AccountPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final size = MediaQuery.of(context).size;
     final genreState = ref.watch(genreControllerProvider);
-
     final accountState = ref.watch(accountControllerPrvider);
-
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
+
     return accountState.when(
       data: (state) {
+        List<AccountState> expendState =
+            state.isNotEmpty ? state.where((p) => p.price < 0).toList() : [];
+        List<AccountState> incomeState =
+            state.isNotEmpty ? state.where((p) => p.price > 0).toList() : [];
+
         List<int> priceList = state.map((e) => e.price).toList();
+
         int expend = priceList.isNotEmpty
             ? priceList
                 .where((p) => p < 0)
@@ -48,14 +55,16 @@ class AccountPage extends HookConsumerWidget {
                     child: SingleChildScrollView(
                       child: SizedBox(
                         width: double.infinity,
-                        child: iESwicherState
-                            ? Column(
-                                children: [
-                                  const IncomeExpendSwicher(),
-                                  const SizedBox(height: 10),
-                                  AccountPieChart(state: state),
-                                  const SizedBox(height: 10),
-                                  Padding(
+                        child: Column(
+                          children: [
+                            const IncomeExpendSwicher(),
+                            const SizedBox(height: 10),
+                            AccountPieChart(
+                              state: iESwicherState ? expendState : incomeState,
+                            ),
+                            const SizedBox(height: 10),
+                            iESwicherState
+                                ? Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 30),
                                     child: Column(
@@ -88,23 +97,15 @@ class AccountPage extends HookConsumerWidget {
                                                 title: genreState.genre.values
                                                     .elementAt(index),
                                                 color: Colors.red,
+                                                index: index,
                                               );
                                             },
                                           ),
                                         )
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 40)
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  const IncomeExpendSwicher(),
-                                  const SizedBox(height: 10),
-                                  AccountPieChart(state: state),
-                                  const SizedBox(height: 10),
-                                  Padding(
+                                  )
+                                : Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 30),
                                     child: Column(
@@ -137,6 +138,7 @@ class AccountPage extends HookConsumerWidget {
                                                 title: genreState.genre2.values
                                                     .elementAt(index),
                                                 color: Colors.green,
+                                                index: index,
                                               );
                                             },
                                           ),
@@ -144,9 +146,9 @@ class AccountPage extends HookConsumerWidget {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(height: 40)
-                                ],
-                              ),
+                            const SizedBox(height: 40)
+                          ],
+                        ),
                       ),
                     ),
                   ),

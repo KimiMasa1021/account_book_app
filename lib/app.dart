@@ -4,6 +4,7 @@ import 'view/routes/app_route.gr.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
+
   final appRouter = AppRouter();
 
   @override
