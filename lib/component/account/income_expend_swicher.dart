@@ -34,6 +34,26 @@ class IncomeExpendSwicher extends HookConsumerWidget {
               iESwicherController.state = !iESwicherState;
             },
             child: Container(
+              width: !iESwicherState ? size.width * 0.4 : size.width * 0.25,
+              height: 40,
+              decoration: !iESwicherState ? focusDecoration : unFocusDecoration,
+              child: Center(
+                child: Text(
+                  "収入",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: !iESwicherState ? Colors.white : Colors.blueAccent,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 20),
+          InkWell(
+            onTap: () {
+              iESwicherController.state = !iESwicherState;
+            },
+            child: Container(
               width: iESwicherState ? size.width * 0.4 : size.width * 0.25,
               height: 40,
               decoration: iESwicherState ? focusDecoration : unFocusDecoration,
@@ -48,26 +68,6 @@ class IncomeExpendSwicher extends HookConsumerWidget {
               ),
             ),
           ),
-          const SizedBox(width: 20),
-          InkWell(
-            onTap: () {
-              iESwicherController.state = !iESwicherState;
-            },
-            child: Container(
-              width: !iESwicherState ? size.width * 0.4 : size.width * 0.25,
-              height: 40,
-              decoration: !iESwicherState ? focusDecoration : unFocusDecoration,
-              child: Center(
-                child: Text(
-                  "収入",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: !iESwicherState ? Colors.white : Colors.blueAccent,
-                  ),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );

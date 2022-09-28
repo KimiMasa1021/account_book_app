@@ -122,7 +122,7 @@ class AccountPage extends HookConsumerWidget {
                                               : incomeState
                                                   .where((state) =>
                                                       state.type ==
-                                                          genreState.genre.keys
+                                                          genreState.genre2.keys
                                                               .elementAt(
                                                                   index) &&
                                                       state.price > 0)
