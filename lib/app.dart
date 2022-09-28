@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'view/routes/app_route.gr.dart';
+import 'view/pages/account/account_add.dart';
+import 'view/separate.dart';
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final appRouter = AppRouter();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routeInformationParser: appRouter.defaultRouteParser(),
-      routerDelegate: appRouter.delegate(),
+      initialRoute: Separate.id,
+      routes: <String, WidgetBuilder>{
+        Separate.id: (BuildContext context) => const Separate(),
+        AccountAdd.id: (BuildContext context) => const AccountAdd(),
+      },
     );
   }
 }

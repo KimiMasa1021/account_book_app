@@ -1,8 +1,5 @@
-import 'dart:math';
-
-import 'package:account_book_app/view/routes/app_route.gr.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../component/account/account_appbar.dart';
@@ -11,6 +8,7 @@ import '../../../component/account/expend_child_bar.dart';
 import '../../../component/account/income_expend_swicher.dart';
 import '../../../model/account_state.dart';
 import '../../../provider/general_provider.dart';
+import 'account_add.dart';
 
 class AccountPage extends HookConsumerWidget {
   const AccountPage({super.key});
@@ -21,22 +19,47 @@ class AccountPage extends HookConsumerWidget {
     final accountState = ref.watch(accountControllerPrvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
 
+    final setDate = useState(DateTime.now());
+
     return accountState.when(
       data: (state) {
-        List<AccountState> expendState =
-            state.isNotEmpty ? state.where((p) => p.price < 0).toList() : [];
-        List<AccountState> incomeState =
-            state.isNotEmpty ? state.where((p) => p.price > 0).toList() : [];
+        List<AccountState> expendState = state.isNotEmpty
+            ? state
+                .where(
+                  (p) =>
+                      p.price < 0 &&
+                      p.registeTime.month == setDate.value.month &&
+                      p.registeTime.year == setDate.value.year,
+                )
+                .toList()
+            : [];
+        List<AccountState> incomeState = state.isNotEmpty
+            ? state
+                .where(
+                  (p) =>
+                      p.price > 0 &&
+                      p.registeTime.month == setDate.value.month &&
+                      p.registeTime.year == setDate.value.year,
+                )
+                .toList()
+            : [];
 
-        List<int> priceList = state.map((e) => e.price).toList();
+        List<int> priceList = state
+            .where(
+              (e) =>
+                  e.registeTime.month == setDate.value.month &&
+                  e.registeTime.year == setDate.value.year,
+            )
+            .map((a) => a.price)
+            .toList();
 
-        int expend = priceList.isNotEmpty
+        int expend = expendState.isNotEmpty
             ? priceList
                 .where((p) => p < 0)
                 .toList()
                 .reduce((value, element) => value + element)
             : 0;
-        int income = priceList.isNotEmpty
+        int income = incomeState.isNotEmpty
             ? priceList
                 .where((p) => p > 0)
                 .toList()
@@ -50,6 +73,7 @@ class AccountPage extends HookConsumerWidget {
                   AccountAppBar(
                     expend: expend,
                     income: income,
+                    setDate: setDate,
                   ),
                   Expanded(
                     child: SingleChildScrollView(
@@ -63,89 +87,62 @@ class AccountPage extends HookConsumerWidget {
                               state: iESwicherState ? expendState : incomeState,
                             ),
                             const SizedBox(height: 10),
-                            iESwicherState
-                                ? Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
-                                    child: Column(
-                                      children: [
-                                        const Divider(
-                                          height: 3,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 20),
-                                        SizedBox(
-                                          height: 60 *
-                                              (state.length.toDouble() +
-                                                  genreState!.genre.length),
-                                          child: ListView.builder(
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: genreState.genre.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return ExpendChildBar(
-                                                list: state
-                                                    .where((state) =>
-                                                        state.type ==
-                                                            genreState
-                                                                .genre.keys
-                                                                .elementAt(
-                                                                    index) &&
-                                                        state.price < 0)
-                                                    .toList(),
-                                                title: genreState.genre.values
-                                                    .elementAt(index),
-                                                color: Colors.red,
-                                                index: index,
-                                              );
-                                            },
-                                          ),
-                                        )
-                                      ],
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Column(
+                                children: [
+                                  const Divider(
+                                    height: 3,
+                                    color: Colors.grey,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  SizedBox(
+                                    height: 60 *
+                                        (state.length.toDouble() +
+                                            genreState!.genre.length),
+                                    child: ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: iESwicherState
+                                          ? genreState.genre.length
+                                          : genreState.genre2.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return ExpendChildBar(
+                                          list: iESwicherState
+                                              ? expendState
+                                                  .where((state) =>
+                                                      state.type ==
+                                                          genreState.genre.keys
+                                                              .elementAt(
+                                                                  index) &&
+                                                      state.price < 0)
+                                                  .toList()
+                                              : incomeState
+                                                  .where((state) =>
+                                                      state.type ==
+                                                          genreState.genre.keys
+                                                              .elementAt(
+                                                                  index) &&
+                                                      state.price > 0)
+                                                  .toList(),
+                                          title: iESwicherState
+                                              ? genreState.genre.values
+                                                  .elementAt(index)
+                                              : genreState.genre2.values
+                                                  .elementAt(index),
+                                          color: iESwicherState
+                                              ? Colors.red
+                                              : Colors.green,
+                                          index: index,
+                                        );
+                                      },
                                     ),
                                   )
-                                : Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
-                                    child: Column(
-                                      children: [
-                                        const Divider(
-                                          height: 3,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 20),
-                                        SizedBox(
-                                          height: 60 *
-                                              (state.length.toDouble() +
-                                                  genreState!.genre2.length),
-                                          child: ListView.builder(
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: genreState.genre2.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return ExpendChildBar(
-                                                list: state
-                                                    .where((state) =>
-                                                        state.type ==
-                                                            genreState
-                                                                .genre2.keys
-                                                                .elementAt(
-                                                                    index) &&
-                                                        state.price > 0)
-                                                    .toList(),
-                                                title: genreState.genre2.values
-                                                    .elementAt(index),
-                                                color: Colors.green,
-                                                index: index,
-                                              );
-                                            },
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                                ],
+                              ),
+                            ),
                             const SizedBox(height: 40)
                           ],
                         ),
@@ -159,7 +156,7 @@ class AccountPage extends HookConsumerWidget {
                 bottom: 15,
                 child: InkWell(
                   onTap: () {
-                    AutoRouter.of(context).push(const AccountAdd());
+                    Navigator.of(context).pushNamed(AccountAdd.id);
                   },
                   child: Container(
                     width: 60,

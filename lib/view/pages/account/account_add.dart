@@ -12,6 +12,7 @@ import '../../../constant/price_formatter.dart';
 
 class AccountAdd extends HookConsumerWidget {
   const AccountAdd({super.key});
+  static const String id = "account_add";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isShow = useState(false);

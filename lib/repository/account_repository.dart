@@ -56,10 +56,13 @@ class AccountRepositoryImple implements AccountRepository {
 
   @override
   Stream<List<QueryDocumentSnapshot<AccountState>>> test() async* {
-    final stateRef = accountCollectionReference!.withConverter<AccountState>(
-      fromFirestore: (snapshot, _) => AccountState.fromJson(snapshot.data()!),
-      toFirestore: (data, _) => data.toJson(),
-    );
+    final stateRef = accountCollectionReference!
+        .orderBy("registeTime")
+        .withConverter<AccountState>(
+          fromFirestore: (snapshot, _) =>
+              AccountState.fromJson(snapshot.data()!),
+          toFirestore: (data, _) => data.toJson(),
+        );
 
     yield* stateRef.snapshots().map((doc) => doc.docs);
   }

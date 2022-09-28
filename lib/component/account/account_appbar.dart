@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class AccountAppBar extends StatelessWidget {
-  const AccountAppBar({super.key, required this.income, required this.expend});
+  const AccountAppBar({
+    super.key,
+    required this.income,
+    required this.expend,
+    required this.setDate,
+  });
   final int income;
   final int expend;
+  final ValueNotifier<DateTime> setDate;
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +33,32 @@ class AccountAppBar extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(
-                Icons.arrow_left,
-                size: 50,
+            children: [
+              InkWell(
+                onTap: () {
+                  setDate.value =
+                      DateTime(setDate.value.year, setDate.value.month - 1);
+                },
+                child: const Icon(
+                  Icons.arrow_left,
+                  size: 50,
+                ),
               ),
               Text(
-                "2022年9月",
-                style: TextStyle(
+                DateFormat('yyyy年MM月').format(setDate.value),
+                style: const TextStyle(
                   fontSize: 25,
                 ),
               ),
-              Icon(
-                Icons.arrow_right,
-                size: 50,
+              InkWell(
+                onTap: () {
+                  setDate.value =
+                      DateTime(setDate.value.year, setDate.value.month + 1);
+                },
+                child: const Icon(
+                  Icons.arrow_right,
+                  size: 50,
+                ),
               ),
             ],
           ),

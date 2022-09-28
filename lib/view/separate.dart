@@ -8,6 +8,7 @@ import 'auth/auth.dart';
 
 class Separate extends HookConsumerWidget {
   const Separate({super.key});
+  static const String id = "separate";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

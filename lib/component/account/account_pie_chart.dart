@@ -27,18 +27,20 @@ class AccountPieChart extends HookConsumerWidget {
             PieChart(
               PieChartData(
                 sections: List.generate(
-                  state.length,
+                  iESwicherState
+                      ? genreState!.genre.length
+                      : genreState!.genre2.length,
                   (index) {
                     final genreList = iESwicherState
                         ? state
                             .where((state) =>
                                 state.type ==
-                                genreState!.genre.keys.elementAt(index))
+                                genreState.genre.keys.elementAt(index))
                             .toList()
                         : state
                             .where((state) =>
                                 state.type ==
-                                genreState!.genre2.keys.elementAt(index))
+                                genreState.genre2.keys.elementAt(index))
                             .toList();
                     double priceList = genreList.isNotEmpty
                         ? genreList

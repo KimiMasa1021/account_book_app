@@ -26,6 +26,7 @@ class ExpendChildBar extends HookConsumerWidget {
     List<int> priceList = list!.map((e) => e!.price).toList();
     final isShow = useState(false);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
+    final size = MediaQuery.of(context).size;
 
     return Column(
       children: [
@@ -42,59 +43,60 @@ class ExpendChildBar extends HookConsumerWidget {
                   offset: Offset(0, 2),
                 ),
               ],
+              border: Border.symmetric(
+                vertical: BorderSide(
+                  color: Colors.black12,
+                ),
+              ),
             ),
             width: double.infinity,
             height: 50,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    width: 14,
-                    height: 14,
-                    decoration: BoxDecoration(
-                      color: colorType[index],
-                      shape: BoxShape.circle,
-                    ),
+            child: Row(
+              children: [
+                Container(
+                  width: 20,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: colorType[index],
                   ),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 23,
-                    ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 23,
                   ),
-                  const Spacer(),
-                  Text(
-                    list!.isNotEmpty
-                        ? iESwicherState
-                            ? NumberFormat("#,###").format(
-                                priceList.reduce(
-                                        (value, element) => value + element) *
-                                    -1,
-                              )
-                            : NumberFormat("#,###").format(
-                                priceList.reduce(
-                                    (value, element) => value + element),
-                              )
-                        : "0",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: color,
-                    ),
+                ),
+                const Spacer(),
+                Text(
+                  list!.isNotEmpty
+                      ? iESwicherState
+                          ? NumberFormat("#,###").format(
+                              priceList.reduce(
+                                      (value, element) => value + element) *
+                                  -1,
+                            )
+                          : NumberFormat("#,###").format(
+                              priceList
+                                  .reduce((value, element) => value + element),
+                            )
+                      : "0",
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: color,
                   ),
-                  !isShow.value
-                      ? const Icon(
+                ),
+                !isShow.value
+                    ? const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                      )
+                    : Transform.rotate(
+                        angle: 90 * pi / 180,
+                        child: const Icon(
                           Icons.arrow_forward_ios_outlined,
-                        )
-                      : Transform.rotate(
-                          angle: 90 * pi / 180,
-                          child: const Icon(
-                            Icons.arrow_forward_ios_outlined,
-                          ),
-                        )
-                ],
-              ),
+                        ),
+                      )
+              ],
             ),
           ),
         ),
@@ -111,29 +113,53 @@ class ExpendChildBar extends HookConsumerWidget {
                       height: 50,
                       decoration: const BoxDecoration(
                         color: Colors.white,
+                        border: Border.symmetric(
+                          vertical: BorderSide(
+                            color: Colors.black12,
+                          ),
+                        ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const SizedBox(width: 20),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(list![index]!.memo),
-                              Text(DateFormat('yyyy/MM/dd')
-                                  .format(list![index]!.registeTime)),
-                            ],
+                          Text(
+                            DateFormat('dd').format(list![index]!.registeTime),
+                            style: const TextStyle(
+                              fontSize: 25,
+                            ),
+                          ),
+                          const Text(
+                            "日",
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          SizedBox(
+                            width: size.width / 2.1,
+                            child: Text(
+                              list![index]!.memo,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           const Spacer(),
-                          Text(
-                            iESwicherState
-                                ? NumberFormat("#,###")
-                                    .format(list![index]!.price * -1)
-                                : NumberFormat("#,###")
-                                    .format(list![index]!.price),
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: color,
+                          SizedBox(
+                            width: size.width / 3.5,
+                            child: Text(
+                              iESwicherState
+                                  ? NumberFormat("#,###")
+                                      .format(list![index]!.price * -1)
+                                  : NumberFormat("#,###")
+                                      .format(list![index]!.price),
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: color,
+                              ),
                             ),
                           ),
                         ],
@@ -147,3 +173,6 @@ class ExpendChildBar extends HookConsumerWidget {
     );
   }
 }
+
+// 
+
