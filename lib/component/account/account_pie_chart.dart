@@ -20,7 +20,7 @@ class AccountPieChart extends HookConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: SizedBox(
-        height: 260,
+        height: 240,
         width: double.infinity,
         child: Stack(
           children: [

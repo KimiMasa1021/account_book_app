@@ -1,4 +1,5 @@
 import 'package:account_book_app/constant/enums.dart';
+import 'package:account_book_app/constant/hex_color.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
 import 'package:account_book_app/view/pages/statistic/statistic.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class RootPage extends HookConsumerWidget {
       ),
     ];
     return Scaffold(
+      backgroundColor: HexColor("F5F5F5"),
       body: _pageList[pageState.index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageState.index,

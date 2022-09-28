@@ -15,7 +15,7 @@ class AccountAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 95,
+      height: 105,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -73,6 +73,7 @@ class AccountAppBar extends StatelessWidget {
                     NumberFormat("#,###").format(income),
                     style: const TextStyle(
                       color: Colors.lightGreen,
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -84,6 +85,7 @@ class AccountAppBar extends StatelessWidget {
                     NumberFormat("#,###").format(expend * -1),
                     style: const TextStyle(
                       color: Colors.redAccent,
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -91,7 +93,12 @@ class AccountAppBar extends StatelessWidget {
               Column(
                 children: [
                   const Text("合計"),
-                  Text(NumberFormat("#,###").format(income + expend)),
+                  Text(
+                    NumberFormat("#,###").format(income + expend),
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                 ],
               ),
             ],
