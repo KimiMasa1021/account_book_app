@@ -17,14 +17,15 @@ class AccountAppBar extends StatelessWidget {
     return Container(
       height: 105,
       width: double.infinity,
+      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(18)),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 1.0,
-            blurRadius: 10.0,
-            offset: Offset(0, 5),
+            offset: Offset(1, 1),
+            color: Colors.grey,
+            blurRadius: 3,
           ),
         ],
       ),

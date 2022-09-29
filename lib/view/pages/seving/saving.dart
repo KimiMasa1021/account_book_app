@@ -9,24 +9,24 @@ class Saving extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           child: Column(
             children: [
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 15,
                       vertical: 4,
                     ),
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: const BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(
                         Radius.circular(50),
                       ),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "あなた",
                         style: TextStyle(
@@ -38,18 +38,13 @@ class Saving extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 15,
                       vertical: 4,
                     ),
-                    margin: EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                        // color: Colors.grey,
-                        // borderRadius: BorderRadius.all(
-                        //   Radius.circular(50),
-                        // ),
-                        ),
-                    child: Center(
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: const BoxDecoration(),
+                    child: const Center(
                       child: Text(
                         "家族",
                         style: TextStyle(
@@ -59,7 +54,7 @@ class Saving extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.group_add_outlined,
                     size: 30,
                   )
@@ -68,18 +63,25 @@ class Saving extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 100,
-                margin: EdgeInsets.only(top: 8),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(top: 13),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
                   color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(1, 1),
+                      color: Colors.grey,
+                      blurRadius: 3,
+                    ),
+                  ],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       "目標",
                       style: TextStyle(
                         fontSize: 25,
-                        color: Color.fromARGB(255, 88, 88, 88),
                       ),
                     ),
                     Text(
@@ -92,38 +94,96 @@ class Saving extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 300,
-                margin: EdgeInsets.only(top: 8),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: LineChart(
-                  LineChartData(lineBarsData: [LineChartBarData()]),
-                  swapAnimationDuration:
-                      const Duration(milliseconds: 150), // Optional
-                  swapAnimationCurve: Curves.linear, // Optional
+              AspectRatio(
+                aspectRatio: 1.35,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 13),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(18)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(1, 1),
+                        color: Colors.grey,
+                        blurRadius: 3,
+                      ),
+                    ],
+                  ),
+                  child: LineChart(
+                    LineChartData(
+                      borderData: FlBorderData(
+                        border: const Border(
+                          bottom: BorderSide(),
+                          left: BorderSide(),
+                        ),
+                      ),
+                      gridData: FlGridData(show: false),
+                      titlesData: FlTitlesData(
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        leftTitles: AxisTitles(
+                          axisNameSize: 100,
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            getTitlesWidget: (value, meta) => const Text("*"),
+                          ),
+                        ),
+                        topTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        rightTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                      ),
+                      lineBarsData: [
+                        LineChartBarData(
+                          spots: [
+                            const FlSpot(1, 1),
+                            const FlSpot(2, 2),
+                            const FlSpot(3, 2),
+                            const FlSpot(4, 2),
+                            const FlSpot(5, 4),
+                            const FlSpot(6, 4.5),
+                            const FlSpot(7, 100),
+                          ],
+                          isCurved: false,
+                        ),
+                      ],
+                    ),
+                    swapAnimationDuration: const Duration(milliseconds: 150),
+                    swapAnimationCurve: Curves.linear,
+                  ),
                 ),
               ),
               Container(
                 width: double.infinity,
                 height: 100,
-                margin: EdgeInsets.only(top: 8),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(top: 13),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
                   color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(1, 1),
+                      color: Colors.grey,
+                      blurRadius: 3,
+                    ),
+                  ],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "目標金額",
                       style: TextStyle(
                         fontSize: 25,
                         color: Color.fromARGB(255, 88, 88, 88),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "４００、０００円",
                       style: TextStyle(
                         fontSize: 26,
@@ -136,21 +196,29 @@ class Saving extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 100,
-                margin: EdgeInsets.only(top: 8),
-                decoration: BoxDecoration(
+                margin: const EdgeInsets.only(top: 13),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
                   color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(1, 1),
+                      color: Colors.grey,
+                      blurRadius: 3,
+                    ),
+                  ],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "節約総金額",
                       style: TextStyle(
                         fontSize: 25,
                         color: Color.fromARGB(255, 88, 88, 88),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "３８０，０００円",
                       style: TextStyle(
                         fontSize: 26,
@@ -160,41 +228,41 @@ class Saving extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("達成率：45%"),
-                  Text("拙訳履歴"),
+                  const Text("達成率：45%"),
+                  const Text("節約履歴"),
                 ],
               ),
-              SizedBox(height: 8),
-              Divider(
+              const SizedBox(height: 8),
+              const Divider(
                 color: Colors.grey,
                 height: 3,
                 thickness: 0.7,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("繰り返し節約品目"),
-                  Text("追加する"),
+                  const Text("繰り返し節約品目"),
+                  const Text("追加する"),
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Container(
                 width: double.infinity,
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Row(
                   children: [
-                    Text("ジュース"),
-                    Spacer(),
-                    Text("毎日"),
-                    Text("170円"),
+                    const Text("ジュース"),
+                    const Spacer(),
+                    const Text("毎日"),
+                    const Text("170円"),
                   ],
                 ),
               )

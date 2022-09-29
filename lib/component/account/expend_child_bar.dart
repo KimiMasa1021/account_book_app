@@ -37,10 +37,9 @@ class ExpendChildBar extends HookConsumerWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black12,
-                  spreadRadius: 1.0,
-                  blurRadius: 2.0,
-                  offset: Offset(0, 2),
+                  offset: Offset(1, 1),
+                  color: Colors.grey,
+                  blurRadius: 2,
                 ),
               ],
               border: Border.symmetric(
