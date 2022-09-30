@@ -18,7 +18,6 @@ class AccountPage extends HookConsumerWidget {
     final genreState = ref.watch(genreControllerProvider);
     final accountState = ref.watch(accountControllerPrvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-
     final setDate = useState(DateTime.now());
 
     return accountState.when(
@@ -43,7 +42,6 @@ class AccountPage extends HookConsumerWidget {
                 )
                 .toList()
             : [];
-
         List<int> priceList = state
             .where(
               (e) =>
@@ -52,7 +50,6 @@ class AccountPage extends HookConsumerWidget {
             )
             .map((a) => a.price)
             .toList();
-
         int expend = expendState.isNotEmpty
             ? priceList
                 .where((p) => p < 0)
