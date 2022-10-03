@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/general_provider.dart';
 import 'pages/account/account.dart';
-import 'pages/seving/saving.dart';
+import 'pages/saving/saving.dart';
 
 class RootPage extends HookConsumerWidget {
   RootPage({super.key});

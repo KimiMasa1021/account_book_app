@@ -1,8 +1,10 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../component/saving/data_card.dart';
 import '../../../provider/general_provider.dart';
+import 'saving_add.dart';
 
 class SavingData extends HookConsumerWidget {
   const SavingData({super.key});
@@ -43,51 +45,53 @@ class SavingData extends HookConsumerWidget {
                             ),
                           ],
                         ),
-                        // child: LineChart(
-                        //   LineChartData(
-                        //     borderData: FlBorderData(
-                        //       border: const Border(
-                        //         bottom: BorderSide(),
-                        //         left: BorderSide(),
-                        //       ),
-                        //     ),
-                        //     gridData: FlGridData(show: false),
-                        //     titlesData: FlTitlesData(
-                        //       bottomTitles: AxisTitles(
-                        //         sideTitles: SideTitles(showTitles: false),
-                        //       ),
-                        //       leftTitles: AxisTitles(
-                        //         axisNameSize: 100,
-                        //         sideTitles: SideTitles(
-                        //           showTitles: true,
-                        //           getTitlesWidget: (value, meta) => const Text("*"),
-                        //         ),
-                        //       ),
-                        //       topTitles: AxisTitles(
-                        //         sideTitles: SideTitles(showTitles: false),
-                        //       ),
-                        //       rightTitles: AxisTitles(
-                        //         sideTitles: SideTitles(showTitles: false),
-                        //       ),
-                        //     ),
-                        //     lineBarsData: [
-                        //       LineChartBarData(
-                        //         spots: [
-                        //           const FlSpot(1, 1),
-                        //           const FlSpot(2, 2),
-                        //           const FlSpot(3, 2),
-                        //           const FlSpot(4, 2),
-                        //           const FlSpot(5, 4),
-                        //           const FlSpot(6, 4.5),
-                        //           const FlSpot(7, 100),
-                        //         ],
-                        //         isCurved: false,
-                        //       ),
-                        //     ],
-                        //   ),
-                        //   swapAnimationDuration: const Duration(milliseconds: 150),
-                        //   swapAnimationCurve: Curves.linear,
-                        // ),
+                        child: LineChart(
+                          LineChartData(
+                            borderData: FlBorderData(
+                              border: const Border(
+                                bottom: BorderSide(),
+                                left: BorderSide(),
+                              ),
+                            ),
+                            gridData: FlGridData(show: false),
+                            titlesData: FlTitlesData(
+                              bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              leftTitles: AxisTitles(
+                                axisNameSize: 100,
+                                sideTitles: SideTitles(
+                                  showTitles: true,
+                                  getTitlesWidget: (value, meta) =>
+                                      const Text("*"),
+                                ),
+                              ),
+                              topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                              rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false),
+                              ),
+                            ),
+                            lineBarsData: [
+                              LineChartBarData(
+                                spots: [
+                                  const FlSpot(1, 1),
+                                  const FlSpot(2, 2),
+                                  const FlSpot(3, 2),
+                                  const FlSpot(4, 2),
+                                  const FlSpot(5, 4),
+                                  const FlSpot(6, 4.5),
+                                  const FlSpot(7, 100),
+                                ],
+                                isCurved: false,
+                              ),
+                            ],
+                          ),
+                          swapAnimationDuration:
+                              const Duration(milliseconds: 150),
+                          swapAnimationCurve: Curves.linear,
+                        ),
                       ),
                     ),
                     DataCard(
@@ -126,7 +130,9 @@ class SavingData extends HookConsumerWidget {
           right: 10,
           bottom: 15,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(SavingAdd.id);
+            },
             child: Container(
               width: 60,
               height: 60,
