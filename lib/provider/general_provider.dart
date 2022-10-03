@@ -1,12 +1,13 @@
-import 'package:account_book_app/view_model/account_controller.dart';
-import 'package:account_book_app/view_model/auth_controller.dart';
+import 'package:account_book_app/controller/saving_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../constant/enums.dart';
+import '../controller/account_controller.dart';
+import '../controller/auth_controller.dart';
+import '../controller/users_controller.dart';
 import '../model/account_state.dart';
-import '../model/genre_state.dart';
-import '../view_model/genre_controller.dart';
+import '../model/users_state.dart';
 
 final authControllerProvider = StateNotifierProvider<AuthController, User?>(
     (ref) => AuthController(ref.read));
@@ -20,9 +21,12 @@ final pageTypeProvider = StateProvider<PageType>((ref) => PageType.account);
 
 final incomeExpendSwicherProvider = StateProvider<bool>((ref) => true);
 
-final genreControllerProvider =
-    StateNotifierProvider<GenreController, GenreState?>(
-        (ref) => GenreController(ref.read));
+final usersControllerProvider =
+    StateNotifierProvider<UsersController, UsersState?>(
+        (ref) => UsersController(ref.read));
 final accountControllerPrvider =
     StateNotifierProvider<AccountController, AsyncValue<List<AccountState>>>(
         (ref) => AccountController(ref.read));
+
+final savingControllerProvider =
+    StateNotifierProvider((ref) => SavingController(ref.read));

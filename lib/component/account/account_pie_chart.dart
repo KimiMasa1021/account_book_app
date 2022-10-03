@@ -14,7 +14,7 @@ class AccountPieChart extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genreState = ref.watch(genreControllerProvider);
+    final genreState = ref.watch(usersControllerProvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
 
     return Padding(

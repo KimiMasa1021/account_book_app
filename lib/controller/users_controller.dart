@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../model/genre_state.dart';
-import '../repository/genre_repository.dart';
+import '../model/users_state.dart';
+import '../repository/users_repository.dart';
 
-class GenreController extends StateNotifier<GenreState> {
+class UsersController extends StateNotifier<UsersState> {
   final Reader reader;
   Map<String, dynamic>? data;
-  GenreController(this.reader) : super(GenreState()) {
-    reader(genreRepositoryProvider).feachGenreList().listen(
+  UsersController(this.reader) : super(UsersState()) {
+    reader(usersRepositoryProvider).feachGenreList().listen(
       (data) {
         state = state.copyWith(
           genre: data.map((doc) => doc.data()).toList()[0].genre,
           genre2: data.map((doc) => doc.data()).toList()[0].genre2,
+          target: data.map((doc) => doc.data()).toList()[0].target,
+          targetPrice: data.map((doc) => doc.data()).toList()[0].targetPrice,
         );
       },
     );

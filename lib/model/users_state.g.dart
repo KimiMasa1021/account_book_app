@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'genre_state.dart';
+part of 'users_state.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GenreState _$$_GenreStateFromJson(Map<String, dynamic> json) =>
-    _$_GenreState(
+_$_UsersState _$$_UsersStateFromJson(Map<String, dynamic> json) =>
+    _$_UsersState(
       genre: (json['genre'] as Map<String, dynamic>?)?.map(
             (k, e) => MapEntry(k, e as String),
           ) ??
@@ -16,10 +16,14 @@ _$_GenreState _$$_GenreStateFromJson(Map<String, dynamic> json) =>
             (k, e) => MapEntry(k, e as String),
           ) ??
           const {"": ""},
+      target: json['target'] as String? ?? "",
+      targetPrice: json['targetPrice'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_GenreStateToJson(_$_GenreState instance) =>
+Map<String, dynamic> _$$_UsersStateToJson(_$_UsersState instance) =>
     <String, dynamic>{
       'genre': instance.genre,
       'genre2': instance.genre2,
+      'target': instance.target,
+      'targetPrice': instance.targetPrice,
     };

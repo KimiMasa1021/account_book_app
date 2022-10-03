@@ -1,3 +1,4 @@
+import 'package:account_book_app/model/users_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,7 +16,7 @@ class AccountPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genreState = ref.watch(genreControllerProvider);
+    final usersState = ref.watch(usersControllerProvider);
     final accountState = ref.watch(accountControllerPrvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final setDate = useState(DateTime.now());
@@ -97,13 +98,13 @@ class AccountPage extends HookConsumerWidget {
                                   SizedBox(
                                     height: 60 *
                                         (state.length.toDouble() +
-                                            genreState!.genre.length),
+                                            usersState!.genre.length),
                                     child: ListView.builder(
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       itemCount: iESwicherState
-                                          ? genreState.genre.length
-                                          : genreState.genre2.length,
+                                          ? usersState.genre.length
+                                          : usersState.genre2.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return ExpendChildBar(
@@ -111,7 +112,7 @@ class AccountPage extends HookConsumerWidget {
                                               ? expendState
                                                   .where((state) =>
                                                       state.type ==
-                                                          genreState.genre.keys
+                                                          usersState.genre.keys
                                                               .elementAt(
                                                                   index) &&
                                                       state.price < 0)
@@ -119,15 +120,15 @@ class AccountPage extends HookConsumerWidget {
                                               : incomeState
                                                   .where((state) =>
                                                       state.type ==
-                                                          genreState.genre2.keys
+                                                          usersState.genre2.keys
                                                               .elementAt(
                                                                   index) &&
                                                       state.price > 0)
                                                   .toList(),
                                           title: iESwicherState
-                                              ? genreState.genre.values
+                                              ? usersState.genre.values
                                                   .elementAt(index)
-                                              : genreState.genre2.values
+                                              : usersState.genre2.values
                                                   .elementAt(index),
                                           color: iESwicherState
                                               ? Colors.red

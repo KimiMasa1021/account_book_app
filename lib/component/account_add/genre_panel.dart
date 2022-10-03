@@ -17,7 +17,7 @@ class GenrePanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final addPageState = ref.watch(genreControllerProvider);
+    final addPageState = ref.watch(usersControllerProvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     return isShow.value
         ? Align(

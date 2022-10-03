@@ -18,7 +18,7 @@ class AccountAdd extends HookConsumerWidget {
     final isShow = useState(false);
     final size = MediaQuery.of(context).size;
     final date = DateFormat('yyyy/MM/dd').format(DateTime.now());
-    final addPageController = ref.watch(genreControllerProvider.notifier);
+    final addPageController = ref.watch(usersControllerProvider.notifier);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
     final dateController = useTextEditingController(text: date);
     final genreController = useTextEditingController(text: "");

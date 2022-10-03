@@ -2,20 +2,20 @@ import 'package:account_book_app/provider/general_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../model/genre_state.dart';
+import '../model/users_state.dart';
 
 import '../provider/firebase_firestore_provider.dart';
 
-final genreRepositoryProvider =
-    Provider<GenreRepository>((ref) => GenreRepositoryImple(ref.read));
+final usersRepositoryProvider =
+    Provider<UsersRepository>((ref) => GenreRepositoryImple(ref.read));
 
-abstract class GenreRepository {
+abstract class UsersRepository {
   // Future<List<QueryDocumentSnapshot<AddPageState>>> fechGenreList();
   //ジャンル一覧の取得
-  Stream<List<QueryDocumentSnapshot<GenreState>>> feachGenreList();
+  Stream<List<QueryDocumentSnapshot<UsersState>>> feachGenreList();
 }
 
-class GenreRepositoryImple implements GenreRepository {
+class GenreRepositoryImple implements UsersRepository {
   CollectionReference? storeCollectionReference;
   final Reader _reader;
   String? userId;
@@ -40,11 +40,11 @@ class GenreRepositoryImple implements GenreRepository {
   // }
 
   @override
-  Stream<List<QueryDocumentSnapshot<GenreState>>> feachGenreList() async* {
+  Stream<List<QueryDocumentSnapshot<UsersState>>> feachGenreList() async* {
     final stateRef = storeCollectionReference!
         .where("uid", isEqualTo: userId)
-        .withConverter<GenreState>(
-          fromFirestore: (snapshot, _) => GenreState.fromJson(snapshot.data()!),
+        .withConverter<UsersState>(
+          fromFirestore: (snapshot, _) => UsersState.fromJson(snapshot.data()!),
           toFirestore: (data, _) => data.toJson(),
         );
 
