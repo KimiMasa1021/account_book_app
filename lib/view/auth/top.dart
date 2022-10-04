@@ -12,7 +12,6 @@ class Top extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final switcherState = ref.watch(authSwitcherPriovider);
     final switcherController = ref.watch(authSwitcherPriovider.notifier);
 
     final size = MediaQuery.of(context).size;

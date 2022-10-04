@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
+import 'package:intl/intl.dart' show NumberFormat;
 
 class ExpendBar extends StatelessWidget {
   const ExpendBar({required this.price, super.key});

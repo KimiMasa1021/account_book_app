@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:account_book_app/constant/color_type.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';

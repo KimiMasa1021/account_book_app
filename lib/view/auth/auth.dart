@@ -14,7 +14,6 @@ class Auth extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final switcherState = ref.watch(authSwitcherPriovider);
-    final switcherController = ref.watch(authSwitcherPriovider.notifier);
 
     if (switcherState == Pages.top) {
       return const Top();

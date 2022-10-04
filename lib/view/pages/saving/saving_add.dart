@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
-import '../../../component/account/income_expend_swicher.dart';
 import '../../../component/account_add/input_date_field.dart';
 import '../../../component/account_add/input_field.dart';
 import '../../../constant/price_formatter.dart';
@@ -36,7 +35,7 @@ class SavingAdd extends HookConsumerWidget {
         children: [
           Column(
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               InputDateField(
                 dateController: dateController,
                 function: () async {

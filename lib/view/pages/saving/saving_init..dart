@@ -12,9 +12,7 @@ class SavingInit extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savingController = ref.watch(savingControllerProvider.notifier);
-    final usersState = ref.watch(usersControllerProvider);
 
-    final size = MediaQuery.of(context).size;
     final targetController = useTextEditingController(text: "");
     final targetPriceController = useTextEditingController(text: "");
 

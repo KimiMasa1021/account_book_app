@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../provider/general_provider.dart';
 
 class GenrePanel extends HookConsumerWidget {
-  GenrePanel({
+  const GenrePanel({
     required this.isShow,
     required this.genreController,
     required this.outputGenre,

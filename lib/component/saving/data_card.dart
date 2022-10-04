@@ -32,14 +32,14 @@ class DataCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 25,
               color: Color.fromARGB(255, 88, 88, 88),
             ),
           ),
           Text(
             subTitle.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.bold,
             ),

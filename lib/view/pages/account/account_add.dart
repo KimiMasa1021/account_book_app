@@ -16,7 +16,6 @@ class AccountAdd extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isShow = useState(false);
-    final size = MediaQuery.of(context).size;
     final date = DateFormat('yyyy/MM/dd').format(DateTime.now());
     final addPageController = ref.watch(usersControllerProvider.notifier);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider); //値の参照
