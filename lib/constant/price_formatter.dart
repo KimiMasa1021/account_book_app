@@ -5,9 +5,10 @@ class CustomTextInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.contains('-') ||
-        newValue.text.contains('.') ||
-        newValue.text.contains(' ')) {
+    if (newValue.text.length > 24) {
+      return oldValue;
+    }
+    if (newValue.text.contains(RegExp(r'[a-zA-Z-._]'))) {
       return oldValue;
     }
     if (newValue.text.length >= 4) {
@@ -22,3 +23,4 @@ class CustomTextInputFormatter extends TextInputFormatter {
     return newValue;
   }
 }
+// RegExp(r'[0-9]')

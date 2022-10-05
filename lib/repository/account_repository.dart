@@ -11,7 +11,7 @@ final accountRepositoryProvider =
     Provider<AccountRepository>((ref) => AccountRepositoryImple(ref.read));
 
 abstract class AccountRepository {
-  Future<bool> addAccount(
+  Future<void> addAccount(
       DateTime registeTime, String type, int price, String memo);
   Stream<List<QueryDocumentSnapshot<AccountState>>> test();
 }
@@ -29,7 +29,7 @@ class AccountRepositoryImple implements AccountRepository {
   }
 
   @override
-  Future<bool> addAccount(
+  Future<void> addAccount(
       DateTime registeTime, String type, int price, String memo) async {
     AccountState setValue = AccountState(
       createdAt: DateTime.now(),
@@ -40,17 +40,9 @@ class AccountRepositoryImple implements AccountRepository {
     );
 
     try {
-      await accountCollectionReference?.add({
-        'createdAt': setValue.createdAt,
-        'registeTime': setValue.registeTime,
-        'type': setValue.type,
-        'price': setValue.price,
-        'memo': setValue.memo,
-      });
-      return true;
+      await accountCollectionReference?.add(setValue.toJson());
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
-      return false;
     }
   }
 

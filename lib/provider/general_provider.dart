@@ -7,6 +7,7 @@ import '../constant/enums.dart';
 import '../controller/saving_controller.dart';
 import '../controller/users_controller.dart';
 import '../model/account_state.dart';
+import '../model/saving_state.dart';
 import '../model/users_state.dart';
 
 final authControllerProvider = StateNotifierProvider<AuthController, User?>(
@@ -26,4 +27,5 @@ final accountControllerPrvider =
         (ref) => AccountController(ref.read));
 
 final savingControllerProvider =
-    StateNotifierProvider((ref) => SavingController(ref.read));
+    StateNotifierProvider<SavingController, List<SavingState>>(
+        (ref) => SavingController(ref.read));

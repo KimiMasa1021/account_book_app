@@ -1,5 +1,6 @@
 import 'package:account_book_app/repository/account_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../model/account_state.dart';
@@ -14,16 +15,25 @@ class AccountController extends StateNotifier<AsyncValue<List<AccountState>>> {
     });
   }
 
-  Future<bool> addAccount(
+  Future<void> addAccount(
       DateTime registeTime, String type, int price, String memo) async {
     try {
-      final flg = reader(accountRepositoryProvider)
+      await reader(accountRepositoryProvider)
           .addAccount(registeTime, type, price, memo);
-      return flg;
     } catch (e) {
       debugPrint(e.toString());
-      return false;
     }
+  }
+
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
   @override

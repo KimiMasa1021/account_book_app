@@ -85,50 +85,52 @@ class AccountAdd extends HookConsumerWidget {
                 },
                 controller: memoController,
               ),
-              genreController.text != "" && priceController.text != ""
-                  ? InkWell(
-                      onTap: () async {
-                        final calculatedPrice = iESwicherState
-                            ? int.parse(
-                                    priceController.text.replaceAll(",", "")) *
-                                -1
-                            : int.parse(
-                                priceController.text.replaceAll(",", ""));
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () async {
+                  if (genreController.text == "" ||
+                      priceController.text == "") {
+                    accountController.showToast("分類と金額は必須項目です");
+                  } else {
+                    final calculatedPrice = iESwicherState
+                        ? int.parse(priceController.text.replaceAll(",", "")) *
+                            -1
+                        : int.parse(priceController.text.replaceAll(",", ""));
 
-                        final flg = await accountController.addAccount(
-                          outputDate.value,
-                          outputGenre.value,
-                          calculatedPrice,
-                          memoController.text,
-                        );
-                        if (flg == true) Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          margin: const EdgeInsets.only(top: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "保存する",
-                              style: TextStyle(
-                                fontSize: 22,
-                              ),
-                            ),
-                          ),
+                    await accountController.addAccount(
+                      outputDate.value,
+                      outputGenre.value,
+                      calculatedPrice,
+                      memoController.text,
+                    );
+                    Navigator.pop(context);
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    margin: const EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "保存する",
+                        style: TextStyle(
+                          fontSize: 22,
                         ),
                       ),
-                    )
-                  : const SizedBox(),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
           GenrePanel(

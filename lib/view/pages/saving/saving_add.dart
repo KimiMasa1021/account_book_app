@@ -20,6 +20,8 @@ class SavingAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final memoController = useTextEditingController(text: "");
     final ValueNotifier<DateTime> outputDate = useState(DateTime.now());
+    final accountController = ref.watch(accountControllerPrvider.notifier);
+    final savingController = ref.watch(savingControllerProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -63,35 +65,45 @@ class SavingAdd extends HookConsumerWidget {
                 },
                 controller: memoController,
               ),
-              priceController.text != ""
-                  ? InkWell(
-                      onTap: () async {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          margin: const EdgeInsets.only(top: 20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "保存する",
-                              style: TextStyle(
-                                fontSize: 22,
-                              ),
-                            ),
-                          ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () async {
+                  if (priceController.text == "" || memoController.text == "") {
+                    savingController.showToast("金額と品目は必須項目です");
+                  } else {
+                    await savingController.addSaving(
+                      outputDate.value,
+                      int.parse(priceController.text.replaceAll(",", "")),
+                      memoController.text,
+                    );
+                    Navigator.pop(context);
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    margin: const EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "保存する",
+                        style: TextStyle(
+                          fontSize: 22,
                         ),
                       ),
-                    )
-                  : const SizedBox(),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ],

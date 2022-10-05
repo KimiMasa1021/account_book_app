@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DataCard extends StatelessWidget {
-  const DataCard({
+class TargetCard extends StatelessWidget {
+  const TargetCard({
     super.key,
     required this.title,
     required this.subTitle,
@@ -14,8 +14,8 @@ class DataCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100,
       margin: const EdgeInsets.only(top: 13),
+      padding: const EdgeInsets.all(8),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(18)),
         color: Colors.white,
@@ -40,7 +40,7 @@ class DataCard extends StatelessWidget {
           Text(
             subTitle.toString(),
             style: const TextStyle(
-              fontSize: 40,
+              fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),

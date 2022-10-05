@@ -1,3 +1,4 @@
+import 'package:account_book_app/model/saving_state.dart';
 import 'package:account_book_app/provider/firebase_firestore_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,15 +12,24 @@ final savingRepositoryProvider =
 
 abstract class SavingRepository {
   Future<void> initTarget(String target, int targetPrice);
+  Future<void> addSaving(DateTime registedTime, int price, String memo);
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving();
 }
 
 class SavingRepoositoryImple implements SavingRepository {
   final Reader reader;
   CollectionReference? targetCollectionReference;
+  CollectionReference? savingCollectionReference;
+  User? user;
 
   SavingRepoositoryImple(this.reader) {
     targetCollectionReference =
         reader(firebaseFireStoreProvider).collection("users");
+    user = reader(firebaseAuthProvider).currentUser;
+    savingCollectionReference = reader(firebaseFireStoreProvider)
+        .collection("users")
+        .doc(user!.uid)
+        .collection("saving");
   }
 
   @override
@@ -36,5 +46,30 @@ class SavingRepoositoryImple implements SavingRepository {
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
+  }
+
+  @override
+  Future<void> addSaving(DateTime registedTime, int price, String memo) async {
+    SavingState savingState = SavingState(
+      createdAt: DateTime.now(),
+      registeTime: registedTime,
+      price: price,
+      memo: memo,
+    );
+    try {
+      await savingCollectionReference?.add(savingState.toJson());
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving() async* {
+    final stateRef = savingCollectionReference!.withConverter<SavingState>(
+      fromFirestore: (snapshot, _) => SavingState.fromJson(snapshot.data()!),
+      toFirestore: (data, _) => data.toJson(),
+    );
+
+    yield* stateRef.snapshots().map((doc) => doc.docs);
   }
 }

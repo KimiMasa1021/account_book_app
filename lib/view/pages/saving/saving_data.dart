@@ -1,8 +1,10 @@
+import 'package:account_book_app/model/saving_state.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 import '../../../component/saving/data_card.dart';
+import '../../../component/saving/target_card.dart';
 import '../../../provider/general_provider.dart';
 import 'saving_add.dart';
 
@@ -13,6 +15,19 @@ class SavingData extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final usersState = ref.watch(usersControllerProvider);
     final size = MediaQuery.of(context).size;
+    final savingState = ref.watch(savingControllerProvider);
+    final savingController = ref.watch(savingControllerProvider.notifier);
+
+    final savingPrice = savingState.isNotEmpty
+        ? savingState
+            .map((e) => e.price)
+            .toList()
+            .reduce((value, element) => value + element)
+        : 0;
+
+    final targetPrice = usersState!.targetPrice;
+
+    final priceParsent = (savingPrice / targetPrice * 100).toStringAsFixed(1);
 
     return Stack(
       children: [
@@ -23,10 +38,65 @@ class SavingData extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 13),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    DataCard(
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                          margin: EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Text(
+                            "あなた",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Text(
+                            "家族",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Text(
+                            "カップル",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    TargetCard(
                       title: '目標',
                       subTitle: usersState!.target,
+                    ),
+                    DataCard(
+                      title: '目標金額',
+                      subTitle: NumberFormat("#,###").format(targetPrice),
                     ),
                     AspectRatio(
                       aspectRatio: 1.35,
@@ -95,31 +165,39 @@ class SavingData extends HookConsumerWidget {
                       ),
                     ),
                     DataCard(
-                      title: '目標金額',
-                      subTitle: usersState.targetPrice.toString(),
-                    ),
-                    const DataCard(
                       title: '節約総金額',
-                      subTitle: "380000",
+                      subTitle: NumberFormat("#,###").format(savingPrice),
                     ),
                     const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          "達成率：45%",
-                          style: TextStyle(
-                            fontSize: 20,
+                    RichText(
+                      text: TextSpan(
+                        style: Theme.of(context).textTheme.bodyText2,
+                        children: [
+                          TextSpan(
+                            text: '達成率：',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "節約履歴",
-                          style: TextStyle(
-                            fontSize: 20,
+                          TextSpan(
+                            text: priceParsent,
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
+                          TextSpan(
+                            text: '%',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    SizedBox(height: 80),
                   ],
                 ),
               ),
@@ -134,18 +212,29 @@ class SavingData extends HookConsumerWidget {
               Navigator.of(context).pushNamed(SavingAdd.id);
             },
             child: Container(
-              width: 60,
+              width: 170,
               height: 60,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
+              decoration: BoxDecoration(
                 color: Colors.lightBlueAccent,
+                borderRadius: BorderRadius.circular(100),
               ),
-              child: const Center(
-                child: Icon(
-                  Icons.savings_outlined,
-                  size: 40,
-                  color: Colors.white,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.savings_outlined,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "節約できた",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
               ),
             ),
           ),
