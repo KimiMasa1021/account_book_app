@@ -106,6 +106,7 @@ class SavingData extends HookConsumerWidget {
                       subTitle: NumberFormat("#,###").format(targetPrice),
                     ),
                     AddButton(
+                      title: "節約記録を追加",
                       function: () {
                         Navigator.of(context).pushNamed(SavingAdd.id);
                       },

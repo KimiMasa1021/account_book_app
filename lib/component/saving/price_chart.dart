@@ -30,8 +30,8 @@ class PriceChart extends StatelessWidget {
           LineChartData(
             borderData: FlBorderData(
               border: const Border(
-                bottom: BorderSide(),
-                left: BorderSide(),
+                bottom: BorderSide(width: 2),
+                left: BorderSide(width: 2),
               ),
             ),
             gridData: FlGridData(show: false),
@@ -57,6 +57,7 @@ class PriceChart extends StatelessWidget {
                       index.toDouble(), savingChartList[index].toDouble()),
                 ),
                 isCurved: false,
+                color: Colors.black,
               ),
             ],
           ),

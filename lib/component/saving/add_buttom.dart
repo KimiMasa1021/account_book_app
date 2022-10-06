@@ -4,7 +4,9 @@ class AddButton extends StatelessWidget {
   const AddButton({
     super.key,
     required this.function,
+    required this.title,
   });
+  final String title;
   final Function() function;
 
   @override
@@ -18,7 +20,7 @@ class AddButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(18)),
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: Color.fromARGB(255, 255, 251, 0),
           boxShadow: [
             BoxShadow(
               offset: Offset(1, 1),
@@ -28,26 +30,23 @@ class AddButton extends StatelessWidget {
           ],
         ),
         child: Row(
-          children: const [
-            Icon(
+          children: [
+            const Icon(
               Icons.savings_outlined,
               size: 40,
-              color: Colors.white,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
-              "節約記録を追加",
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
               ),
             ),
-            Spacer(),
-            Icon(
+            const Spacer(),
+            const Icon(
               Icons.arrow_forward_ios,
               size: 25,
-              color: Colors.white,
             ),
           ],
         ),
