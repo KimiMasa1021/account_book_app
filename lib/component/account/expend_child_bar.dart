@@ -49,7 +49,7 @@ class ExpendChildBar extends HookConsumerWidget {
               ),
             ),
             width: double.infinity,
-            height: 50,
+            height: 55,
             child: Row(
               children: [
                 Container(
@@ -63,7 +63,7 @@ class ExpendChildBar extends HookConsumerWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 23,
+                    fontSize: 25,
                   ),
                 ),
                 const Spacer(),
@@ -81,7 +81,7 @@ class ExpendChildBar extends HookConsumerWidget {
                             )
                       : "0",
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 28,
                     color: color,
                   ),
                 ),
@@ -101,7 +101,7 @@ class ExpendChildBar extends HookConsumerWidget {
         ),
         isShow.value
             ? SizedBox(
-                height: list!.length * 50,
+                height: list!.length * 55,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: list!.length,
@@ -109,7 +109,7 @@ class ExpendChildBar extends HookConsumerWidget {
                     return Container(
                       padding: const EdgeInsets.all(5),
                       width: double.infinity,
-                      height: 50,
+                      height: 55,
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         border: Border.symmetric(
@@ -131,7 +131,7 @@ class ExpendChildBar extends HookConsumerWidget {
                           const Text(
                             "日",
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 20,
                             ),
                           ),
                           const SizedBox(width: 10),

@@ -9,6 +9,7 @@ import '../../../component/account/income_expend_swicher.dart';
 import '../../../model/account_state.dart';
 import '../../../provider/general_provider.dart';
 import 'account_add.dart';
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class AccountPage extends HookConsumerWidget {
   const AccountPage({super.key});
@@ -19,6 +20,7 @@ class AccountPage extends HookConsumerWidget {
     final accountState = ref.watch(accountControllerPrvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final setDate = useState(DateTime.now());
+    final size = MediaQuery.of(context).size;
 
     return accountState.when(
       data: (state) {
@@ -80,8 +82,83 @@ class AccountPage extends HookConsumerWidget {
                           children: [
                             const IncomeExpendSwicher(),
                             const SizedBox(height: 10),
-                            AccountPieChart(
-                              state: iESwicherState ? expendState : incomeState,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                AccountPieChart(
+                                  state: iESwicherState
+                                      ? expendState
+                                      : incomeState,
+                                ),
+                                Container(
+                                  width: size.width / 1.9,
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            "収入",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          Text(
+                                            NumberFormat("#,###")
+                                                .format(income),
+                                            style: const TextStyle(
+                                              color: Colors.lightGreen,
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            "支出",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          Text(
+                                            NumberFormat("#,###")
+                                                .format(expend * -1),
+                                            style: const TextStyle(
+                                              color: Colors.redAccent,
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            "収支",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                          Text(
+                                            NumberFormat("#,###")
+                                                .format(income + expend),
+                                            style: const TextStyle(
+                                              fontSize: 25,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
                             const SizedBox(height: 10),
                             Padding(

@@ -15,7 +15,7 @@ class AccountAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 105,
+      height: 60,
       width: double.infinity,
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       decoration: const BoxDecoration(
@@ -30,6 +30,7 @@ class AccountAppBar extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +49,7 @@ class AccountAppBar extends StatelessWidget {
               Text(
                 DateFormat('yyyy年MM月').format(setDate.value),
                 style: const TextStyle(
-                  fontSize: 25,
+                  fontSize: 30,
                 ),
               ),
               InkWell(
@@ -63,47 +64,47 @@ class AccountAppBar extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  const Text("収入"),
-                  Text(
-                    NumberFormat("#,###").format(income),
-                    style: const TextStyle(
-                      color: Colors.lightGreen,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const Text("支出"),
-                  Text(
-                    NumberFormat("#,###").format(expend * -1),
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const Text("合計"),
-                  Text(
-                    NumberFormat("#,###").format(income + expend),
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     Column(
+          //       children: [
+          //         const Text("収入"),
+          //         Text(
+          //           NumberFormat("#,###").format(income),
+          //           style: const TextStyle(
+          //             color: Colors.lightGreen,
+          //             fontSize: 18,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     Column(
+          //       children: [
+          //         const Text("支出"),
+          //         Text(
+          //           NumberFormat("#,###").format(expend * -1),
+          //           style: const TextStyle(
+          //             color: Colors.redAccent,
+          //             fontSize: 18,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //     Column(
+          //       children: [
+          //         const Text("合計"),
+          //         Text(
+          //           NumberFormat("#,###").format(income + expend),
+          //           style: const TextStyle(
+          //             fontSize: 18,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
