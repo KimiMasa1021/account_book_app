@@ -65,10 +65,13 @@ class SavingRepoositoryImple implements SavingRepository {
 
   @override
   Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving() async* {
-    final stateRef = savingCollectionReference!.withConverter<SavingState>(
-      fromFirestore: (snapshot, _) => SavingState.fromJson(snapshot.data()!),
-      toFirestore: (data, _) => data.toJson(),
-    );
+    final stateRef = savingCollectionReference!
+        .orderBy("registeTime")
+        .withConverter<SavingState>(
+          fromFirestore: (snapshot, _) =>
+              SavingState.fromJson(snapshot.data()!),
+          toFirestore: (data, _) => data.toJson(),
+        );
 
     yield* stateRef.snapshots().map((doc) => doc.docs);
   }
