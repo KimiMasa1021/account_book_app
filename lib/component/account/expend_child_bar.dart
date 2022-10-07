@@ -69,7 +69,7 @@ class ExpendChildBar extends HookConsumerWidget {
                 const Spacer(),
                 Text(
                   list!.isNotEmpty
-                      ? iESwicherState
+                      ? priceList[0] < 0
                           ? NumberFormat("#,###").format(
                               priceList.reduce(
                                       (value, element) => value + element) *
@@ -149,7 +149,7 @@ class ExpendChildBar extends HookConsumerWidget {
                           SizedBox(
                             width: size.width / 3.5,
                             child: Text(
-                              iESwicherState
+                              list![index]!.price < 0
                                   ? NumberFormat("#,###")
                                       .format(list![index]!.price * -1)
                                   : NumberFormat("#,###")

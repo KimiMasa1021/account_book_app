@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
-class AccountAppBar extends StatelessWidget {
-  const AccountAppBar({
-    super.key,
-    required this.income,
-    required this.expend,
-    required this.setDate,
-  });
-  final int income;
-  final int expend;
-  final ValueNotifier<DateTime> setDate;
+class StatisticAppBar extends StatelessWidget {
+  const StatisticAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +9,6 @@ class AccountAppBar extends StatelessWidget {
       height: 100,
       width: double.infinity,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(18)),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -29,33 +19,27 @@ class AccountAppBar extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
-                onTap: () {
-                  setDate.value =
-                      DateTime(setDate.value.year, setDate.value.month - 1);
-                },
+                onTap: () {},
                 child: const Icon(
                   Icons.arrow_left,
                   size: 50,
                 ),
               ),
-              Text(
-                DateFormat('yyyy年MM月').format(setDate.value),
-                style: const TextStyle(
+              const Text(
+                "2022年10月",
+                style: TextStyle(
                   fontSize: 30,
                 ),
               ),
               InkWell(
-                onTap: () {
-                  setDate.value =
-                      DateTime(setDate.value.year, setDate.value.month + 1);
-                },
+                onTap: () {},
                 child: const Icon(
                   Icons.arrow_right,
                   size: 50,
@@ -69,8 +53,9 @@ class AccountAppBar extends StatelessWidget {
             labelColor: Colors.black,
             labelStyle: TextStyle(fontSize: 24),
             tabs: <Widget>[
-              Tab(text: '収入'),
-              Tab(text: '支出'),
+              Tab(text: '１日'),
+              Tab(text: '日別'),
+              Tab(text: '月別'),
             ],
           ),
         ],

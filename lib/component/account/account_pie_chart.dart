@@ -7,13 +7,16 @@ import '../../model/account_state.dart';
 import '../../provider/general_provider.dart';
 
 class AccountPieChart extends HookConsumerWidget {
-  const AccountPieChart({required this.state, super.key});
+  const AccountPieChart({
+    required this.state,
+    super.key,
+    required this.genre,
+  });
   final List<AccountState> state;
+  final Map<String, String> genre;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genreState = ref.watch(usersControllerProvider);
-    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
@@ -22,19 +25,12 @@ class AccountPieChart extends HookConsumerWidget {
       child: PieChart(
         PieChartData(
           sections: List.generate(
-            iESwicherState
-                ? genreState!.genre.length
-                : genreState!.genre2.length,
+            genre.length,
             (index) {
-              final genreList = iESwicherState
-                  ? state
-                      .where((state) =>
-                          state.type == genreState.genre.keys.elementAt(index))
-                      .toList()
-                  : state
-                      .where((state) =>
-                          state.type == genreState.genre2.keys.elementAt(index))
-                      .toList();
+              final genreList = state
+                  .where((state) => state.type == genre.keys.elementAt(index))
+                  .toList();
+
               double priceList = genreList.isNotEmpty
                   ? genreList
                       .map((e) => e.price)

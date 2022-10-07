@@ -1,11 +1,9 @@
+import 'package:account_book_app/view/pages/account/account_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../component/account/account_appbar.dart';
-import '../../../component/account/account_pie_chart.dart';
-import '../../../component/account/expend_child_bar.dart';
-import '../../../component/account/income_expend_swicher.dart';
 import '../../../model/account_state.dart';
 import '../../../provider/general_provider.dart';
 import 'account_add.dart';
@@ -18,9 +16,7 @@ class AccountPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final usersState = ref.watch(usersControllerProvider);
     final accountState = ref.watch(accountControllerPrvider);
-    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final setDate = useState(DateTime.now());
-    final size = MediaQuery.of(context).size;
 
     return accountState.when(
       data: (state) {
@@ -64,192 +60,67 @@ class AccountPage extends HookConsumerWidget {
                 .toList()
                 .reduce((value, element) => value + element)
             : 0;
-        return SafeArea(
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  AccountAppBar(
-                    expend: expend,
-                    income: income,
-                    setDate: setDate,
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Column(
-                          children: [
-                            const IncomeExpendSwicher(),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                AccountPieChart(
-                                  state: iESwicherState
-                                      ? expendState
-                                      : incomeState,
-                                ),
-                                Container(
-                                  width: size.width / 1.9,
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            "収入",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                          Text(
-                                            NumberFormat("#,###")
-                                                .format(income),
-                                            style: const TextStyle(
-                                              color: Colors.lightGreen,
-                                              fontSize: 25,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            "支出",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                          Text(
-                                            NumberFormat("#,###")
-                                                .format(expend * -1),
-                                            style: const TextStyle(
-                                              color: Colors.redAccent,
-                                              fontSize: 25,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            "収支",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                            ),
-                                          ),
-                                          Text(
-                                            NumberFormat("#,###")
-                                                .format(income + expend),
-                                            style: const TextStyle(
-                                              fontSize: 25,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                children: [
-                                  const Divider(
-                                    height: 3,
-                                    color: Colors.grey,
-                                  ),
-                                  const SizedBox(height: 20),
-                                  SizedBox(
-                                    height: 60 *
-                                        (state.length.toDouble() +
-                                            usersState!.genre.length),
-                                    child: ListView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemCount: iESwicherState
-                                          ? usersState.genre.length
-                                          : usersState.genre2.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return ExpendChildBar(
-                                          list: iESwicherState
-                                              ? expendState
-                                                  .where((state) =>
-                                                      state.type ==
-                                                          usersState.genre.keys
-                                                              .elementAt(
-                                                                  index) &&
-                                                      state.price < 0)
-                                                  .toList()
-                                              : incomeState
-                                                  .where((state) =>
-                                                      state.type ==
-                                                          usersState.genre2.keys
-                                                              .elementAt(
-                                                                  index) &&
-                                                      state.price > 0)
-                                                  .toList(),
-                                          title: iESwicherState
-                                              ? usersState.genre.values
-                                                  .elementAt(index)
-                                              : usersState.genre2.values
-                                                  .elementAt(index),
-                                          color: iESwicherState
-                                              ? Colors.red
-                                              : Colors.green,
-                                          index: index,
-                                        );
-                                      },
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 40)
-                          ],
+        return DefaultTabController(
+          length: 2,
+          initialIndex: 1,
+          child: SafeArea(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    AccountAppBar(
+                      expend: expend,
+                      income: income,
+                      setDate: setDate,
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          AccountContent(
+                            state: incomeState,
+                            genre: usersState!.genre2,
+                            income: income,
+                            expend: expend,
+                            fontColor: Colors.green,
+                          ),
+                          AccountContent(
+                            state: expendState,
+                            genre: usersState.genre,
+                            income: income,
+                            expend: expend,
+                            fontColor: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  right: 10,
+                  bottom: 15,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(AccountAdd.id);
+                    },
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.lightBlueAccent,
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.add,
+                          size: 40,
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
-              Positioned(
-                right: 10,
-                bottom: 15,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(AccountAdd.id);
-                  },
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.lightBlueAccent,
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         );
       },
