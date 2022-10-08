@@ -17,6 +17,7 @@ class AccountAppBar extends StatelessWidget {
     return Container(
       height: 100,
       width: double.infinity,
+      clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(18)),
         color: Colors.white,
