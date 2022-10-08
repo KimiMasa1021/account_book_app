@@ -11,52 +11,93 @@ class DailyPage extends StatelessWidget {
         MediaQuery.of(context).padding.top;
 
     return TableCalendar(
+      locale: 'ja',
+      shouldFillViewport: true,
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: DateTime.now(),
       headerVisible: false,
-      daysOfWeekHeight: 30,
-      rowHeight: (size.height - stateBar - 100 - 72 - 30) / 7,
+      daysOfWeekHeight: 40,
       calendarBuilders: CalendarBuilders(
-        defaultBuilder: ((context, day, focusedDay) {
+        outsideBuilder: ((context, day, focusedDay) {
           return AnimatedContainer(
-            duration: const Duration(
-              milliseconds: 0,
-            ),
+            duration: const Duration(milliseconds: 0),
             margin: EdgeInsets.zero,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromARGB(255, 129, 129, 129)!,
-                width: 0.5,
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.black,
+                ),
+                right: BorderSide(
+                  color: Colors.black,
+                ),
               ),
             ),
             alignment: Alignment.topCenter,
-            child: Text(
-              day.day.toString(),
-              style: const TextStyle(
-                color: Colors.black87,
+            child: Padding(
+              padding: const EdgeInsets.all(7),
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          );
+        }),
+        defaultBuilder: ((context, day, focusedDay) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 0),
+            margin: EdgeInsets.zero,
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.black,
+                ),
+                right: BorderSide(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(7),
+              child: Text(
+                day.day.toString(),
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
           );
         }),
         todayBuilder: ((context, day, focusedDay) {
           return AnimatedContainer(
-            duration: const Duration(
-              milliseconds: 0,
-            ),
+            duration: const Duration(milliseconds: 0),
             margin: EdgeInsets.zero,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              border: Border.all(
-                color: const Color.fromARGB(255, 129, 129, 129)!,
-                width: 0.5,
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.black,
+                ),
               ),
             ),
             alignment: Alignment.topCenter,
-            child: Text(
-              day.day.toString(),
-              style: const TextStyle(
-                color: Colors.black87,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(7),
+                child: Text(
+                  day.day.toString(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ),
           );

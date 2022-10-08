@@ -25,7 +25,6 @@ class ExpendChildBar extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<int> priceList = list!.map((e) => e!.price).toList();
     final isShow = useState(false);
-    final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final size = MediaQuery.of(context).size;
 
     return Column(

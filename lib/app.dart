@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'view/pages/account/account_add.dart';
 import 'view/pages/saving/saving_add.dart';
 import 'view/pages/saving/saving_history.dart';
@@ -11,6 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ja'),
+      ],
       debugShowCheckedModeBanner: false,
       initialRoute: Separate.id,
       routes: <String, WidgetBuilder>{

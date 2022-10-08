@@ -50,7 +50,10 @@ dependencies:
   json_annotation: ^4.7.0
   freezed_annotation: ^2.1.0
   table_calendar: ^3.0.7
-
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
