@@ -6,59 +6,55 @@ class DailyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final stateBar = MediaQuery.of(context).padding.bottom +
-        MediaQuery.of(context).padding.top;
-
     return TableCalendar(
       locale: 'ja',
       shouldFillViewport: true,
       firstDay: DateTime.utc(2010, 10, 16),
       lastDay: DateTime.utc(2030, 3, 14),
       focusedDay: DateTime.now(),
-      headerVisible: false,
       daysOfWeekHeight: 40,
+      availableCalendarFormats: const {CalendarFormat.month: 'Month'},
+      headerStyle: const HeaderStyle(
+        titleCentered: true,
+        titleTextStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+        leftChevronIcon: Icon(Icons.arrow_back_ios_new),
+        rightChevronIcon: Icon(Icons.arrow_forward_ios),
+      ),
+      onHeaderTapped: (dateTIme) {
+        debugPrint(dateTIme.toString());
+      },
+      daysOfWeekStyle: const DaysOfWeekStyle(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 192, 215, 255),
+        ),
+        weekdayStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        weekendStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.orange,
+        ),
+      ),
       calendarBuilders: CalendarBuilders(
         outsideBuilder: ((context, day, focusedDay) {
           return AnimatedContainer(
             duration: const Duration(milliseconds: 0),
             margin: EdgeInsets.zero,
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: Colors.black,
-                ),
-                right: BorderSide(
-                  color: Colors.black,
-                ),
-              ),
+            decoration: BoxDecoration(
+              border: Border.all(width: 0.2),
             ),
             alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(7),
-              child: Text(
-                day.day.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
           );
         }),
         defaultBuilder: ((context, day, focusedDay) {
           return AnimatedContainer(
             duration: const Duration(milliseconds: 0),
             margin: EdgeInsets.zero,
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: Colors.black,
-                ),
-                right: BorderSide(
-                  color: Colors.black,
-                ),
-              ),
+            decoration: BoxDecoration(
+              border: Border.all(width: 0.2),
             ),
             alignment: Alignment.topCenter,
             child: Padding(
@@ -67,6 +63,7 @@ class DailyPage extends StatelessWidget {
                 day.day.toString(),
                 style: const TextStyle(
                   fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -76,12 +73,8 @@ class DailyPage extends StatelessWidget {
           return AnimatedContainer(
             duration: const Duration(milliseconds: 0),
             margin: EdgeInsets.zero,
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: Colors.black,
-                ),
-              ),
+            decoration: BoxDecoration(
+              border: Border.all(width: 0.2),
             ),
             alignment: Alignment.topCenter,
             child: Container(

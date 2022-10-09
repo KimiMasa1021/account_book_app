@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../model/account_state.dart';
-import '../../provider/general_provider.dart';
 
 class AccountPieChart extends HookConsumerWidget {
   const AccountPieChart({
@@ -20,8 +19,8 @@ class AccountPieChart extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
-      height: size.width / 2.3,
-      width: size.width / 2.3,
+      height: size.width / 2.5,
+      width: size.width / 2.5,
       child: PieChart(
         PieChartData(
           sections: List.generate(
@@ -39,14 +38,10 @@ class AccountPieChart extends HookConsumerWidget {
                       .toDouble()
                   : 0;
               return PieChartSectionData(
-                title: "",
+                showTitle: false,
                 value: priceList,
-                radius: 40,
+                radius: (size.width / 2.5) / 2,
                 color: colorType[index],
-                titleStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                ),
               );
             },
           ),

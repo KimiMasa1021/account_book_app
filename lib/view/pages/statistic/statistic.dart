@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../component/statistics/statistic_appbar.dart';
 import 'daily_page.dart';
+import 'one_day_page.dart';
 
 class Statistic extends StatelessWidget {
   const Statistic({super.key});
@@ -13,16 +14,14 @@ class Statistic extends StatelessWidget {
       initialIndex: 0,
       child: SafeArea(
         child: Column(
-          children: [
-            // My App Bar
+          children: const [
             StatisticAppBar(),
-            // Content
             Expanded(
               child: TabBarView(
                 children: [
-                  Text("一日"),
+                  OneDayPage(),
                   DailyPage(),
-                  Text("一日"),
+                  Text("月別やで！！！！！！！！！！！！"),
                 ],
               ),
             ),

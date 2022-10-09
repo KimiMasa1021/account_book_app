@@ -6,7 +6,7 @@ class StatisticAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 60,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -19,35 +19,9 @@ class StatisticAppBar extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: const Icon(
-                  Icons.arrow_left,
-                  size: 50,
-                ),
-              ),
-              const Text(
-                "2022年10月",
-                style: TextStyle(
-                  fontSize: 30,
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: const Icon(
-                  Icons.arrow_right,
-                  size: 50,
-                ),
-              ),
-            ],
-          ),
-          const TabBar(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: const [
+          TabBar(
             indicatorColor: Colors.black,
             indicatorWeight: 4,
             labelColor: Colors.black,

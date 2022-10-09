@@ -102,12 +102,7 @@ class AccountContent extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 5),
-              const Divider(
-                color: Color.fromARGB(255, 65, 65, 65),
-                thickness: 1,
-              ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
               SizedBox(
                 height: 2000,
                 child: ListView.builder(
