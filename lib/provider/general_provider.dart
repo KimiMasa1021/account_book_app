@@ -86,7 +86,7 @@ final processingPriceProvider = Provider<AsyncValue<PriceState>>((ref) {
             .toList()
             .reduce((value, element) => value + element)
         : 0;
-
+//a
     return PriceState(
       monthlyState: monthlyState,
       expendState: expendState,
