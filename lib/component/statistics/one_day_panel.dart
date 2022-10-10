@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../model/account_state.dart';
 
 class OneDayPanel extends StatelessWidget {
-  OneDayPanel({
+  const OneDayPanel({
     super.key,
     required this.day,
     required this.list,
-  }) {
-    debugPrint("");
-  }
+    required this.index,
+  });
 
   final String day;
   final List<AccountState> list;
-
+  final int index;
   @override
   Widget build(BuildContext context) {
     int sumExpend = list.where((e) => e.price < 0).isNotEmpty
@@ -37,15 +35,31 @@ class OneDayPanel extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: 55,
-              child: Text(
-                "$day日",
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+            Container(
+              decoration: DateTime.now().day == index + 1
+                  ? BoxDecoration(
+                      color: Colors.blueAccent.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(10),
+                    )
+                  : null,
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              width: 60,
+              child: Center(
+                child: RichText(
+                  text: TextSpan(
+                    style: const TextStyle(color: Colors.black),
+                    children: [
+                      TextSpan(
+                        text: day,
+                        style: const TextStyle(fontSize: 25),
+                      ),
+                      const TextSpan(
+                        text: '日',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ],
+                  ),
                 ),
-                textAlign: TextAlign.right,
               ),
             ),
             Expanded(
@@ -63,7 +77,16 @@ class OneDayPanel extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(
+                    Container(
+                      decoration: BoxDecoration(
+                        border: DateTime.now().day == index + 1
+                            ? const Border(
+                                bottom: BorderSide(
+                                  width: 0.5,
+                                ),
+                              )
+                            : null,
+                      ),
                       height: 40,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

@@ -13,6 +13,10 @@ class AccountPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final usersState = ref.watch(usersControllerProvider);
+    final test = ref.watch(testPrivider(10));
+    final test2 = ref.watch(testPrivider(100));
+    debugPrint("test" + test.toString());
+    debugPrint("test2" + test2.toString());
 
     return ref.watch(processingPriceProvider).when(
       data: (state) {

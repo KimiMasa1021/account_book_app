@@ -86,7 +86,7 @@ final processingPriceProvider = Provider<AsyncValue<PriceState>>((ref) {
             .toList()
             .reduce((value, element) => value + element)
         : 0;
-//a
+
     return PriceState(
       monthlyState: monthlyState,
       expendState: expendState,
@@ -95,4 +95,8 @@ final processingPriceProvider = Provider<AsyncValue<PriceState>>((ref) {
       income: income,
     );
   });
+});
+//新しいインスタンス作ってちゃんと動いてるっぽいから↑をfamilyバージョンに変更してみる！！
+final testPrivider = Provider.family((ref, int aaa) {
+  return aaa + 10;
 });

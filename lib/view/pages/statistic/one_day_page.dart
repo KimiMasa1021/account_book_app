@@ -30,6 +30,7 @@ class OneDayPage extends HookConsumerWidget {
                           list: state.monthlyState
                               .where((val) => val.registeTime.day == index + 1)
                               .toList(),
+                          index: index,
                         );
                       },
                     ),
