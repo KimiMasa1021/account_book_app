@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../model/account_state.dart';
 
 class OneDayPanel extends StatelessWidget {
-  const OneDayPanel({
+  OneDayPanel({
     super.key,
     required this.day,
     required this.list,
-  });
+  }) {
+    debugPrint("");
+  }
 
   final String day;
   final List<AccountState> list;
@@ -24,22 +27,25 @@ class OneDayPanel extends StatelessWidget {
         : 0;
     int sumIncome = list.where((e) => e.price > 0).isNotEmpty
         ? list
-                .where((e) => e.price > 0)
-                .map((a) => a.price)
-                .toList()
-                .reduce((v, e) => v + e) *
-            -1
+            .where((e) => e.price > 0)
+            .map((a) => a.price)
+            .toList()
+            .reduce((v, e) => v + e)
         : 0;
     return Column(
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "$day日",
-              style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: 55,
+              child: Text(
+                "$day日",
+                style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.right,
               ),
             ),
             Expanded(
@@ -57,16 +63,8 @@ class OneDayPanel extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 40,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            width: 1,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +73,7 @@ class OneDayPanel extends StatelessWidget {
                             sumIncome.toString(),
                             style: const TextStyle(
                               fontSize: 20,
-                              color: Colors.greenAccent,
+                              color: Colors.green,
                             ),
                           ),
                           const SizedBox(width: 20),
@@ -110,7 +108,7 @@ class OneDayPanel extends StatelessWidget {
                                   Text(
                                     list[index].type,
                                     style: const TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 15,
                                     ),
                                   ),
                                 ],
@@ -119,9 +117,11 @@ class OneDayPanel extends StatelessWidget {
                                 list[index].price >= 0
                                     ? list[index].price.toString()
                                     : (list[index].price * -1).toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.red,
+                                  color: list[index].price >= 0
+                                      ? Colors.green
+                                      : Colors.red,
                                 ),
                               )
                             ],
