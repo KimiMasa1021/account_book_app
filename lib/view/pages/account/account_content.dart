@@ -15,7 +15,7 @@ class AccountContent extends StatelessWidget {
   });
 
   final List<AccountState> state;
-  final Map<String, String> genre;
+  final List<String> genre;
   final int income;
   final int expend;
   final Color fontColor;
@@ -111,10 +111,9 @@ class AccountContent extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return ExpendChildBar(
                       list: state
-                          .where((state) =>
-                              state.type == genre.keys.elementAt(index))
+                          .where((state) => state.type == genre[index])
                           .toList(),
-                      title: genre.values.elementAt(index),
+                      title: genre[index],
                       color: fontColor,
                       index: index,
                     );

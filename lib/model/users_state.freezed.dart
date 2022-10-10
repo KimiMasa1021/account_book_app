@@ -20,8 +20,8 @@ UsersState _$UsersStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UsersState {
-  Map<String, String> get genre => throw _privateConstructorUsedError;
-  Map<String, String> get genre2 => throw _privateConstructorUsedError;
+  List<String> get genre => throw _privateConstructorUsedError;
+  List<String> get genre2 => throw _privateConstructorUsedError;
   String get target => throw _privateConstructorUsedError;
   int get targetPrice => throw _privateConstructorUsedError;
 
@@ -37,8 +37,8 @@ abstract class $UsersStateCopyWith<$Res> {
           UsersState value, $Res Function(UsersState) then) =
       _$UsersStateCopyWithImpl<$Res>;
   $Res call(
-      {Map<String, String> genre,
-      Map<String, String> genre2,
+      {List<String> genre,
+      List<String> genre2,
       String target,
       int targetPrice});
 }
@@ -62,11 +62,11 @@ class _$UsersStateCopyWithImpl<$Res> implements $UsersStateCopyWith<$Res> {
       genre: genre == freezed
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as List<String>,
       genre2: genre2 == freezed
           ? _value.genre2
           : genre2 // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as List<String>,
       target: target == freezed
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -87,8 +87,8 @@ abstract class _$$_UsersStateCopyWith<$Res>
       __$$_UsersStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Map<String, String> genre,
-      Map<String, String> genre2,
+      {List<String> genre,
+      List<String> genre2,
       String target,
       int targetPrice});
 }
@@ -114,11 +114,11 @@ class __$$_UsersStateCopyWithImpl<$Res> extends _$UsersStateCopyWithImpl<$Res>
       genre: genre == freezed
           ? _value._genre
           : genre // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as List<String>,
       genre2: genre2 == freezed
           ? _value._genre2
           : genre2 // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>,
+              as List<String>,
       target: target == freezed
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -135,8 +135,8 @@ class __$$_UsersStateCopyWithImpl<$Res> extends _$UsersStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UsersState extends _UsersState {
   _$_UsersState(
-      {final Map<String, String> genre = const {"": ""},
-      final Map<String, String> genre2 = const {"": ""},
+      {final List<String> genre = const [],
+      final List<String> genre2 = const [],
       this.target = "",
       this.targetPrice = 0})
       : _genre = genre,
@@ -146,20 +146,20 @@ class _$_UsersState extends _UsersState {
   factory _$_UsersState.fromJson(Map<String, dynamic> json) =>
       _$$_UsersStateFromJson(json);
 
-  final Map<String, String> _genre;
+  final List<String> _genre;
   @override
   @JsonKey()
-  Map<String, String> get genre {
+  List<String> get genre {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_genre);
+    return EqualUnmodifiableListView(_genre);
   }
 
-  final Map<String, String> _genre2;
+  final List<String> _genre2;
   @override
   @JsonKey()
-  Map<String, String> get genre2 {
+  List<String> get genre2 {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_genre2);
+    return EqualUnmodifiableListView(_genre2);
   }
 
   @override
@@ -210,8 +210,8 @@ class _$_UsersState extends _UsersState {
 
 abstract class _UsersState extends UsersState {
   factory _UsersState(
-      {final Map<String, String> genre,
-      final Map<String, String> genre2,
+      {final List<String> genre,
+      final List<String> genre2,
       final String target,
       final int targetPrice}) = _$_UsersState;
   _UsersState._() : super._();
@@ -220,9 +220,9 @@ abstract class _UsersState extends UsersState {
       _$_UsersState.fromJson;
 
   @override
-  Map<String, String> get genre;
+  List<String> get genre;
   @override
-  Map<String, String> get genre2;
+  List<String> get genre2;
   @override
   String get target;
   @override

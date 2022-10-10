@@ -12,7 +12,7 @@ class AccountPieChart extends HookConsumerWidget {
     required this.genre,
   });
   final List<AccountState> state;
-  final Map<String, String> genre;
+  final List<String> genre;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,9 +26,8 @@ class AccountPieChart extends HookConsumerWidget {
           sections: List.generate(
             genre.length,
             (index) {
-              final genreList = state
-                  .where((state) => state.type == genre.keys.elementAt(index))
-                  .toList();
+              final genreList =
+                  state.where((state) => state.type == genre[index]).toList();
 
               double priceList = genreList.isNotEmpty
                   ? genreList

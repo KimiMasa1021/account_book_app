@@ -71,21 +71,21 @@ class AuthRepositoryImpl implements AuthRepository {
         'uid': user?.uid,
         'email': user?.email,
         'name': name,
-        'genre': {
-          'education': '教育費',
-          'food': '食費',
-          'others': 'その他',
-          'beauty': '美容',
-          'convenience': 'コンビニ',
-          'transportation': '交通費',
-        },
-        'genre2': {
-          'salary': '給料',
-          'extraIncome': '副収入',
-          'others': 'その他',
-          'pocketMoney': 'お小遣い',
-          'bonus': 'ボーナス',
-        },
+        'genre': [
+          '教育費',
+          '食費',
+          'その他',
+          '美容',
+          'コンビニ',
+          '交通費',
+        ],
+        'genre2': [
+          '給料',
+          '副収入',
+          'その他',
+          'お小遣い',
+          'ボーナス',
+        ]
       });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);

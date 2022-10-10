@@ -8,12 +8,10 @@ class GenrePanel extends HookConsumerWidget {
   const GenrePanel({
     required this.isShow,
     required this.genreController,
-    required this.outputGenre,
     super.key,
   });
   final ValueNotifier<bool> isShow;
   final TextEditingController genreController;
-  final ValueNotifier<String> outputGenre;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
@@ -72,11 +70,8 @@ class GenrePanel extends HookConsumerWidget {
                               InkWell(
                             onTap: () {
                               genreController.text = iESwicherState
-                                  ? addPageState.genre.values.elementAt(index)
-                                  : addPageState.genre2.values.elementAt(index);
-                              outputGenre.value = iESwicherState
-                                  ? addPageState.genre.keys.elementAt(index)
-                                  : addPageState.genre2.keys.elementAt(index);
+                                  ? addPageState.genre[index]
+                                  : addPageState.genre2[index];
                             },
                             child: Container(
                               margin: const EdgeInsets.only(
@@ -88,10 +83,8 @@ class GenrePanel extends HookConsumerWidget {
                               child: Center(
                                 child: Text(
                                   iESwicherState
-                                      ? addPageState.genre.values
-                                          .elementAt(index)
-                                      : addPageState.genre2.values
-                                          .elementAt(index),
+                                      ? addPageState.genre[index]
+                                      : addPageState.genre2[index],
                                   style: const TextStyle(fontSize: 20),
                                 ),
                               ),

@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
-class AccountAppBar extends StatelessWidget {
+import '../../provider/general_provider.dart';
+
+class AccountAppBar extends HookConsumerWidget {
   const AccountAppBar({
     super.key,
     required this.income,
     required this.expend,
-    required this.setDate,
   });
   final int income;
   final int expend;
-  final ValueNotifier<DateTime> setDate;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dateState = ref.watch(setDateProvider);
+    final dateController = ref.watch(setDateProvider.notifier);
+
     return Container(
       height: 100,
       width: double.infinity,
@@ -38,8 +42,8 @@ class AccountAppBar extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  setDate.value =
-                      DateTime(setDate.value.year, setDate.value.month - 1);
+                  dateController.state =
+                      DateTime(dateState.year, dateState.month - 1);
                 },
                 child: const Icon(
                   Icons.arrow_left,
@@ -47,15 +51,15 @@ class AccountAppBar extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat('yyyy年MM月').format(setDate.value),
+                DateFormat('yyyy年MM月').format(dateState),
                 style: const TextStyle(
                   fontSize: 30,
                 ),
               ),
               InkWell(
                 onTap: () {
-                  setDate.value =
-                      DateTime(setDate.value.year, setDate.value.month + 1);
+                  dateController.state =
+                      DateTime(dateState.year, dateState.month + 1);
                 },
                 child: const Icon(
                   Icons.arrow_right,

@@ -24,7 +24,6 @@ class AccountAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final memoController = useTextEditingController(text: "");
     final ValueNotifier<DateTime> outputDate = useState(DateTime.now());
-    final ValueNotifier<String> outputGenre = useState("");
 
     final accountController = ref.watch(accountControllerPrvider.notifier);
 
@@ -99,7 +98,7 @@ class AccountAdd extends HookConsumerWidget {
 
                     await accountController.addAccount(
                       outputDate.value,
-                      outputGenre.value,
+                      genreController.text,
                       calculatedPrice,
                       memoController.text,
                     );
@@ -136,7 +135,6 @@ class AccountAdd extends HookConsumerWidget {
           GenrePanel(
             genreController: genreController,
             isShow: isShow,
-            outputGenre: outputGenre,
           )
         ],
       ),

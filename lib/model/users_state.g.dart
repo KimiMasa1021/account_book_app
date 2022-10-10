@@ -8,14 +8,13 @@ part of 'users_state.dart';
 
 _$_UsersState _$$_UsersStateFromJson(Map<String, dynamic> json) =>
     _$_UsersState(
-      genre: (json['genre'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
-          ) ??
-          const {"": ""},
-      genre2: (json['genre2'] as Map<String, dynamic>?)?.map(
-            (k, e) => MapEntry(k, e as String),
-          ) ??
-          const {"": ""},
+      genre:
+          (json['genre'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const [],
+      genre2: (json['genre2'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       target: json['target'] as String? ?? "",
       targetPrice: json['targetPrice'] as int? ?? 0,
     );
