@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class OneDayAppBar extends StatelessWidget {
-  const OneDayAppBar({super.key});
+  const OneDayAppBar({
+    super.key,
+    required this.setDate,
+    required this.expend,
+    required this.income,
+  });
+  final ValueNotifier<DateTime> setDate;
+  final int expend;
+  final int income;
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +38,26 @@ class OneDayAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    setDate.value =
+                        DateTime(setDate.value.year, setDate.value.month - 1);
+                  },
                   child: const Icon(
                     Icons.arrow_left,
                     size: 50,
                   ),
                 ),
-                const Text(
-                  "2022年10月",
+                Text(
+                  DateFormat('yyyy年MM月').format(setDate.value),
                   style: TextStyle(
                     fontSize: 25,
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    setDate.value =
+                        DateTime(setDate.value.year, setDate.value.month + 1);
+                  },
                   child: const Icon(
                     Icons.arrow_right,
                     size: 50,
@@ -54,21 +69,21 @@ class OneDayAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Text("収入"),
-                    Text("1,050,000"),
+                    Text(income.toString()),
                   ],
                 ),
                 Column(
-                  children: const [
+                  children: [
                     Text("支出"),
-                    Text("450,000"),
+                    Text((expend * -1).toString()),
                   ],
                 ),
                 Column(
-                  children: const [
+                  children: [
                     Text("収支"),
-                    Text("4250,000"),
+                    Text((income + expend).toString()),
                   ],
                 ),
               ],

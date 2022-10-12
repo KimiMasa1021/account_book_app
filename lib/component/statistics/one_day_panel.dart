@@ -8,11 +8,14 @@ class OneDayPanel extends StatelessWidget {
     required this.day,
     required this.list,
     required this.index,
+    required this.setDate,
   });
 
   final String day;
   final List<AccountState> list;
   final int index;
+  final ValueNotifier<DateTime> setDate;
+
   @override
   Widget build(BuildContext context) {
     int sumExpend = list.where((e) => e.price < 0).isNotEmpty
@@ -36,7 +39,9 @@ class OneDayPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration: DateTime.now().day == index + 1
+              decoration: DateTime.now().day == index + 1 &&
+                      DateTime.now().year == setDate.value.year &&
+                      DateTime.now().month == setDate.value.month
                   ? BoxDecoration(
                       color: Colors.blueAccent.withOpacity(0.4),
                       borderRadius: BorderRadius.circular(10),
@@ -79,7 +84,7 @@ class OneDayPanel extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        border: DateTime.now().day == index + 1
+                        border: list.isNotEmpty
                             ? const Border(
                                 bottom: BorderSide(
                                   width: 0.5,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../component/statistics/statistic_appbar.dart';
 import 'daily_page.dart';
+import 'monthly_page.dart';
 import 'one_day_page.dart';
 
 class Statistic extends StatelessWidget {
@@ -21,7 +22,7 @@ class Statistic extends StatelessWidget {
                 children: [
                   OneDayPage(),
                   DailyPage(),
-                  Text("月別やで！！！！！！！！！！！！"),
+                  MonthlyPage(),
                 ],
               ),
             ),
@@ -31,3 +32,5 @@ class Statistic extends StatelessWidget {
     );
   }
 }
+// DefaultTabController.of(context)?.animateTo(1);
+

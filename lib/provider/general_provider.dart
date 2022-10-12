@@ -32,10 +32,10 @@ final accountControllerPrvider =
     StateNotifierProvider<AccountController, AsyncValue<List<AccountState>>>(
         (ref) => AccountController(ref.read));
 
-final setDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
+// final setDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
 
-final processingPriceProvider = Provider<AsyncValue<PriceState>>((ref) {
-  final setDate = ref.watch(setDateProvider);
+final processingPriceProvider = Provider.family((ref, DateTime setDate) {
+  // final setDate = ref.watch(setDateProvider);
   return ref.watch(accountControllerPrvider).whenData((state) {
     List<AccountState> monthlyState = state.isNotEmpty
         ? state
@@ -95,8 +95,4 @@ final processingPriceProvider = Provider<AsyncValue<PriceState>>((ref) {
       income: income,
     );
   });
-});
-//新しいインスタンス作ってちゃんと動いてるっぽいから↑をfamilyバージョンに変更してみる！！
-final testPrivider = Provider.family((ref, int aaa) {
-  return aaa + 10;
 });

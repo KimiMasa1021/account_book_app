@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../../../component/statistics/one_day_appbar.dart';
@@ -10,7 +11,8 @@ class OneDayPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(processingPriceProvider).when(
+    final setDate = useState(DateTime.now());
+    return ref.watch(processingPriceProvider(setDate.value)).when(
       data: (state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -31,13 +33,18 @@ class OneDayPage extends HookConsumerWidget {
                               .where((val) => val.registeTime.day == index + 1)
                               .toList(),
                           index: index,
+                          setDate: setDate,
                         );
                       },
                     ),
                   ),
                 ],
               ),
-              const OneDayAppBar(),
+              OneDayAppBar(
+                setDate: setDate,
+                expend: state.expend,
+                income: state.income,
+              ),
             ],
           ),
         );
