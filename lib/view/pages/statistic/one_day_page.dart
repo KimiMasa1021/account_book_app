@@ -7,11 +7,12 @@ import '../../../component/statistics/one_day_panel.dart';
 import '../../../provider/general_provider.dart';
 
 class OneDayPage extends HookConsumerWidget {
-  const OneDayPage({super.key});
+  const OneDayPage({required this.setDate, super.key});
+  final ValueNotifier<DateTime> setDate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setDate = useState(DateTime.now());
+    debugPrint(setDate.value.day.toString());
     return ref.watch(processingPriceProvider(setDate.value)).when(
       data: (state) {
         return Padding(
@@ -24,7 +25,7 @@ class OneDayPage extends HookConsumerWidget {
                   Expanded(
                     child: ScrollablePositionedList.builder(
                       shrinkWrap: true,
-                      initialScrollIndex: DateTime.now().day - 1,
+                      initialScrollIndex: setDate.value.day - 1,
                       itemCount: 31,
                       itemBuilder: (context, index) {
                         return OneDayPanel(

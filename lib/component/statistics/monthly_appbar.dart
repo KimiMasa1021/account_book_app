@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class MonthlyAppBar extends StatelessWidget {
-  const MonthlyAppBar({super.key});
+  const MonthlyAppBar({required this.setDate, super.key});
+  final ValueNotifier<DateTime> setDate;
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +29,40 @@ class MonthlyAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                setDate.value = DateTime(
+                  setDate.value.year - 1,
+                );
+              },
               child: const Icon(
                 Icons.arrow_left,
                 size: 50,
               ),
             ),
-            const Text(
-              "2022年5月",
-              style: TextStyle(
-                fontSize: 25,
+            RichText(
+              text: TextSpan(
+                style: const TextStyle(color: Colors.black),
+                children: [
+                  TextSpan(
+                    text: DateFormat('yyyy').format(setDate.value),
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const TextSpan(
+                    text: '年',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                setDate.value = DateTime(
+                  setDate.value.year + 1,
+                );
+              },
               child: const Icon(
                 Icons.arrow_right,
                 size: 50,

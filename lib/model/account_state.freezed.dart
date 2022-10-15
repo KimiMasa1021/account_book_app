@@ -38,7 +38,8 @@ mixin _$AccountState {
 abstract class $AccountStateCopyWith<$Res> {
   factory $AccountStateCopyWith(
           AccountState value, $Res Function(AccountState) then) =
-      _$AccountStateCopyWithImpl<$Res>;
+      _$AccountStateCopyWithImpl<$Res, AccountState>;
+  @useResult
   $Res call(
       {@TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime registeTime,
@@ -48,43 +49,46 @@ abstract class $AccountStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AccountStateCopyWithImpl<$Res> implements $AccountStateCopyWith<$Res> {
+class _$AccountStateCopyWithImpl<$Res, $Val extends AccountState>
+    implements $AccountStateCopyWith<$Res> {
   _$AccountStateCopyWithImpl(this._value, this._then);
 
-  final AccountState _value;
   // ignore: unused_field
-  final $Res Function(AccountState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = freezed,
-    Object? registeTime = freezed,
-    Object? type = freezed,
-    Object? price = freezed,
-    Object? memo = freezed,
+    Object? createdAt = null,
+    Object? registeTime = null,
+    Object? type = null,
+    Object? price = null,
+    Object? memo = null,
   }) {
     return _then(_value.copyWith(
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      registeTime: registeTime == freezed
+      registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      memo: memo == freezed
+      memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -95,6 +99,7 @@ abstract class _$$_AccountStateCopyWith<$Res>
           _$_AccountState value, $Res Function(_$_AccountState) then) =
       __$$_AccountStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime registeTime,
@@ -105,41 +110,39 @@ abstract class _$$_AccountStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_AccountStateCopyWithImpl<$Res>
-    extends _$AccountStateCopyWithImpl<$Res>
+    extends _$AccountStateCopyWithImpl<$Res, _$_AccountState>
     implements _$$_AccountStateCopyWith<$Res> {
   __$$_AccountStateCopyWithImpl(
       _$_AccountState _value, $Res Function(_$_AccountState) _then)
-      : super(_value, (v) => _then(v as _$_AccountState));
+      : super(_value, _then);
 
-  @override
-  _$_AccountState get _value => super._value as _$_AccountState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = freezed,
-    Object? registeTime = freezed,
-    Object? type = freezed,
-    Object? price = freezed,
-    Object? memo = freezed,
+    Object? createdAt = null,
+    Object? registeTime = null,
+    Object? type = null,
+    Object? price = null,
+    Object? memo = null,
   }) {
     return _then(_$_AccountState(
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      registeTime: registeTime == freezed
+      registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      memo: memo == freezed
+      memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
@@ -187,26 +190,23 @@ class _$_AccountState extends _AccountState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountState &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality()
-                .equals(other.registeTime, registeTime) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.memo, memo));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.registeTime, registeTime) ||
+                other.registeTime == registeTime) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.memo, memo) || other.memo == memo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(registeTime),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(memo));
+  int get hashCode =>
+      Object.hash(runtimeType, createdAt, registeTime, type, price, memo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AccountStateCopyWith<_$_AccountState> get copyWith =>
       __$$_AccountStateCopyWithImpl<_$_AccountState>(this, _$identity);
 

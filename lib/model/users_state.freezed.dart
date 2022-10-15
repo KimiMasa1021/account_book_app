@@ -35,7 +35,8 @@ mixin _$UsersState {
 abstract class $UsersStateCopyWith<$Res> {
   factory $UsersStateCopyWith(
           UsersState value, $Res Function(UsersState) then) =
-      _$UsersStateCopyWithImpl<$Res>;
+      _$UsersStateCopyWithImpl<$Res, UsersState>;
+  @useResult
   $Res call(
       {List<String> genre,
       List<String> genre2,
@@ -44,38 +45,41 @@ abstract class $UsersStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UsersStateCopyWithImpl<$Res> implements $UsersStateCopyWith<$Res> {
+class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
+    implements $UsersStateCopyWith<$Res> {
   _$UsersStateCopyWithImpl(this._value, this._then);
 
-  final UsersState _value;
   // ignore: unused_field
-  final $Res Function(UsersState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? genre = freezed,
-    Object? genre2 = freezed,
-    Object? target = freezed,
-    Object? targetPrice = freezed,
+    Object? genre = null,
+    Object? genre2 = null,
+    Object? target = null,
+    Object? targetPrice = null,
   }) {
     return _then(_value.copyWith(
-      genre: genre == freezed
+      genre: null == genre
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      genre2: genre2 == freezed
+      genre2: null == genre2
           ? _value.genre2
           : genre2 // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      target: target == freezed
+      target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as String,
-      targetPrice: targetPrice == freezed
+      targetPrice: null == targetPrice
           ? _value.targetPrice
           : targetPrice // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -86,6 +90,7 @@ abstract class _$$_UsersStateCopyWith<$Res>
           _$_UsersState value, $Res Function(_$_UsersState) then) =
       __$$_UsersStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<String> genre,
       List<String> genre2,
@@ -94,36 +99,35 @@ abstract class _$$_UsersStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UsersStateCopyWithImpl<$Res> extends _$UsersStateCopyWithImpl<$Res>
+class __$$_UsersStateCopyWithImpl<$Res>
+    extends _$UsersStateCopyWithImpl<$Res, _$_UsersState>
     implements _$$_UsersStateCopyWith<$Res> {
   __$$_UsersStateCopyWithImpl(
       _$_UsersState _value, $Res Function(_$_UsersState) _then)
-      : super(_value, (v) => _then(v as _$_UsersState));
+      : super(_value, _then);
 
-  @override
-  _$_UsersState get _value => super._value as _$_UsersState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? genre = freezed,
-    Object? genre2 = freezed,
-    Object? target = freezed,
-    Object? targetPrice = freezed,
+    Object? genre = null,
+    Object? genre2 = null,
+    Object? target = null,
+    Object? targetPrice = null,
   }) {
     return _then(_$_UsersState(
-      genre: genre == freezed
+      genre: null == genre
           ? _value._genre
           : genre // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      genre2: genre2 == freezed
+      genre2: null == genre2
           ? _value._genre2
           : genre2 // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      target: target == freezed
+      target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as String,
-      targetPrice: targetPrice == freezed
+      targetPrice: null == targetPrice
           ? _value.targetPrice
           : targetPrice // ignore: cast_nullable_to_non_nullable
               as int,
@@ -181,9 +185,9 @@ class _$_UsersState extends _UsersState {
             other is _$_UsersState &&
             const DeepCollectionEquality().equals(other._genre, _genre) &&
             const DeepCollectionEquality().equals(other._genre2, _genre2) &&
-            const DeepCollectionEquality().equals(other.target, target) &&
-            const DeepCollectionEquality()
-                .equals(other.targetPrice, targetPrice));
+            (identical(other.target, target) || other.target == target) &&
+            (identical(other.targetPrice, targetPrice) ||
+                other.targetPrice == targetPrice));
   }
 
   @JsonKey(ignore: true)
@@ -192,11 +196,12 @@ class _$_UsersState extends _UsersState {
       runtimeType,
       const DeepCollectionEquality().hash(_genre),
       const DeepCollectionEquality().hash(_genre2),
-      const DeepCollectionEquality().hash(target),
-      const DeepCollectionEquality().hash(targetPrice));
+      target,
+      targetPrice);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UsersStateCopyWith<_$_UsersState> get copyWith =>
       __$$_UsersStateCopyWithImpl<_$_UsersState>(this, _$identity);
 

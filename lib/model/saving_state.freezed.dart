@@ -37,7 +37,8 @@ mixin _$SavingState {
 abstract class $SavingStateCopyWith<$Res> {
   factory $SavingStateCopyWith(
           SavingState value, $Res Function(SavingState) then) =
-      _$SavingStateCopyWithImpl<$Res>;
+      _$SavingStateCopyWithImpl<$Res, SavingState>;
+  @useResult
   $Res call(
       {@TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime registeTime,
@@ -46,38 +47,41 @@ abstract class $SavingStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SavingStateCopyWithImpl<$Res> implements $SavingStateCopyWith<$Res> {
+class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
+    implements $SavingStateCopyWith<$Res> {
   _$SavingStateCopyWithImpl(this._value, this._then);
 
-  final SavingState _value;
   // ignore: unused_field
-  final $Res Function(SavingState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = freezed,
-    Object? registeTime = freezed,
-    Object? price = freezed,
-    Object? memo = freezed,
+    Object? createdAt = null,
+    Object? registeTime = null,
+    Object? price = null,
+    Object? memo = null,
   }) {
     return _then(_value.copyWith(
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      registeTime: registeTime == freezed
+      registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      memo: memo == freezed
+      memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -88,6 +92,7 @@ abstract class _$$_SavingStateCopyWith<$Res>
           _$_SavingState value, $Res Function(_$_SavingState) then) =
       __$$_SavingStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime registeTime,
@@ -96,36 +101,35 @@ abstract class _$$_SavingStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SavingStateCopyWithImpl<$Res> extends _$SavingStateCopyWithImpl<$Res>
+class __$$_SavingStateCopyWithImpl<$Res>
+    extends _$SavingStateCopyWithImpl<$Res, _$_SavingState>
     implements _$$_SavingStateCopyWith<$Res> {
   __$$_SavingStateCopyWithImpl(
       _$_SavingState _value, $Res Function(_$_SavingState) _then)
-      : super(_value, (v) => _then(v as _$_SavingState));
+      : super(_value, _then);
 
-  @override
-  _$_SavingState get _value => super._value as _$_SavingState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = freezed,
-    Object? registeTime = freezed,
-    Object? price = freezed,
-    Object? memo = freezed,
+    Object? createdAt = null,
+    Object? registeTime = null,
+    Object? price = null,
+    Object? memo = null,
   }) {
     return _then(_$_SavingState(
-      createdAt: createdAt == freezed
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      registeTime: registeTime == freezed
+      registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      price: price == freezed
+      price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
-      memo: memo == freezed
+      memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
@@ -169,24 +173,22 @@ class _$_SavingState extends _SavingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SavingState &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality()
-                .equals(other.registeTime, registeTime) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.memo, memo));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.registeTime, registeTime) ||
+                other.registeTime == registeTime) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.memo, memo) || other.memo == memo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(registeTime),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(memo));
+  int get hashCode =>
+      Object.hash(runtimeType, createdAt, registeTime, price, memo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SavingStateCopyWith<_$_SavingState> get copyWith =>
       __$$_SavingStateCopyWithImpl<_$_SavingState>(this, _$identity);
 

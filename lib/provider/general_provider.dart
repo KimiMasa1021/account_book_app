@@ -37,6 +37,7 @@ final accountControllerPrvider =
 final processingPriceProvider = Provider.family((ref, DateTime setDate) {
   // final setDate = ref.watch(setDateProvider);
   return ref.watch(accountControllerPrvider).whenData((state) {
+    List<AccountState> allState = state.isNotEmpty ? state.toList() : [];
     List<AccountState> monthlyState = state.isNotEmpty
         ? state
             .where(
@@ -88,6 +89,7 @@ final processingPriceProvider = Provider.family((ref, DateTime setDate) {
         : 0;
 
     return PriceState(
+      allState: allState,
       monthlyState: monthlyState,
       expendState: expendState,
       incomeState: incomeState,

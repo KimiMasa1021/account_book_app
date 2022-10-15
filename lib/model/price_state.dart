@@ -7,6 +7,7 @@ part 'price_state.freezed.dart';
 class PriceState with _$PriceState {
   const PriceState._();
   factory PriceState({
+    @Default([]) List<AccountState> allState,
     @Default([]) List<AccountState> monthlyState,
     @Default([]) List<AccountState> expendState,
     @Default([]) List<AccountState> incomeState,

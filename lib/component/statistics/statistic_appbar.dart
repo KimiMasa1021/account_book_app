@@ -27,9 +27,9 @@ class StatisticAppBar extends StatelessWidget {
             labelColor: Colors.black,
             labelStyle: TextStyle(fontSize: 24),
             tabs: <Widget>[
-              Tab(text: '１日'),
-              Tab(text: '日別'),
               Tab(text: '月別'),
+              Tab(text: '日別'),
+              Tab(text: '１日'),
             ],
           ),
         ],
