@@ -6,10 +6,10 @@ import '../model/users_state.dart';
 import '../repository/users_repository.dart';
 
 class UsersController extends StateNotifier<UsersState> {
-  final Reader reader;
+  final Ref ref;
   Map<String, dynamic>? data;
-  UsersController(this.reader) : super(UsersState()) {
-    reader(usersRepositoryProvider).feachGenreList().listen(
+  UsersController(this.ref) : super(UsersState()) {
+    ref.read(usersRepositoryProvider).feachGenreList().listen(
       (data) {
         state = state.copyWith(
           genre: data.map((doc) => doc.data()).toList()[0].genre,
@@ -22,7 +22,7 @@ class UsersController extends StateNotifier<UsersState> {
   }
 
   // Future<void> test() async {
-  //   final test = await reader(addPageRepositoryProvider).fechGenreList();
+  //   final test = await ref.read(addPageRepositoryProvider).fechGenreList();
   //   final List<AddPageState?> list = test.map((data) => data.data()).toList();
 
   //   state = state.copyWith(
@@ -53,7 +53,7 @@ class UsersController extends StateNotifier<UsersState> {
   }
 }
 // Future<void> test() async {
-//   final test = await reader(addPageRepositoryProvider).fechGenreList();
+//   final test = await ref.read(addPageRepositoryProvider).fechGenreList();
 //   final List<AddPageState?> list = test.map((data) => data.data()).toList();
 
 //   state = state.copyWith(

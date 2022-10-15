@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/firebase_auth_provider.dart';
 
 final savingRepositoryProvider =
-    Provider<SavingRepository>((ref) => SavingRepoositoryImple(ref.read));
+    Provider<SavingRepository>((ref) => SavingRepoositoryImple(ref));
 
 abstract class SavingRepository {
   Future<void> initTarget(String target, int targetPrice);
@@ -17,16 +17,17 @@ abstract class SavingRepository {
 }
 
 class SavingRepoositoryImple implements SavingRepository {
-  final Reader reader;
+  final Ref ref;
   CollectionReference? targetCollectionReference;
   CollectionReference? savingCollectionReference;
   User? user;
 
-  SavingRepoositoryImple(this.reader) {
+  SavingRepoositoryImple(this.ref) {
     targetCollectionReference =
-        reader(firebaseFireStoreProvider).collection("users");
-    user = reader(firebaseAuthProvider).currentUser;
-    savingCollectionReference = reader(firebaseFireStoreProvider)
+        ref.read(firebaseFireStoreProvider).collection("users");
+    user = ref.read(firebaseAuthProvider).currentUser;
+    savingCollectionReference = ref
+        .read(firebaseFireStoreProvider)
         .collection("users")
         .doc(user!.uid)
         .collection("saving");
@@ -34,7 +35,7 @@ class SavingRepoositoryImple implements SavingRepository {
 
   @override
   Future<void> initTarget(String target, int targetPrice) async {
-    User? user = reader(firebaseAuthProvider).currentUser;
+    User? user = ref.read(firebaseAuthProvider).currentUser;
     try {
       await targetCollectionReference?.doc(user?.uid).set(
         {

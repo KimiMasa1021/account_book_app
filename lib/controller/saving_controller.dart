@@ -6,19 +6,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/saving_state.dart';
 
 class SavingController extends StateNotifier<List<SavingState>> {
-  final Reader reader;
-  SavingController(this.reader) : super([]) {
-    reader(savingRepositoryProvider).feachSaving().listen((data) {
+  final Ref ref;
+  SavingController(this.ref) : super([]) {
+    ref.read(savingRepositoryProvider).feachSaving().listen((data) {
       state = data.map((doc) => doc.data()).toList();
     });
   }
 
   Future<void> initTarget(String target, int targetPrice) async {
-    reader(savingRepositoryProvider).initTarget(target, targetPrice);
+    ref.read(savingRepositoryProvider).initTarget(target, targetPrice);
   }
 
   Future<void> addSaving(DateTime registedTime, int price, String memo) async {
-    await reader(savingRepositoryProvider).addSaving(registedTime, price, memo);
+    await ref
+        .read(savingRepositoryProvider)
+        .addSaving(registedTime, price, memo);
   }
 
   void showToast(String msg) {

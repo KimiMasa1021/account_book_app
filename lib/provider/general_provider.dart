@@ -11,8 +11,8 @@ import '../model/price_state.dart';
 import '../model/saving_state.dart';
 import '../model/users_state.dart';
 
-final authControllerProvider = StateNotifierProvider<AuthController, User?>(
-    (ref) => AuthController(ref.read));
+final authControllerProvider =
+    StateNotifierProvider<AuthController, User?>((ref) => AuthController(ref));
 
 final authSwitcherPriovider = StateProvider<Pages>((ref) => Pages.top);
 
@@ -22,15 +22,15 @@ final incomeExpendSwicherProvider = StateProvider<bool>((ref) => true);
 
 final usersControllerProvider =
     StateNotifierProvider<UsersController, UsersState?>(
-        (ref) => UsersController(ref.read));
+        (ref) => UsersController(ref));
 
 final savingControllerProvider =
     StateNotifierProvider<SavingController, List<SavingState>>(
-        (ref) => SavingController(ref.read));
+        (ref) => SavingController(ref));
 
 final accountControllerPrvider =
     StateNotifierProvider<AccountController, AsyncValue<List<AccountState>>>(
-        (ref) => AccountController(ref.read));
+        (ref) => AccountController(ref));
 
 // final setDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
 

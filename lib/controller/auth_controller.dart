@@ -7,13 +7,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AuthController extends StateNotifier<User?> {
-  final Reader _reader;
+  final Ref ref;
 
   StreamSubscription<User?>? _authStateChangesSubscription;
 
-  AuthController(this._reader) : super(null) {
+  AuthController(this.ref) : super(null) {
     _authStateChangesSubscription?.cancel();
-    _authStateChangesSubscription = _reader(authRepositoryProvider)
+    _authStateChangesSubscription = ref
+        .read(authRepositoryProvider)
         .authStateChange
         .listen((user) => state = user);
   }
@@ -24,15 +25,16 @@ class AuthController extends StateNotifier<User?> {
     super.dispose();
   }
 
-  @override
-  User? get state => _reader(authRepositoryProvider).getCurrentUser();
+  // @override
+  // User? get state => ref.read(authRepositoryProvider).getCurrentUser();
 
   Future<void> signIn(
       String email, String password, ValueNotifier<bool> loading) async {
     try {
       if (!validate2(email, password)) return showToast("no-data");
 
-      final flg = await _reader(authRepositoryProvider)
+      final flg = await ref
+          .read(authRepositoryProvider)
           .signInWithEmail(email, password);
       loading.value = false;
       if (flg != null) {
@@ -49,11 +51,11 @@ class AuthController extends StateNotifier<User?> {
       if (!validate(email, password, name)) return showToast("no-data");
 
       final flg =
-          await _reader(authRepositoryProvider).signUp(email, password, name);
+          await ref.read(authRepositoryProvider).signUp(email, password, name);
       loading.value = false;
       if (flg == null) {
         debugPrint(flg);
-        await _reader(authRepositoryProvider).saveUserData(name);
+        await ref.read(authRepositoryProvider).saveUserData(name);
       } else {
         showToast(flg);
       }
@@ -63,7 +65,7 @@ class AuthController extends StateNotifier<User?> {
   }
 
   Future<void> signOut() async {
-    _reader(authRepositoryProvider).signOut();
+    ref.read(authRepositoryProvider).signOut();
   }
 
   void showToast(String flg) {

@@ -8,7 +8,7 @@ import '../provider/firebase_auth_provider.dart';
 import '../provider/firebase_firestore_provider.dart';
 
 final accountRepositoryProvider =
-    Provider<AccountRepository>((ref) => AccountRepositoryImple(ref.read));
+    Provider<AccountRepository>((ref) => AccountRepositoryImple(ref));
 
 abstract class AccountRepository {
   Future<void> addAccount(
@@ -17,12 +17,13 @@ abstract class AccountRepository {
 }
 
 class AccountRepositoryImple implements AccountRepository {
-  final Reader reader;
+  final Ref ref;
   CollectionReference? accountCollectionReference;
   User? user;
-  AccountRepositoryImple(this.reader) {
-    user = reader(firebaseAuthProvider).currentUser;
-    accountCollectionReference = reader(firebaseFireStoreProvider)
+  AccountRepositoryImple(this.ref) {
+    user = ref.read(firebaseAuthProvider).currentUser;
+    accountCollectionReference = ref
+        .read(firebaseFireStoreProvider)
         .collection("users")
         .doc(user!.uid)
         .collection("account");

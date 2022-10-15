@@ -6,9 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/account_state.dart';
 
 class AccountController extends StateNotifier<AsyncValue<List<AccountState>>> {
-  final Reader reader;
-  AccountController(this.reader) : super(const AsyncLoading()) {
-    reader(accountRepositoryProvider).test().listen((data) {
+  final Ref ref;
+  AccountController(this.ref) : super(const AsyncLoading()) {
+    ref.read(accountRepositoryProvider).test().listen((data) {
       state = AsyncData(
         data.map((doc) => doc.data()).toList(),
       );
@@ -18,7 +18,8 @@ class AccountController extends StateNotifier<AsyncValue<List<AccountState>>> {
   Future<void> addAccount(
       DateTime registeTime, String type, int price, String memo) async {
     try {
-      await reader(accountRepositoryProvider)
+      await ref
+          .read(accountRepositoryProvider)
           .addAccount(registeTime, type, price, memo);
     } catch (e) {
       debugPrint(e.toString());

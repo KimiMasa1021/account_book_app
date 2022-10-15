@@ -7,7 +7,7 @@ import '../model/users_state.dart';
 import '../provider/firebase_firestore_provider.dart';
 
 final usersRepositoryProvider =
-    Provider<UsersRepository>((ref) => GenreRepositoryImple(ref.read));
+    Provider<UsersRepository>((ref) => GenreRepositoryImple(ref));
 
 abstract class UsersRepository {
   // Future<List<QueryDocumentSnapshot<AddPageState>>> fechGenreList();
@@ -17,12 +17,12 @@ abstract class UsersRepository {
 
 class GenreRepositoryImple implements UsersRepository {
   CollectionReference? storeCollectionReference;
-  final Reader _reader;
+  final Ref ref;
   String? userId;
-  GenreRepositoryImple(this._reader) {
+  GenreRepositoryImple(this.ref) {
     storeCollectionReference =
-        _reader(firebaseFireStoreProvider).collection("users");
-    userId = _reader(authControllerProvider)!.uid;
+        ref.read(firebaseFireStoreProvider).collection("users");
+    userId = ref.read(authControllerProvider)!.uid;
   }
   // @override
   // Future<List<QueryDocumentSnapshot<AddPageState>>> fechGenreList() async {
