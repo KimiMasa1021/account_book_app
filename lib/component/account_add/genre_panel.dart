@@ -1,3 +1,4 @@
+import 'package:account_book_app/view/pages/account/account_genre.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,9 +41,11 @@ class GenrePanel extends HookConsumerWidget {
                           ),
                         ),
                         const Spacer(),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(AccountGenre.id);
+                          },
+                          child: const Icon(
                             Icons.edit_note_rounded,
                             size: 40,
                             color: Colors.white,
