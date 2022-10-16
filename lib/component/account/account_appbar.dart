@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
@@ -18,7 +19,7 @@ class AccountAppBar extends HookConsumerWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      clipBehavior: Clip.antiAlias,
+      // clipBehavior: Clip.antiAlias,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(18)),
         color: Colors.white,

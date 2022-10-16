@@ -13,8 +13,8 @@ class RootPage extends HookConsumerWidget {
   RootPage({super.key});
   final List<Widget> _pageList = <Widget>[
     const AccountPage(),
-    const Saving(),
     const Statistic(),
+    const Saving(),
     const Setting(),
   ];
   @override
@@ -26,12 +26,12 @@ class RootPage extends HookConsumerWidget {
         label: '家計簿',
       ),
       const BottomNavigationBarItem(
-        icon: Icon(Icons.savings_outlined),
-        label: '節約',
-      ),
-      const BottomNavigationBarItem(
         icon: Icon(Icons.stacked_bar_chart),
         label: '統計',
+      ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.savings_outlined),
+        label: '節約',
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings),

@@ -20,6 +20,10 @@ mixin _$PriceState {
   List<AccountState> get monthlyState => throw _privateConstructorUsedError;
   List<AccountState> get expendState => throw _privateConstructorUsedError;
   List<AccountState> get incomeState => throw _privateConstructorUsedError;
+  List<AccountState> get expendStateYearly =>
+      throw _privateConstructorUsedError;
+  List<AccountState> get incomeStateYearly =>
+      throw _privateConstructorUsedError;
   dynamic get priceList => throw _privateConstructorUsedError;
   dynamic get expend => throw _privateConstructorUsedError;
   dynamic get income => throw _privateConstructorUsedError;
@@ -40,6 +44,8 @@ abstract class $PriceStateCopyWith<$Res> {
       List<AccountState> monthlyState,
       List<AccountState> expendState,
       List<AccountState> incomeState,
+      List<AccountState> expendStateYearly,
+      List<AccountState> incomeStateYearly,
       dynamic priceList,
       dynamic expend,
       dynamic income});
@@ -62,6 +68,8 @@ class _$PriceStateCopyWithImpl<$Res, $Val extends PriceState>
     Object? monthlyState = null,
     Object? expendState = null,
     Object? incomeState = null,
+    Object? expendStateYearly = null,
+    Object? incomeStateYearly = null,
     Object? priceList = null,
     Object? expend = null,
     Object? income = null,
@@ -82,6 +90,14 @@ class _$PriceStateCopyWithImpl<$Res, $Val extends PriceState>
       incomeState: null == incomeState
           ? _value.incomeState
           : incomeState // ignore: cast_nullable_to_non_nullable
+              as List<AccountState>,
+      expendStateYearly: null == expendStateYearly
+          ? _value.expendStateYearly
+          : expendStateYearly // ignore: cast_nullable_to_non_nullable
+              as List<AccountState>,
+      incomeStateYearly: null == incomeStateYearly
+          ? _value.incomeStateYearly
+          : incomeStateYearly // ignore: cast_nullable_to_non_nullable
               as List<AccountState>,
       priceList: null == priceList
           ? _value.priceList
@@ -112,6 +128,8 @@ abstract class _$$_PriceStateCopyWith<$Res>
       List<AccountState> monthlyState,
       List<AccountState> expendState,
       List<AccountState> incomeState,
+      List<AccountState> expendStateYearly,
+      List<AccountState> incomeStateYearly,
       dynamic priceList,
       dynamic expend,
       dynamic income});
@@ -132,6 +150,8 @@ class __$$_PriceStateCopyWithImpl<$Res>
     Object? monthlyState = null,
     Object? expendState = null,
     Object? incomeState = null,
+    Object? expendStateYearly = null,
+    Object? incomeStateYearly = null,
     Object? priceList = null,
     Object? expend = null,
     Object? income = null,
@@ -153,6 +173,14 @@ class __$$_PriceStateCopyWithImpl<$Res>
           ? _value._incomeState
           : incomeState // ignore: cast_nullable_to_non_nullable
               as List<AccountState>,
+      expendStateYearly: null == expendStateYearly
+          ? _value._expendStateYearly
+          : expendStateYearly // ignore: cast_nullable_to_non_nullable
+              as List<AccountState>,
+      incomeStateYearly: null == incomeStateYearly
+          ? _value._incomeStateYearly
+          : incomeStateYearly // ignore: cast_nullable_to_non_nullable
+              as List<AccountState>,
       priceList: null == priceList ? _value.priceList : priceList,
       expend: null == expend ? _value.expend : expend,
       income: null == income ? _value.income : income,
@@ -168,6 +196,8 @@ class _$_PriceState extends _PriceState {
       final List<AccountState> monthlyState = const [],
       final List<AccountState> expendState = const [],
       final List<AccountState> incomeState = const [],
+      final List<AccountState> expendStateYearly = const [],
+      final List<AccountState> incomeStateYearly = const [],
       this.priceList = const [],
       this.expend = 0,
       this.income = 0})
@@ -175,6 +205,8 @@ class _$_PriceState extends _PriceState {
         _monthlyState = monthlyState,
         _expendState = expendState,
         _incomeState = incomeState,
+        _expendStateYearly = expendStateYearly,
+        _incomeStateYearly = incomeStateYearly,
         super._();
 
   final List<AccountState> _allState;
@@ -209,6 +241,22 @@ class _$_PriceState extends _PriceState {
     return EqualUnmodifiableListView(_incomeState);
   }
 
+  final List<AccountState> _expendStateYearly;
+  @override
+  @JsonKey()
+  List<AccountState> get expendStateYearly {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_expendStateYearly);
+  }
+
+  final List<AccountState> _incomeStateYearly;
+  @override
+  @JsonKey()
+  List<AccountState> get incomeStateYearly {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_incomeStateYearly);
+  }
+
   @override
   @JsonKey()
   final dynamic priceList;
@@ -221,7 +269,7 @@ class _$_PriceState extends _PriceState {
 
   @override
   String toString() {
-    return 'PriceState(allState: $allState, monthlyState: $monthlyState, expendState: $expendState, incomeState: $incomeState, priceList: $priceList, expend: $expend, income: $income)';
+    return 'PriceState(allState: $allState, monthlyState: $monthlyState, expendState: $expendState, incomeState: $incomeState, expendStateYearly: $expendStateYearly, incomeStateYearly: $incomeStateYearly, priceList: $priceList, expend: $expend, income: $income)';
   }
 
   @override
@@ -236,6 +284,10 @@ class _$_PriceState extends _PriceState {
                 .equals(other._expendState, _expendState) &&
             const DeepCollectionEquality()
                 .equals(other._incomeState, _incomeState) &&
+            const DeepCollectionEquality()
+                .equals(other._expendStateYearly, _expendStateYearly) &&
+            const DeepCollectionEquality()
+                .equals(other._incomeStateYearly, _incomeStateYearly) &&
             const DeepCollectionEquality().equals(other.priceList, priceList) &&
             const DeepCollectionEquality().equals(other.expend, expend) &&
             const DeepCollectionEquality().equals(other.income, income));
@@ -248,6 +300,8 @@ class _$_PriceState extends _PriceState {
       const DeepCollectionEquality().hash(_monthlyState),
       const DeepCollectionEquality().hash(_expendState),
       const DeepCollectionEquality().hash(_incomeState),
+      const DeepCollectionEquality().hash(_expendStateYearly),
+      const DeepCollectionEquality().hash(_incomeStateYearly),
       const DeepCollectionEquality().hash(priceList),
       const DeepCollectionEquality().hash(expend),
       const DeepCollectionEquality().hash(income));
@@ -265,6 +319,8 @@ abstract class _PriceState extends PriceState {
       final List<AccountState> monthlyState,
       final List<AccountState> expendState,
       final List<AccountState> incomeState,
+      final List<AccountState> expendStateYearly,
+      final List<AccountState> incomeStateYearly,
       final dynamic priceList,
       final dynamic expend,
       final dynamic income}) = _$_PriceState;
@@ -278,6 +334,10 @@ abstract class _PriceState extends PriceState {
   List<AccountState> get expendState;
   @override
   List<AccountState> get incomeState;
+  @override
+  List<AccountState> get expendStateYearly;
+  @override
+  List<AccountState> get incomeStateYearly;
   @override
   dynamic get priceList;
   @override

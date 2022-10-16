@@ -87,7 +87,20 @@ final processingPriceProvider = Provider.family((ref, DateTime setDate) {
             .toList()
             .reduce((value, element) => value + element)
         : 0;
-
+    List<AccountState> expendStateYearly = state.isNotEmpty
+        ? state
+            .where(
+              (p) => p.price < 0 && p.registeTime.year == setDate.year,
+            )
+            .toList()
+        : [];
+    List<AccountState> incomeStateYearly = state.isNotEmpty
+        ? state
+            .where(
+              (p) => p.price > 0 && p.registeTime.year == setDate.year,
+            )
+            .toList()
+        : [];
     return PriceState(
       allState: allState,
       monthlyState: monthlyState,
@@ -95,6 +108,8 @@ final processingPriceProvider = Provider.family((ref, DateTime setDate) {
       incomeState: incomeState,
       expend: expend,
       income: income,
+      expendStateYearly: expendStateYearly,
+      incomeStateYearly: incomeStateYearly,
     );
   });
 });

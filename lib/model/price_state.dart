@@ -11,6 +11,8 @@ class PriceState with _$PriceState {
     @Default([]) List<AccountState> monthlyState,
     @Default([]) List<AccountState> expendState,
     @Default([]) List<AccountState> incomeState,
+    @Default([]) List<AccountState> expendStateYearly,
+    @Default([]) List<AccountState> incomeStateYearly,
     @Default([]) priceList,
     @Default(0) expend,
     @Default(0) income,
