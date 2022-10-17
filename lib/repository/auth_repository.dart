@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../provider/firebase_auth_provider.dart';
 import '../provider/firebase_firestore_provider.dart';
+import '../provider/general_provider.dart';
 
 final authRepositoryProvider =
     Provider<AuthRepository>((ref) => AuthRepositoryImpl(ref));
@@ -23,6 +24,8 @@ abstract class AuthRepository {
   Stream<User?> get authStateChange;
   //ログイン中のユーザーのデータの取得
   User? getCurrentUser();
+  Future<void> addGenre(String genre);
+  Future<void> addGenre2(String genre);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -107,6 +110,40 @@ class AuthRepositoryImpl implements AuthRepository {
       return ref.read(firebaseAuthProvider).currentUser;
     } on FirebaseAuthException catch (e) {
       throw (e.code);
+    }
+  }
+
+  @override
+  Future<void> addGenre(String genre) async {
+    User? user = ref.read(firebaseAuthProvider).currentUser;
+    final List<String> genreList = ref.read(usersControllerProvider)!.genre;
+    final List<String> genreList2 = ref.read(usersControllerProvider)!.genre2;
+    genreList.add(genre);
+
+    try {
+      await storeCollectionReference?.doc(user?.uid).set({
+        'genre': genreList,
+        'genre2': genreList2,
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> addGenre2(String genre) async {
+    User? user = ref.read(firebaseAuthProvider).currentUser;
+    final List<String> genreList = ref.read(usersControllerProvider)!.genre;
+    final List<String> genreList2 = ref.read(usersControllerProvider)!.genre2;
+    genreList2.add(genre);
+
+    try {
+      await storeCollectionReference?.doc(user?.uid).set({
+        'genre': genreList,
+        'genre2': genreList2,
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
     }
   }
 }

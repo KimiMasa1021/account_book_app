@@ -19,6 +19,7 @@ abstract class AccountRepository {
 class AccountRepositoryImple implements AccountRepository {
   final Ref ref;
   CollectionReference? accountCollectionReference;
+
   User? user;
   AccountRepositoryImple(this.ref) {
     user = ref.read(firebaseAuthProvider).currentUser;

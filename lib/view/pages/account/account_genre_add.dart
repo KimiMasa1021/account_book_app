@@ -1,5 +1,6 @@
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/account/income_expend_swicher.dart';
 
@@ -10,12 +11,15 @@ class AccountGenreAdd extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final usersState = ref.watch(usersControllerProvider);
+    final genreController = ref.watch(authControllerProvider.notifier);
+
+    final genreTextController = useTextEditingController(text: '');
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           iESwicherState ? "支出分類の追加" : "収入分類の追加",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),
@@ -31,9 +35,58 @@ class AccountGenreAdd extends HookConsumerWidget {
       body: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
           child: Column(
-            children: [TextField()],
+            children: [
+              Container(
+                width: double.infinity,
+                height: 65,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(width: 3, color: Colors.black),
+                ),
+                child: Center(
+                  child: TextFormField(
+                    controller: genreTextController,
+                    autofocus: true,
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                    decoration: InputDecoration(
+                      focusedBorder: InputBorder.none,
+                      hintText: "新しい分類",
+                    ),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              InkWell(
+                onTap: () {
+                  genreController.addGenre(
+                      genreTextController.text, iESwicherState);
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "登録する",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -91,7 +91,10 @@ class AccountGenre extends HookConsumerWidget {
                               ),
                             ),
                             const Spacer(),
-                            const Icon(Icons.delete)
+                            const Icon(
+                              Icons.delete_outline,
+                              color: Colors.redAccent,
+                            )
                           ],
                         ),
                       ),

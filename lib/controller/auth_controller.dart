@@ -123,4 +123,12 @@ class AuthController extends StateNotifier<User?> {
 
     return true;
   }
+
+  Future<void> addGenre(String genre, bool ie) async {
+    if (ie == true) {
+      ref.read(authRepositoryProvider).addGenre(genre);
+    } else {
+      ref.read(authRepositoryProvider).addGenre2(genre);
+    }
+  }
 }
