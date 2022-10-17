@@ -116,15 +116,28 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> addGenre(String genre) async {
     User? user = ref.read(firebaseAuthProvider).currentUser;
-    final List<String> genreList = ref.read(usersControllerProvider)!.genre;
-    final List<String> genreList2 = ref.read(usersControllerProvider)!.genre2;
-    genreList.add(genre);
+    final genreList = ref.read(usersControllerProvider)!.genre;
+    final genreList2 = ref.read(usersControllerProvider)!.genre2;
+
+    final newList = List.generate(
+      genreList.length + 1,
+      (index) {
+        if (genreList.length > index) {
+          return genreList[index];
+        } else {
+          return genre;
+        }
+      },
+    );
 
     try {
-      await storeCollectionReference?.doc(user?.uid).set({
-        'genre': genreList,
-        'genre2': genreList2,
-      });
+      await storeCollectionReference?.doc(user?.uid).set(
+        {
+          'genre': newList,
+          'genre2': genreList2,
+        },
+        SetOptions(merge: true),
+      );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
@@ -133,15 +146,26 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> addGenre2(String genre) async {
     User? user = ref.read(firebaseAuthProvider).currentUser;
-    final List<String> genreList = ref.read(usersControllerProvider)!.genre;
-    final List<String> genreList2 = ref.read(usersControllerProvider)!.genre2;
-    genreList2.add(genre);
-
+    var genreList = ref.read(usersControllerProvider)!.genre;
+    var genreList2 = ref.read(usersControllerProvider)!.genre2;
+    final newList = List.generate(
+      genreList2.length + 1,
+      (index) {
+        if (genreList2.length > index) {
+          return genreList2[index];
+        } else {
+          return genre;
+        }
+      },
+    );
     try {
-      await storeCollectionReference?.doc(user?.uid).set({
-        'genre': genreList,
-        'genre2': genreList2,
-      });
+      await storeCollectionReference?.doc(user?.uid).set(
+        {
+          'genre': genreList,
+          'genre2': newList,
+        },
+        SetOptions(merge: true),
+      );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }

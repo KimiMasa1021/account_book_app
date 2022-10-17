@@ -77,7 +77,7 @@ class SignIn extends HookConsumerWidget {
 
                                   await authController.signIn(
                                       email, passwrod, loading);
-                                  // loading.value = false;
+                                  loading.value = false;
                                 } catch (e) {
                                   debugPrint(e.toString());
                                 }

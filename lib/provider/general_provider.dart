@@ -32,10 +32,7 @@ final accountControllerPrvider =
     StateNotifierProvider<AccountController, AsyncValue<List<AccountState>>>(
         (ref) => AccountController(ref));
 
-// final setDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
-
 final processingPriceProvider = Provider.family((ref, DateTime setDate) {
-  // final setDate = ref.watch(setDateProvider);
   return ref.watch(accountControllerPrvider).whenData((state) {
     List<AccountState> allState = state.isNotEmpty ? state.toList() : [];
     List<AccountState> monthlyState = state.isNotEmpty

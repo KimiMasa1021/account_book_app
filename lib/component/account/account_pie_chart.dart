@@ -17,33 +17,33 @@ class AccountPieChart extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final sectionsList = List.generate(
+      genre.length,
+      (index) {
+        final genreList =
+            state.where((state) => state.type == genre[index]).toList();
 
+        double priceList = genreList.isNotEmpty
+            ? genreList
+                .map((e) => e.price)
+                .toList()
+                .reduce((a, b) => a + b)
+                .toDouble()
+            : 0;
+        return PieChartSectionData(
+          showTitle: false,
+          value: priceList,
+          radius: (size.width / 2.5) / 2,
+          color: colorType[index],
+        );
+      },
+    );
     return SizedBox(
       height: size.width / 2.5,
       width: size.width / 2.5,
       child: PieChart(
         PieChartData(
-          sections: List.generate(
-            genre.length,
-            (index) {
-              final genreList =
-                  state.where((state) => state.type == genre[index]).toList();
-
-              double priceList = genreList.isNotEmpty
-                  ? genreList
-                      .map((e) => e.price)
-                      .toList()
-                      .reduce((a, b) => a + b)
-                      .toDouble()
-                  : 0;
-              return PieChartSectionData(
-                showTitle: false,
-                value: priceList,
-                radius: (size.width / 2.5) / 2,
-                color: colorType[index],
-              );
-            },
-          ),
+          sections: sectionsList,
         ),
       ),
     );
