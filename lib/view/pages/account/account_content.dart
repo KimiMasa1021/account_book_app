@@ -1,10 +1,11 @@
+import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/account/account_pie_chart.dart';
 import '../../../component/account/expend_child_bar.dart';
 import '../../../model/account_state.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
-class AccountContent extends StatelessWidget {
+class AccountContent extends HookConsumerWidget {
   const AccountContent({
     super.key,
     required this.state,
@@ -21,7 +22,8 @@ class AccountContent extends StatelessWidget {
   final Color fontColor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountProvider = ref.watch(accountControllerPrvider.notifier);
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: SizedBox(
@@ -54,7 +56,7 @@ class AccountContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              NumberFormat("#,###").format(income),
+                              accountProvider.displayPriceFormatter(income),
                               style: const TextStyle(
                                 color: Colors.lightGreen,
                                 fontSize: 25,
@@ -72,7 +74,8 @@ class AccountContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              NumberFormat("#,###").format(expend * -1),
+                              accountProvider
+                                  .displayPriceFormatter(expend * -1),
                               style: const TextStyle(
                                 color: Colors.redAccent,
                                 fontSize: 25,
@@ -90,7 +93,8 @@ class AccountContent extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              NumberFormat("#,###").format(income + expend),
+                              accountProvider
+                                  .displayPriceFormatter(income + expend),
                               style: const TextStyle(
                                 fontSize: 25,
                               ),

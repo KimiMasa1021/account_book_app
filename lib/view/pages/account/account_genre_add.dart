@@ -2,7 +2,6 @@ import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../component/account/income_expend_swicher.dart';
 
 class AccountGenreAdd extends HookConsumerWidget {
   const AccountGenreAdd({super.key});
@@ -51,10 +50,10 @@ class AccountGenreAdd extends HookConsumerWidget {
                   child: TextFormField(
                     controller: genreTextController,
                     autofocus: true,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                     ),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       focusedBorder: InputBorder.none,
                       hintText: "新しい分類",
                     ),

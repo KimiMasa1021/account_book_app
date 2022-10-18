@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/account/account_appbar.dart';
 import '../../../provider/general_provider.dart';
 import 'account_add.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 class AccountPage extends HookConsumerWidget {
   const AccountPage({super.key});

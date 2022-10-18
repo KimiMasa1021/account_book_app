@@ -2,6 +2,7 @@ import 'package:account_book_app/repository/account_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 
 import '../model/account_state.dart';
 
@@ -40,5 +41,10 @@ class AccountController extends StateNotifier<AsyncValue<List<AccountState>>> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  String displayPriceFormatter(int price) {
+    final newPrice = NumberFormat("#,###").format(price);
+    return newPrice;
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:math';
 import '../../model/account_state.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
+import 'package:intl/intl.dart' show DateFormat;
 
 import '../../provider/general_provider.dart';
 
@@ -26,6 +26,7 @@ class ExpendChildBar extends HookConsumerWidget {
     List<int> priceList = list!.map((e) => e!.price).toList();
     final isShow = useState(false);
     final size = MediaQuery.of(context).size;
+    final accountProvider = ref.watch(accountControllerPrvider.notifier);
 
     return Column(
       children: [
@@ -69,15 +70,11 @@ class ExpendChildBar extends HookConsumerWidget {
                 Text(
                   list!.isNotEmpty
                       ? priceList[0] < 0
-                          ? NumberFormat("#,###").format(
-                              priceList.reduce(
-                                      (value, element) => value + element) *
-                                  -1,
-                            )
-                          : NumberFormat("#,###").format(
-                              priceList
-                                  .reduce((value, element) => value + element),
-                            )
+                          ? accountProvider.displayPriceFormatter(priceList
+                                  .reduce((value, element) => value + element) *
+                              -1)
+                          : accountProvider.displayPriceFormatter(priceList
+                              .reduce((value, element) => value + element))
                       : "0",
                   style: TextStyle(
                     fontSize: 28,
@@ -149,10 +146,10 @@ class ExpendChildBar extends HookConsumerWidget {
                             width: size.width / 3.5,
                             child: Text(
                               list![index]!.price < 0
-                                  ? NumberFormat("#,###")
-                                      .format(list![index]!.price * -1)
-                                  : NumberFormat("#,###")
-                                      .format(list![index]!.price),
+                                  ? accountProvider.displayPriceFormatter(
+                                      list![index]!.price * -1)
+                                  : accountProvider.displayPriceFormatter(
+                                      list![index]!.price),
                               textAlign: TextAlign.end,
                               style: TextStyle(
                                 fontSize: 20,

@@ -62,41 +62,41 @@ class SavingData extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 5),
-                          margin: const EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: const Text(
-                            "あなた",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: const Text(
-                            "家族",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       padding: const EdgeInsets.symmetric(
+                    //           horizontal: 15, vertical: 5),
+                    //       margin: const EdgeInsets.only(right: 10),
+                    //       decoration: BoxDecoration(
+                    //         color: Colors.grey,
+                    //         borderRadius: BorderRadius.circular(100),
+                    //       ),
+                    //       child: const Text(
+                    //         "あなた",
+                    //         style: TextStyle(
+                    //           fontSize: 20,
+                    //           fontWeight: FontWeight.bold,
+                    //           color: Colors.white,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       padding: const EdgeInsets.symmetric(
+                    //           horizontal: 15, vertical: 5),
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(100),
+                    //       ),
+                    //       child: const Text(
+                    //         "家族",
+                    //         style: TextStyle(
+                    //           fontSize: 20,
+                    //           fontWeight: FontWeight.bold,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     TargetCard(
                       title: '目標',
                       subTitle: usersState.target,
@@ -113,7 +113,7 @@ class SavingData extends HookConsumerWidget {
                     ),
                     PriceChart(savingChartList: savingChartList),
                     DataCard(
-                      title: '節約総金額',
+                      title: '現在の節約総金額',
                       subTitle: NumberFormat("#,###").format(savingPrice),
                     ),
                     Row(

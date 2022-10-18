@@ -25,37 +25,37 @@ class SavingInit extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 4,
-                        ),
-                        margin: const EdgeInsets.only(right: 10),
-                        decoration: const BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "あなた",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Icon(
-                        Icons.group_add_outlined,
-                        size: 30,
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Container(
+                  //       padding: const EdgeInsets.symmetric(
+                  //         horizontal: 15,
+                  //         vertical: 4,
+                  //       ),
+                  //       margin: const EdgeInsets.only(right: 10),
+                  //       decoration: const BoxDecoration(
+                  //         color: Colors.grey,
+                  //         borderRadius: BorderRadius.all(
+                  //           Radius.circular(50),
+                  //         ),
+                  //       ),
+                  //       child: const Center(
+                  //         child: Text(
+                  //           "あなた",
+                  //           style: TextStyle(
+                  //             color: Colors.white,
+                  //             fontWeight: FontWeight.bold,
+                  //             fontSize: 20,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     const Icon(
+                  //       Icons.group_add_outlined,
+                  //       size: 30,
+                  //     )
+                  //   ],
+                  // ),
                   Container(
                     width: double.infinity,
                     height: 120,
@@ -73,10 +73,10 @@ class SavingInit extends HookConsumerWidget {
                     ),
                     child: const Center(
                       child: Text(
-                        "目標と目標金額を決めて\n節約をはじめよう!!",
+                        "あなたに合った目標と目標金額\nを決めて節約をはじめよう!!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
