@@ -60,20 +60,22 @@ class ExpendChildBar extends HookConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 25,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 25,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const Spacer(),
                 Text(
                   list!.isNotEmpty
                       ? priceList[0] < 0
-                          ? accountProvider.displayPriceFormatter(priceList
+                          ? accountProvider.pFormat(priceList
                                   .reduce((value, element) => value + element) *
                               -1)
-                          : accountProvider.displayPriceFormatter(priceList
+                          : accountProvider.pFormat(priceList
                               .reduce((value, element) => value + element))
                       : "0",
                   style: TextStyle(
@@ -131,8 +133,7 @@ class ExpendChildBar extends HookConsumerWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          SizedBox(
-                            width: size.width / 2.1,
+                          Expanded(
                             child: Text(
                               list![index]!.memo,
                               style: const TextStyle(
@@ -141,20 +142,15 @@ class ExpendChildBar extends HookConsumerWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const Spacer(),
-                          SizedBox(
-                            width: size.width / 3.5,
-                            child: Text(
-                              list![index]!.price < 0
-                                  ? accountProvider.displayPriceFormatter(
-                                      list![index]!.price * -1)
-                                  : accountProvider.displayPriceFormatter(
-                                      list![index]!.price),
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: color,
-                              ),
+                          Text(
+                            list![index]!.price < 0
+                                ? accountProvider
+                                    .pFormat(list![index]!.price * -1)
+                                : accountProvider.pFormat(list![index]!.price),
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: color,
                             ),
                           ),
                         ],

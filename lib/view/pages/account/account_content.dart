@@ -46,6 +46,7 @@ class AccountContent extends HookConsumerWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        // Text("")
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -56,7 +57,7 @@ class AccountContent extends HookConsumerWidget {
                               ),
                             ),
                             Text(
-                              accountProvider.displayPriceFormatter(income),
+                              accountProvider.pFormat(income),
                               style: const TextStyle(
                                 color: Colors.lightGreen,
                                 fontSize: 25,
@@ -74,8 +75,7 @@ class AccountContent extends HookConsumerWidget {
                               ),
                             ),
                             Text(
-                              accountProvider
-                                  .displayPriceFormatter(expend * -1),
+                              accountProvider.pFormat(expend * -1),
                               style: const TextStyle(
                                 color: Colors.redAccent,
                                 fontSize: 25,
@@ -93,8 +93,7 @@ class AccountContent extends HookConsumerWidget {
                               ),
                             ),
                             Text(
-                              accountProvider
-                                  .displayPriceFormatter(income + expend),
+                              accountProvider.pFormat(income + expend),
                               style: const TextStyle(
                                 fontSize: 25,
                               ),

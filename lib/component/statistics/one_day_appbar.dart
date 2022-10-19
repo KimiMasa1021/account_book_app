@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class OneDayAppBar extends StatelessWidget {
+import '../../provider/general_provider.dart';
+
+class OneDayAppBar extends HookConsumerWidget {
   const OneDayAppBar({
     super.key,
     required this.setDate,
@@ -13,7 +16,9 @@ class OneDayAppBar extends StatelessWidget {
   final int income;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final accountProvider = ref.watch(accountControllerPrvider.notifier);
+
     return Align(
       alignment: Alignment.topCenter,
       child: Container(
@@ -71,19 +76,34 @@ class OneDayAppBar extends StatelessWidget {
                 Column(
                   children: [
                     const Text("収入"),
-                    Text(income.toString()),
+                    Text(
+                      accountProvider.pFormat(income),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.green,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
                   children: [
                     const Text("支出"),
-                    Text((expend * -1).toString()),
+                    Text(
+                      accountProvider.pFormat(expend * -1),
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.redAccent,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
                   children: [
                     const Text("収支"),
-                    Text((income + expend).toString()),
+                    Text(
+                      accountProvider.pFormat(income + expend),
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
               ],

@@ -13,6 +13,7 @@ class MonthlyPage extends HookConsumerWidget {
       data: (state) {
         final expendStateYearly = state.expendStateYearly;
         final incomeStateYearly = state.incomeStateYearly;
+        final accountProvider = ref.watch(accountControllerPrvider.notifier);
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -22,6 +23,7 @@ class MonthlyPage extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 MonthlyAppBar(setDate: setDate),
+                Text("あああああ"),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -66,12 +68,12 @@ class MonthlyPage extends HookConsumerWidget {
                               DefaultTabController.of(context)?.animateTo(1);
                             },
                             child: Container(
-                              height: 50,
+                              height: 45,
                               width: double.infinity,
                               decoration: const BoxDecoration(
                                 border: Border.symmetric(
                                   horizontal: BorderSide(
-                                    width: 0.3,
+                                    width: 0.2,
                                   ),
                                 ),
                               ),
@@ -80,7 +82,7 @@ class MonthlyPage extends HookConsumerWidget {
                                   Container(
                                     width: 10,
                                     margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
+                                        const EdgeInsets.symmetric(vertical: 3),
                                     decoration: BoxDecoration(
                                       color: DateTime(setDate.value.year,
                                                   index + 1) ==
@@ -116,18 +118,18 @@ class MonthlyPage extends HookConsumerWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        sumIncome.toString(),
+                                        accountProvider.pFormat(sumIncome),
                                         style: const TextStyle(
                                           color: Colors.lightGreen,
-                                          fontSize: 20,
+                                          fontSize: 25,
                                         ),
                                       ),
                                       const SizedBox(width: 10),
                                       Text(
-                                        sumExpend.toString(),
+                                        accountProvider.pFormat(sumExpend),
                                         style: const TextStyle(
                                           color: Colors.redAccent,
-                                          fontSize: 20,
+                                          fontSize: 25,
                                         ),
                                       ),
                                     ],

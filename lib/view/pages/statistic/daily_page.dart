@@ -138,24 +138,27 @@ class DailyPage extends HookConsumerWidget {
               if (sumIncome == 0 && sumExpend == 0) {
                 return const SizedBox();
               } else {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      NumberFormat("#,###").format(sumIncome),
-                      style: const TextStyle(
-                        color: Colors.lightGreen,
-                        fontSize: 15,
+                return FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        NumberFormat("#,###").format(sumIncome),
+                        style: const TextStyle(
+                          color: Colors.lightGreen,
+                          fontSize: 15,
+                        ),
                       ),
-                    ),
-                    Text(
-                      NumberFormat("#,###").format(sumExpend),
-                      style: const TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 15,
+                      Text(
+                        NumberFormat("#,###").format(sumExpend),
+                        style: const TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 15,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }
             },

@@ -43,7 +43,7 @@ class AccountController extends StateNotifier<AsyncValue<List<AccountState>>> {
     super.dispose();
   }
 
-  String displayPriceFormatter(int price) {
+  String pFormat(int price) {
     final newPrice = NumberFormat("#,###").format(price);
     return newPrice;
   }

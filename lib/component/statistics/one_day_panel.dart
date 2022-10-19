@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../model/account_state.dart';
+import '../../provider/general_provider.dart';
 
-class OneDayPanel extends StatelessWidget {
+class OneDayPanel extends HookConsumerWidget {
   const OneDayPanel({
     super.key,
     required this.day,
@@ -17,7 +19,7 @@ class OneDayPanel extends StatelessWidget {
   final ValueNotifier<DateTime> setDate;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     int sumExpend = list.where((e) => e.price < 0).isNotEmpty
         ? list
                 .where((e) => e.price < 0)
@@ -33,6 +35,8 @@ class OneDayPanel extends StatelessWidget {
             .toList()
             .reduce((v, e) => v + e)
         : 0;
+    final accountProvider = ref.watch(accountControllerPrvider.notifier);
+
     return Column(
       children: [
         Row(
@@ -98,7 +102,7 @@ class OneDayPanel extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            sumIncome.toString(),
+                            accountProvider.pFormat(sumIncome),
                             style: const TextStyle(
                               fontSize: 20,
                               color: Colors.green,
@@ -106,7 +110,7 @@ class OneDayPanel extends StatelessWidget {
                           ),
                           const SizedBox(width: 20),
                           Text(
-                            sumExpend.toString(),
+                            accountProvider.pFormat(sumExpend),
                             style: const TextStyle(
                               fontSize: 20,
                               color: Colors.red,
@@ -124,27 +128,32 @@ class OneDayPanel extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    list[index].memo,
-                                    style: const TextStyle(
-                                      fontSize: 25,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      list[index].memo,
+                                      style: const TextStyle(
+                                        fontSize: 25,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                  Text(
-                                    list[index].type,
-                                    style: const TextStyle(
-                                      fontSize: 15,
+                                    Text(
+                                      list[index].type,
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               Text(
                                 list[index].price >= 0
-                                    ? list[index].price.toString()
-                                    : (list[index].price * -1).toString(),
+                                    ? accountProvider.pFormat(list[index].price)
+                                    : accountProvider
+                                        .pFormat(list[index].price * -1),
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: list[index].price >= 0

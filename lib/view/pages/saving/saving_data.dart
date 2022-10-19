@@ -108,7 +108,6 @@ class SavingData extends HookConsumerWidget {
                         Navigator.of(context).pushNamed(SavingAdd.id);
                       },
                     ),
-                    PriceChart(savingChartList: savingChartList),
                     DataCard(
                       title: '現在の節約総金額',
                       subTitle: NumberFormat("#,###").format(savingPrice),
@@ -127,6 +126,8 @@ class SavingData extends HookConsumerWidget {
                         ),
                       ],
                     ),
+                    PriceChart(savingChartList: savingChartList),
+
                     const SizedBox(height: 80),
                   ],
                 ),
