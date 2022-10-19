@@ -117,15 +117,15 @@ class MonthlyPage extends HookConsumerWidget {
                                     children: [
                                       Text(
                                         sumIncome.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.lightGreen,
                                           fontSize: 20,
                                         ),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Text(
                                         sumExpend.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.redAccent,
                                           fontSize: 20,
                                         ),

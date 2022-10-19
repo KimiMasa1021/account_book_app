@@ -9,7 +9,6 @@ class AccountGenreAdd extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-    final usersState = ref.watch(usersControllerProvider);
     final genreController = ref.watch(authControllerProvider.notifier);
 
     final genreTextController = useTextEditingController(text: '');

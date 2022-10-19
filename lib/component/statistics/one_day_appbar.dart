@@ -49,7 +49,7 @@ class OneDayAppBar extends StatelessWidget {
                 ),
                 Text(
                   DateFormat('yyyy年MM月').format(setDate.value),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 25,
                   ),
                 ),
@@ -70,19 +70,19 @@ class OneDayAppBar extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Text("収入"),
+                    const Text("収入"),
                     Text(income.toString()),
                   ],
                 ),
                 Column(
                   children: [
-                    Text("支出"),
+                    const Text("支出"),
                     Text((expend * -1).toString()),
                   ],
                 ),
                 Column(
                   children: [
-                    Text("収支"),
+                    const Text("収支"),
                     Text((income + expend).toString()),
                   ],
                 ),

@@ -1,10 +1,8 @@
 import 'package:account_book_app/component/saving/add_buttom.dart';
-import 'package:account_book_app/model/saving_state.dart';
 import 'package:account_book_app/view/pages/saving/saving_history.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
+import 'package:intl/intl.dart' show NumberFormat;
 import '../../../component/saving/achieve_rate.dart';
 import '../../../component/saving/data_card.dart';
 import '../../../component/saving/history_button.dart';
@@ -34,7 +32,6 @@ class SavingData extends HookConsumerWidget {
     final usersState = ref.watch(usersControllerProvider);
     final size = MediaQuery.of(context).size;
     final savingState = ref.watch(savingControllerProvider);
-    final savingController = ref.watch(savingControllerProvider.notifier);
 
     final savingPrice = savingState.isNotEmpty
         ? savingState

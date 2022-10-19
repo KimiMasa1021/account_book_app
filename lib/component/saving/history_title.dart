@@ -15,8 +15,8 @@ class HistoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      padding: EdgeInsets.symmetric(horizontal: 13),
-      margin: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 13),
+      margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(18)),
         color: Colors.white,
@@ -37,14 +37,14 @@ class HistoryTile extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 DateFormat('yyyy年MM月dd日').format(date),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 88, 88, 88),
@@ -54,7 +54,7 @@ class HistoryTile extends StatelessWidget {
           ),
           Text(
             NumberFormat("#,###").format(price),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 23,
               fontWeight: FontWeight.bold,
             ),

@@ -20,7 +20,6 @@ class SavingAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final memoController = useTextEditingController(text: "");
     final ValueNotifier<DateTime> outputDate = useState(DateTime.now());
-    final accountController = ref.watch(accountControllerPrvider.notifier);
     final savingController = ref.watch(savingControllerProvider.notifier);
 
     return Scaffold(

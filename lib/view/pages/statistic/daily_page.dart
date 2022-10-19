@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
+import 'package:intl/intl.dart' show NumberFormat;
 import '../../../provider/general_provider.dart';
 
 class DailyPage extends HookConsumerWidget {
