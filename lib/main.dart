@@ -20,6 +20,4 @@ Future<void> main() async {
 //  曜日別に色分け
 //  topPageのジャンル別に段落を付ける
 //  カレンダーの色分け
-//  家計簿入力
-//  ジャンル追加のオーバーフロー
 //    textInputAction: TextInputAction.done

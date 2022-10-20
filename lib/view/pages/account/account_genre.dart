@@ -82,15 +82,17 @@ class AccountGenre extends HookConsumerWidget {
                         ),
                         child: Row(
                           children: [
-                            Text(
-                              iESwicherState
-                                  ? usersState.genre[index]
-                                  : usersState.genre2[index],
-                              style: const TextStyle(
-                                fontSize: 25,
+                            Expanded(
+                              child: Text(
+                                iESwicherState
+                                    ? usersState.genre[index]
+                                    : usersState.genre2[index],
+                                style: const TextStyle(
+                                  fontSize: 25,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            const Spacer(),
                             const Icon(
                               Icons.delete_outline,
                               color: Colors.redAccent,

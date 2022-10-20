@@ -42,6 +42,7 @@ class InputField extends HookConsumerWidget {
             const SizedBox(width: 10),
             Expanded(
               child: TextFormField(
+                autofocus: true,
                 controller: controller,
                 textAlign: TextAlign.end,
                 textInputAction: TextInputAction.next,

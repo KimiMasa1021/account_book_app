@@ -75,6 +75,8 @@ class GenrePanel extends HookConsumerWidget {
                               genreController.text = iESwicherState
                                   ? addPageState.genre[index]
                                   : addPageState.genre2[index];
+                              FocusScope.of(context).nextFocus();
+                              isShow.value = false;
                             },
                             child: Container(
                               margin: const EdgeInsets.only(

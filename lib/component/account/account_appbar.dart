@@ -19,7 +19,8 @@ class AccountAppBar extends HookConsumerWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      // clipBehavior: Clip.antiAlias,
+      // clipBehavior: Clip.antiAlias,\
+
       decoration: const BoxDecoration(
         color: Colors.white,
         boxShadow: [

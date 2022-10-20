@@ -27,7 +27,7 @@ class InputDateField extends HookConsumerWidget {
           children: [
             Expanded(
               child: TextFormField(
-                autofocus: true,
+                autofocus: false,
                 textInputAction: TextInputAction.next,
                 controller: dateController,
                 keyboardType: TextInputType.none,
