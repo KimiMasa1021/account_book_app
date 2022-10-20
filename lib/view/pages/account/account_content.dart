@@ -46,7 +46,6 @@ class AccountContent extends HookConsumerWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Text("")
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
