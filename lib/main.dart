@@ -21,3 +21,5 @@ Future<void> main() async {
 //  topPageのジャンル別に段落を付ける
 //  カレンダーの色分け
 //    textInputAction: TextInputAction.done
+
+//　ジャンルの保存方法の変更　順番の変更　削除

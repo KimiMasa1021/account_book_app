@@ -27,7 +27,7 @@ class ExpendChildBar extends HookConsumerWidget {
     final isShow = useState(false);
     final size = MediaQuery.of(context).size;
     final accountProvider = ref.watch(accountControllerPrvider.notifier);
-
+    final dateFormatForDayOfWeek = DateFormat.E('ja');
     return Column(
       children: [
         InkWell(
@@ -106,6 +106,16 @@ class ExpendChildBar extends HookConsumerWidget {
                                   itemCount: list!.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
+                                    final today = DateTime(
+                                        list![index]!.registeTime.year,
+                                        list![index]!.registeTime.month,
+                                        list![index]!.registeTime.day);
+                                    final yesterday = index != 0
+                                        ? DateTime(
+                                            list![index - 1]!.registeTime.year,
+                                            list![index - 1]!.registeTime.month,
+                                            list![index - 1]!.registeTime.day)
+                                        : null;
                                     return Container(
                                       padding: const EdgeInsets.all(5),
                                       width: double.infinity,
@@ -120,16 +130,47 @@ class ExpendChildBar extends HookConsumerWidget {
                                           Row(
                                             children: [
                                               Text(
-                                                DateFormat('dd').format(
-                                                    list![index]!.registeTime),
-                                                style: const TextStyle(
+                                                DateFormat('dd').format(today),
+                                                style: TextStyle(
                                                   fontSize: 25,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: yesterday == null
+                                                      ? Colors.black
+                                                      : yesterday == today
+                                                          ? Colors.white
+                                                          : Colors.black,
                                                 ),
                                               ),
-                                              const Text(
-                                                "日",
+                                              Text(
+                                                '(${dateFormatForDayOfWeek.format(today)})',
                                                 style: TextStyle(
                                                   fontSize: 20,
+                                                  color: yesterday == null
+                                                      ? dateFormatForDayOfWeek
+                                                                  .format(
+                                                                      today) ==
+                                                              "土"
+                                                          ? Colors.blue
+                                                          : dateFormatForDayOfWeek
+                                                                      .format(
+                                                                          today) ==
+                                                                  "日"
+                                                              ? Colors.red
+                                                              : Colors.black
+                                                      : yesterday == today
+                                                          ? Colors.white
+                                                          : dateFormatForDayOfWeek
+                                                                      .format(
+                                                                          today) ==
+                                                                  "土"
+                                                              ? Colors.blue
+                                                              : dateFormatForDayOfWeek
+                                                                          .format(
+                                                                              today) ==
+                                                                      "日"
+                                                                  ? Colors.red
+                                                                  : Colors
+                                                                      .black,
                                                 ),
                                               ),
                                               const SizedBox(width: 10),
