@@ -1,4 +1,5 @@
 import 'package:account_book_app/provider/general_provider.dart';
+import 'package:account_book_app/view/pages/account/account_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -64,7 +65,8 @@ class AccountGenreAdd extends HookConsumerWidget {
                 onTap: () {
                   genreController.addGenre(
                       genreTextController.text, iESwicherState);
-                  Navigator.pop(context);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, AccountAdd.id, (route) => false);
                 },
                 child: Container(
                   width: double.infinity,

@@ -11,6 +11,8 @@ import 'pages/saving/saving.dart';
 
 class RootPage extends HookConsumerWidget {
   RootPage({super.key});
+  static const String id = "root_page";
+
   final List<Widget> _pageList = <Widget>[
     const AccountPage(),
     const Statistic(),

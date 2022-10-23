@@ -5,6 +5,7 @@ import 'view/pages/account/account_genre.dart';
 import 'view/pages/account/account_genre_add.dart';
 import 'view/pages/saving/saving_add.dart';
 import 'view/pages/saving/saving_history.dart';
+import 'view/root_page.dart';
 import 'view/separate.dart';
 
 class MyApp extends StatelessWidget {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         SavingHistory.id: (BuildContext context) => const SavingHistory(),
         AccountGenre.id: (BuildContext context) => const AccountGenre(),
         AccountGenreAdd.id: (BuildContext context) => const AccountGenreAdd(),
+        RootPage.id: (BuildContext context) => RootPage()
       },
     );
   }

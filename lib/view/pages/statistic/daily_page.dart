@@ -32,19 +32,13 @@ class DailyPage extends HookConsumerWidget {
             setDate.value = selectedDay;
             DefaultTabController.of(context)?.animateTo(2);
           },
-          onHeaderTapped: (dateTIme) {
-            debugPrint(dateTIme.toString());
-          },
           daysOfWeekStyle: const DaysOfWeekStyle(
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 192, 215, 255),
-            ),
             weekdayStyle: TextStyle(
               fontWeight: FontWeight.bold,
             ),
             weekendStyle: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.orange,
+              color: Colors.black,
             ),
           ),
           calendarBuilders: CalendarBuilders(
@@ -80,9 +74,14 @@ class DailyPage extends HookConsumerWidget {
                   padding: const EdgeInsets.all(7),
                   child: Text(
                     day.day.toString(),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: day.weekday == DateTime.sunday
+                          ? Colors.red
+                          : day.weekday == DateTime.saturday
+                              ? Colors.blue
+                              : Colors.black,
                     ),
                   ),
                 ),

@@ -11,7 +11,10 @@ class AccountGenre extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
     final usersState = ref.watch(usersControllerProvider);
-
+    final expendState = ref.watch(expendControllerProvider);
+    final incomeState = ref.watch(incomeControllerProvider);
+    final expendController = ref.watch(expendControllerProvider.notifier);
+    final incomeController = ref.watch(incomeControllerProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -42,6 +45,7 @@ class AccountGenre extends HookConsumerWidget {
                   "追加する",
                   style: TextStyle(
                     color: Colors.black,
+                    fontSize: 20,
                   ),
                 ),
                 SizedBox(width: 10)
@@ -62,9 +66,7 @@ class AccountGenre extends HookConsumerWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: List.generate(
-                      iESwicherState
-                          ? usersState!.genre.length
-                          : usersState!.genre2.length,
+                      iESwicherState ? expendState.length : incomeState.length,
                       (index) => Container(
                         height: 50,
                         width: double.infinity,
@@ -82,20 +84,34 @@ class AccountGenre extends HookConsumerWidget {
                         ),
                         child: Row(
                           children: [
+                            const Icon(
+                              Icons.drag_handle,
+                              color: Colors.grey,
+                            ),
+                            const SizedBox(width: 7),
                             Expanded(
                               child: Text(
                                 iESwicherState
-                                    ? usersState.genre[index]
-                                    : usersState.genre2[index],
+                                    ? expendState[index].name
+                                    : incomeState[index].name,
                                 style: const TextStyle(
                                   fontSize: 25,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            const Icon(
-                              Icons.delete_outline,
-                              color: Colors.redAccent,
+                            InkWell(
+                              onTap: () {
+                                iESwicherState
+                                    ? expendController
+                                        .deleteExpend(expendState[index].docId)
+                                    : incomeController
+                                        .deleteIncome(incomeState[index].docId);
+                              },
+                              child: Icon(
+                                Icons.delete_outline,
+                                color: Colors.redAccent,
+                              ),
                             )
                           ],
                         ),

@@ -1,4 +1,5 @@
 import 'package:account_book_app/constant/color_type.dart';
+import 'package:account_book_app/model/genre_state.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,7 +13,7 @@ class AccountPieChart extends HookConsumerWidget {
     required this.genre,
   });
   final List<AccountState> state;
-  final List<String> genre;
+  final List<GenreState> genre;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +22,7 @@ class AccountPieChart extends HookConsumerWidget {
       genre.length,
       (index) {
         final genreList =
-            state.where((state) => state.type == genre[index]).toList();
+            state.where((state) => state.type == genre[index].name).toList();
 
         double priceList = genreList.isNotEmpty
             ? genreList

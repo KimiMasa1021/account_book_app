@@ -16,73 +16,58 @@ class MonthlyPage extends HookConsumerWidget {
         final accountProvider = ref.watch(accountControllerPrvider.notifier);
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: SizedBox(
-            height: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                MonthlyAppBar(setDate: setDate),
-                Text("あああああ"),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: List.generate(
-                        12,
-                        (index) {
-                          int sumExpend = expendStateYearly
-                                  .where(
-                                    (e) => e.registeTime.month == index + 1,
-                                  )
-                                  .toList()
-                                  .isNotEmpty
-                              ? expendStateYearly
-                                      .where(
-                                        (e) => e.registeTime.month == index + 1,
-                                      )
-                                      .map((a) => a.price)
-                                      .toList()
-                                      .reduce((v, e) => v + e) *
-                                  -1
-                              : 0;
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              MonthlyAppBar(setDate: setDate),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: List.generate(
+                      12,
+                      (index) {
+                        int sumExpend = expendStateYearly
+                                .where(
+                                  (e) => e.registeTime.month == index + 1,
+                                )
+                                .toList()
+                                .isNotEmpty
+                            ? expendStateYearly
+                                    .where(
+                                      (e) => e.registeTime.month == index + 1,
+                                    )
+                                    .map((a) => a.price)
+                                    .toList()
+                                    .reduce((v, e) => v + e) *
+                                -1
+                            : 0;
 
-                          int sumIncome = incomeStateYearly
-                                  .where(
-                                    (e) => e.registeTime.month == index + 1,
-                                  )
-                                  .toList()
-                                  .isNotEmpty
-                              ? incomeStateYearly
-                                  .where(
-                                    (e) => e.registeTime.month == index + 1,
-                                  )
-                                  .map((a) => a.price)
-                                  .toList()
-                                  .reduce((v, e) => v + e)
-                              : 0;
+                        int sumIncome = incomeStateYearly
+                                .where(
+                                  (e) => e.registeTime.month == index + 1,
+                                )
+                                .toList()
+                                .isNotEmpty
+                            ? incomeStateYearly
+                                .where(
+                                  (e) => e.registeTime.month == index + 1,
+                                )
+                                .map((a) => a.price)
+                                .toList()
+                                .reduce((v, e) => v + e)
+                            : 0;
 
-                          return InkWell(
-                            onTap: () {
-                              setDate.value =
-                                  DateTime(setDate.value.year, index + 1);
-                              DefaultTabController.of(context)?.animateTo(1);
-                            },
-                            child: Container(
-                              height: 45,
-                              width: double.infinity,
-                              decoration: const BoxDecoration(
-                                border: Border.symmetric(
-                                  horizontal: BorderSide(
-                                    width: 0.2,
-                                  ),
-                                ),
-                              ),
+                        return Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
                               child: Row(
                                 children: [
                                   Container(
-                                    width: 10,
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 3),
+                                    width: 7,
+                                    height: 45,
+                                    margin: const EdgeInsets.only(right: 5),
                                     decoration: BoxDecoration(
                                       color: DateTime(setDate.value.year,
                                                   index + 1) ==
@@ -94,7 +79,6 @@ class MonthlyPage extends HookConsumerWidget {
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                   ),
-                                  const SizedBox(width: 3),
                                   RichText(
                                     text: TextSpan(
                                       style:
@@ -114,8 +98,29 @@ class MonthlyPage extends HookConsumerWidget {
                                       ],
                                     ),
                                   ),
-                                  const Spacer(),
-                                  Row(
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: InkWell(
+                                onTap: () {
+                                  setDate.value =
+                                      DateTime(setDate.value.year, index + 1);
+                                  DefaultTabController.of(context)
+                                      ?.animateTo(1);
+                                },
+                                child: Container(
+                                  height: 45,
+                                  decoration: const BoxDecoration(
+                                    border: Border.symmetric(
+                                      horizontal: BorderSide(
+                                        width: 0.3,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
                                         accountProvider.pFormat(sumIncome),
@@ -133,18 +138,18 @@ class MonthlyPage extends HookConsumerWidget {
                                         ),
                                       ),
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },

@@ -8,8 +8,6 @@ part 'users_state.g.dart';
 class UsersState with _$UsersState {
   const UsersState._();
   factory UsersState({
-    @Default([]) List<String> genre,
-    @Default([]) List<String> genre2,
     @Default("") String target,
     @Default(0) int targetPrice,
   }) = _UsersState;

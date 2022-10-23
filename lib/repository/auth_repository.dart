@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'dart:math';
 import '../provider/firebase_auth_provider.dart';
 import '../provider/firebase_firestore_provider.dart';
 import '../provider/general_provider.dart';
@@ -30,8 +30,14 @@ abstract class AuthRepository {
 
 class AuthRepositoryImpl implements AuthRepository {
   CollectionReference? storeCollectionReference;
+  CollectionReference? expendCollectionReference;
+  CollectionReference? incomeCollectionReference;
+  User? user;
   final Ref ref;
+
   AuthRepositoryImpl(this.ref) {
+    user = ref.read(firebaseAuthProvider).currentUser;
+
     storeCollectionReference =
         ref.read(firebaseFireStoreProvider).collection("users");
   }
@@ -74,22 +80,35 @@ class AuthRepositoryImpl implements AuthRepository {
         'uid': user?.uid,
         'email': user?.email,
         'name': name,
-        'genre': [
-          '教育費',
-          '食費',
-          'その他',
-          '美容',
-          'コンビニ',
-          '交通費',
-        ],
-        'genre2': [
-          '給料',
-          '副収入',
-          'その他',
-          'お小遣い',
-          'ボーナス',
-        ]
       });
+      expendCollectionReference = ref
+          .read(firebaseFireStoreProvider)
+          .collection("users")
+          .doc(user?.uid)
+          .collection("expend");
+      incomeCollectionReference = ref
+          .read(firebaseFireStoreProvider)
+          .collection("users")
+          .doc(user?.uid)
+          .collection("income");
+      final List<Map<String, dynamic>> income = [
+        {"name": "給料", "seq": 0},
+        {"name": "ボーナス", "seq": 1},
+        {"name": "お小遣い", "seq": 2},
+        {"name": "副業", "seq": 3},
+      ];
+      final List<Map<String, dynamic>> expend = [
+        {"name": "食費", "seq": 0},
+        {"name": "交通費", "seq": 1},
+        {"name": "プレゼント", "seq": 2},
+        {"name": "光熱費", "seq": 3},
+      ];
+      for (int i = 0; i < income.length; i++) {
+        await incomeCollectionReference!.add(income[i]);
+      }
+      for (int i = 0; i < expend.length; i++) {
+        await expendCollectionReference!.add(expend[i]);
+      }
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
@@ -116,27 +135,20 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> addGenre(String genre) async {
     User? user = ref.read(firebaseAuthProvider).currentUser;
-    final genreList = ref.read(usersControllerProvider)!.genre;
-    final genreList2 = ref.read(usersControllerProvider)!.genre2;
-
-    final newList = List.generate(
-      genreList.length + 1,
-      (index) {
-        if (genreList.length > index) {
-          return genreList[index];
-        } else {
-          return genre;
-        }
-      },
-    );
+    final expend = ref.read(expendControllerProvider); // List<GenreState>
+    expendCollectionReference = ref
+        .read(firebaseFireStoreProvider)
+        .collection("users")
+        .doc(user?.uid)
+        .collection("expend");
+    int maxSeq = expend.map((e) => e.seq).reduce(max) + 1;
 
     try {
-      await storeCollectionReference?.doc(user?.uid).set(
+      await expendCollectionReference?.add(
         {
-          'genre': newList,
-          'genre2': genreList2,
+          'name': genre,
+          'seq': maxSeq,
         },
-        SetOptions(merge: true),
       );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
@@ -146,25 +158,20 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> addGenre2(String genre) async {
     User? user = ref.read(firebaseAuthProvider).currentUser;
-    var genreList = ref.read(usersControllerProvider)!.genre;
-    var genreList2 = ref.read(usersControllerProvider)!.genre2;
-    final newList = List.generate(
-      genreList2.length + 1,
-      (index) {
-        if (genreList2.length > index) {
-          return genreList2[index];
-        } else {
-          return genre;
-        }
-      },
-    );
+    final income = ref.read(incomeControllerProvider); // List<GenreState>
+    incomeCollectionReference = ref
+        .read(firebaseFireStoreProvider)
+        .collection("users")
+        .doc(user?.uid)
+        .collection("income");
+    int maxSeq = income.map((e) => e.seq).reduce(max) + 1;
+
     try {
-      await storeCollectionReference?.doc(user?.uid).set(
+      await incomeCollectionReference?.add(
         {
-          'genre': genreList,
-          'genre2': newList,
+          'name': genre,
+          'seq': maxSeq,
         },
-        SetOptions(merge: true),
       );
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);

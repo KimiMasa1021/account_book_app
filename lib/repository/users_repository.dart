@@ -10,8 +10,6 @@ final usersRepositoryProvider =
     Provider<UsersRepository>((ref) => GenreRepositoryImple(ref));
 
 abstract class UsersRepository {
-  // Future<List<QueryDocumentSnapshot<AddPageState>>> fechGenreList();
-  //ジャンル一覧の取得
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachGenreList();
 }
 
@@ -24,20 +22,6 @@ class GenreRepositoryImple implements UsersRepository {
         ref.read(firebaseFireStoreProvider).collection("users");
     userId = ref.read(authControllerProvider)!.uid;
   }
-  // @override
-  // Future<List<QueryDocumentSnapshot<AddPageState>>> fechGenreList() async {
-  //   final stateRef = storeCollectionReference!
-  //       .where("uid", isEqualTo: userId)
-  //       .withConverter<AddPageState>(
-  //         fromFirestore: (snapshot, _) =>
-  //             AddPageState.fromJson(snapshot.data()!),
-  //         toFirestore: (data, _) => data.toJson(),
-  //       );
-
-  //   final snapshot = await stateRef.get();
-
-  //   return snapshot.docs;
-  // }
 
   @override
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachGenreList() async* {

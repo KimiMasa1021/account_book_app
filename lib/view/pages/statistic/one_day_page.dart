@@ -25,7 +25,9 @@ class OneDayPage extends HookConsumerWidget {
                     child: ScrollablePositionedList.builder(
                       shrinkWrap: true,
                       initialScrollIndex: setDate.value.day - 1,
-                      itemCount: 31,
+                      itemCount: DateTime(
+                              setDate.value.year, setDate.value.month + 1, 0)
+                          .day,
                       itemBuilder: (context, index) {
                         return OneDayPanel(
                           day: (index + 1).toString(),

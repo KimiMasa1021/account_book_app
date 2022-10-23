@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../model/account_state.dart';
 import '../../provider/general_provider.dart';
@@ -36,6 +37,8 @@ class OneDayPanel extends HookConsumerWidget {
             .reduce((v, e) => v + e)
         : 0;
     final accountProvider = ref.watch(accountControllerPrvider.notifier);
+    final dateFormatForDayOfWeek = DateFormat.E('ja');
+    final date = DateTime(setDate.value.year, setDate.value.month, index + 1);
 
     return Column(
       children: [
@@ -43,14 +46,14 @@ class OneDayPanel extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration: DateTime.now().day == index + 1 &&
-                      DateTime.now().year == setDate.value.year &&
-                      DateTime.now().month == setDate.value.month
-                  ? BoxDecoration(
-                      color: Colors.blueAccent.withOpacity(0.4),
-                      borderRadius: BorderRadius.circular(10),
-                    )
-                  : null,
+              // decoration: DateTime.now().day == index + 1 &&
+              //         DateTime.now().year == setDate.value.year &&
+              //         DateTime.now().month == setDate.value.month
+              //     ? BoxDecoration(
+              //         color: Colors.blueAccent.withOpacity(0.4),
+              //         borderRadius: BorderRadius.circular(10),
+              //       )
+              //     : null,
               padding: const EdgeInsets.symmetric(horizontal: 2),
               width: 60,
               child: Center(
@@ -62,9 +65,15 @@ class OneDayPanel extends HookConsumerWidget {
                         text: day,
                         style: const TextStyle(fontSize: 25),
                       ),
-                      const TextSpan(
-                        text: '日',
-                        style: TextStyle(fontSize: 15),
+                      TextSpan(
+                        text: '(${dateFormatForDayOfWeek.format(date)})',
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: dateFormatForDayOfWeek.format(date) == "土"
+                                ? Colors.blue
+                                : dateFormatForDayOfWeek.format(date) == "日"
+                                    ? Colors.red
+                                    : Colors.black),
                       ),
                     ],
                   ),

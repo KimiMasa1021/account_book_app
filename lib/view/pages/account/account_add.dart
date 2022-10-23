@@ -9,6 +9,7 @@ import '../../../component/account_add/genre_panel.dart';
 import '../../../component/account_add/input_date_field.dart';
 import '../../../component/account_add/input_field.dart';
 import '../../../constant/price_formatter.dart';
+import '../../root_page.dart';
 
 class AccountAdd extends HookConsumerWidget {
   const AccountAdd({super.key});
@@ -102,7 +103,7 @@ class AccountAdd extends HookConsumerWidget {
                       calculatedPrice,
                       memoController.text,
                     );
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, RootPage.id);
                   }
                 },
                 child: Padding(

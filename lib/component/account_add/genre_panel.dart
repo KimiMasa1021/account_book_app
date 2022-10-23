@@ -18,6 +18,9 @@ class GenrePanel extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final addPageState = ref.watch(usersControllerProvider);
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
+    final expendState = ref.watch(expendControllerProvider);
+    final incomeState = ref.watch(incomeControllerProvider);
+
     return isShow.value
         ? Align(
             alignment: const Alignment(0, 1),
@@ -63,8 +66,8 @@ class GenrePanel extends HookConsumerWidget {
                         height: size.height / 2.4 - 50,
                         child: GridView.builder(
                           itemCount: iESwicherState
-                              ? addPageState!.genre.length
-                              : addPageState!.genre2.length,
+                              ? expendState.length
+                              : incomeState.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
@@ -73,8 +76,8 @@ class GenrePanel extends HookConsumerWidget {
                               InkWell(
                             onTap: () {
                               genreController.text = iESwicherState
-                                  ? addPageState.genre[index]
-                                  : addPageState.genre2[index];
+                                  ? expendState[index].name
+                                  : incomeState[index].name;
                               FocusScope.of(context).nextFocus();
                               isShow.value = false;
                             },
@@ -88,8 +91,8 @@ class GenrePanel extends HookConsumerWidget {
                               child: Center(
                                 child: Text(
                                   iESwicherState
-                                      ? addPageState.genre[index]
-                                      : addPageState.genre2[index],
+                                      ? expendState[index].name
+                                      : incomeState[index].name,
                                   style: const TextStyle(fontSize: 20),
                                 ),
                               ),

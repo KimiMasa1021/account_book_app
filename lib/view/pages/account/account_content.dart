@@ -1,3 +1,4 @@
+import 'package:account_book_app/model/genre_state.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,7 +17,7 @@ class AccountContent extends HookConsumerWidget {
   });
 
   final List<AccountState> state;
-  final List<String> genre;
+  final List<GenreState> genre;
   final int income;
   final int expend;
   final Color fontColor;
@@ -111,11 +112,12 @@ class AccountContent extends HookConsumerWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: genre.length,
                   itemBuilder: (BuildContext context, int index) {
+                    debugPrint(genre.length.toString());
                     return ExpendChildBar(
                       list: state
-                          .where((state) => state.type == genre[index])
+                          .where((state) => state.type == genre[index].name)
                           .toList(),
-                      title: genre[index],
+                      title: genre[index].name,
                       color: fontColor,
                       index: index,
                     );
