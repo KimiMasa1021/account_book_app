@@ -25,37 +25,6 @@ class SavingInit extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Row(
-                  //   children: [
-                  //     Container(
-                  //       padding: const EdgeInsets.symmetric(
-                  //         horizontal: 15,
-                  //         vertical: 4,
-                  //       ),
-                  //       margin: const EdgeInsets.only(right: 10),
-                  //       decoration: const BoxDecoration(
-                  //         color: Colors.grey,
-                  //         borderRadius: BorderRadius.all(
-                  //           Radius.circular(50),
-                  //         ),
-                  //       ),
-                  //       child: const Center(
-                  //         child: Text(
-                  //           "あなた",
-                  //           style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontWeight: FontWeight.bold,
-                  //             fontSize: 20,
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     const Icon(
-                  //       Icons.group_add_outlined,
-                  //       size: 30,
-                  //     )
-                  //   ],
-                  // ),
                   Container(
                     width: double.infinity,
                     height: 120,
@@ -96,7 +65,57 @@ class SavingInit extends HookConsumerWidget {
                     controller: targetPriceController,
                     inputType: TextInputType.number,
                     formatter: [CustomTextInputFormatter()],
-                  )
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 13),
+                      Text(
+                        "いつまでに達成したい？",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(1, 1),
+                              color: Colors.grey,
+                              blurRadius: 3,
+                            ),
+                          ],
+                        ),
+                        child: DropdownButton(
+                          hint: Text("達成目安"),
+                          isExpanded: true,
+                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("Menu One"),
+                              value: "menuone",
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Menu One"),
+                              value: "menuone",
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Menu One"),
+                              value: "menuone",
+                            )
+                          ],
+                          onChanged: (String? value) {},
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

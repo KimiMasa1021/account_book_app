@@ -56,6 +56,7 @@ class OneDayAppBar extends HookConsumerWidget {
                   DateFormat('yyyy年MM月').format(setDate.value),
                   style: const TextStyle(
                     fontSize: 25,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 InkWell(

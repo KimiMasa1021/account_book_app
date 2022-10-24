@@ -12,7 +12,7 @@ class MonthlyAppBar extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 50,
-        margin: const EdgeInsets.only(top: 15),
+        margin: const EdgeInsets.only(top: 15, bottom: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
