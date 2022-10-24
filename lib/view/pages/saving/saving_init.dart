@@ -70,10 +70,10 @@ class SavingInit extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 13),
-                      Text(
+                      const Text(
                         "いつまでに達成したい？",
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
                         ),
@@ -94,21 +94,40 @@ class SavingInit extends HookConsumerWidget {
                           ],
                         ),
                         child: DropdownButton(
-                          hint: Text("達成目安"),
+                          hint: const Text("達成目安"),
                           isExpanded: true,
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.black),
+                          underline: const SizedBox(),
                           items: [
-                            DropdownMenuItem(
-                              child: Text("Menu One"),
+                            const DropdownMenuItem(
                               value: "menuone",
+                              child: Text("１か月後"),
+                            ),
+                            const DropdownMenuItem(
+                              value: "menuone",
+                              child: Text("３か月後"),
+                            ),
+                            const DropdownMenuItem(
+                              value: "menuone",
+                              child: Text("半年後"),
+                            ),
+                            const DropdownMenuItem(
+                              value: "menuone",
+                              child: Text("一年後"),
                             ),
                             DropdownMenuItem(
-                              child: Text("Menu One"),
                               value: "menuone",
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Menu One"),
-                              value: "menuone",
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.calendar_month_rounded,
+                                    size: 25,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text("詳細な日程"),
+                                ],
+                              ),
                             )
                           ],
                           onChanged: (String? value) {},
@@ -116,44 +135,45 @@ class SavingInit extends HookConsumerWidget {
                       )
                     ],
                   ),
+                  Text("目標達成まで45")
                 ],
               ),
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: InkWell(
-            onTap: () async {
-              await savingController.initTarget(
-                targetController.text,
-                int.parse(
-                  targetPriceController.text.replaceAll(",", ""),
-                ),
-              );
-            },
-            child: Container(
-              width: 200,
-              height: 50,
-              margin: const EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
-                color: Colors.white,
-                border: Border.all(width: 3),
-              ),
-              child: const Center(
-                child: Text(
-                  "目標設定完了",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: InkWell(
+        //     onTap: () async {
+        //       await savingController.initTarget(
+        //         targetController.text,
+        //         int.parse(
+        //           targetPriceController.text.replaceAll(",", ""),
+        //         ),
+        //       );
+        //     },
+        //     child: Container(
+        //       width: 200,
+        //       height: 50,
+        //       margin: const EdgeInsets.only(bottom: 20),
+        //       decoration: BoxDecoration(
+        //         borderRadius: const BorderRadius.all(Radius.circular(100)),
+        //         color: Colors.white,
+        //         border: Border.all(width: 3),
+        //       ),
+        //       child: const Center(
+        //         child: Text(
+        //           "目標設定完了",
+        //           textAlign: TextAlign.center,
+        //           style: TextStyle(
+        //             fontSize: 20,
+        //             fontWeight: FontWeight.bold,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
