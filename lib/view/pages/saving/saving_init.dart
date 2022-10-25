@@ -15,6 +15,7 @@ class SavingInit extends HookConsumerWidget {
 
     final targetController = useTextEditingController(text: "");
     final targetPriceController = useTextEditingController(text: "");
+    final ValueNotifier<String?> time = useState(null);
 
     return Stack(
       children: [
@@ -105,19 +106,19 @@ class SavingInit extends HookConsumerWidget {
                               child: Text("１か月後"),
                             ),
                             const DropdownMenuItem(
-                              value: "menuone",
+                              value: "えｗ",
                               child: Text("３か月後"),
                             ),
                             const DropdownMenuItem(
-                              value: "menuone",
+                              value: "え３２",
                               child: Text("半年後"),
                             ),
                             const DropdownMenuItem(
-                              value: "menuone",
+                              value: "ｃｄｓ",
                               child: Text("一年後"),
                             ),
                             DropdownMenuItem(
-                              value: "menuone",
+                              value: "えｗ４",
                               child: Row(
                                 children: const [
                                   Icon(
@@ -130,6 +131,7 @@ class SavingInit extends HookConsumerWidget {
                               ),
                             )
                           ],
+                          value: time.value,
                           onChanged: (String? value) {},
                         ),
                       )

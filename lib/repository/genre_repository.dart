@@ -14,6 +14,7 @@ abstract class GenreRepository {
   Stream<List<QueryDocumentSnapshot<GenreState>>> fetchExpend();
   Future<void> deleteIncome(String docId);
   Future<void> deleteExpend(String docId);
+  Future<void> updateSeq(GenreState newState, GenreState oldState);
 }
 
 class GenreRepositoryImple implements GenreRepository {
@@ -72,6 +73,20 @@ class GenreRepositoryImple implements GenreRepository {
   Future<void> deleteExpend(String docId) async {
     try {
       await expendCollectionReference!.doc(docId).delete();
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> updateSeq(GenreState newState, GenreState oldState) async {
+    try {
+      await expendCollectionReference!
+          .doc(newState.docId)
+          .update({'seq': oldState.seq});
+      await expendCollectionReference!
+          .doc(oldState.docId)
+          .update({'seq': newState.seq});
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }

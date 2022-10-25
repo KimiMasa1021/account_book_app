@@ -54,76 +54,128 @@ class AccountGenre extends HookConsumerWidget {
           )
         ],
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            children: [
-              const IncomeExpendSwicher(),
-              const SizedBox(height: 10),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: List.generate(
-                      iESwicherState ? expendState.length : incomeState.length,
-                      (index) => Container(
-                        height: 50,
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 0.5,
-                            ),
-                            top: BorderSide(
-                              width: 0.5,
-                            ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            const IncomeExpendSwicher(),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ReorderableListView(
+                padding: EdgeInsets.all(10.0),
+                onReorder: (int oldIndex, int newIndex) async {
+                  if (oldIndex < newIndex) {
+                    newIndex--;
+                  }
+
+                  await expendController.updateSeq(
+                      expendState[newIndex], expendState[oldIndex]);
+                },
+                children: expendState.map(
+                  (state) {
+                    return Container(
+                      key: Key(state.docId),
+                      height: 50,
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 0.5,
+                          ),
+                          top: BorderSide(
+                            width: 0.5,
                           ),
                         ),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.drag_handle,
-                              color: Colors.grey,
-                            ),
-                            const SizedBox(width: 7),
-                            Expanded(
-                              child: Text(
-                                iESwicherState
-                                    ? expendState[index].name
-                                    : incomeState[index].name,
-                                style: const TextStyle(
-                                  fontSize: 25,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                iESwicherState
-                                    ? expendController
-                                        .deleteExpend(expendState[index].docId)
-                                    : incomeController
-                                        .deleteIncome(incomeState[index].docId);
-                              },
-                              child: Icon(
-                                Icons.delete_outline,
-                                color: Colors.redAccent,
-                              ),
-                            )
-                          ],
-                        ),
                       ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.drag_handle,
+                            color: Colors.grey,
+                          ),
+                          const SizedBox(width: 7),
+                          Expanded(
+                            child: Text(
+                              iESwicherState ? state.name : state.name,
+                              style: const TextStyle(
+                                fontSize: 25,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              iESwicherState
+                                  ? expendController.deleteExpend(state.docId)
+                                  : incomeController.deleteIncome(state.docId);
+                            },
+                            child: Icon(
+                              Icons.delete_outline,
+                              color: Colors.redAccent,
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+                      // iESwicherState ? expendState.length : incomeState.length,
+                      // (index) => Container(
+                      //   height: 50,
+                      //   width: double.infinity,
+                      //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                      //   decoration: const BoxDecoration(
+                      //     color: Colors.white,
+                      //     border: Border(
+                      //       bottom: BorderSide(
+                      //         width: 0.5,
+                      //       ),
+                      //       top: BorderSide(
+                      //         width: 0.5,
+                      //       ),
+                      //     ),
+                      //   ),
+                      //   child: Row(
+                      //     children: [
+                      //       const Icon(
+                      //         Icons.drag_handle,
+                      //         color: Colors.grey,
+                      //       ),
+                      //       const SizedBox(width: 7),
+                      //       Expanded(
+                      //         child: Text(
+                      //           iESwicherState
+                      //               ? expendState[index].name
+                      //               : incomeState[index].name,
+                      //           style: const TextStyle(
+                      //             fontSize: 25,
+                      //           ),
+                      //           overflow: TextOverflow.ellipsis,
+                      //         ),
+                      //       ),
+                      //       InkWell(
+                      //         onTap: () {
+                      //           iESwicherState
+                      //               ? expendController
+                      //                   .deleteExpend(expendState[index].docId)
+                      //               : incomeController
+                      //                   .deleteIncome(incomeState[index].docId);
+                      //         },
+                      //         child: Icon(
+                      //           Icons.delete_outline,
+                      //           color: Colors.redAccent,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),

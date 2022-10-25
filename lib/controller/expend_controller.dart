@@ -21,6 +21,10 @@ class ExpendController extends StateNotifier<List<GenreState>> {
     await ref.read(GenreRepositoryProvider).deleteExpend(docId);
   }
 
+  Future<void> updateSeq(GenreState newState, GenreState oldState) async {
+    await ref.read(GenreRepositoryProvider).updateSeq(newState, oldState);
+  }
+
   @override
   void dispose() {
     super.dispose();
