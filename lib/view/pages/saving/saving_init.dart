@@ -16,6 +16,8 @@ class SavingInit extends HookConsumerWidget {
     final targetController = useTextEditingController(text: "");
     final targetPriceController = useTextEditingController(text: "");
     final ValueNotifier<String?> time = useState(null);
+    final monthlySaving = useState("");
+    final weeklySaving = useState("");
 
     return Stack(
       children: [
@@ -102,23 +104,23 @@ class SavingInit extends HookConsumerWidget {
                           underline: const SizedBox(),
                           items: [
                             const DropdownMenuItem(
-                              value: "menuone",
+                              value: "one_month",
                               child: Text("１か月後"),
                             ),
                             const DropdownMenuItem(
-                              value: "えｗ",
+                              value: "tree_month",
                               child: Text("３か月後"),
                             ),
                             const DropdownMenuItem(
-                              value: "え３２",
+                              value: "six_month",
                               child: Text("半年後"),
                             ),
                             const DropdownMenuItem(
-                              value: "ｃｄｓ",
-                              child: Text("一年後"),
+                              value: "year",
+                              child: Text("１年後"),
                             ),
                             DropdownMenuItem(
-                              value: "えｗ４",
+                              value: "details",
                               child: Row(
                                 children: const [
                                   Icon(
@@ -132,12 +134,94 @@ class SavingInit extends HookConsumerWidget {
                             )
                           ],
                           value: time.value,
-                          onChanged: (String? value) {},
+                          onChanged: (String? value) {
+                            time.value = value;
+                            if (value == "details") {
+                              savingController.selectDate(context);
+                            }
+                            switch (value) {
+                              case "one_month":
+                                monthlySaving.value =
+                                    targetPriceController.text;
+                                // weeklySaving.value =
+                                //     targetPriceController.text/4;
+                                break;
+                              case "tree_month":
+                                break;
+                              case "six_month":
+                                break;
+                              case "year":
+                                break;
+                              case "details":
+                                break;
+                            }
+                          },
                         ),
                       )
                     ],
                   ),
-                  Text("目標達成まで45")
+                  targetPriceController.text != "" && time.value != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 13),
+                            const Text(
+                              "節約の目安",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: '１か月あたり ',
+                                  ),
+                                  TextSpan(
+                                    text: '20,000',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' 円',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: '１週間当たり ',
+                                  ),
+                                  TextSpan(
+                                    text: '666',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' 円',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
                 ],
               ),
             ),

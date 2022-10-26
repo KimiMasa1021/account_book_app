@@ -2,7 +2,7 @@ import 'package:account_book_app/repository/saving_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 import '../model/saving_state.dart';
 
 class SavingController extends StateNotifier<List<SavingState>> {
@@ -34,5 +34,21 @@ class SavingController extends StateNotifier<List<SavingState>> {
         fontSize: 16.0);
 
     debugPrint(state[0].memo);
+  }
+
+  Future<DateTime> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now().add(
+        const Duration(days: 700),
+      ),
+    );
+    if (picked == null) {
+      return DateTime.now();
+    }
+
+    return picked;
   }
 }
