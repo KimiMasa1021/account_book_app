@@ -139,18 +139,26 @@ class SavingInit extends HookConsumerWidget {
                             if (value == "details") {
                               savingController.selectDate(context);
                             }
+                            final intPrice = int.parse(
+                                targetPriceController.text.replaceAll(",", ""));
                             switch (value) {
                               case "one_month":
                                 monthlySaving.value =
                                     targetPriceController.text;
-                                // weeklySaving.value =
-                                //     targetPriceController.text/4;
+                                weeklySaving.value = (intPrice / 4).toString();
                                 break;
                               case "tree_month":
+                                monthlySaving.value = (intPrice / 3).toString();
+                                weeklySaving.value = (intPrice / 12).toString();
                                 break;
                               case "six_month":
+                                monthlySaving.value = (intPrice / 6).toString();
+                                weeklySaving.value = (intPrice / 18).toString();
                                 break;
                               case "year":
+                                monthlySaving.value =
+                                    (intPrice / 12).toString();
+                                weeklySaving.value = (intPrice / 36).toString();
                                 break;
                               case "details":
                                 break;
@@ -184,7 +192,7 @@ class SavingInit extends HookConsumerWidget {
                                     text: '１か月あたり ',
                                   ),
                                   TextSpan(
-                                    text: '20,000',
+                                    text: monthlySaving.value,
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -207,7 +215,7 @@ class SavingInit extends HookConsumerWidget {
                                     text: '１週間当たり ',
                                   ),
                                   TextSpan(
-                                    text: '666',
+                                    text: weeklySaving.value,
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
