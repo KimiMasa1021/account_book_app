@@ -2,6 +2,7 @@ import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../component/saving/input_target_field.dart';
 import '../../../constant/price_formatter.dart';
@@ -16,8 +17,9 @@ class SavingInit extends HookConsumerWidget {
     final targetController = useTextEditingController(text: "");
     final targetPriceController = useTextEditingController(text: "");
     final ValueNotifier<String?> time = useState(null);
-    final monthlySaving = useState("");
-    final weeklySaving = useState("");
+    final monthlySaving = useState(0.0);
+    final weeklySaving = useState(0.0);
+    final displayDate = useState("");
 
     return Stack(
       children: [
@@ -122,45 +124,55 @@ class SavingInit extends HookConsumerWidget {
                             DropdownMenuItem(
                               value: "details",
                               child: Row(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.calendar_month_rounded,
                                     size: 25,
                                   ),
                                   SizedBox(width: 5),
-                                  Text("詳細な日程"),
+                                  Text(
+                                    "詳細な日程" + displayDate.value,
+                                  ),
                                 ],
                               ),
                             )
                           ],
                           value: time.value,
-                          onChanged: (String? value) {
+                          onChanged: (String? value) async {
                             time.value = value;
-                            if (value == "details") {
-                              savingController.selectDate(context);
+                            if (targetPriceController.text == "") {
+                              return;
                             }
-                            final intPrice = int.parse(
+                            final intPrice = double.parse(
                                 targetPriceController.text.replaceAll(",", ""));
                             switch (value) {
                               case "one_month":
-                                monthlySaving.value =
-                                    targetPriceController.text;
-                                weeklySaving.value = (intPrice / 4).toString();
+                                monthlySaving.value = intPrice;
+                                weeklySaving.value = (intPrice / 4);
                                 break;
                               case "tree_month":
-                                monthlySaving.value = (intPrice / 3).toString();
-                                weeklySaving.value = (intPrice / 12).toString();
+                                monthlySaving.value = (intPrice / 3);
+                                weeklySaving.value = (intPrice / 12);
                                 break;
                               case "six_month":
-                                monthlySaving.value = (intPrice / 6).toString();
-                                weeklySaving.value = (intPrice / 18).toString();
+                                monthlySaving.value = (intPrice / 6);
+                                weeklySaving.value = (intPrice / 24);
                                 break;
                               case "year":
-                                monthlySaving.value =
-                                    (intPrice / 12).toString();
-                                weeklySaving.value = (intPrice / 36).toString();
+                                monthlySaving.value = (intPrice / 12);
+                                weeklySaving.value = (intPrice / 48);
                                 break;
                               case "details":
+                                final dateTime =
+                                    await savingController.selectDate(context);
+                                final day =
+                                    dateTime.difference(DateTime.now()).inDays;
+                                displayDate.value =
+                                    DateFormat('(yyyy/MM/DD)').format(dateTime);
+                                debugPrint(day.toString());
+                                monthlySaving.value = (intPrice / (day / 30));
+                                weeklySaving.value =
+                                    (intPrice / ((day / 30) * 4));
                                 break;
                             }
                           },
@@ -192,7 +204,8 @@ class SavingInit extends HookConsumerWidget {
                                     text: '１か月あたり ',
                                   ),
                                   TextSpan(
-                                    text: monthlySaving.value,
+                                    text: NumberFormat("#,###")
+                                        .format(monthlySaving.value),
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -215,7 +228,8 @@ class SavingInit extends HookConsumerWidget {
                                     text: '１週間当たり ',
                                   ),
                                   TextSpan(
-                                    text: weeklySaving.value,
+                                    text: NumberFormat("#,###")
+                                        .format(weeklySaving.value),
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
@@ -230,44 +244,48 @@ class SavingInit extends HookConsumerWidget {
                           ],
                         )
                       : SizedBox(),
+                  SizedBox(height: 50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await savingController.initTarget(
+                            targetController.text,
+                            int.parse(
+                              targetPriceController.text.replaceAll(",", ""),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 200,
+                          height: 50,
+                          margin: const EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(100)),
+                            color: Colors.white,
+                            border: Border.all(width: 3),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "目標設定完了",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
           ),
         ),
-        // Align(
-        //   alignment: Alignment.bottomCenter,
-        //   child: InkWell(
-        //     onTap: () async {
-        //       await savingController.initTarget(
-        //         targetController.text,
-        //         int.parse(
-        //           targetPriceController.text.replaceAll(",", ""),
-        //         ),
-        //       );
-        //     },
-        //     child: Container(
-        //       width: 200,
-        //       height: 50,
-        //       margin: const EdgeInsets.only(bottom: 20),
-        //       decoration: BoxDecoration(
-        //         borderRadius: const BorderRadius.all(Radius.circular(100)),
-        //         color: Colors.white,
-        //         border: Border.all(width: 3),
-        //       ),
-        //       child: const Center(
-        //         child: Text(
-        //           "目標設定完了",
-        //           textAlign: TextAlign.center,
-        //           style: TextStyle(
-        //             fontSize: 20,
-        //             fontWeight: FontWeight.bold,
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

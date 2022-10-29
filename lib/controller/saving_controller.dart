@@ -39,10 +39,14 @@ class SavingController extends StateNotifier<List<SavingState>> {
   Future<DateTime> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
+      initialDate: DateTime.now().add(
+        const Duration(days: 0),
+      ),
+      firstDate: DateTime.now().add(
+        const Duration(days: 0),
+      ),
       lastDate: DateTime.now().add(
-        const Duration(days: 700),
+        const Duration(days: 7000),
       ),
     );
     if (picked == null) {

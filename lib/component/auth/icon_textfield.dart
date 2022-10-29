@@ -14,6 +14,7 @@ class IconTextField extends HookConsumerWidget {
   final IconData icon;
   final String hintText;
   final TextInputType type;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
