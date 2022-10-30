@@ -20,6 +20,10 @@ UsersState _$UsersStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UsersState {
+  String get email => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  List<dynamic> get friends => throw _privateConstructorUsedError;
   String get target => throw _privateConstructorUsedError;
   int get targetPrice => throw _privateConstructorUsedError;
 
@@ -35,7 +39,13 @@ abstract class $UsersStateCopyWith<$Res> {
           UsersState value, $Res Function(UsersState) then) =
       _$UsersStateCopyWithImpl<$Res, UsersState>;
   @useResult
-  $Res call({String target, int targetPrice});
+  $Res call(
+      {String email,
+      String uid,
+      String name,
+      List<dynamic> friends,
+      String target,
+      int targetPrice});
 }
 
 /// @nodoc
@@ -51,10 +61,30 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? email = null,
+    Object? uid = null,
+    Object? name = null,
+    Object? friends = null,
     Object? target = null,
     Object? targetPrice = null,
   }) {
     return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      friends: null == friends
+          ? _value.friends
+          : friends // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -75,7 +105,13 @@ abstract class _$$_UsersStateCopyWith<$Res>
       __$$_UsersStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String target, int targetPrice});
+  $Res call(
+      {String email,
+      String uid,
+      String name,
+      List<dynamic> friends,
+      String target,
+      int targetPrice});
 }
 
 /// @nodoc
@@ -89,10 +125,30 @@ class __$$_UsersStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? email = null,
+    Object? uid = null,
+    Object? name = null,
+    Object? friends = null,
     Object? target = null,
     Object? targetPrice = null,
   }) {
     return _then(_$_UsersState(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      friends: null == friends
+          ? _value._friends
+          : friends // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -108,10 +164,35 @@ class __$$_UsersStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_UsersState extends _UsersState {
-  _$_UsersState({this.target = "", this.targetPrice = 0}) : super._();
+  _$_UsersState(
+      {this.email = "",
+      this.uid = "",
+      this.name = "",
+      final List<dynamic> friends = const [],
+      this.target = "",
+      this.targetPrice = 0})
+      : _friends = friends,
+        super._();
 
   factory _$_UsersState.fromJson(Map<String, dynamic> json) =>
       _$$_UsersStateFromJson(json);
+
+  @override
+  @JsonKey()
+  final String email;
+  @override
+  @JsonKey()
+  final String uid;
+  @override
+  @JsonKey()
+  final String name;
+  final List<dynamic> _friends;
+  @override
+  @JsonKey()
+  List<dynamic> get friends {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_friends);
+  }
 
   @override
   @JsonKey()
@@ -122,7 +203,7 @@ class _$_UsersState extends _UsersState {
 
   @override
   String toString() {
-    return 'UsersState(target: $target, targetPrice: $targetPrice)';
+    return 'UsersState(email: $email, uid: $uid, name: $name, friends: $friends, target: $target, targetPrice: $targetPrice)';
   }
 
   @override
@@ -130,6 +211,10 @@ class _$_UsersState extends _UsersState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UsersState &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._friends, _friends) &&
             (identical(other.target, target) || other.target == target) &&
             (identical(other.targetPrice, targetPrice) ||
                 other.targetPrice == targetPrice));
@@ -137,7 +222,8 @@ class _$_UsersState extends _UsersState {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, target, targetPrice);
+  int get hashCode => Object.hash(runtimeType, email, uid, name,
+      const DeepCollectionEquality().hash(_friends), target, targetPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -154,13 +240,26 @@ class _$_UsersState extends _UsersState {
 }
 
 abstract class _UsersState extends UsersState {
-  factory _UsersState({final String target, final int targetPrice}) =
-      _$_UsersState;
+  factory _UsersState(
+      {final String email,
+      final String uid,
+      final String name,
+      final List<dynamic> friends,
+      final String target,
+      final int targetPrice}) = _$_UsersState;
   _UsersState._() : super._();
 
   factory _UsersState.fromJson(Map<String, dynamic> json) =
       _$_UsersState.fromJson;
 
+  @override
+  String get email;
+  @override
+  String get uid;
+  @override
+  String get name;
+  @override
+  List<dynamic> get friends;
   @override
   String get target;
   @override

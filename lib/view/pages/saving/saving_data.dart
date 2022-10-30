@@ -59,6 +59,32 @@ class SavingData extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 190, 190, 190),
+                            borderRadius: BorderRadius.circular(200),
+                          ),
+                          child: Center(
+                            child: Text("あなた"),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Icon(
+                              Icons.group_add_outlined,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                     TargetCard(
                       title: '目標',
                       subTitle: usersState.target,

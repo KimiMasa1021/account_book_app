@@ -15,9 +15,9 @@ abstract class AuthRepository {
   //email passwordでログイン
   Future<String?> signInWithEmail(String email, String password);
   //email password name で新規登録
-  Future<String?> signUp(String email, String password, String name);
+  Future<Object?> signUp(String email, String password, String name);
   //新規登録の後にuid email name をstoreに登録
-  Future<void> saveUserData(String naem);
+  Future<void> saveUserData(String name, UserCredential user);
   //サインアウト
   Future signOut();
   //ログイン状態を監視
@@ -60,36 +60,39 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<String?> signUp(String email, String password, String name) async {
+  Future<Object?> signUp(String email, String password, String name) async {
     try {
-      await ref.read(firebaseAuthProvider).createUserWithEmailAndPassword(
-            email: email,
-            password: password,
-          );
-      return null;
+      final aaa =
+          await ref.read(firebaseAuthProvider).createUserWithEmailAndPassword(
+                email: email,
+                password: password,
+              );
+      return aaa;
     } on FirebaseAuthException catch (e) {
       return e.code;
     }
   }
 
   @override
-  Future<void> saveUserData(String name) async {
-    User? user = ref.read(firebaseAuthProvider).currentUser;
+  Future<void> saveUserData(String name, UserCredential user) async {
     try {
-      await storeCollectionReference?.doc(user?.uid).set({
-        'uid': user?.uid,
-        'email': user?.email,
+      final uid = user.user!.uid;
+      final email = user.user!.email;
+      await storeCollectionReference?.doc(uid).set({
+        'uid': uid,
+        'email': email,
         'name': name,
+        'friends': [],
       });
       expendCollectionReference = ref
           .read(firebaseFireStoreProvider)
           .collection("users")
-          .doc(user?.uid)
+          .doc(uid)
           .collection("expend");
       incomeCollectionReference = ref
           .read(firebaseFireStoreProvider)
           .collection("users")
-          .doc(user?.uid)
+          .doc(uid)
           .collection("income");
       final List<Map<String, dynamic>> income = [
         {"name": "給料", "seq": 0},

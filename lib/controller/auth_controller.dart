@@ -53,11 +53,13 @@ class AuthController extends StateNotifier<User?> {
       final flg =
           await ref.read(authRepositoryProvider).signUp(email, password, name);
       loading.value = false;
-      if (flg == null) {
-        debugPrint(flg);
-        await ref.read(authRepositoryProvider).saveUserData(name);
+      if (flg == String) {
+        showToast(flg.toString());
       } else {
-        showToast(flg);
+        await ref.read(authRepositoryProvider).saveUserData(
+              name,
+              flg as UserCredential,
+            );
       }
     } catch (e) {
       throw e.toString();

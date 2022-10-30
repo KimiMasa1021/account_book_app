@@ -8,6 +8,10 @@ part 'users_state.g.dart';
 class UsersState with _$UsersState {
   const UsersState._();
   factory UsersState({
+    @Default("") String email,
+    @Default("") String uid,
+    @Default("") String name,
+    @Default([]) List friends,
     @Default("") String target,
     @Default(0) int targetPrice,
   }) = _UsersState;
