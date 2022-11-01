@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../constant/enums.dart';
+import '../controller/friends_controller.dart';
 import '../controller/saving_controller.dart';
 import '../controller/users_controller.dart';
 import '../model/account_state.dart';
@@ -42,6 +43,9 @@ final expendControllerProvider =
 final incomeControllerProvider =
     StateNotifierProvider<IncomeController, List<GenreState>>(
         (ref) => IncomeController(ref));
+final friendsListControllerProvider =
+    StateNotifierProvider<FriendsController, List<UsersState>>(
+        (ref) => FriendsController(ref));
 
 final processingPriceProvider = Provider.family((ref, DateTime setDate) {
   return ref.watch(accountControllerPrvider).whenData((state) {

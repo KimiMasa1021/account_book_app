@@ -1,4 +1,6 @@
 import 'package:account_book_app/view/pages/setting/friend_add_scan.dart';
+import 'package:account_book_app/view/pages/setting/friends_list.dart';
+import 'package:account_book_app/view/pages/setting/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'view/pages/account/account_add.dart';
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
         RootPage.id: (BuildContext context) => RootPage(),
         FriendAddQr.id: (BuildContext context) => const FriendAddQr(),
         FriendAddScan.id: (BuildContext context) => FriendAddScan(),
+        FriendsList.id: (BuildContext context) => const FriendsList(),
+        ProfilePage.id: (BuildContext context) => const ProfilePage(),
       },
     );
   }

@@ -13,24 +13,32 @@ class SettingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: 30,
-            color: Colors.grey,
-          ),
-          SizedBox(width: 10),
-          Text(title),
-          Spacer(),
-          Icon(
-            Icons.arrow_forward_ios_outlined,
-            size: 20,
-            color: Colors.black,
-          ),
-        ],
+    return InkWell(
+      onTap: () => function(),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 30,
+              color: Colors.grey,
+            ),
+            SizedBox(width: 10),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            Spacer(),
+            Icon(
+              Icons.arrow_forward_ios_outlined,
+              size: 20,
+              color: Colors.black,
+            ),
+          ],
+        ),
       ),
     );
   }
