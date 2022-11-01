@@ -83,6 +83,7 @@ class AuthRepositoryImpl implements AuthRepository {
         'email': email,
         'name': name,
         'friends': [],
+        "img": "",
       });
       expendCollectionReference = ref
           .read(firebaseFireStoreProvider)

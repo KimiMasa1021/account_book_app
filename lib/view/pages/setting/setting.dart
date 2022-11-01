@@ -70,7 +70,10 @@ class Setting extends HookConsumerWidget {
                               ? DecorationImage(
                                   image: NetworkImage(userState!.img),
                                 )
-                              : null,
+                              : DecorationImage(
+                                  fit: BoxFit.fitHeight,
+                                  image: AssetImage("assets/img/profile.png"),
+                                ),
                         ),
                       ),
                       Positioned(
