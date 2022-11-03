@@ -36,20 +36,28 @@ class FriendsList extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 65,
                     height: 65,
-                    margin: const EdgeInsets.only(right: 10),
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 17, 32, 241),
+                    width: 65,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
                       shape: BoxShape.circle,
+                      image: friendsListState[index].img != ""
+                          ? DecorationImage(
+                              image: NetworkImage(friendsListState[index].img),
+                            )
+                          : const DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage("assets/img/profile.png"),
+                            ),
                     ),
                   ),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         friendsListState[index].name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

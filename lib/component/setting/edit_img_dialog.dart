@@ -16,25 +16,25 @@ class EditImageDialog extends HookConsumerWidget {
     final userController = ref.watch(usersControllerProvider.notifier);
 
     final ValueNotifier<File?> previewImage = useState(null);
+    final size = MediaQuery.of(context).size;
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: <Widget>[
-          Container(
-            padding:
-                EdgeInsets.only(left: 10, top: 45 + 20, right: 10, bottom: 20),
-            margin: EdgeInsets.only(top: 45),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+      child: Container(
+        height: size.height / 2,
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
                   "プロフィール画像の変更",
@@ -51,19 +51,25 @@ class EditImageDialog extends HookConsumerWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              userController.getImageFromGarary(previewImage);
+                              userController.getImage(
+                                previewImage,
+                                ImageSource.gallery,
+                              );
                             },
                             child: Container(
                               height: 50,
                               decoration: BoxDecoration(
-                                color: Colors.black,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(100),
+                                border: Border.all(
+                                  width: 3,
+                                  color: Colors.black,
+                                ),
                               ),
                               child: Center(
                                 child: Text(
                                   "本体から",
                                   style: TextStyle(
-                                    color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -76,7 +82,10 @@ class EditImageDialog extends HookConsumerWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              userController.getImageFromCamera(previewImage);
+                              userController.getImage(
+                                previewImage,
+                                ImageSource.camera,
+                              );
                             },
                             child: Container(
                               height: 50,
@@ -105,19 +114,17 @@ class EditImageDialog extends HookConsumerWidget {
                     SizedBox(height: 10),
                     previewImage.value != null
                         ? InkWell(
-                            onTap: () {
-                              userController.getImageFromGarary(previewImage);
+                            onTap: () async {
+                              await userController
+                                  .updateImage(previewImage.value!);
+                              Navigator.pop(context);
                             },
                             child: Container(
                               height: 50,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(100),
-                                border: Border.all(
-                                  width: 3,
-                                  color: Colors.black,
-                                ),
                               ),
                               child: Center(
                                 child: Text(
@@ -125,6 +132,7 @@ class EditImageDialog extends HookConsumerWidget {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -135,35 +143,28 @@ class EditImageDialog extends HookConsumerWidget {
                 )
               ],
             ),
-          ),
-          Positioned(
-            left: 10,
-            right: 10,
-            top: -20,
-            child: Container(
-              width: 120,
-              height: 120,
-              clipBehavior: Clip.none,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: previewImage.value != null
-                    ? DecorationImage(
-                        fit: BoxFit.cover,
-                        image: FileImage(previewImage.value!),
+            Positioned(
+              top: -60,
+              left: (size.width - 40) / 4,
+              child: Container(
+                width: 120,
+                height: 120,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: previewImage.value != null
+                    ? Image.file(
+                        previewImage.value!,
+                        fit: BoxFit.fill,
                       )
                     : userState?.img != ""
-                        ? DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(userState!.img),
-                          )
-                        : DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/img/profile.png"),
-                          ),
+                        ? Image.network(userState!.img)
+                        : Image.asset("assets/img/profile.png"),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

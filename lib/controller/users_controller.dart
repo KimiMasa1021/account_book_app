@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -85,30 +86,54 @@ class UsersController extends StateNotifier<UsersState> {
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
-      textColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      textColor: const Color.fromARGB(255, 255, 255, 255),
       fontSize: 16.0,
     );
   }
 
   final picker = ImagePicker();
-  Future<void> getImageFromGarary(ValueNotifier<File?> value) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future<void> getImage(ValueNotifier<File?> value, ImageSource source) async {
+    final pickedFile = await picker.pickImage(
+      source: source,
+      imageQuality: 80,
+    );
     if (pickedFile == null) {
       value.value = null;
       return;
     }
-
-    value.value = File(pickedFile.path);
+    final croppedFile = await cropImage(pickedFile.path);
+    if (croppedFile == null) {
+      return;
+    }
+    value.value = File(croppedFile.path);
   }
 
-  Future<void> getImageFromCamera(ValueNotifier<File?> value) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    if (pickedFile == null) {
-      value.value = null;
-      return;
-    }
+  Future<File?> cropImage(String path) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: path,
+      cropStyle: CropStyle.circle,
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+      compressQuality: 80,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: '画像の位置選択',
+          toolbarColor: const Color.fromARGB(255, 255, 0, 0),
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: false,
+          hideBottomControls: true,
+          showCropGrid: false,
+        ),
+      ],
+    );
+    if (croppedFile == null) return null;
 
-    value.value = File(pickedFile.path);
+    return File(croppedFile.path);
+  }
+
+  Future<void> updateImage(File image) async {
+    final url = await ref.read(usersRepositoryProvider).uploadImage(image);
+    await ref.read(usersRepositoryProvider).saveImageUrl(url);
   }
 }

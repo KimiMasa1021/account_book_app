@@ -22,7 +22,7 @@ class Setting extends HookConsumerWidget {
             Expanded(
               flex: 2,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 120, 171, 201),
                 ),
               ),
@@ -30,7 +30,7 @@ class Setting extends HookConsumerWidget {
             Expanded(
               flex: 3,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
               ),
@@ -43,13 +43,13 @@ class Setting extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Container(
               clipBehavior: Clip.none,
-              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
               height: MediaQuery.of(context).size.height / 1.4,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
-                  BoxShadow(
+                  const BoxShadow(
                     offset: Offset(0, 4),
                     color: Color.fromARGB(255, 211, 211, 211),
                     blurRadius: 5,
@@ -70,7 +70,7 @@ class Setting extends HookConsumerWidget {
                               ? DecorationImage(
                                   image: NetworkImage(userState!.img),
                                 )
-                              : DecorationImage(
+                              : const DecorationImage(
                                   fit: BoxFit.fitHeight,
                                   image: AssetImage("assets/img/profile.png"),
                                 ),
@@ -84,7 +84,7 @@ class Setting extends HookConsumerWidget {
                             showDialog<void>(
                               context: context,
                               builder: (BuildContext context) {
-                                return EditImageDialog();
+                                return const EditImageDialog();
                               },
                             );
                           },
@@ -97,7 +97,7 @@ class Setting extends HookConsumerWidget {
                                 shape: BoxShape.circle,
                                 border: Border.all(),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Icon(
                                   Icons.edit,
                                 ),
@@ -113,25 +113,25 @@ class Setting extends HookConsumerWidget {
                     children: [
                       Text(
                         userState!.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10),
                         child: Icon(Icons.edit),
                       )
                     ],
                   ),
                   Text(
                     userState.email,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 17,
                       color: Color.fromARGB(255, 98, 98, 98),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Divider(
+                  const SizedBox(height: 10),
+                  const Divider(
                     height: 3,
                     color: Colors.black,
                   ),
@@ -143,44 +143,45 @@ class Setting extends HookConsumerWidget {
                     },
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.person_add_alt,
                           size: 30,
                           color: Colors.grey,
                         ),
-                        SizedBox(width: 10),
-                        Text(
+                        const SizedBox(width: 10),
+                        const Text(
                           "フレンド追加",
                           style: TextStyle(
                             fontSize: 20,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(context, FriendAddQr.id);
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.qr_code,
                             size: 28,
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         InkWell(
                           onTap: () {
                             Navigator.pushNamed(context, FriendAddScan.id);
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.camera_alt_outlined,
                             size: 28,
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                       ],
                     ),
                   ),
