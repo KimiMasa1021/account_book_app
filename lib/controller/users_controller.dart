@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../model/users_state.dart';
@@ -85,5 +89,26 @@ class UsersController extends StateNotifier<UsersState> {
       textColor: Color.fromARGB(255, 255, 255, 255),
       fontSize: 16.0,
     );
+  }
+
+  final picker = ImagePicker();
+  Future<void> getImageFromGarary(ValueNotifier<File?> value) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile == null) {
+      value.value = null;
+      return;
+    }
+
+    value.value = File(pickedFile.path);
+  }
+
+  Future<void> getImageFromCamera(ValueNotifier<File?> value) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    if (pickedFile == null) {
+      value.value = null;
+      return;
+    }
+
+    value.value = File(pickedFile.path);
   }
 }
