@@ -17,24 +17,24 @@ class SavingHistory extends HookConsumerWidget {
         title: const Text("節約履歴"),
         centerTitle: true,
       ),
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: List.generate(
-                savingState.length,
-                (index) => HistoryTile(
-                  title: savingState[index].memo,
-                  date: savingState[index].registeTime,
-                  price: savingState[index].price,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+      // body: SafeArea(
+      //   child: SizedBox(
+      //     width: double.infinity,
+      //     child: SingleChildScrollView(
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: List.generate(
+      //           savingState.length,
+      //           (index) => HistoryTile(
+      //             title: savingState[index].memo,
+      //             date: savingState[index].registeTime,
+      //             price: savingState[index].price,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

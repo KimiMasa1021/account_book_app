@@ -1,11 +1,12 @@
+import 'package:account_book_app/model/target_state.dart';
 import 'package:account_book_app/repository/saving_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart' show DateFormat, NumberFormat;
 import '../model/saving_state.dart';
+import '../model/users_state.dart';
 
-class SavingController extends StateNotifier<List<SavingState>> {
+class SavingController extends StateNotifier<List<TargetState>> {
   final Ref ref;
   SavingController(this.ref) : super([]) {
     ref.read(savingRepositoryProvider).feachSaving().listen((data) {
@@ -13,14 +14,26 @@ class SavingController extends StateNotifier<List<SavingState>> {
     });
   }
 
-  Future<void> initTarget(String target, int targetPrice) async {
-    ref.read(savingRepositoryProvider).initTarget(target, targetPrice);
+  Future<void> initTarget(
+    String target,
+    String targetPrice,
+    String groupName,
+    List<UsersState> membersList,
+  ) async {
+    int price = int.parse(targetPrice.replaceAll(",", ""));
+    List<String> membersListUid = membersList.map((e) => e.uid).toList();
+    await ref.read(savingRepositoryProvider).initTarget(
+          target,
+          price,
+          groupName,
+          membersListUid,
+        );
   }
 
   Future<void> addSaving(DateTime registedTime, int price, String memo) async {
-    await ref
-        .read(savingRepositoryProvider)
-        .addSaving(registedTime, price, memo);
+    // await ref
+    //     .read(savingRepositoryProvider)
+    //     .addSaving(registedTime, price, memo);
   }
 
   void showToast(String msg) {
@@ -32,8 +45,6 @@ class SavingController extends StateNotifier<List<SavingState>> {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-
-    debugPrint(state[0].memo);
   }
 
   Future<DateTime> selectDate(BuildContext context) async {

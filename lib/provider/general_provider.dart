@@ -3,6 +3,7 @@ import 'package:account_book_app/controller/auth_controller.dart';
 import 'package:account_book_app/controller/expend_controller.dart';
 import 'package:account_book_app/controller/income_controller.dart';
 import 'package:account_book_app/model/genre_state.dart';
+import 'package:account_book_app/model/target_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,7 +30,7 @@ final usersControllerProvider =
         (ref) => UsersController(ref));
 
 final savingControllerProvider =
-    StateNotifierProvider<SavingController, List<SavingState>>(
+    StateNotifierProvider<SavingController, List<TargetState>>(
         (ref) => SavingController(ref));
 
 final accountControllerPrvider =

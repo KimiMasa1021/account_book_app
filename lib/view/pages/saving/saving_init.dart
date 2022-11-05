@@ -19,8 +19,10 @@ class SavingInit extends HookConsumerWidget {
 
     final targetController = useTextEditingController(text: "");
     final targetPriceController = useTextEditingController(text: "");
+    final groupNameController = useTextEditingController(text: "");
     final userState = ref.watch(usersControllerProvider);
     final memberLists = ref.watch(memberListProvider);
+
     return Stack(
       children: [
         SafeArea(
@@ -74,7 +76,7 @@ class SavingInit extends HookConsumerWidget {
                   InputTargetField(
                     title: "グループ名",
                     hintText: '例：家族,カップル(短め推奨)',
-                    controller: targetPriceController,
+                    controller: groupNameController,
                     inputType: TextInputType.text,
                   ),
                   Column(
@@ -97,7 +99,7 @@ class SavingInit extends HookConsumerWidget {
                               Navigator.pushNamed(context, SavingMemberAdd.id);
                             },
                             child: Text(
-                              "追加する",
+                              "編集する",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 25,
@@ -120,17 +122,18 @@ class SavingInit extends HookConsumerWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: 50),
+                  SizedBox(height: 18),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
                         onTap: () async {
+                          final list = [...memberLists, userState];
                           await savingController.initTarget(
                             targetController.text,
-                            int.parse(
-                              targetPriceController.text.replaceAll(",", ""),
-                            ),
+                            targetPriceController.text,
+                            groupNameController.text,
+                            list,
                           );
                         },
                         child: Container(

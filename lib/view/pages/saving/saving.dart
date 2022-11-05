@@ -11,12 +11,11 @@ class Saving extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final usersState = ref.watch(usersControllerProvider);
-
-    if (usersState!.target != "") {
-      debugPrint(usersState.target);
-      return const SavingData();
-    } else {
-      return const SavingInit();
-    }
+    return const SavingData();
+    // if (usersState!.target != "") {
+    //   debugPrint(usersState.target);
+    // } else {
+    //   return const SavingInit();
+    // }
   }
 }

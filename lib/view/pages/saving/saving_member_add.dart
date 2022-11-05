@@ -90,28 +90,6 @@ class SavingMemberAdd extends HookConsumerWidget {
                 },
               ),
             ),
-            InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Container(
-                width: double.infinity,
-                height: 120,
-                decoration: const BoxDecoration(
-                  color: Colors.orange,
-                ),
-                child: const Center(
-                  child: Text(
-                    "追加する",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

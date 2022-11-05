@@ -1,4 +1,5 @@
 import 'package:account_book_app/model/saving_state.dart';
+import 'package:account_book_app/model/target_state.dart';
 import 'package:account_book_app/provider/firebase_firestore_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,66 +12,67 @@ final savingRepositoryProvider =
     Provider<SavingRepository>((ref) => SavingRepoositoryImple(ref));
 
 abstract class SavingRepository {
-  Future<void> initTarget(String target, int targetPrice);
-  Future<void> addSaving(DateTime registedTime, int price, String memo);
-  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving();
+  Future<void> initTarget(
+      String target, int targetPrice, String groupName, List membersList);
+  // Future<void> addSaving(DateTime registedTime, int price, String memo);
+  Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving();
 }
 
 class SavingRepoositoryImple implements SavingRepository {
   final Ref ref;
-  CollectionReference? targetCollectionReference;
-  CollectionReference? savingCollectionReference;
+  CollectionReference? collectionReference;
   User? user;
 
   SavingRepoositoryImple(this.ref) {
-    targetCollectionReference =
-        ref.read(firebaseFireStoreProvider).collection("users");
+    collectionReference =
+        ref.read(firebaseFireStoreProvider).collection("saving");
     user = ref.read(firebaseAuthProvider).currentUser;
-    savingCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user!.uid)
-        .collection("saving");
   }
 
   @override
-  Future<void> initTarget(String target, int targetPrice) async {
-    User? user = ref.read(firebaseAuthProvider).currentUser;
+  Future<void> initTarget(
+    String target,
+    int targetPrice,
+    String groupName,
+    List membersList,
+  ) async {
     try {
-      await targetCollectionReference?.doc(user?.uid).set(
+      debugPrint("レポジトリー");
+      await collectionReference!.add(
         {
           'target': target,
           'targetPrice': targetPrice,
+          'groupName': groupName,
+          'members': membersList,
         },
-        SetOptions(merge: true),
       );
     } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
+      debugPrint("あああああああああ" + e.code);
     }
   }
 
-  @override
-  Future<void> addSaving(DateTime registedTime, int price, String memo) async {
-    SavingState savingState = SavingState(
-      createdAt: DateTime.now(),
-      registeTime: registedTime,
-      price: price,
-      memo: memo,
-    );
-    try {
-      await savingCollectionReference?.add(savingState.toJson());
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
-    }
-  }
+  // @override
+  // Future<void> addSaving(DateTime registedTime, int price, String memo) async {
+  //   SavingState savingState = SavingState(
+  //     createdAt: DateTime.now(),
+  //     registeTime: registedTime,
+  //     price: price,
+  //     memo: memo,
+  //   );
+  //   try {
+  //     await savingCollectionReference?.add(savingState.toJson());
+  //   } on FirebaseAuthException catch (e) {
+  //     debugPrint(e.code);
+  //   }
+  // }
 
   @override
-  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving() async* {
-    final stateRef = savingCollectionReference!
-        .orderBy("registeTime")
-        .withConverter<SavingState>(
+  Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving() async* {
+    final stateRef = collectionReference!
+        .where('members', arrayContains: user!.uid)
+        .withConverter<TargetState>(
           fromFirestore: (snapshot, _) =>
-              SavingState.fromJson(snapshot.data()!),
+              TargetState.fromJson(snapshot.data()!),
           toFirestore: (data, _) => data.toJson(),
         );
 

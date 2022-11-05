@@ -17,13 +17,14 @@ class MemberButton extends HookConsumerWidget {
     final memberLists = ref.watch(memberListProvider);
     final memberListsCNT = ref.watch(memberListProvider.notifier);
 
-    final flg = useState(false);
+    final flg = useState(memberLists.contains(state));
 
-    return flg.value
+    return memberLists.contains(state)
         ? InkWell(
             onTap: () {
               flg.value = false;
-              memberListsCNT.state.remove(state);
+              memberListsCNT.state =
+                  memberLists.where((e) => e != state).toList();
             },
             child: Container(
               width: 90,
@@ -32,15 +33,15 @@ class MemberButton extends HookConsumerWidget {
                 color: Colors.white,
                 border: Border.all(
                   color: Colors.black,
-                  width: 4,
+                  width: 3,
                 ),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: const Center(
                 child: Text(
-                  "キャンセル",
+                  "削除",
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 20,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
@@ -51,7 +52,8 @@ class MemberButton extends HookConsumerWidget {
         : InkWell(
             onTap: () {
               flg.value = true;
-              memberListsCNT.state.add(state);
+
+              memberListsCNT.state = [...memberLists, state];
             },
             child: Container(
               width: 90,
