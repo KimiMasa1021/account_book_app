@@ -1,4 +1,5 @@
 import 'package:account_book_app/component/setting/edit_img_dialog.dart';
+import 'package:account_book_app/component/setting/rename_dialog.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/view/pages/setting/friend_add_scan.dart';
 import 'package:flutter/material.dart';
@@ -116,10 +117,22 @@ class Setting extends HookConsumerWidget {
                         style: const TextStyle(
                           fontSize: 24,
                         ),
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.right,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Icon(Icons.edit),
+                      InkWell(
+                        onTap: () {
+                          showDialog<void>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const RenameDialog();
+                            },
+                          );
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Icon(Icons.edit),
+                        ),
                       )
                     ],
                   ),
@@ -150,7 +163,7 @@ class Setting extends HookConsumerWidget {
                         const Icon(
                           Icons.person_add_alt,
                           size: 30,
-                          color: Colors.grey,
+                          color: Colors.black,
                         ),
                         const SizedBox(width: 10),
                         const Text(

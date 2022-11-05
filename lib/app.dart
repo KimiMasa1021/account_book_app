@@ -3,11 +3,13 @@ import 'package:account_book_app/view/pages/setting/friends_list.dart';
 import 'package:account_book_app/view/pages/setting/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'view/pages/account/account_add.dart';
 import 'view/pages/account/account_genre.dart';
 import 'view/pages/account/account_genre_add.dart';
 import 'view/pages/saving/saving_add.dart';
 import 'view/pages/saving/saving_history.dart';
+import 'view/pages/saving/saving_member_add.dart';
 import 'view/pages/setting/friend_add_qr.dart';
 import 'view/root_page.dart';
 import 'view/separate.dart';
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
         FriendAddScan.id: (BuildContext context) => FriendAddScan(),
         FriendsList.id: (BuildContext context) => const FriendsList(),
         ProfilePage.id: (BuildContext context) => const ProfilePage(),
+        SavingMemberAdd.id: (BuildContext context) => SavingMemberAdd(),
       },
     );
   }

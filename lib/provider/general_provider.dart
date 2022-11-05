@@ -23,7 +23,7 @@ final authSwitcherPriovider = StateProvider<Pages>((ref) => Pages.top);
 final pageTypeProvider = StateProvider<PageType>((ref) => PageType.account);
 
 final incomeExpendSwicherProvider = StateProvider<bool>((ref) => true);
-
+final memberListProvider = StateProvider<List<UsersState>>((ref) => []);
 final usersControllerProvider =
     StateNotifierProvider<UsersController, UsersState?>(
         (ref) => UsersController(ref));

@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:account_book_app/provider/firebase_storage.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/users_state.dart';
 import '../provider/firebase_firestore_provider.dart';
@@ -16,6 +18,7 @@ abstract class UsersRepository {
   Future<void> makeFriend(String uid, List friendList, List myList);
   Future<String> uploadImage(File image);
   Future<void> saveImageUrl(String url);
+  Future<void> reName(String newName);
 }
 
 class GenreRepositoryImple implements UsersRepository {
@@ -77,5 +80,16 @@ class GenreRepositoryImple implements UsersRepository {
     await collectionReference!.doc(userId).update({
       'img': url,
     });
+  }
+
+  @override
+  Future<void> reName(String newName) async {
+    try {
+      await collectionReference!.doc(userId).update({
+        'name': newName,
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code.toString());
+    }
   }
 }

@@ -57,7 +57,7 @@ class InputTargetField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: const TextStyle(
-                color: Colors.grey,
+                color: Color.fromARGB(255, 66, 66, 66),
               ),
               focusedBorder: InputBorder.none,
               border: InputBorder.none,

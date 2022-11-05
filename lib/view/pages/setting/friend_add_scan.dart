@@ -4,8 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import '../../../repository/users_repository.dart';
-
 class FriendAddScan extends HookConsumerWidget {
   FriendAddScan({super.key});
 

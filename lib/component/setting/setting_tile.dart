@@ -16,23 +16,23 @@ class SettingTile extends StatelessWidget {
     return InkWell(
       onTap: () => function(),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Row(
           children: [
             Icon(
               icon,
               size: 30,
-              color: Colors.grey,
+              color: Colors.black,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
               ),
             ),
-            Spacer(),
-            Icon(
+            const Spacer(),
+            const Icon(
               Icons.arrow_forward_ios_outlined,
               size: 20,
               color: Colors.black,

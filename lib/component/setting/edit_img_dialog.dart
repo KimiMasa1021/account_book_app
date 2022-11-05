@@ -25,7 +25,7 @@ class EditImageDialog extends HookConsumerWidget {
       backgroundColor: Colors.transparent,
       child: Container(
         height: size.height / 2,
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -36,11 +36,11 @@ class EditImageDialog extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   "プロフィール画像の変更",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 35,
                 ),
                 Column(
@@ -66,7 +66,7 @@ class EditImageDialog extends HookConsumerWidget {
                                   color: Colors.black,
                                 ),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "本体から",
                                   style: TextStyle(
@@ -78,7 +78,7 @@ class EditImageDialog extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Expanded(
                           child: InkWell(
                             onTap: () {
@@ -97,7 +97,7 @@ class EditImageDialog extends HookConsumerWidget {
                                   color: Colors.black,
                                 ),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "カメラから",
                                   style: TextStyle(
@@ -111,7 +111,7 @@ class EditImageDialog extends HookConsumerWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     previewImage.value != null
                         ? InkWell(
                             onTap: () async {
@@ -126,7 +126,7 @@ class EditImageDialog extends HookConsumerWidget {
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(100),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "変更する",
                                   style: TextStyle(
@@ -138,7 +138,7 @@ class EditImageDialog extends HookConsumerWidget {
                               ),
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                   ],
                 )
               ],
@@ -150,7 +150,7 @@ class EditImageDialog extends HookConsumerWidget {
                 width: 120,
                 height: 120,
                 clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
                 child: previewImage.value != null

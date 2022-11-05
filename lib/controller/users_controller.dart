@@ -136,4 +136,8 @@ class UsersController extends StateNotifier<UsersState> {
     final url = await ref.read(usersRepositoryProvider).uploadImage(image);
     await ref.read(usersRepositoryProvider).saveImageUrl(url);
   }
+
+  Future<void> reName(String newName) async {
+    await ref.read(usersRepositoryProvider).reName(newName);
+  }
 }
