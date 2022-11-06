@@ -21,11 +21,10 @@ SavingState _$SavingStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SavingState {
   @TimestampConverter()
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime get registeTime => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
+  String get member => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,10 +39,10 @@ abstract class $SavingStateCopyWith<$Res> {
       _$SavingStateCopyWithImpl<$Res, SavingState>;
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime registeTime,
+      {@TimestampConverter() DateTime registeTime,
       int price,
-      String memo});
+      String memo,
+      String member});
 }
 
 /// @nodoc
@@ -59,16 +58,12 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = null,
     Object? registeTime = null,
     Object? price = null,
     Object? memo = null,
+    Object? member = null,
   }) {
     return _then(_value.copyWith(
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
@@ -80,6 +75,10 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
       memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
+              as String,
+      member: null == member
+          ? _value.member
+          : member // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -94,10 +93,10 @@ abstract class _$$_SavingStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime createdAt,
-      @TimestampConverter() DateTime registeTime,
+      {@TimestampConverter() DateTime registeTime,
       int price,
-      String memo});
+      String memo,
+      String member});
 }
 
 /// @nodoc
@@ -111,16 +110,12 @@ class __$$_SavingStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? createdAt = null,
     Object? registeTime = null,
     Object? price = null,
     Object? memo = null,
+    Object? member = null,
   }) {
     return _then(_$_SavingState(
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
@@ -133,6 +128,10 @@ class __$$_SavingStateCopyWithImpl<$Res>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
+      member: null == member
+          ? _value.member
+          : member // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -141,18 +140,15 @@ class __$$_SavingStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SavingState extends _SavingState {
   _$_SavingState(
-      {@TimestampConverter() required this.createdAt,
-      @TimestampConverter() required this.registeTime,
+      {@TimestampConverter() required this.registeTime,
       this.price = 0,
-      this.memo = ""})
+      this.memo = "",
+      this.member = ""})
       : super._();
 
   factory _$_SavingState.fromJson(Map<String, dynamic> json) =>
       _$$_SavingStateFromJson(json);
 
-  @override
-  @TimestampConverter()
-  final DateTime createdAt;
   @override
   @TimestampConverter()
   final DateTime registeTime;
@@ -162,10 +158,13 @@ class _$_SavingState extends _SavingState {
   @override
   @JsonKey()
   final String memo;
+  @override
+  @JsonKey()
+  final String member;
 
   @override
   String toString() {
-    return 'SavingState(createdAt: $createdAt, registeTime: $registeTime, price: $price, memo: $memo)';
+    return 'SavingState(registeTime: $registeTime, price: $price, memo: $memo, member: $member)';
   }
 
   @override
@@ -173,18 +172,17 @@ class _$_SavingState extends _SavingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SavingState &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
             (identical(other.registeTime, registeTime) ||
                 other.registeTime == registeTime) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.memo, memo) || other.memo == memo));
+            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.member, member) || other.member == member));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, createdAt, registeTime, price, memo);
+      Object.hash(runtimeType, registeTime, price, memo, member);
 
   @JsonKey(ignore: true)
   @override
@@ -202,10 +200,10 @@ class _$_SavingState extends _SavingState {
 
 abstract class _SavingState extends SavingState {
   factory _SavingState(
-      {@TimestampConverter() required final DateTime createdAt,
-      @TimestampConverter() required final DateTime registeTime,
+      {@TimestampConverter() required final DateTime registeTime,
       final int price,
-      final String memo}) = _$_SavingState;
+      final String memo,
+      final String member}) = _$_SavingState;
   _SavingState._() : super._();
 
   factory _SavingState.fromJson(Map<String, dynamic> json) =
@@ -213,14 +211,13 @@ abstract class _SavingState extends SavingState {
 
   @override
   @TimestampConverter()
-  DateTime get createdAt;
-  @override
-  @TimestampConverter()
   DateTime get registeTime;
   @override
   int get price;
   @override
   String get memo;
+  @override
+  String get member;
   @override
   @JsonKey(ignore: true)
   _$$_SavingStateCopyWith<_$_SavingState> get copyWith =>

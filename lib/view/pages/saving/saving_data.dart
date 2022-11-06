@@ -9,7 +9,9 @@ import '../../../component/saving/data_card.dart';
 import '../../../component/saving/history_button.dart';
 import '../../../component/saving/price_chart.dart';
 import '../../../component/saving/target_card.dart';
+import '../../../model/saving_state.dart';
 import '../../../provider/general_provider.dart';
+import '../../../repository/saving_repository.dart';
 import 'saving_add.dart';
 
 class SavingData extends HookConsumerWidget {
@@ -34,7 +36,6 @@ class SavingData extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final savingState = ref.watch(savingControllerProvider);
     final selectedSaving = useState(0);
-
     // final savingPrice = savingState.isNotEmpty
     //     ? savingState
     //         .map((e) => e.price)
@@ -61,72 +62,135 @@ class SavingData extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    Row(
-                      children: List.generate(savingState.length, (index) {
-                        return Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 5,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          ...List.generate(
+                            savingState.length,
+                            (index) {
+                              return InkWell(
+                                onTap: () {
+                                  selectedSaving.value = index;
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 5,
+                                  ),
+                                  margin: EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                    color: index == selectedSaving.value
+                                        ? Colors.black
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.circular(200),
+                                    border: Border.all(
+                                      width: 3,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      savingState[index].groupName,
+                                      style: TextStyle(
+                                        color: index == selectedSaving.value
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontWeight:
+                                            index == selectedSaving.value
+                                                ? FontWeight.bold
+                                                : FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 222, 222, 222),
-                            borderRadius: BorderRadius.circular(200),
+                          InkWell(
+                            onTap: () {},
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Icon(
+                                Icons.group_add_outlined,
+                                size: 35,
+                              ),
+                            ),
                           ),
-                          child: Center(
-                            child: Text(savingState[index].groupName),
-                          ),
-                        );
-                      }),
+                        ],
+                      ),
                     ),
+                    StreamBuilder(
+                      stream: ref.read(savingRepositoryProvider).feachList(
+                            savingState[selectedSaving.value].id,
+                          ),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return CircularProgressIndicator();
+                        } else {
+                          final List<SavingState> state =
+                              snapshot.data!.map((e) => e.data()).toList();
+                          return Column(
+                            children: [
+                              TargetCard(
+                                title: '目標',
+                                subTitle:
+                                    savingState[selectedSaving.value].target,
+                              ),
+                              DataCard(
+                                  title: '目標金額',
+                                  subTitle: NumberFormat("#,###").format(
+                                      savingState[selectedSaving.value]
+                                          .targetPrice)),
+                              AddButton(
+                                title: "節約記録を追加",
+                                function: () {
+                                  Navigator.of(context).pushNamed(SavingAdd.id);
+                                },
+                              ),
+                              DataCard(
+                                title: '現在の節約総金額',
+                                subTitle: "かり",
+                                //NumberFormat("#,###").format(savingPrice),
+                              ),
+                              Row(
+                                children: [
+                                  AchieveRate(
+                                    title: "達成率",
+                                    parsent: "かり",
+                                    //priceParsent,
+                                  ),
+                                  HistoryButton(
+                                    title: '履歴',
+                                    fucntion: () {
+                                      Navigator.of(context)
+                                          .pushNamed(SavingHistory.id);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              PriceChart(
+                                savingChartList: [], //savingChartList,
+                              ),
+                              const SizedBox(height: 80),
+                            ],
+                          );
+                        }
+                        // if (snapshot.connectionState == ConnectionState.done) {
+                        //   if (snapshot.hasError) {
+                        //     return SizedBox();
+                        //   }
+                        //   if (!snapshot.hasData) {
+                        //     return Text("データが見つかりません");
+                        //   }
 
-                    // InkWell(
-                    //   onTap: () {},
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.symmetric(horizontal: 10),
-                    //     child: Icon(
-                    //       Icons.group_add_outlined,
-                    //     ),
-                    //   ),
-                    // )
-                    TargetCard(
-                      title: '目標',
-                      subTitle: savingState[selectedSaving.value].target,
-                    ),
-                    DataCard(
-                      title: '目標金額',
-                      subTitle: "かり",
-                      //NumberFormat("#,###").format(targetPrice),
-                    ),
-                    AddButton(
-                      title: "節約記録を追加",
-                      function: () {
-                        Navigator.of(context).pushNamed(SavingAdd.id);
+                        // } else {
+                        //   return Center(
+                        //     child: const CircularProgressIndicator(),
+                        //   );
+                        // }
                       },
                     ),
-                    DataCard(
-                      title: '現在の節約総金額',
-                      subTitle: "かり",
-                      //NumberFormat("#,###").format(savingPrice),
-                    ),
-                    Row(
-                      children: [
-                        AchieveRate(
-                          title: "達成率",
-                          parsent: "かり",
-                          //priceParsent,
-                        ),
-                        HistoryButton(
-                          title: '履歴',
-                          fucntion: () {
-                            Navigator.of(context).pushNamed(SavingHistory.id);
-                          },
-                        ),
-                      ],
-                    ),
-                    PriceChart(
-                      savingChartList: [], //savingChartList,
-                    ),
-                    const SizedBox(height: 80),
                   ],
                 ),
               ),

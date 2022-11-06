@@ -23,6 +23,7 @@ mixin _$TargetState {
   String get groupName => throw _privateConstructorUsedError;
   List<dynamic> get members => throw _privateConstructorUsedError;
   String get target => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   int get targetPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $TargetStateCopyWith<$Res> {
       {String groupName,
       List<dynamic> members,
       String target,
+      String id,
       int targetPrice});
 }
 
@@ -60,6 +62,7 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
     Object? groupName = null,
     Object? members = null,
     Object? target = null,
+    Object? id = null,
     Object? targetPrice = null,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +77,10 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       targetPrice: null == targetPrice
           ? _value.targetPrice
@@ -95,6 +102,7 @@ abstract class _$$_TargetStateCopyWith<$Res>
       {String groupName,
       List<dynamic> members,
       String target,
+      String id,
       int targetPrice});
 }
 
@@ -112,6 +120,7 @@ class __$$_TargetStateCopyWithImpl<$Res>
     Object? groupName = null,
     Object? members = null,
     Object? target = null,
+    Object? id = null,
     Object? targetPrice = null,
   }) {
     return _then(_$_TargetState(
@@ -126,6 +135,10 @@ class __$$_TargetStateCopyWithImpl<$Res>
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       targetPrice: null == targetPrice
           ? _value.targetPrice
@@ -142,6 +155,7 @@ class _$_TargetState extends _TargetState {
       {this.groupName = "",
       final List<dynamic> members = const [],
       this.target = "",
+      this.id = "",
       this.targetPrice = 0})
       : _members = members,
         super._();
@@ -165,11 +179,14 @@ class _$_TargetState extends _TargetState {
   final String target;
   @override
   @JsonKey()
+  final String id;
+  @override
+  @JsonKey()
   final int targetPrice;
 
   @override
   String toString() {
-    return 'TargetState(groupName: $groupName, members: $members, target: $target, targetPrice: $targetPrice)';
+    return 'TargetState(groupName: $groupName, members: $members, target: $target, id: $id, targetPrice: $targetPrice)';
   }
 
   @override
@@ -181,6 +198,7 @@ class _$_TargetState extends _TargetState {
                 other.groupName == groupName) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
             (identical(other.target, target) || other.target == target) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.targetPrice, targetPrice) ||
                 other.targetPrice == targetPrice));
   }
@@ -188,7 +206,7 @@ class _$_TargetState extends _TargetState {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, groupName,
-      const DeepCollectionEquality().hash(_members), target, targetPrice);
+      const DeepCollectionEquality().hash(_members), target, id, targetPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -209,6 +227,7 @@ abstract class _TargetState extends TargetState {
       {final String groupName,
       final List<dynamic> members,
       final String target,
+      final String id,
       final int targetPrice}) = _$_TargetState;
   _TargetState._() : super._();
 
@@ -221,6 +240,8 @@ abstract class _TargetState extends TargetState {
   List<dynamic> get members;
   @override
   String get target;
+  @override
+  String get id;
   @override
   int get targetPrice;
   @override

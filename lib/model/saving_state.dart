@@ -10,10 +10,10 @@ part 'saving_state.g.dart';
 class SavingState with _$SavingState {
   const SavingState._();
   factory SavingState({
-    @TimestampConverter() required DateTime createdAt,
     @TimestampConverter() required DateTime registeTime,
     @Default(0) int price,
     @Default("") String memo,
+    @Default("") String member,
   }) = _SavingState;
 
   factory SavingState.fromJson(Map<String, dynamic> json) =>

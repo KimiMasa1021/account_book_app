@@ -1,4 +1,3 @@
-import 'package:account_book_app/model/saving_state.dart';
 import 'package:account_book_app/model/target_state.dart';
 import 'package:account_book_app/provider/firebase_firestore_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../model/saving_state.dart';
 import '../provider/firebase_auth_provider.dart';
 
 final savingRepositoryProvider =
@@ -16,11 +16,14 @@ abstract class SavingRepository {
       String target, int targetPrice, String groupName, List membersList);
   // Future<void> addSaving(DateTime registedTime, int price, String memo);
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving();
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(String uid);
 }
 
 class SavingRepoositoryImple implements SavingRepository {
   final Ref ref;
   CollectionReference? collectionReference;
+  CollectionReference? collectionReference2;
+
   User? user;
 
   SavingRepoositoryImple(this.ref) {
@@ -37,8 +40,7 @@ class SavingRepoositoryImple implements SavingRepository {
     List membersList,
   ) async {
     try {
-      debugPrint("レポジトリー");
-      await collectionReference!.add(
+      final fff = await collectionReference!.add(
         {
           'target': target,
           'targetPrice': targetPrice,
@@ -46,8 +48,14 @@ class SavingRepoositoryImple implements SavingRepository {
           'members': membersList,
         },
       );
+      await collectionReference!.doc(fff.id).set(
+        {
+          'id': fff.id,
+        },
+        SetOptions(merge: true),
+      );
     } on FirebaseAuthException catch (e) {
-      debugPrint("あああああああああ" + e.code);
+      debugPrint(e.code);
     }
   }
 
@@ -75,6 +83,23 @@ class SavingRepoositoryImple implements SavingRepository {
               TargetState.fromJson(snapshot.data()!),
           toFirestore: (data, _) => data.toJson(),
         );
+
+    yield* stateRef.snapshots().map((doc) => doc.docs);
+  }
+
+  @override
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(
+    String uid,
+  ) async* {
+    collectionReference2 = ref
+        .read(firebaseFireStoreProvider)
+        .collection("saving")
+        .doc(uid)
+        .collection("list");
+    final stateRef = collectionReference2!.withConverter<SavingState>(
+      fromFirestore: (snapshot, _) => SavingState.fromJson(snapshot.data()!),
+      toFirestore: (data, _) => data.toJson(),
+    );
 
     yield* stateRef.snapshots().map((doc) => doc.docs);
   }
