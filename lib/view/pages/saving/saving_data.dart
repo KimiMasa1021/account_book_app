@@ -32,23 +32,9 @@ class SavingData extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final usersState = ref.watch(usersControllerProvider);
     final size = MediaQuery.of(context).size;
     final savingState = ref.watch(savingControllerProvider);
     final selectedSaving = useState(0);
-    // final savingPrice = savingState.isNotEmpty
-    //     ? savingState
-    //         .map((e) => e.price)
-    //         .toList()
-    //         .reduce((value, element) => value + element)
-    //     : 0;
-    // final targetPrice = usersState!.targetPrice;
-    // final priceParsent = (savingPrice / targetPrice * 100).toStringAsFixed(1);
-    // final List<int> savingChartList = savingState.isNotEmpty
-    //     ? increaseRate(
-    //         savingState.map((e) => e.price).toList(),
-    //       )
-    //     : [];
 
     return Stack(
       children: [
@@ -130,6 +116,21 @@ class SavingData extends HookConsumerWidget {
                         } else {
                           final List<SavingState> state =
                               snapshot.data!.map((e) => e.data()).toList();
+                          final savingPrice = state.isNotEmpty
+                              ? state
+                                  .map((e) => e.price)
+                                  .toList()
+                                  .reduce((value, element) => value + element)
+                              : 0;
+                          final targetPrice =
+                              savingState[selectedSaving.value].targetPrice;
+                          final priceParsent = (savingPrice / targetPrice * 100)
+                              .toStringAsFixed(1);
+                          final List<int> savingChartList = state.isNotEmpty
+                              ? increaseRate(
+                                  state.map((e) => e.price).toList(),
+                                )
+                              : [];
                           return Column(
                             children: [
                               TargetCard(
@@ -145,20 +146,23 @@ class SavingData extends HookConsumerWidget {
                               AddButton(
                                 title: "節約記録を追加",
                                 function: () {
-                                  Navigator.of(context).pushNamed(SavingAdd.id);
+                                  Navigator.of(context).pushNamed(
+                                    SavingAdd.id,
+                                    arguments:
+                                        savingState[selectedSaving.value].id,
+                                  );
                                 },
                               ),
                               DataCard(
                                 title: '現在の節約総金額',
-                                subTitle: "かり",
-                                //NumberFormat("#,###").format(savingPrice),
+                                subTitle:
+                                    NumberFormat("#,###").format(savingPrice),
                               ),
                               Row(
                                 children: [
                                   AchieveRate(
                                     title: "達成率",
-                                    parsent: "かり",
-                                    //priceParsent,
+                                    parsent: priceParsent,
                                   ),
                                   HistoryButton(
                                     title: '履歴',
@@ -170,25 +174,12 @@ class SavingData extends HookConsumerWidget {
                                 ],
                               ),
                               PriceChart(
-                                savingChartList: [], //savingChartList,
+                                savingChartList: savingChartList,
                               ),
                               const SizedBox(height: 80),
                             ],
                           );
                         }
-                        // if (snapshot.connectionState == ConnectionState.done) {
-                        //   if (snapshot.hasError) {
-                        //     return SizedBox();
-                        //   }
-                        //   if (!snapshot.hasData) {
-                        //     return Text("データが見つかりません");
-                        //   }
-
-                        // } else {
-                        //   return Center(
-                        //     child: const CircularProgressIndicator(),
-                        //   );
-                        // }
                       },
                     ),
                   ],

@@ -21,6 +21,9 @@ class SavingAdd extends HookConsumerWidget {
     final memoController = useTextEditingController(text: "");
     final ValueNotifier<DateTime> outputDate = useState(DateTime.now());
     final savingController = ref.watch(savingControllerProvider.notifier);
+    final usersState = ref.watch(usersControllerProvider);
+
+    final id = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -72,8 +75,10 @@ class SavingAdd extends HookConsumerWidget {
                   } else {
                     await savingController.addSaving(
                       outputDate.value,
-                      int.parse(priceController.text.replaceAll(",", "")),
+                      priceController.text,
                       memoController.text,
+                      id,
+                      usersState!.uid,
                     );
                     Navigator.pop(context);
                   }

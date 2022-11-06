@@ -14,7 +14,8 @@ final savingRepositoryProvider =
 abstract class SavingRepository {
   Future<void> initTarget(
       String target, int targetPrice, String groupName, List membersList);
-  // Future<void> addSaving(DateTime registedTime, int price, String memo);
+  Future<void> addSaving(
+      DateTime registedTime, int price, String memo, String uid, String member);
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving();
   Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(String uid);
 }
@@ -59,20 +60,31 @@ class SavingRepoositoryImple implements SavingRepository {
     }
   }
 
-  // @override
-  // Future<void> addSaving(DateTime registedTime, int price, String memo) async {
-  //   SavingState savingState = SavingState(
-  //     createdAt: DateTime.now(),
-  //     registeTime: registedTime,
-  //     price: price,
-  //     memo: memo,
-  //   );
-  //   try {
-  //     await savingCollectionReference?.add(savingState.toJson());
-  //   } on FirebaseAuthException catch (e) {
-  //     debugPrint(e.code);
-  //   }
-  // }
+  @override
+  Future<void> addSaving(
+    DateTime registedTime,
+    int price,
+    String memo,
+    String uid,
+    String member,
+  ) async {
+    SavingState savingState = SavingState(
+      registeTime: registedTime,
+      price: price,
+      memo: memo,
+      member: member,
+    );
+    try {
+      collectionReference2 = ref
+          .read(firebaseFireStoreProvider)
+          .collection("saving")
+          .doc(uid)
+          .collection("list");
+      await collectionReference2?.add(savingState.toJson());
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
 
   @override
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving() async* {

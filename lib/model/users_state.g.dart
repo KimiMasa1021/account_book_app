@@ -12,9 +12,7 @@ _$_UsersState _$$_UsersStateFromJson(Map<String, dynamic> json) =>
       uid: json['uid'] as String? ?? "",
       name: json['name'] as String? ?? "",
       friends: json['friends'] as List<dynamic>? ?? const [],
-      target: json['target'] as String? ?? "",
       img: json['img'] as String? ?? "",
-      targetPrice: json['targetPrice'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_UsersStateToJson(_$_UsersState instance) =>
@@ -23,7 +21,5 @@ Map<String, dynamic> _$$_UsersStateToJson(_$_UsersState instance) =>
       'uid': instance.uid,
       'name': instance.name,
       'friends': instance.friends,
-      'target': instance.target,
       'img': instance.img,
-      'targetPrice': instance.targetPrice,
     };

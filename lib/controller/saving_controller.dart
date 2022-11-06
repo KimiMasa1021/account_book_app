@@ -30,10 +30,21 @@ class SavingController extends StateNotifier<List<TargetState>> {
         );
   }
 
-  Future<void> addSaving(DateTime registedTime, int price, String memo) async {
-    // await ref
-    //     .read(savingRepositoryProvider)
-    //     .addSaving(registedTime, price, memo);
+  Future<void> addSaving(
+    DateTime registedTime,
+    String price,
+    String memo,
+    String uid,
+    String member,
+  ) async {
+    final formatPrice = int.parse(price.replaceAll(",", ""));
+    await ref.read(savingRepositoryProvider).addSaving(
+          registedTime,
+          formatPrice,
+          memo,
+          uid,
+          member,
+        );
   }
 
   void showToast(String msg) {

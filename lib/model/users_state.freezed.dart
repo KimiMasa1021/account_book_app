@@ -24,9 +24,7 @@ mixin _$UsersState {
   String get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<dynamic> get friends => throw _privateConstructorUsedError;
-  String get target => throw _privateConstructorUsedError;
   String get img => throw _privateConstructorUsedError;
-  int get targetPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,9 +43,7 @@ abstract class $UsersStateCopyWith<$Res> {
       String uid,
       String name,
       List<dynamic> friends,
-      String target,
-      String img,
-      int targetPrice});
+      String img});
 }
 
 /// @nodoc
@@ -67,9 +63,7 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
     Object? uid = null,
     Object? name = null,
     Object? friends = null,
-    Object? target = null,
     Object? img = null,
-    Object? targetPrice = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -88,18 +82,10 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
           ? _value.friends
           : friends // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      target: null == target
-          ? _value.target
-          : target // ignore: cast_nullable_to_non_nullable
-              as String,
       img: null == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String,
-      targetPrice: null == targetPrice
-          ? _value.targetPrice
-          : targetPrice // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
@@ -117,9 +103,7 @@ abstract class _$$_UsersStateCopyWith<$Res>
       String uid,
       String name,
       List<dynamic> friends,
-      String target,
-      String img,
-      int targetPrice});
+      String img});
 }
 
 /// @nodoc
@@ -137,9 +121,7 @@ class __$$_UsersStateCopyWithImpl<$Res>
     Object? uid = null,
     Object? name = null,
     Object? friends = null,
-    Object? target = null,
     Object? img = null,
-    Object? targetPrice = null,
   }) {
     return _then(_$_UsersState(
       email: null == email
@@ -158,18 +140,10 @@ class __$$_UsersStateCopyWithImpl<$Res>
           ? _value._friends
           : friends // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      target: null == target
-          ? _value.target
-          : target // ignore: cast_nullable_to_non_nullable
-              as String,
       img: null == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String,
-      targetPrice: null == targetPrice
-          ? _value.targetPrice
-          : targetPrice // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -182,9 +156,7 @@ class _$_UsersState extends _UsersState {
       this.uid = "",
       this.name = "",
       final List<dynamic> friends = const [],
-      this.target = "",
-      this.img = "",
-      this.targetPrice = 0})
+      this.img = ""})
       : _friends = friends,
         super._();
 
@@ -210,17 +182,11 @@ class _$_UsersState extends _UsersState {
 
   @override
   @JsonKey()
-  final String target;
-  @override
-  @JsonKey()
   final String img;
-  @override
-  @JsonKey()
-  final int targetPrice;
 
   @override
   String toString() {
-    return 'UsersState(email: $email, uid: $uid, name: $name, friends: $friends, target: $target, img: $img, targetPrice: $targetPrice)';
+    return 'UsersState(email: $email, uid: $uid, name: $name, friends: $friends, img: $img)';
   }
 
   @override
@@ -232,16 +198,13 @@ class _$_UsersState extends _UsersState {
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._friends, _friends) &&
-            (identical(other.target, target) || other.target == target) &&
-            (identical(other.img, img) || other.img == img) &&
-            (identical(other.targetPrice, targetPrice) ||
-                other.targetPrice == targetPrice));
+            (identical(other.img, img) || other.img == img));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, email, uid, name,
-      const DeepCollectionEquality().hash(_friends), target, img, targetPrice);
+      const DeepCollectionEquality().hash(_friends), img);
 
   @JsonKey(ignore: true)
   @override
@@ -263,9 +226,7 @@ abstract class _UsersState extends UsersState {
       final String uid,
       final String name,
       final List<dynamic> friends,
-      final String target,
-      final String img,
-      final int targetPrice}) = _$_UsersState;
+      final String img}) = _$_UsersState;
   _UsersState._() : super._();
 
   factory _UsersState.fromJson(Map<String, dynamic> json) =
@@ -280,11 +241,7 @@ abstract class _UsersState extends UsersState {
   @override
   List<dynamic> get friends;
   @override
-  String get target;
-  @override
   String get img;
-  @override
-  int get targetPrice;
   @override
   @JsonKey(ignore: true)
   _$$_UsersStateCopyWith<_$_UsersState> get copyWith =>
