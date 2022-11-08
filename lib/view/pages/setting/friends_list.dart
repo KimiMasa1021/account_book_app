@@ -10,7 +10,6 @@ class FriendsList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final friendsListState = ref.watch(friendsListControllerProvider);
-    debugPrint(friendsListState.toString());
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(

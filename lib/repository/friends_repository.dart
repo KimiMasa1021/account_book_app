@@ -11,6 +11,9 @@ final friendsListRepositoryProvider =
 
 abstract class FriendsListRepository {
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachFriends();
+  Future<List<UsersState>> feachTargetsFriends(
+    List<String> friends,
+  );
 }
 
 class FriendsListRepositoryImple implements FriendsListRepository {
@@ -35,5 +38,20 @@ class FriendsListRepositoryImple implements FriendsListRepository {
         );
 
     yield* stateRef.snapshots().map((doc) => doc.docs);
+  }
+
+  @override
+  Future<List<UsersState>> feachTargetsFriends(
+    List<String> friends,
+  ) async {
+    final stateRef = collectionReference!
+        .where('uid', whereIn: friends)
+        .withConverter<UsersState>(
+          fromFirestore: (snapshot, _) => UsersState.fromJson(snapshot.data()!),
+          toFirestore: (data, _) => data.toJson(),
+        );
+    final querySnap = await stateRef.get();
+    final result = querySnap.docs.map((e) => e.data()).toList();
+    return result;
   }
 }

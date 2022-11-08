@@ -21,7 +21,7 @@ TargetState _$TargetStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TargetState {
   String get groupName => throw _privateConstructorUsedError;
-  List<dynamic> get members => throw _privateConstructorUsedError;
+  List<String> get members => throw _privateConstructorUsedError;
   String get target => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   int get targetPrice => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $TargetStateCopyWith<$Res> {
   @useResult
   $Res call(
       {String groupName,
-      List<dynamic> members,
+      List<String> members,
       String target,
       String id,
       int targetPrice});
@@ -73,7 +73,7 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
       members: null == members
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$_TargetStateCopyWith<$Res>
   @useResult
   $Res call(
       {String groupName,
-      List<dynamic> members,
+      List<String> members,
       String target,
       String id,
       int targetPrice});
@@ -131,7 +131,7 @@ class __$$_TargetStateCopyWithImpl<$Res>
       members: null == members
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -153,7 +153,7 @@ class __$$_TargetStateCopyWithImpl<$Res>
 class _$_TargetState extends _TargetState {
   _$_TargetState(
       {this.groupName = "",
-      final List<dynamic> members = const [],
+      final List<String> members = const [],
       this.target = "",
       this.id = "",
       this.targetPrice = 0})
@@ -166,10 +166,10 @@ class _$_TargetState extends _TargetState {
   @override
   @JsonKey()
   final String groupName;
-  final List<dynamic> _members;
+  final List<String> _members;
   @override
   @JsonKey()
-  List<dynamic> get members {
+  List<String> get members {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_members);
   }
@@ -225,7 +225,7 @@ class _$_TargetState extends _TargetState {
 abstract class _TargetState extends TargetState {
   factory _TargetState(
       {final String groupName,
-      final List<dynamic> members,
+      final List<String> members,
       final String target,
       final String id,
       final int targetPrice}) = _$_TargetState;
@@ -237,7 +237,7 @@ abstract class _TargetState extends TargetState {
   @override
   String get groupName;
   @override
-  List<dynamic> get members;
+  List<String> get members;
   @override
   String get target;
   @override

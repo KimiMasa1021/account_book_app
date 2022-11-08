@@ -8,7 +8,7 @@ class TargetState with _$TargetState {
   const TargetState._();
   factory TargetState({
     @Default("") String groupName,
-    @Default([]) List members,
+    @Default([]) List<String> members,
     @Default("") String target,
     @Default("") String id,
     @Default(0) int targetPrice,
