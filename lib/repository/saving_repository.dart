@@ -90,6 +90,7 @@ class SavingRepoositoryImple implements SavingRepository {
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving() async* {
     final stateRef = collectionReference!
         .where('members', arrayContains: user!.uid)
+        .orderBy('registeTime', descending: false)
         .withConverter<TargetState>(
           fromFirestore: (snapshot, _) =>
               TargetState.fromJson(snapshot.data()!),

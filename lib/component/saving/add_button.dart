@@ -52,7 +52,6 @@ class MemberButton extends HookConsumerWidget {
         : InkWell(
             onTap: () {
               flg.value = true;
-
               memberListsCNT.state = [...memberLists, state];
             },
             child: Container(

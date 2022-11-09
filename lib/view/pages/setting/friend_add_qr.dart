@@ -22,18 +22,27 @@ class FriendAddQr extends HookConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black,
-              width: 1,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 5,
+                ),
+              ),
+              width: double.infinity,
+              child: QrImage(
+                data: usersState!.uid.toString(),
+                version: QrVersions.auto,
+              ),
             ),
-          ),
-          width: double.infinity,
-          child: QrImage(
-            data: usersState!.uid.toString(),
-            version: QrVersions.auto,
-          ),
+            Text(
+              "※  同じアプリ同士で読み込みしてください。",
+              style: TextStyle(fontSize: 22),
+            ),
+          ],
         ),
       ),
     );

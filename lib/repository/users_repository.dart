@@ -42,13 +42,22 @@ class GenreRepositoryImple implements UsersRepository {
 
   @override
   Future<UsersState?> searchUser(String uid) async {
-    final docSnapshot = collectionReference!.doc(uid).withConverter<UsersState>(
-          fromFirestore: (snapshot, _) => UsersState.fromJson(snapshot.data()!),
-          toFirestore: (data, _) => data.toJson(),
-        );
-    final docSnap = await docSnapshot.get();
-    final result = docSnap.data();
-    return result;
+    try {
+      if (uid.contains("//")) {
+        return null;
+      }
+      final docSnapshot =
+          collectionReference!.doc(uid).withConverter<UsersState>(
+                fromFirestore: (snapshot, _) =>
+                    UsersState.fromJson(snapshot.data()!),
+                toFirestore: (data, _) => data.toJson(),
+              );
+      final docSnap = await docSnapshot.get();
+      final result = docSnap.data();
+      return result;
+    } on FirebaseAuthException catch (e) {
+      return null;
+    }
   }
 
   @override

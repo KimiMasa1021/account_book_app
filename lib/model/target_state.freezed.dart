@@ -20,6 +20,8 @@ TargetState _$TargetStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TargetState {
+  @TimestampConverter()
+  DateTime get registeTime => throw _privateConstructorUsedError;
   String get groupName => throw _privateConstructorUsedError;
   List<String> get members => throw _privateConstructorUsedError;
   String get target => throw _privateConstructorUsedError;
@@ -39,7 +41,8 @@ abstract class $TargetStateCopyWith<$Res> {
       _$TargetStateCopyWithImpl<$Res, TargetState>;
   @useResult
   $Res call(
-      {String groupName,
+      {@TimestampConverter() DateTime registeTime,
+      String groupName,
       List<String> members,
       String target,
       String id,
@@ -59,6 +62,7 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? registeTime = null,
     Object? groupName = null,
     Object? members = null,
     Object? target = null,
@@ -66,6 +70,10 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
     Object? targetPrice = null,
   }) {
     return _then(_value.copyWith(
+      registeTime: null == registeTime
+          ? _value.registeTime
+          : registeTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       groupName: null == groupName
           ? _value.groupName
           : groupName // ignore: cast_nullable_to_non_nullable
@@ -99,7 +107,8 @@ abstract class _$$_TargetStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String groupName,
+      {@TimestampConverter() DateTime registeTime,
+      String groupName,
       List<String> members,
       String target,
       String id,
@@ -117,6 +126,7 @@ class __$$_TargetStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? registeTime = null,
     Object? groupName = null,
     Object? members = null,
     Object? target = null,
@@ -124,6 +134,10 @@ class __$$_TargetStateCopyWithImpl<$Res>
     Object? targetPrice = null,
   }) {
     return _then(_$_TargetState(
+      registeTime: null == registeTime
+          ? _value.registeTime
+          : registeTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       groupName: null == groupName
           ? _value.groupName
           : groupName // ignore: cast_nullable_to_non_nullable
@@ -152,7 +166,8 @@ class __$$_TargetStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TargetState extends _TargetState {
   _$_TargetState(
-      {this.groupName = "",
+      {@TimestampConverter() required this.registeTime,
+      this.groupName = "",
       final List<String> members = const [],
       this.target = "",
       this.id = "",
@@ -163,6 +178,9 @@ class _$_TargetState extends _TargetState {
   factory _$_TargetState.fromJson(Map<String, dynamic> json) =>
       _$$_TargetStateFromJson(json);
 
+  @override
+  @TimestampConverter()
+  final DateTime registeTime;
   @override
   @JsonKey()
   final String groupName;
@@ -186,7 +204,7 @@ class _$_TargetState extends _TargetState {
 
   @override
   String toString() {
-    return 'TargetState(groupName: $groupName, members: $members, target: $target, id: $id, targetPrice: $targetPrice)';
+    return 'TargetState(registeTime: $registeTime, groupName: $groupName, members: $members, target: $target, id: $id, targetPrice: $targetPrice)';
   }
 
   @override
@@ -194,6 +212,8 @@ class _$_TargetState extends _TargetState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TargetState &&
+            (identical(other.registeTime, registeTime) ||
+                other.registeTime == registeTime) &&
             (identical(other.groupName, groupName) ||
                 other.groupName == groupName) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
@@ -205,7 +225,7 @@ class _$_TargetState extends _TargetState {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, groupName,
+  int get hashCode => Object.hash(runtimeType, registeTime, groupName,
       const DeepCollectionEquality().hash(_members), target, id, targetPrice);
 
   @JsonKey(ignore: true)
@@ -224,7 +244,8 @@ class _$_TargetState extends _TargetState {
 
 abstract class _TargetState extends TargetState {
   factory _TargetState(
-      {final String groupName,
+      {@TimestampConverter() required final DateTime registeTime,
+      final String groupName,
       final List<String> members,
       final String target,
       final String id,
@@ -234,6 +255,9 @@ abstract class _TargetState extends TargetState {
   factory _TargetState.fromJson(Map<String, dynamic> json) =
       _$_TargetState.fromJson;
 
+  @override
+  @TimestampConverter()
+  DateTime get registeTime;
   @override
   String get groupName;
   @override

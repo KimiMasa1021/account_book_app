@@ -132,9 +132,10 @@ class UsersController extends StateNotifier<UsersState> {
     return File(croppedFile.path);
   }
 
-  Future<void> updateImage(File image) async {
+  Future<void> updateImage(File image, Function() function) async {
     final url = await ref.read(usersRepositoryProvider).uploadImage(image);
     await ref.read(usersRepositoryProvider).saveImageUrl(url);
+    function();
   }
 
   Future<void> reName(String newName) async {

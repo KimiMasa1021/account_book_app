@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../component/saving/add_button.dart';
+import '../../../model/users_state.dart';
 import '../../../provider/general_provider.dart';
 
-class SavingMemberAdd extends HookConsumerWidget {
-  const SavingMemberAdd({super.key});
-  static String id = "saving_member_add";
+class SavingMemberAdd2 extends HookConsumerWidget {
+  const SavingMemberAdd2({super.key});
+  static String id = "saving_member_add2";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final friendsListState = ref.watch(friendsListControllerProvider);
+    final args = ModalRoute.of(context)!.settings.arguments as List<UsersState>;
+    final list = friendsListState.where((e) => !args.contains(e)).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -21,7 +24,7 @@ class SavingMemberAdd extends HookConsumerWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: friendsListState.length,
+                itemCount: list.length,
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
@@ -48,10 +51,9 @@ class SavingMemberAdd extends HookConsumerWidget {
                           decoration: BoxDecoration(
                             color: Colors.grey,
                             shape: BoxShape.circle,
-                            image: friendsListState[index].img != ""
+                            image: list[index].img != ""
                                 ? DecorationImage(
-                                    image: NetworkImage(
-                                        friendsListState[index].img),
+                                    image: NetworkImage(list[index].img),
                                   )
                                 : const DecorationImage(
                                     fit: BoxFit.fill,
@@ -65,7 +67,7 @@ class SavingMemberAdd extends HookConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                friendsListState[index].name,
+                                list[index].name,
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -73,14 +75,14 @@ class SavingMemberAdd extends HookConsumerWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                friendsListState[index].email,
+                                list[index].email,
                                 overflow: TextOverflow.ellipsis,
                               )
                             ],
                           ),
                         ),
                         MemberButton(
-                          state: friendsListState[index],
+                          state: list[index],
                         ),
                       ],
                     ),

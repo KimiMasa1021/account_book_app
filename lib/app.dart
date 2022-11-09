@@ -1,4 +1,5 @@
 import 'package:account_book_app/view/pages/saving/saving_init.dart';
+import 'package:account_book_app/view/pages/saving/saving_member_add_2.dart';
 import 'package:account_book_app/view/pages/setting/friend_add_scan.dart';
 import 'package:account_book_app/view/pages/setting/friends_list.dart';
 import 'package:account_book_app/view/pages/setting/profile_page.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         ProfilePage.id: (BuildContext context) => const ProfilePage(),
         SavingMemberAdd.id: (BuildContext context) => const SavingMemberAdd(),
         SavingInit.id: (BuildContext context) => const SavingInit(),
+        SavingMemberAdd2.id: (BuildContext context) => const SavingMemberAdd2(),
       },
     );
   }
