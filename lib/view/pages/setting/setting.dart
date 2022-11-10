@@ -165,13 +165,13 @@ class Setting extends HookConsumerWidget {
                         Navigator.pushNamed(context, FriendAddScan.id);
                       },
                     ),
-                    SettingTile(
-                      icon: Icons.palette_outlined,
-                      title: "テーマカラーの変更",
-                      function: () {
-                        Navigator.pushNamed(context, FriendsList.id);
-                      },
-                    ),
+                    // SettingTile(
+                    //   icon: Icons.palette_outlined,
+                    //   title: "テーマカラーの変更",
+                    //   function: () {
+                    //     Navigator.pushNamed(context, FriendsList.id);
+                    //   },
+                    // ),
                     SettingTile(
                       icon: Icons.reviews_outlined,
                       title: "アプリのレビュー",
