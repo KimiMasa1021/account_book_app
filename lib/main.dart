@@ -14,7 +14,7 @@ Future<void> main() async {
   );
 }
 
-//  targetStateからの脱退
+//  targetStateからの脱退・追加
 //  家計簿円グラフの配色の設定
 //  家計簿ジャンルをjsonファイルに保存する
 //  
