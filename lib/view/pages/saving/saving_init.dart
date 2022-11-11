@@ -24,6 +24,19 @@ class SavingInit extends HookConsumerWidget {
     final userState = ref.watch(usersControllerProvider);
     final memberLists = ref.watch(memberListProvider);
     final savingState = ref.watch(savingControllerProvider);
+    Future<void> function(Function() function) async {
+      final list = [...memberLists, userState!];
+      await savingController.initTarget(
+        targetController.text,
+        targetPriceController.text,
+        groupNameController.text,
+        list,
+      );
+      if (savingState.isNotEmpty) {
+        function();
+      }
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -132,16 +145,9 @@ class SavingInit extends HookConsumerWidget {
                       children: [
                         InkWell(
                           onTap: () async {
-                            final list = [...memberLists, userState];
-                            await savingController.initTarget(
-                              targetController.text,
-                              targetPriceController.text,
-                              groupNameController.text,
-                              list,
+                            await function(
+                              () => Navigator.pop(context),
                             );
-                            if (savingState.isNotEmpty) {
-                              Navigator.pop(context);
-                            }
                           },
                           child: Container(
                             width: 200,

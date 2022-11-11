@@ -50,6 +50,7 @@ class SavingRepoositoryImple implements SavingRepository {
           'registeTime': DateTime.now(),
         },
       );
+
       await collectionReference!.doc(fff.id).set(
         {
           'id': fff.id,

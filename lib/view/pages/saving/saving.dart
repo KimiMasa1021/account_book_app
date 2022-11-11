@@ -11,7 +11,7 @@ class Saving extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savingState = ref.watch(savingControllerProvider);
-    if (savingState.isNotEmpty) {
+    if (savingState.isNotEmpty && savingState.last.id != "") {
       return const SavingData();
     } else {
       return const SavingInit();
