@@ -6,15 +6,13 @@ import '../../provider/general_provider.dart';
 import '../../view/pages/saving/saving_init.dart';
 
 class TargetBar extends HookConsumerWidget {
-  const TargetBar({
-    super.key,
-    required this.selectedSaving,
-  });
-  final ValueNotifier<int> selectedSaving;
+  const TargetBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savingState = ref.watch(savingControllerProvider);
+    final selectedSaving = ref.watch(selectedSavingProvider);
+    final selectedSavingCTL = ref.watch(selectedSavingProvider.notifier);
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -25,7 +23,7 @@ class TargetBar extends HookConsumerWidget {
             (index) {
               return InkWell(
                 onTap: () {
-                  selectedSaving.value = index;
+                  selectedSavingCTL.state = index;
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -34,9 +32,8 @@ class TargetBar extends HookConsumerWidget {
                   ),
                   margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
-                    color: index == selectedSaving.value
-                        ? Colors.black
-                        : Colors.white,
+                    color:
+                        index == selectedSaving ? Colors.black : Colors.white,
                     borderRadius: BorderRadius.circular(200),
                     border: Border.all(
                       width: 3,
@@ -46,10 +43,10 @@ class TargetBar extends HookConsumerWidget {
                     child: Text(
                       savingState[index].groupName,
                       style: TextStyle(
-                        color: index == selectedSaving.value
+                        color: index == selectedSaving
                             ? Colors.white
                             : Colors.black,
-                        fontWeight: index == selectedSaving.value
+                        fontWeight: index == selectedSaving
                             ? FontWeight.bold
                             : FontWeight.normal,
                       ),

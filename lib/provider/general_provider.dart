@@ -24,6 +24,7 @@ final authSwitcherPriovider = StateProvider<Pages>((ref) => Pages.top);
 final pageTypeProvider = StateProvider<PageType>((ref) => PageType.account);
 
 final incomeExpendSwicherProvider = StateProvider<bool>((ref) => true);
+final selectedSavingProvider = StateProvider<int>((ref) => 0);
 final memberListProvider =
     StateProvider.autoDispose<List<UsersState>>((ref) => []);
 final usersControllerProvider =

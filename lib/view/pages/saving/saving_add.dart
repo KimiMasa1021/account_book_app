@@ -78,7 +78,7 @@ class SavingAdd extends HookConsumerWidget {
                       priceController.text,
                       memoController.text,
                       id,
-                      usersState!.uid,
+                      usersState!.name,
                     );
                     Navigator.pop(context);
                   }

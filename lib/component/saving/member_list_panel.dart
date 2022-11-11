@@ -6,19 +6,16 @@ import '../../repository/friends_repository.dart';
 import '../../view/pages/saving/saving_member_add.dart';
 
 class MemberListPanel extends HookConsumerWidget {
-  const MemberListPanel({
-    super.key,
-    required this.selectedSaving,
-  });
-  final ValueNotifier<int> selectedSaving;
+  const MemberListPanel({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savingState = ref.watch(savingControllerProvider);
+    final selectedSaving = ref.watch(selectedSavingProvider);
 
     return FutureBuilder(
       future: ref
           .watch(friendsListRepositoryProvider)
-          .feachTargetsFriends(savingState[selectedSaving.value].members),
+          .feachTargetsFriends(savingState[selectedSaving].members),
       builder: (context, friend) {
         if (!friend.hasData) {
           return SizedBox();

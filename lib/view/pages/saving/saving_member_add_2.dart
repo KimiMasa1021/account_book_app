@@ -81,8 +81,9 @@ class SavingMemberAdd2 extends HookConsumerWidget {
                             ],
                           ),
                         ),
-                        MemberButton(
-                          state: list[index],
+                        Checkbox(
+                          value: true,
+                          onChanged: (val) {},
                         ),
                       ],
                     ),

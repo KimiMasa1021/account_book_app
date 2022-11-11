@@ -39,7 +39,7 @@ class SavingData extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final savingState = ref.watch(savingControllerProvider);
-    final selectedSaving = useState(0);
+    final selectedSaving = ref.watch(selectedSavingProvider);
     final _controller =
         ConfettiController(duration: const Duration(seconds: 1000));
     _controller.play();
@@ -54,10 +54,10 @@ class SavingData extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                TargetBar(selectedSaving: selectedSaving),
+                TargetBar(),
                 StreamBuilder(
                   stream: ref.read(savingRepositoryProvider).feachList(
-                        savingState[selectedSaving.value].id,
+                        savingState[selectedSaving].id,
                       ),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
@@ -72,7 +72,7 @@ class SavingData extends HookConsumerWidget {
                               .reduce((value, element) => value + element)
                           : 0;
                       final targetPrice =
-                          savingState[selectedSaving.value].targetPrice;
+                          savingState[selectedSaving].targetPrice;
                       final priceParsent = (savingPrice / targetPrice * 100);
                       final List<int> savingChartList = state.isNotEmpty
                           ? increaseRate(
@@ -85,21 +85,18 @@ class SavingData extends HookConsumerWidget {
                             children: [
                               TargetCard(
                                 title: '目標',
-                                subTitle:
-                                    savingState[selectedSaving.value].target,
+                                subTitle: savingState[selectedSaving].target,
                               ),
                               DataCard(
                                   title: '目標金額',
                                   subTitle: NumberFormat("#,###").format(
-                                      savingState[selectedSaving.value]
-                                          .targetPrice)),
+                                      savingState[selectedSaving].targetPrice)),
                               AddButton(
                                 title: "節約記録を追加",
                                 function: () {
                                   Navigator.of(context).pushNamed(
                                     SavingAdd.id,
-                                    arguments:
-                                        savingState[selectedSaving.value].id,
+                                    arguments: savingState[selectedSaving].id,
                                   );
                                 },
                               ),
@@ -128,7 +125,7 @@ class SavingData extends HookConsumerWidget {
                               PriceChart(
                                 savingChartList: savingChartList,
                               ),
-                              MemberListPanel(selectedSaving: selectedSaving),
+                              MemberListPanel(),
                               const SizedBox(height: 80),
                             ],
                           ),

@@ -47,6 +47,7 @@ class SavingRepoositoryImple implements SavingRepository {
           'targetPrice': targetPrice,
           'groupName': groupName,
           'members': membersList,
+          'registeTime': DateTime.now(),
         },
       );
       await collectionReference!.doc(fff.id).set(
