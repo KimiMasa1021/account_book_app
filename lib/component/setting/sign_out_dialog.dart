@@ -26,40 +26,74 @@ class SignOutDaialog extends HookConsumerWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                const Text(
-                  "ログアウトしますか？",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                InkWell(
-                  onTap: () async {
-                    await authController.signOut();
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    height: 60,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        width: 3,
-                        color: Colors.black,
-                      ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 10),
+                  const Text(
+                    "ログアウトしますか？",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: Center(
-                      child: Text(
-                        "ログアウト",
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () async {
+                      await authController.signOut(
+                        () => Navigator.pop(context),
+                      );
+                    },
+                    child: Container(
+                      height: 60,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          width: 3,
+                          color: Colors.black,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "ログアウト",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 10),
+                  InkWell(
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 60,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "キャンセル",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
             ),
           ],
         ),

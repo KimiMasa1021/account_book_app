@@ -3,9 +3,6 @@ import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-
-import '../../../component/saving/add_member_argment.dart';
 import '../../../component/saving/input_target_field.dart';
 import '../../../constant/price_formatter.dart';
 import 'saving_member_add.dart';
@@ -102,7 +99,7 @@ class SavingInit extends HookConsumerWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               "メンバー",
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -115,7 +112,7 @@ class SavingInit extends HookConsumerWidget {
                                 Navigator.pushNamed(
                                     context, SavingMemberAdd.id);
                               },
-                              child: Text(
+                              child: const Text(
                                 "編集する",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -139,7 +136,7 @@ class SavingInit extends HookConsumerWidget {
                         )
                       ],
                     ),
-                    SizedBox(height: 18),
+                    const SizedBox(height: 18),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

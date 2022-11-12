@@ -1,7 +1,7 @@
+import 'package:account_book_app/component/saving/friend_check_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../component/saving/add_button.dart';
 import '../../../model/users_state.dart';
 import '../../../provider/general_provider.dart';
 
@@ -14,10 +14,39 @@ class SavingMemberAdd2 extends HookConsumerWidget {
     final friendsListState = ref.watch(friendsListControllerProvider);
     final args = ModalRoute.of(context)!.settings.arguments as List<UsersState>;
     final list = friendsListState.where((e) => !args.contains(e)).toList();
+    final ValueNotifier<List<String>> friendList = useState([]);
+    final selectedSaving = ref.watch(selectedSavingProvider);
+    final savingState = ref.watch(savingControllerProvider);
+    final savingCTL = ref.watch(savingControllerProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("フレンドを選択してください"),
+        actions: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () async {
+                  await savingCTL.addMember(
+                    savingState[selectedSaving].id,
+                    friendList.value,
+                    savingState[selectedSaving].members,
+                    () => Navigator.pop(context),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    "追加する",
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -81,10 +110,10 @@ class SavingMemberAdd2 extends HookConsumerWidget {
                             ],
                           ),
                         ),
-                        Checkbox(
-                          value: true,
-                          onChanged: (val) {},
-                        ),
+                        FriendCheckBox(
+                          friendList: friendList,
+                          uid: list[index].uid,
+                        )
                       ],
                     ),
                   );

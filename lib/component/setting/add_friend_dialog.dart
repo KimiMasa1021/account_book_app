@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
-import '../../view/pages/setting/friend_add_qr.dart';
-import '../../view/pages/setting/friend_add_scan.dart';
 
 class AddFriendDialog extends StatelessWidget {
   const AddFriendDialog({

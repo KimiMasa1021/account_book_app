@@ -3,7 +3,6 @@ import 'package:account_book_app/repository/saving_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../model/saving_state.dart';
 import '../model/users_state.dart';
 
 class SavingController extends StateNotifier<List<TargetState>> {
@@ -30,13 +29,8 @@ class SavingController extends StateNotifier<List<TargetState>> {
         );
   }
 
-  Future<void> addSaving(
-    DateTime registedTime,
-    String price,
-    String memo,
-    String uid,
-    String member,
-  ) async {
+  Future<void> addSaving(DateTime registedTime, String price, String memo,
+      String uid, String member, Function() function) async {
     final formatPrice = int.parse(price.replaceAll(",", ""));
     await ref.read(savingRepositoryProvider).addSaving(
           registedTime,
@@ -45,6 +39,7 @@ class SavingController extends StateNotifier<List<TargetState>> {
           uid,
           member,
         );
+    function();
   }
 
   void showToast(String msg) {
@@ -76,5 +71,24 @@ class SavingController extends StateNotifier<List<TargetState>> {
     }
 
     return picked;
+  }
+
+  Future<void> addMember(
+    String docId,
+    List<String> newList,
+    List<String> oldList,
+    Function() function,
+  ) async {
+    await ref.read(savingRepositoryProvider).addMember(docId, newList, oldList);
+    function();
+  }
+
+  Future<void> seceesion(
+    String docId,
+    List<String> list,
+    Function() function,
+  ) async {
+    await ref.read(savingRepositoryProvider).seceesion(docId, list);
+    function();
   }
 }

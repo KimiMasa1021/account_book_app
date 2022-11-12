@@ -15,7 +15,7 @@ class DailyPage extends HookConsumerWidget {
           locale: 'ja',
           shouldFillViewport: true,
           firstDay: DateTime.utc(2010, 10, 16),
-          lastDay: DateTime.utc(2030, 3, 14),
+          lastDay: DateTime.utc(3000, 1, 1),
           focusedDay: setDate.value,
           daysOfWeekHeight: 40,
           availableCalendarFormats: const {CalendarFormat.month: 'Month'},

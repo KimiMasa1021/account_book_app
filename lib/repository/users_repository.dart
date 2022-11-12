@@ -55,7 +55,7 @@ class GenreRepositoryImple implements UsersRepository {
       final docSnap = await docSnapshot.get();
       final result = docSnap.data();
       return result;
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       return null;
     }
   }

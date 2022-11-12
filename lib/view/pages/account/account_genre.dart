@@ -10,9 +10,7 @@ class AccountGenre extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-    final usersState = ref.watch(usersControllerProvider);
     final expendState = ref.watch(expendControllerProvider);
-    final incomeState = ref.watch(incomeControllerProvider);
     final expendController = ref.watch(expendControllerProvider.notifier);
     final incomeController = ref.watch(incomeControllerProvider.notifier);
     return Scaffold(
@@ -62,7 +60,7 @@ class AccountGenre extends HookConsumerWidget {
             const SizedBox(height: 10),
             Expanded(
               child: ReorderableListView(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 onReorder: (int oldIndex, int newIndex) async {
                   if (oldIndex < newIndex) {
                     newIndex--;
@@ -111,7 +109,7 @@ class AccountGenre extends HookConsumerWidget {
                                   ? expendController.deleteExpend(state.docId)
                                   : incomeController.deleteIncome(state.docId);
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.delete_outline,
                               color: Colors.redAccent,
                             ),

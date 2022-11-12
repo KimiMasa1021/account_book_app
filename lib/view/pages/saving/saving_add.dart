@@ -79,8 +79,8 @@ class SavingAdd extends HookConsumerWidget {
                       memoController.text,
                       id,
                       usersState!.name,
+                      () => Navigator.pop(context),
                     );
-                    Navigator.pop(context);
                   }
                 },
                 child: Padding(

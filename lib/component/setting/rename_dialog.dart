@@ -75,9 +75,10 @@ class RenameDialog extends HookConsumerWidget {
                 newNameTextController.text != ""
                     ? InkWell(
                         onTap: () async {
-                          await userController
-                              .reName(newNameTextController.text);
-                          Navigator.pop(context);
+                          await userController.reName(
+                            newNameTextController.text,
+                            () => Navigator.pop(context),
+                          );
                         },
                         child: Container(
                           height: 60,

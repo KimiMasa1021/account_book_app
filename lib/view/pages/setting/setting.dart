@@ -2,8 +2,8 @@ import 'package:account_book_app/component/setting/edit_img_dialog.dart';
 import 'package:account_book_app/component/setting/rename_dialog.dart';
 import 'package:account_book_app/component/setting/sign_out_dialog.dart';
 import 'package:account_book_app/provider/general_provider.dart';
+import 'package:account_book_app/view/pages/setting/setting_web_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/setting/setting_tile.dart';
 import 'friend_add_scan.dart';
@@ -15,7 +15,6 @@ class Setting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
-    final loading = useState(false);
     return SafeArea(
       child: Stack(
         children: [
@@ -51,8 +50,8 @@ class Setting extends HookConsumerWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    const BoxShadow(
+                  boxShadow: const [
+                    BoxShadow(
                       offset: Offset(0, 4),
                       color: Color.fromARGB(255, 211, 211, 211),
                       blurRadius: 5,
@@ -181,9 +180,12 @@ class Setting extends HookConsumerWidget {
                     ),
                     SettingTile(
                       icon: Icons.energy_savings_leaf_rounded,
-                      title: "ご意見やご要望",
+                      title: "ご要望・不具合報告",
                       function: () {
-                        Navigator.pushNamed(context, FriendsList.id);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => SettingWebView())));
                       },
                     ),
                     SettingTile(

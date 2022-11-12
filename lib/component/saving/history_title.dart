@@ -66,7 +66,7 @@ class HistoryTile extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.person),
+                            const Icon(Icons.person),
                             Expanded(
                               child: Text(
                                 name,

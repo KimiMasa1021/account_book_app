@@ -62,6 +62,7 @@ dependencies:
   image_cropper: ^3.0.1
   wave: ^0.2.2
   confetti: ^0.7.0
+  webview_flutter: ^3.0.4
     
 dev_dependencies:
   flutter_test:

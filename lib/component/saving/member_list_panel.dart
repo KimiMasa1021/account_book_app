@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../provider/general_provider.dart';
 import '../../repository/friends_repository.dart';
-import '../../view/pages/saving/saving_member_add.dart';
 
 class MemberListPanel extends HookConsumerWidget {
   const MemberListPanel({super.key});
@@ -18,7 +17,7 @@ class MemberListPanel extends HookConsumerWidget {
           .feachTargetsFriends(savingState[selectedSaving].members),
       builder: (context, friend) {
         if (!friend.hasData) {
-          return SizedBox();
+          return const SizedBox();
         } else {
           return Container(
             margin: const EdgeInsets.only(top: 13, left: 5),
@@ -46,7 +45,7 @@ class MemberListPanel extends HookConsumerWidget {
                         color: Color.fromARGB(255, 88, 88, 88),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, SavingMemberAdd2.id,
@@ -97,7 +96,7 @@ class MemberListPanel extends HookConsumerWidget {
                             children: [
                               Text(
                                 friend.data![index].name,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),

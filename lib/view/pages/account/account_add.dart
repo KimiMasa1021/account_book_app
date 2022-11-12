@@ -102,8 +102,8 @@ class AccountAdd extends HookConsumerWidget {
                       genreController.text,
                       calculatedPrice,
                       memoController.text,
+                      () => Navigator.pushNamed(context, RootPage.id),
                     );
-                    Navigator.pushNamed(context, RootPage.id);
                   }
                 },
                 child: Padding(

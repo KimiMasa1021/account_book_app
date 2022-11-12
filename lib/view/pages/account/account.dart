@@ -12,7 +12,6 @@ class AccountPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final usersState = ref.watch(usersControllerProvider);
     final setDate = useState(DateTime.now());
     final expendState = ref.watch(expendControllerProvider);
     final incomeState = ref.watch(incomeControllerProvider);

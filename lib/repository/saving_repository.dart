@@ -18,6 +18,9 @@ abstract class SavingRepository {
       DateTime registedTime, int price, String memo, String uid, String member);
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving();
   Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(String uid);
+  Future<void> addMember(
+      String docId, List<String> newList, List<String> oldList);
+  Future<void> seceesion(String docId, List<String> list);
 }
 
 class SavingRepoositoryImple implements SavingRepository {
@@ -83,6 +86,42 @@ class SavingRepoositoryImple implements SavingRepository {
           .doc(uid)
           .collection("list");
       await collectionReference2?.add(savingState.toJson());
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> addMember(
+    String docId,
+    List<String> newList,
+    List<String> oldList,
+  ) async {
+    try {
+      collectionReference =
+          ref.read(firebaseFireStoreProvider).collection("saving");
+
+      await collectionReference?.doc(docId).update({
+        'members': [...oldList, ...newList],
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> seceesion(
+    String docId,
+    List<String> list,
+  ) async {
+    try {
+      collectionReference =
+          ref.read(firebaseFireStoreProvider).collection("saving");
+      final newList = list.where((e) => e != user!.uid).toList();
+
+      await collectionReference?.doc(docId).update({
+        'members': newList,
+      });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }

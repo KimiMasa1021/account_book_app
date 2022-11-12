@@ -25,7 +25,7 @@ class FriendAddScan extends HookConsumerWidget {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back,
             size: 30,
             color: Colors.black,
@@ -33,7 +33,7 @@ class FriendAddScan extends HookConsumerWidget {
         ),
       ),
       body: DefaultTabController(
-        animationDuration: Duration(microseconds: 0),
+        animationDuration: const Duration(microseconds: 0),
         length: 2,
         initialIndex: 0,
         child: SafeArea(
@@ -82,7 +82,7 @@ class FriendAddScan extends HookConsumerWidget {
               Container(
                 height: 120,
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -95,7 +95,7 @@ class FriendAddScan extends HookConsumerWidget {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+                  children: const [
                     Text(
                       "※同じアプリ同士で読み込みを行ってください。",
                       style: TextStyle(

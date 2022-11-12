@@ -66,8 +66,9 @@ class AuthController extends StateNotifier<User?> {
     }
   }
 
-  Future<void> signOut() async {
-    ref.read(authRepositoryProvider).signOut();
+  Future<void> signOut(Function() function) async {
+    await ref.read(authRepositoryProvider).signOut();
+    function();
   }
 
   void showToast(String flg) {

@@ -138,7 +138,8 @@ class UsersController extends StateNotifier<UsersState> {
     function();
   }
 
-  Future<void> reName(String newName) async {
+  Future<void> reName(String newName, Function() function) async {
     await ref.read(usersRepositoryProvider).reName(newName);
+    function();
   }
 }

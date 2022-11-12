@@ -1,10 +1,9 @@
 import 'package:account_book_app/component/saving/add_buttom.dart';
 import 'package:account_book_app/component/saving/member_list_panel.dart';
+import 'package:account_book_app/component/saving/secession_dialog.dart';
 import 'package:account_book_app/component/saving/target_bar.dart';
 import 'package:account_book_app/view/pages/saving/saving_history.dart';
-import 'package:account_book_app/view/pages/saving/saving_init.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart' show NumberFormat;
 import '../../../component/saving/achieve_rate.dart';
@@ -14,7 +13,6 @@ import '../../../component/saving/price_chart.dart';
 import '../../../component/saving/target_card.dart';
 import '../../../model/saving_state.dart';
 import '../../../provider/general_provider.dart';
-import '../../../repository/friends_repository.dart';
 import '../../../repository/saving_repository.dart';
 import 'saving_add.dart';
 import 'package:confetti/confetti.dart';
@@ -40,9 +38,9 @@ class SavingData extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final savingState = ref.watch(savingControllerProvider);
     final selectedSaving = ref.watch(selectedSavingProvider);
-    final _controller =
+    final controller =
         ConfettiController(duration: const Duration(seconds: 1000));
-    _controller.play();
+    controller.play();
 
     return SizedBox(
       height: size.height,
@@ -54,7 +52,7 @@ class SavingData extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                TargetBar(),
+                const TargetBar(),
                 StreamBuilder(
                   stream: ref.read(savingRepositoryProvider).feachList(
                         savingState[selectedSaving].id,
@@ -125,7 +123,50 @@ class SavingData extends HookConsumerWidget {
                               PriceChart(
                                 savingChartList: savingChartList,
                               ),
-                              MemberListPanel(),
+                              const MemberListPanel(),
+                              InkWell(
+                                onTap: () {
+                                  showDialog<void>(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return const SecessionDialog();
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.only(top: 13, left: 5),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(18)),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        offset: Offset(1, 1),
+                                        color: Colors.grey,
+                                        blurRadius: 3,
+                                      ),
+                                    ],
+                                  ),
+                                  height: 60,
+                                  width: double.infinity,
+                                  child: Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.logout_outlined,
+                                        size: 35,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "メンバーから抜ける",
+                                        style: TextStyle(fontSize: 20),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                               const SizedBox(height: 80),
                             ],
                           ),
@@ -133,10 +174,10 @@ class SavingData extends HookConsumerWidget {
                               ? Align(
                                   alignment: Alignment.topRight,
                                   child: ConfettiWidget(
-                                    confettiController: _controller,
+                                    confettiController: controller,
                                   ),
                                 )
-                              : SizedBox(),
+                              : const SizedBox(),
                         ],
                       );
                     }

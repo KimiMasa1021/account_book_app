@@ -18,7 +18,7 @@ class SavingHistory extends HookConsumerWidget {
     final selectedSaving = ref.watch(selectedSavingProvider);
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 233, 233, 233),
+      backgroundColor: const Color.fromARGB(255, 233, 233, 233),
       appBar: AppBar(
         title: const Text("節約履歴"),
         centerTitle: true,
@@ -29,7 +29,7 @@ class SavingHistory extends HookConsumerWidget {
             .feachTargetsFriends(savingState[selectedSaving].members),
         builder: (context, friend) {
           if (!friend.hasData) {
-            return SizedBox();
+            return const SizedBox();
           } else {
             return SafeArea(
               child: SizedBox(

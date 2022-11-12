@@ -34,18 +34,12 @@ class AchieveRate extends HookConsumerWidget {
           children: [
             WaveWidget(
               config: CustomConfig(
-                colors: [
-                  Color(0xFF00BBF9),
-                ],
-                durations: [
-                  4000,
-                ],
-                heightPercentages: [
-                  1 - (parsent / 100),
-                ],
+                colors: [const Color(0xFF00BBF9)],
+                durations: [4000],
+                heightPercentages: [1 - (parsent / 100)],
               ),
               backgroundColor: Colors.white,
-              size: Size(double.infinity, double.infinity),
+              size: const Size(double.infinity, double.infinity),
               waveAmplitude: 0,
             ),
             Align(
