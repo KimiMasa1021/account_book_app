@@ -1,3 +1,4 @@
+import 'package:account_book_app/model/genre.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'genre_state.freezed.dart';
@@ -8,9 +9,8 @@ part 'genre_state.g.dart';
 class GenreState with _$GenreState {
   const GenreState._();
   factory GenreState({
-    @Default("") String docId,
-    @Default("") String name,
-    @Default(0) int seq,
+    @Default([]) List<Genre> income,
+    @Default([]) List<Genre> expend,
   }) = _GenreState;
 
   factory GenreState.fromJson(Map<String, dynamic> json) =>

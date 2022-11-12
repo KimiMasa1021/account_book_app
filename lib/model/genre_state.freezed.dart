@@ -20,9 +20,8 @@ GenreState _$GenreStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GenreState {
-  String get docId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  int get seq => throw _privateConstructorUsedError;
+  List<Genre> get income => throw _privateConstructorUsedError;
+  List<Genre> get expend => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +35,7 @@ abstract class $GenreStateCopyWith<$Res> {
           GenreState value, $Res Function(GenreState) then) =
       _$GenreStateCopyWithImpl<$Res, GenreState>;
   @useResult
-  $Res call({String docId, String name, int seq});
+  $Res call({List<Genre> income, List<Genre> expend});
 }
 
 /// @nodoc
@@ -52,23 +51,18 @@ class _$GenreStateCopyWithImpl<$Res, $Val extends GenreState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? docId = null,
-    Object? name = null,
-    Object? seq = null,
+    Object? income = null,
+    Object? expend = null,
   }) {
     return _then(_value.copyWith(
-      docId: null == docId
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      seq: null == seq
-          ? _value.seq
-          : seq // ignore: cast_nullable_to_non_nullable
-              as int,
+      income: null == income
+          ? _value.income
+          : income // ignore: cast_nullable_to_non_nullable
+              as List<Genre>,
+      expend: null == expend
+          ? _value.expend
+          : expend // ignore: cast_nullable_to_non_nullable
+              as List<Genre>,
     ) as $Val);
   }
 }
@@ -81,7 +75,7 @@ abstract class _$$_GenreStateCopyWith<$Res>
       __$$_GenreStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String docId, String name, int seq});
+  $Res call({List<Genre> income, List<Genre> expend});
 }
 
 /// @nodoc
@@ -95,23 +89,18 @@ class __$$_GenreStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? docId = null,
-    Object? name = null,
-    Object? seq = null,
+    Object? income = null,
+    Object? expend = null,
   }) {
     return _then(_$_GenreState(
-      docId: null == docId
-          ? _value.docId
-          : docId // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      seq: null == seq
-          ? _value.seq
-          : seq // ignore: cast_nullable_to_non_nullable
-              as int,
+      income: null == income
+          ? _value._income
+          : income // ignore: cast_nullable_to_non_nullable
+              as List<Genre>,
+      expend: null == expend
+          ? _value._expend
+          : expend // ignore: cast_nullable_to_non_nullable
+              as List<Genre>,
     ));
   }
 }
@@ -119,24 +108,35 @@ class __$$_GenreStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_GenreState extends _GenreState {
-  _$_GenreState({this.docId = "", this.name = "", this.seq = 0}) : super._();
+  _$_GenreState(
+      {final List<Genre> income = const [],
+      final List<Genre> expend = const []})
+      : _income = income,
+        _expend = expend,
+        super._();
 
   factory _$_GenreState.fromJson(Map<String, dynamic> json) =>
       _$$_GenreStateFromJson(json);
 
+  final List<Genre> _income;
   @override
   @JsonKey()
-  final String docId;
+  List<Genre> get income {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_income);
+  }
+
+  final List<Genre> _expend;
   @override
   @JsonKey()
-  final String name;
-  @override
-  @JsonKey()
-  final int seq;
+  List<Genre> get expend {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_expend);
+  }
 
   @override
   String toString() {
-    return 'GenreState(docId: $docId, name: $name, seq: $seq)';
+    return 'GenreState(income: $income, expend: $expend)';
   }
 
   @override
@@ -144,14 +144,16 @@ class _$_GenreState extends _GenreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GenreState &&
-            (identical(other.docId, docId) || other.docId == docId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.seq, seq) || other.seq == seq));
+            const DeepCollectionEquality().equals(other._income, _income) &&
+            const DeepCollectionEquality().equals(other._expend, _expend));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, docId, name, seq);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_income),
+      const DeepCollectionEquality().hash(_expend));
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +170,7 @@ class _$_GenreState extends _GenreState {
 }
 
 abstract class _GenreState extends GenreState {
-  factory _GenreState({final String docId, final String name, final int seq}) =
+  factory _GenreState({final List<Genre> income, final List<Genre> expend}) =
       _$_GenreState;
   _GenreState._() : super._();
 
@@ -176,11 +178,9 @@ abstract class _GenreState extends GenreState {
       _$_GenreState.fromJson;
 
   @override
-  String get docId;
+  List<Genre> get income;
   @override
-  String get name;
-  @override
-  int get seq;
+  List<Genre> get expend;
   @override
   @JsonKey(ignore: true)
   _$$_GenreStateCopyWith<_$_GenreState> get copyWith =>

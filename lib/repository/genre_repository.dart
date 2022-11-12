@@ -1,94 +1,78 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'package:account_book_app/model/genre.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../model/genre_state.dart';
 import '../provider/firebase_auth_provider.dart';
-import '../provider/firebase_firestore_provider.dart';
+import '../provider/general_provider.dart';
 
-final GenreRepositoryProvider = Provider((ref) => GenreRepositoryImple(ref));
+final genreRepositoryProvider = Provider((ref) => GenreRepositoryImple(ref));
 
 abstract class GenreRepository {
-  Stream<List<QueryDocumentSnapshot<GenreState>>> fetchIncome();
-  Stream<List<QueryDocumentSnapshot<GenreState>>> fetchExpend();
   Future<void> deleteIncome(String docId);
   Future<void> deleteExpend(String docId);
-  Future<void> updateSeq(GenreState newState, GenreState oldState);
+  Future<GenreState> loadJsonAsset();
+  Future<void> addGenre(String text, bool flg);
 }
 
 class GenreRepositoryImple implements GenreRepository {
   final Ref ref;
-  CollectionReference? incomeCollectionReference;
-  CollectionReference? expendCollectionReference;
+  final String path = "assets/json/genre.json";
   User? user;
 
   GenreRepositoryImple(this.ref) {
     user = ref.read(firebaseAuthProvider).currentUser;
-    incomeCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user!.uid)
-        .collection("income");
-    expendCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user!.uid)
-        .collection("expend");
-  }
-  @override
-  Stream<List<QueryDocumentSnapshot<GenreState>>> fetchIncome() async* {
-    final stateRef = incomeCollectionReference!
-        .orderBy("seq")
-        .withConverter<GenreState>(
-          fromFirestore: (snapshot, _) => GenreState.fromJson(snapshot.data()!),
-          toFirestore: (data, _) => data.toJson(),
-        );
-
-    yield* stateRef.snapshots().map((doc) => doc.docs);
-  }
-
-  @override
-  Stream<List<QueryDocumentSnapshot<GenreState>>> fetchExpend() async* {
-    final stateRef = expendCollectionReference!
-        .orderBy("seq")
-        .withConverter<GenreState>(
-          fromFirestore: (snapshot, _) => GenreState.fromJson(snapshot.data()!),
-          toFirestore: (data, _) => data.toJson(),
-        );
-
-    yield* stateRef.snapshots().map((doc) => doc.docs);
   }
 
   @override
   Future<void> deleteIncome(String docId) async {
-    try {
-      await incomeCollectionReference!.doc(docId).delete();
-    } on FirebaseAuthException catch (e) {
+    try {} on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
   }
 
   @override
   Future<void> deleteExpend(String docId) async {
-    try {
-      await expendCollectionReference!.doc(docId).delete();
-    } on FirebaseAuthException catch (e) {
+    try {} on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
   }
 
   @override
-  Future<void> updateSeq(GenreState newState, GenreState oldState) async {
-    try {
-      await expendCollectionReference!
-          .doc(newState.docId)
-          .update({'seq': oldState.seq});
-      await expendCollectionReference!
-          .doc(oldState.docId)
-          .update({'seq': newState.seq});
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
+  Future<GenreState> loadJsonAsset() async {
+    String loadData = await rootBundle.loadString(path);
+
+    final model =
+        GenreState.fromJson(jsonDecode(loadData) as Map<String, dynamic>);
+    return model;
+  }
+
+  @override
+  Future<void> addGenre(String text, bool flg) async {
+    final genre = ref.read(genreControllerProvider);
+    final jsonFile = File(path);
+    String loadData = await rootBundle.loadString(path);
+
+    // final json = jsonDecode(genre.toString());
+    final json = jsonDecode(loadData);
+
+    if (flg) {
+      int maxSeq = genre.expend.map((e) => e.seq).reduce(max) + 1;
+
+      final newGenre = [
+        ...genre.expend,
+        Genre(
+          name: text,
+          seq: maxSeq,
+        ),
+      ];
+      json['expend'] = newGenre;
     }
+    // final jsonFile = File(path);
+    await jsonFile.writeAsString(jsonEncode(json));
   }
 }

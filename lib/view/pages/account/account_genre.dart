@@ -10,9 +10,8 @@ class AccountGenre extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-    final expendState = ref.watch(expendControllerProvider);
-    final expendController = ref.watch(expendControllerProvider.notifier);
-    final incomeController = ref.watch(incomeControllerProvider.notifier);
+    final genre = ref.watch(genreControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -66,13 +65,13 @@ class AccountGenre extends HookConsumerWidget {
                     newIndex--;
                   }
 
-                  await expendController.updateSeq(
-                      expendState[newIndex], expendState[oldIndex]);
+                  // await expendController.updateSeq(
+                  //     expendState[newIndex], expendState[oldIndex]);
                 },
-                children: expendState.map(
+                children: genre.income.map(
                   (state) {
                     return Container(
-                      key: Key(state.docId),
+                      key: Key(state.seq.toString()),
                       height: 50,
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -105,9 +104,9 @@ class AccountGenre extends HookConsumerWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              iESwicherState
-                                  ? expendController.deleteExpend(state.docId)
-                                  : incomeController.deleteIncome(state.docId);
+                              // iESwicherState
+                              //     ? expendController.deleteExpend(state.docId)
+                              //     : incomeController.deleteIncome(state.docId);
                             },
                             child: const Icon(
                               Icons.delete_outline,

@@ -1,4 +1,4 @@
-import 'package:account_book_app/model/genre_state.dart';
+import 'package:account_book_app/model/genre.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,7 +17,7 @@ class AccountContent extends HookConsumerWidget {
   });
 
   final List<AccountState> state;
-  final List<GenreState> genre;
+  final List<Genre> genre;
   final int income;
   final int expend;
   final Color fontColor;

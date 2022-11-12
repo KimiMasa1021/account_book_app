@@ -13,8 +13,7 @@ class AccountPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final setDate = useState(DateTime.now());
-    final expendState = ref.watch(expendControllerProvider);
-    final incomeState = ref.watch(incomeControllerProvider);
+    final genre = ref.watch(genreControllerProvider);
 
     return ref.watch(processingPriceProvider(setDate.value)).when(
       data: (state) {
@@ -36,14 +35,14 @@ class AccountPage extends HookConsumerWidget {
                         children: [
                           AccountContent(
                             state: state.incomeState,
-                            genre: incomeState,
+                            genre: genre.income,
                             income: state.income,
                             expend: state.expend,
                             fontColor: Colors.green,
                           ),
                           AccountContent(
                             state: state.expendState,
-                            genre: expendState,
+                            genre: genre.expend,
                             income: state.income,
                             expend: state.expend,
                             fontColor: Colors.red,

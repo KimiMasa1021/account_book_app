@@ -24,8 +24,8 @@ abstract class AuthRepository {
   Stream<User?> get authStateChange;
   //ログイン中のユーザーのデータの取得
   User? getCurrentUser();
-  Future<void> addGenre(String genre);
-  Future<void> addGenre2(String genre);
+  // Future<void> addGenre(String genre);
+  // Future<void> addGenre2(String genre);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -136,49 +136,49 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
-  Future<void> addGenre(String genre) async {
-    User? user = ref.read(firebaseAuthProvider).currentUser;
-    final expend = ref.read(expendControllerProvider); // List<GenreState>
-    expendCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user?.uid)
-        .collection("expend");
-    int maxSeq = expend.map((e) => e.seq).reduce(max) + 1;
+  // @override
+  // Future<void> addGenre(String genre) async {
+  //   User? user = ref.read(firebaseAuthProvider).currentUser;
+  //   final expend = ref.read(expendControllerProvider); // List<GenreState>
+  //   expendCollectionReference = ref
+  //       .read(firebaseFireStoreProvider)
+  //       .collection("users")
+  //       .doc(user?.uid)
+  //       .collection("expend");
+  //   int maxSeq = expend.map((e) => e.seq).reduce(max) + 1;
 
-    try {
-      await expendCollectionReference?.add(
-        {
-          'name': genre,
-          'seq': maxSeq,
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
-    }
-  }
+  //   try {
+  //     await expendCollectionReference?.add(
+  //       {
+  //         'name': genre,
+  //         'seq': maxSeq,
+  //       },
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     debugPrint(e.code);
+  //   }
+  // }
 
-  @override
-  Future<void> addGenre2(String genre) async {
-    User? user = ref.read(firebaseAuthProvider).currentUser;
-    final income = ref.read(incomeControllerProvider); // List<GenreState>
-    incomeCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user?.uid)
-        .collection("income");
-    int maxSeq = income.map((e) => e.seq).reduce(max) + 1;
+  // @override
+  // Future<void> addGenre2(String genre) async {
+  //   User? user = ref.read(firebaseAuthProvider).currentUser;
+  //   final income = ref.read(incomeControllerProvider); // List<GenreState>
+  //   incomeCollectionReference = ref
+  //       .read(firebaseFireStoreProvider)
+  //       .collection("users")
+  //       .doc(user?.uid)
+  //       .collection("income");
+  //   int maxSeq = income.map((e) => e.seq).reduce(max) + 1;
 
-    try {
-      await incomeCollectionReference?.add(
-        {
-          'name': genre,
-          'seq': maxSeq,
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
-    }
-  }
+  //   try {
+  //     await incomeCollectionReference?.add(
+  //       {
+  //         'name': genre,
+  //         'seq': maxSeq,
+  //       },
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     debugPrint(e.code);
+  //   }
+  // }
 }

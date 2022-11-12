@@ -10,7 +10,7 @@ class AccountGenreAdd extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-    final genreController = ref.watch(authControllerProvider.notifier);
+    final genreController = ref.watch(genreControllerProvider.notifier);
 
     final genreTextController = useTextEditingController(text: '');
 
@@ -62,11 +62,11 @@ class AccountGenreAdd extends HookConsumerWidget {
               ),
               const Spacer(),
               InkWell(
-                onTap: () {
-                  genreController.addGenre(
+                onTap: () async {
+                  await genreController.addGenre(
                       genreTextController.text, iESwicherState);
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AccountAdd.id, (route) => false);
+                  // Navigator.pushNamedAndRemoveUntil(
+                  //     context, AccountAdd.id, (route) => false);
                 },
                 child: Container(
                   width: double.infinity,

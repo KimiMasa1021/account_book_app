@@ -17,8 +17,7 @@ class GenrePanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final iESwicherState = ref.watch(incomeExpendSwicherProvider);
-    final expendState = ref.watch(expendControllerProvider);
-    final incomeState = ref.watch(incomeControllerProvider);
+    final genre = ref.watch(genreControllerProvider);
 
     return isShow.value
         ? Align(
@@ -65,8 +64,8 @@ class GenrePanel extends HookConsumerWidget {
                         height: size.height / 2.4 - 50,
                         child: GridView.builder(
                           itemCount: iESwicherState
-                              ? expendState.length
-                              : incomeState.length,
+                              ? genre.expend.length
+                              : genre.income.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
@@ -75,8 +74,8 @@ class GenrePanel extends HookConsumerWidget {
                               InkWell(
                             onTap: () {
                               genreController.text = iESwicherState
-                                  ? expendState[index].name
-                                  : incomeState[index].name;
+                                  ? genre.expend[index].name
+                                  : genre.income[index].name;
                               FocusScope.of(context).nextFocus();
                               isShow.value = false;
                             },
@@ -90,8 +89,8 @@ class GenrePanel extends HookConsumerWidget {
                               child: Center(
                                 child: Text(
                                   iESwicherState
-                                      ? expendState[index].name
-                                      : incomeState[index].name,
+                                      ? genre.expend[index].name
+                                      : genre.income[index].name,
                                   style: const TextStyle(fontSize: 20),
                                 ),
                               ),
