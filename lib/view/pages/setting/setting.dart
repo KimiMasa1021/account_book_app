@@ -185,7 +185,8 @@ class Setting extends HookConsumerWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => SettingWebView())));
+                                builder: ((context) =>
+                                    const SettingWebView())));
                       },
                     ),
                     SettingTile(

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SettingWebView extends StatefulWidget {
+  const SettingWebView({super.key});
+
   @override
   _SettingWebViewState createState() => _SettingWebViewState();
 }
@@ -27,27 +29,27 @@ class _SettingWebViewState extends State<SettingWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_title),
-      ),
       body: _buildBody(),
     );
   }
 
   Widget _buildBody() {
-    return Column(
-      children: [
-        if (_isLoading) const LinearProgressIndicator(),
-        Expanded(
-          child: _buildWebView(),
-        ),
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          if (_isLoading) const LinearProgressIndicator(),
+          Expanded(
+            child: _buildWebView(),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildWebView() {
     return WebView(
-      initialUrl: 'https://flutter.dev',
+      initialUrl:
+          'https://docs.google.com/forms/d/e/1FAIpQLSdZinuFKnQ2Sld88ztGxIBOPPlBj_ycuajmqZ6RC2p5Ao37Cw/viewform?usp=sf_link',
       // jsを有効化
       javascriptMode: JavascriptMode.unrestricted,
       // controllerを登録

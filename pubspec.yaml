@@ -63,6 +63,7 @@ dependencies:
   wave: ^0.2.2
   confetti: ^0.7.0
   webview_flutter: ^3.0.4
+  google_sign_in: ^5.4.2
     
 dev_dependencies:
   flutter_test:

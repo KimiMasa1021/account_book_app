@@ -1,7 +1,4 @@
-import 'package:account_book_app/model/users_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -25,7 +22,7 @@ class FriendAddQr extends HookConsumerWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -38,7 +35,7 @@ class FriendAddQr extends HookConsumerWidget {
                 version: QrVersions.auto,
               ),
             ),
-            Text(
+            const Text(
               "※  同じアプリ同士で読み込みしてください。",
               style: TextStyle(fontSize: 22),
             ),

@@ -34,8 +34,8 @@ class SavingMemberAdd2 extends HookConsumerWidget {
                     () => Navigator.pop(context),
                   );
                 },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
                     "追加する",
                     style: TextStyle(
