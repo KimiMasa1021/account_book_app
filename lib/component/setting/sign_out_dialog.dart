@@ -31,7 +31,7 @@ class SignOutDaialog extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(),
+                  const SizedBox(),
                   const Text(
                     "ログアウトしますか？",
                     style: TextStyle(

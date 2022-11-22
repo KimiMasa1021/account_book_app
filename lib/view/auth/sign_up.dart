@@ -41,7 +41,7 @@ class SignUp extends HookConsumerWidget {
                   alignment: const Alignment(0, 0),
                   child: SingleChildScrollView(
                     child: Container(
-                      width: size.width * 0.9,
+                      width: size.width * 0.85,
                       height: size.height * 0.65,
                       decoration: const BoxDecoration(
                         color: Colors.white,

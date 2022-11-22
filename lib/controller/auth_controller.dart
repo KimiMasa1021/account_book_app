@@ -25,9 +25,6 @@ class AuthController extends StateNotifier<User?> {
     super.dispose();
   }
 
-  // @override
-  // User? get state => ref.read(authRepositoryProvider).getCurrentUser();
-
   Future<void> signIn(
       String email, String password, ValueNotifier<bool> loading) async {
     try {
@@ -74,7 +71,7 @@ class AuthController extends StateNotifier<User?> {
         return;
       }
       await ref.read(authRepositoryProvider).saveUserData(
-            credential!.user!.displayName!,
+            credential.user!.displayName!,
             credential,
           );
       loading.value = false;

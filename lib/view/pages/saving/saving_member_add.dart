@@ -100,22 +100,31 @@ class SavingMemberAdd extends HookConsumerWidget {
                       onTap: () {
                         Navigator.pushNamed(context, FriendAddScan.id);
                       },
-                      child: RichText(
-                        text: const TextSpan(
-                          style: TextStyle(color: Colors.black, fontSize: 22),
-                          children: [
-                            TextSpan(
-                              text: 'フレンド登録は',
+                      child: Column(
+                        children: [
+                          const Text(
+                            "※フレンド以外は招待できません。",
+                            style: TextStyle(color: Colors.black, fontSize: 20),
+                          ),
+                          RichText(
+                            text: const TextSpan(
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 22),
+                              children: [
+                                TextSpan(
+                                  text: 'フレンド登録は',
+                                ),
+                                TextSpan(
+                                  text: 'こちら',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                                TextSpan(
+                                  text: 'から',
+                                ),
+                              ],
                             ),
-                            TextSpan(
-                              text: 'こちら',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                            TextSpan(
-                              text: 'から',
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
             ],

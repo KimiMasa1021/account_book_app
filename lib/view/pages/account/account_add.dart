@@ -40,7 +40,7 @@ class AccountAdd extends HookConsumerWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, RootPage.id);
           },
           icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),

@@ -63,6 +63,7 @@ class AccountGenreAdd extends HookConsumerWidget {
               const Spacer(),
               InkWell(
                 onTap: () {
+                  if (genreTextController.text == "") return;
                   genreController.addGenre(
                       genreTextController.text, iESwicherState);
                   Navigator.pushNamedAndRemoveUntil(

@@ -18,7 +18,8 @@ import '../model/users_state.dart';
 final authControllerProvider =
     StateNotifierProvider<AuthController, User?>((ref) => AuthController(ref));
 
-final authSwitcherPriovider = StateProvider<Pages>((ref) => Pages.top);
+final authSwitcherPriovider =
+    StateProvider.autoDispose<Pages>((ref) => Pages.top);
 
 final pageTypeProvider = StateProvider<PageType>((ref) => PageType.account);
 

@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/users_state.dart';
 import '../../../provider/general_provider.dart';
+import '../setting/friend_add_scan.dart';
 
 class SavingMemberAdd2 extends HookConsumerWidget {
   const SavingMemberAdd2({super.key});
@@ -51,75 +52,107 @@ class SavingMemberAdd2 extends HookConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: list.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.zero,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-                    margin: const EdgeInsets.symmetric(horizontal: 5),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      border: Border.symmetric(
-                        horizontal: BorderSide(
-                          width: 0.3,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 65,
-                          width: 65,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                            image: list[index].img != ""
-                                ? DecorationImage(
-                                    image: NetworkImage(list[index].img),
-                                  )
-                                : const DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage("assets/img/profile.png"),
-                                  ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                list[index].name,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
+            friendsListState.isNotEmpty
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: list.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 0),
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            border: Border.symmetric(
+                              horizontal: BorderSide(
+                                width: 0.3,
+                                color: Colors.black,
                               ),
-                              Text(
-                                list[index].email,
-                                overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  shape: BoxShape.circle,
+                                  image: list[index].img != ""
+                                      ? DecorationImage(
+                                          image: NetworkImage(list[index].img),
+                                        )
+                                      : const DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage(
+                                              "assets/img/profile.png"),
+                                        ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      list[index].name,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      list[index].email,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              FriendCheckBox(
+                                friendList: friendList,
+                                uid: list[index].uid,
                               )
                             ],
                           ),
+                        );
+                      },
+                    ),
+                  )
+                : InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, FriendAddScan.id);
+                    },
+                    child: Column(
+                      children: [
+                        const Text(
+                          "※フレンド以外は招待できません。",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
-                        FriendCheckBox(
-                          friendList: friendList,
-                          uid: list[index].uid,
-                        )
+                        RichText(
+                          text: const TextSpan(
+                            style: TextStyle(color: Colors.black, fontSize: 22),
+                            children: [
+                              TextSpan(
+                                text: 'フレンド登録は',
+                              ),
+                              TextSpan(
+                                text: 'こちら',
+                                style: TextStyle(color: Colors.blue),
+                              ),
+                              TextSpan(
+                                text: 'から',
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
           ],
         ),
       ),

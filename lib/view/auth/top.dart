@@ -45,11 +45,11 @@ class Top extends HookConsumerWidget {
                       style: TextStyle(fontSize: 25),
                     ),
                     const Text(
-                      "絶対に貯まる",
+                      "みんなで貯める貯金",
                       style: TextStyle(fontSize: 25),
                     ),
                     const Text(
-                      "家計簿アプリへ",
+                      "ミンチョキへ",
                       style: TextStyle(fontSize: 25),
                     ),
                     const Spacer(),
