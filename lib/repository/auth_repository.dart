@@ -7,6 +7,7 @@ import 'dart:math';
 import '../provider/firebase_auth_provider.dart';
 import '../provider/firebase_firestore_provider.dart';
 import '../provider/general_provider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final authRepositoryProvider =
     Provider<AuthRepository>((ref) => AuthRepositoryImpl(ref));
@@ -26,6 +27,7 @@ abstract class AuthRepository {
   User? getCurrentUser();
   Future<void> addGenre(String genre);
   Future<void> addGenre2(String genre);
+  Future<UserCredential?> signInWithGoogle();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -180,5 +182,22 @@ class AuthRepositoryImpl implements AuthRepository {
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
+  }
+
+  @override
+  Future<UserCredential?> signInWithGoogle() async {
+    final googleUser = await GoogleSignIn(scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ]).signIn();
+    final googleAuth = await googleUser?.authentication;
+    if (googleAuth == null) {
+      return null;
+    }
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    return FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

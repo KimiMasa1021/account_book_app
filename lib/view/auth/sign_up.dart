@@ -101,7 +101,16 @@ class SignUp extends HookConsumerWidget {
                             ),
                             const SizedBox(height: 10),
                             BorderButton(
-                              function: () {},
+                              function: () async {
+                                loading.value = true;
+                                try {
+                                  await authController
+                                      .signUpWithGoogle(loading);
+                                  loading.value = false;
+                                } catch (e) {
+                                  debugPrint(e.toString());
+                                }
+                              },
                               title: 'Googleで作成',
                             ),
                           ],

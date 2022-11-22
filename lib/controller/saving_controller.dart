@@ -3,7 +3,7 @@ import 'package:account_book_app/repository/saving_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../model/users_state.dart';
+import '../provider/general_provider.dart';
 
 class SavingController extends StateNotifier<List<TargetState>> {
   final Ref ref;
@@ -17,16 +17,28 @@ class SavingController extends StateNotifier<List<TargetState>> {
     String target,
     String targetPrice,
     String groupName,
-    List<UsersState> membersList,
+    Function() fucntion,
   ) async {
+    final userState = ref.read(usersControllerProvider);
+    final memberLists = ref.read(memberListProvider);
+    if (target == "" || targetPrice == "" || groupName == "") {
+      return showToast("すべて必須項目ですよ");
+    }
+
+    final list = [...memberLists, userState!];
+
     int price = int.parse(targetPrice.replaceAll(",", ""));
-    List<String> membersListUid = membersList.map((e) => e.uid).toList();
+    List<String> membersListUid = list.map((e) => e.uid).toList();
     await ref.read(savingRepositoryProvider).initTarget(
           target,
           price,
           groupName,
           membersListUid,
         );
+
+    if (state.length != 1) {
+      fucntion();
+    }
   }
 
   Future<void> addSaving(DateTime registedTime, String price, String memo,

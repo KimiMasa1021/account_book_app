@@ -14,9 +14,9 @@ class RootPage extends HookConsumerWidget {
   static const String id = "root_page";
 
   final List<Widget> _pageList = <Widget>[
+    const Saving(),
     const AccountPage(),
     const Statistic(),
-    const Saving(),
     const Setting(),
   ];
   @override
@@ -24,16 +24,16 @@ class RootPage extends HookConsumerWidget {
     final pageState = ref.watch(pageTypeProvider);
     final tabItems = [
       const BottomNavigationBarItem(
+        icon: Icon(Icons.savings_outlined),
+        label: '節約',
+      ),
+      const BottomNavigationBarItem(
         icon: Icon(Icons.monetization_on),
         label: '家計簿',
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.stacked_bar_chart),
         label: '統計',
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.savings_outlined),
-        label: '節約',
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings),

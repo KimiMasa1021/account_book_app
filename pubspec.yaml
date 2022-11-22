@@ -64,6 +64,7 @@ dependencies:
   confetti: ^0.7.0
   webview_flutter: ^3.0.4
   google_sign_in: ^5.4.2
+  app_review: ^2.1.2+1
     
 dev_dependencies:
   flutter_test:

@@ -17,7 +17,7 @@ abstract class SavingRepository {
   Future<void> addSaving(
       DateTime registedTime, int price, String memo, String uid, String member);
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachSaving();
-  Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(String uid);
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(String? uid);
   Future<void> addMember(
       String docId, List<String> newList, List<String> oldList);
   Future<void> seceesion(String docId, List<String> list);
@@ -143,7 +143,7 @@ class SavingRepoositoryImple implements SavingRepository {
 
   @override
   Stream<List<QueryDocumentSnapshot<SavingState>>> feachList(
-    String uid,
+    String? uid,
   ) async* {
     collectionReference2 = ref
         .read(firebaseFireStoreProvider)

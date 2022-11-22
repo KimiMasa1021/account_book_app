@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/saving/input_target_field.dart';
 import '../../../constant/price_formatter.dart';
+import '../../root_page.dart';
 import 'saving_member_add.dart';
 
 class SavingInit extends HookConsumerWidget {
@@ -20,19 +21,6 @@ class SavingInit extends HookConsumerWidget {
     final groupNameController = useTextEditingController(text: "");
     final userState = ref.watch(usersControllerProvider);
     final memberLists = ref.watch(memberListProvider);
-    final savingState = ref.watch(savingControllerProvider);
-    Future<void> function(Function() function) async {
-      final list = [...memberLists, userState!];
-      await savingController.initTarget(
-        targetController.text,
-        targetPriceController.text,
-        groupNameController.text,
-        list,
-      );
-      if (savingState.isNotEmpty) {
-        function();
-      }
-    }
 
     return Scaffold(
       body: Stack(
@@ -62,7 +50,7 @@ class SavingInit extends HookConsumerWidget {
                       ),
                       child: const Center(
                         child: Text(
-                          "あなたに合った目標と目標金額\nを決めて節約をはじめよう!!",
+                          "あなたに合った目標と目標金額\nを決めて貯金をはじめよう!!",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 22,
@@ -113,10 +101,10 @@ class SavingInit extends HookConsumerWidget {
                                     context, SavingMemberAdd.id);
                               },
                               child: const Text(
-                                "編集する",
+                                "追加する",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -142,8 +130,14 @@ class SavingInit extends HookConsumerWidget {
                       children: [
                         InkWell(
                           onTap: () async {
-                            await function(
-                              () => Navigator.pop(context),
+                            await savingController.initTarget(
+                              targetController.text,
+                              targetPriceController.text,
+                              groupNameController.text,
+                              () {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, RootPage.id, (route) => false);
+                              },
                             );
                           },
                           child: Container(

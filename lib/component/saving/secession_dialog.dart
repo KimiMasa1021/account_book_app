@@ -9,6 +9,7 @@ class SecessionDialog extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final selectedSaving = ref.watch(selectedSavingProvider);
+    final selectedSavingCTL = ref.watch(selectedSavingProvider.notifier);
     final savingState = ref.watch(savingControllerProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
 
@@ -46,6 +47,7 @@ class SecessionDialog extends HookConsumerWidget {
             const Spacer(),
             InkWell(
               onTap: () async {
+                selectedSavingCTL.state = 0;
                 await savingCTL.seceesion(
                   savingState[selectedSaving].id,
                   savingState[selectedSaving].members,

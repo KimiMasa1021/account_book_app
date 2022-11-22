@@ -15,6 +15,8 @@ class Setting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
+    final userCTL = ref.watch(usersControllerProvider.notifier);
+
     return SafeArea(
       child: Stack(
         children: [
@@ -175,7 +177,7 @@ class Setting extends HookConsumerWidget {
                       icon: Icons.reviews_outlined,
                       title: "アプリのレビュー",
                       function: () {
-                        Navigator.pushNamed(context, FriendsList.id);
+                        userCTL.requestReview();
                       },
                     ),
                     SettingTile(

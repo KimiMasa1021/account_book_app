@@ -5,14 +5,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-
 import '../model/users_state.dart';
 import '../provider/general_provider.dart';
 import '../repository/users_repository.dart';
+import 'package:app_review/app_review.dart';
 
 class UsersController extends StateNotifier<UsersState> {
   final Ref ref;
   Map<String, dynamic>? data;
+
   UsersController(this.ref) : super(UsersState()) {
     ref
         .read(usersRepositoryProvider)
@@ -139,5 +140,11 @@ class UsersController extends StateNotifier<UsersState> {
   Future<void> reName(String newName, Function() function) async {
     await ref.read(usersRepositoryProvider).reName(newName);
     function();
+  }
+
+  void requestReview() {
+    AppReview.requestReview.then((onValue) {
+      debugPrint(onValue);
+    });
   }
 }

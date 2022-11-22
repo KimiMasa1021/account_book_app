@@ -87,7 +87,16 @@ class SignIn extends HookConsumerWidget {
                             const SizedBox(height: 10),
                             //Googleで作成
                             BorderButton(
-                              function: () {},
+                              function: () async {
+                                loading.value = true;
+                                try {
+                                  await authController
+                                      .signInWithGoogle(loading);
+                                  loading.value = false;
+                                } catch (e) {
+                                  debugPrint(e.toString());
+                                }
+                              },
                               title: 'Googleでログイン',
                             ),
                           ],

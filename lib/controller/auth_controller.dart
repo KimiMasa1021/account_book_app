@@ -66,6 +66,33 @@ class AuthController extends StateNotifier<User?> {
     }
   }
 
+  Future<void> signUpWithGoogle(ValueNotifier<bool> loading) async {
+    try {
+      final credential =
+          await ref.read(authRepositoryProvider).signInWithGoogle();
+      if (credential == null) {
+        return;
+      }
+      await ref.read(authRepositoryProvider).saveUserData(
+            credential!.user!.displayName!,
+            credential,
+          );
+      loading.value = false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<void> signInWithGoogle(ValueNotifier<bool> loading) async {
+    try {
+      await ref.read(authRepositoryProvider).signInWithGoogle();
+
+      loading.value = false;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
   Future<void> signOut(Function() function) async {
     await ref.read(authRepositoryProvider).signOut();
     function();
