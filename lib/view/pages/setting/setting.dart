@@ -1,6 +1,7 @@
 import 'package:account_book_app/component/setting/edit_img_dialog.dart';
 import 'package:account_book_app/component/setting/rename_dialog.dart';
 import 'package:account_book_app/component/setting/sign_out_dialog.dart';
+import 'package:account_book_app/constant/hex_color.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/view/pages/setting/setting_web_view.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ class Setting extends HookConsumerWidget {
               Expanded(
                 flex: 2,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 120, 171, 201),
+                  decoration: BoxDecoration(
+                    color: HexColor("#FDA857"),
                   ),
                 ),
               ),
@@ -48,7 +49,6 @@ class Setting extends HookConsumerWidget {
                 clipBehavior: Clip.none,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-                // height: MediaQuery.of(context).size.height / 1.4,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -166,13 +166,6 @@ class Setting extends HookConsumerWidget {
                         Navigator.pushNamed(context, FriendAddScan.id);
                       },
                     ),
-                    // SettingTile(
-                    //   icon: Icons.palette_outlined,
-                    //   title: "テーマカラーの変更",
-                    //   function: () {
-                    //     Navigator.pushNamed(context, FriendsList.id);
-                    //   },
-                    // ),
                     SettingTile(
                       icon: Icons.reviews_outlined,
                       title: "アプリのレビュー",

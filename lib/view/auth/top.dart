@@ -77,11 +77,12 @@ class Top extends HookConsumerWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 10),
                                   child: Text(
                                     "初めての方はこちら",
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 18,
                                     ),
                                   ),
                                 ),

@@ -26,7 +26,7 @@ class PinkBackGround extends HookConsumerWidget {
         width: size.width,
         height: size.height * heightScale,
         decoration: BoxDecoration(
-          color: HexColor("EE6983"),
+          color: HexColor("#FDA857"),
           borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(100),
             bottomRight: Radius.circular(100),

@@ -18,7 +18,7 @@ class PaintedButton extends StatelessWidget {
         width: double.infinity,
         height: 58,
         decoration: BoxDecoration(
-          color: HexColor("850E35"),
+          color: HexColor("#FDA857"),
           borderRadius: const BorderRadius.all(
             Radius.circular(123),
           ),

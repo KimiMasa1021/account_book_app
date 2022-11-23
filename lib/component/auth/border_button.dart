@@ -24,14 +24,14 @@ class BorderButton extends StatelessWidget {
           ),
           border: Border.all(
             width: 3,
-            color: HexColor("850E35"),
+            color: HexColor("#FDA857"),
           ),
         ),
         child: Center(
           child: Text(
             title,
             style: TextStyle(
-              color: HexColor("850E35"),
+              color: HexColor("#FDA857"),
               fontSize: 25,
             ),
           ),
