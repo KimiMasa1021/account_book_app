@@ -150,10 +150,12 @@ class SavingRepoositoryImple implements SavingRepository {
         .collection("saving")
         .doc(uid)
         .collection("list");
-    final stateRef = collectionReference2!.withConverter<SavingState>(
-      fromFirestore: (snapshot, _) => SavingState.fromJson(snapshot.data()!),
-      toFirestore: (data, _) => data.toJson(),
-    );
+    final stateRef =
+        collectionReference2!.orderBy("registeTime").withConverter<SavingState>(
+              fromFirestore: (snapshot, _) =>
+                  SavingState.fromJson(snapshot.data()!),
+              toFirestore: (data, _) => data.toJson(),
+            );
 
     yield* stateRef.snapshots().map((doc) => doc.docs);
   }

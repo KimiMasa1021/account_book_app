@@ -43,9 +43,7 @@ class SavingHistory extends HookConsumerWidget {
                         title: state[index].memo,
                         date: state[index].registeTime,
                         price: state[index].price,
-                        name: friend.data!
-                            .singleWhere((e) => e.uid == state[index].member)
-                            .name,
+                        name: state[index].member,
                       ),
                     ),
                   ),
