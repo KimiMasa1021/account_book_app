@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.account_book_app">
+    package="com.kmass.account_book_app">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />    
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
    <application
-        android:label="account_book_app"
+        android:label="ミンチョキ"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

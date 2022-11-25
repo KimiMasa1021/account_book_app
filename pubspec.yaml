@@ -65,6 +65,7 @@ dependencies:
   webview_flutter: ^3.0.4
   google_sign_in: ^5.4.2
   app_review: ^2.1.2+1
+  flutter_launcher_icons: ^0.11.0
     
 dev_dependencies:
   flutter_test:
@@ -96,7 +97,10 @@ flutter:
   assets:
     - assets/img/profile.png
 
-
+flutter_icons:
+  android: true 
+  ios: true
+  image_path: "assets/img/icon.png"
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

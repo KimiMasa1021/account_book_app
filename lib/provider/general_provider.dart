@@ -16,41 +16,45 @@ import '../model/price_state.dart';
 import '../model/users_state.dart';
 
 final authControllerProvider =
-    StateNotifierProvider<AuthController, User?>((ref) => AuthController(ref));
+    StateNotifierProvider.autoDispose<AuthController, User?>(
+        (ref) => AuthController(ref));
 
 final authSwitcherPriovider =
     StateProvider.autoDispose<Pages>((ref) => Pages.top);
 
-final pageTypeProvider = StateProvider<PageType>((ref) => PageType.account);
+final pageTypeProvider =
+    StateProvider.autoDispose<PageType>((ref) => PageType.account);
 
-final incomeExpendSwicherProvider = StateProvider<bool>((ref) => true);
-final selectedSavingProvider = StateProvider<int>((ref) => 0);
+final incomeExpendSwicherProvider =
+    StateProvider.autoDispose<bool>((ref) => true);
+final selectedSavingProvider = StateProvider.autoDispose<int>((ref) => 0);
 final memberListProvider =
     StateProvider.autoDispose<List<UsersState>>((ref) => []);
 final usersControllerProvider =
-    StateNotifierProvider<UsersController, UsersState?>(
+    StateNotifierProvider.autoDispose<UsersController, UsersState?>(
         (ref) => UsersController(ref));
 
 final savingControllerProvider =
-    StateNotifierProvider<SavingController, List<TargetState>>(
+    StateNotifierProvider.autoDispose<SavingController, List<TargetState>>(
         (ref) => SavingController(ref));
 
-final accountControllerPrvider =
-    StateNotifierProvider<AccountController, AsyncValue<List<AccountState>>>(
-        (ref) => AccountController(ref));
+final accountControllerPrvider = StateNotifierProvider.autoDispose<
+    AccountController,
+    AsyncValue<List<AccountState>>>((ref) => AccountController(ref));
 
 final expendControllerProvider =
-    StateNotifierProvider<ExpendController, List<GenreState>>(
+    StateNotifierProvider.autoDispose<ExpendController, List<GenreState>>(
         (ref) => ExpendController(ref));
 
 final incomeControllerProvider =
-    StateNotifierProvider<IncomeController, List<GenreState>>(
+    StateNotifierProvider.autoDispose<IncomeController, List<GenreState>>(
         (ref) => IncomeController(ref));
 final friendsListControllerProvider =
-    StateNotifierProvider<FriendsController, List<UsersState>>(
+    StateNotifierProvider.autoDispose<FriendsController, List<UsersState>>(
         (ref) => FriendsController(ref));
 
-final processingPriceProvider = Provider.family((ref, DateTime setDate) {
+final processingPriceProvider =
+    Provider.autoDispose.family((ref, DateTime setDate) {
   return ref.watch(accountControllerPrvider).whenData((state) {
     List<AccountState> allState = state.isNotEmpty ? state.toList() : [];
     List<AccountState> monthlyState = state.isNotEmpty

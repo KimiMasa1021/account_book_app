@@ -27,7 +27,7 @@ class FriendsListRepositoryImple implements FriendsListRepository {
 
   @override
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachFriends() async* {
-    final uid = ref.watch(usersControllerProvider)!.uid;
+    final uid = ref.read(usersControllerProvider)!.uid;
     debugPrint(uid);
 
     final stateRef = collectionReference!
