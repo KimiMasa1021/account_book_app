@@ -10,7 +10,6 @@ import 'view/pages/account/account_genre_add.dart';
 import 'view/pages/saving/saving_add.dart';
 import 'view/pages/saving/saving_history.dart';
 import 'view/pages/saving/saving_member_add.dart';
-import 'view/pages/setting/friend_add_qr.dart';
 import 'view/root_page.dart';
 import 'view/separate.dart';
 
@@ -38,7 +37,6 @@ class MyApp extends StatelessWidget {
         AccountGenre.id: (BuildContext context) => const AccountGenre(),
         AccountGenreAdd.id: (BuildContext context) => const AccountGenreAdd(),
         RootPage.id: (BuildContext context) => RootPage(),
-        FriendAddQr.id: (BuildContext context) => const FriendAddQr(),
         FriendAddScan.id: (BuildContext context) => FriendAddScan(),
         FriendsList.id: (BuildContext context) => const FriendsList(),
         SavingMemberAdd.id: (BuildContext context) => const SavingMemberAdd(),

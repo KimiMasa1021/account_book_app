@@ -50,7 +50,7 @@ final incomeControllerProvider =
     StateNotifierProvider.autoDispose<IncomeController, List<GenreState>>(
         (ref) => IncomeController(ref));
 final friendsListControllerProvider =
-    StateNotifierProvider.autoDispose<FriendsController, List<UsersState>>(
+    StateNotifierProvider<FriendsController, List<UsersState>>(
         (ref) => FriendsController(ref));
 
 final processingPriceProvider =
