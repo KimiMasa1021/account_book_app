@@ -4,6 +4,7 @@ import 'package:account_book_app/view/pages/setting/friend_add_scan.dart';
 import 'package:account_book_app/view/pages/setting/friends_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'view/pages/account/account_add.dart';
 import 'view/pages/account/account_genre.dart';
 import 'view/pages/account/account_genre_add.dart';
@@ -12,13 +13,19 @@ import 'view/pages/saving/saving_history.dart';
 import 'view/pages/saving/saving_member_add.dart';
 import 'view/root_page.dart';
 import 'view/separate.dart';
+import 'view/theme/app_theme.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = ref.watch(appThemeProvider);
+    final themeMode = ref.watch(appThemeModeProvider);
     return MaterialApp(
+      theme: theme.data,
+      darkTheme: AppTheme.dark().data,
+      themeMode: themeMode,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

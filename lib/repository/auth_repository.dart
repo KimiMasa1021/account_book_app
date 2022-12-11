@@ -80,13 +80,6 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final uid = user.user!.uid;
       final email = user.user!.email;
-      await storeCollectionReference?.doc(uid).set({
-        'uid': uid,
-        'email': email,
-        'name': name,
-        'friends': [],
-        "img": "",
-      });
       expendCollectionReference = ref
           .read(firebaseFireStoreProvider)
           .collection("users")
@@ -97,23 +90,33 @@ class AuthRepositoryImpl implements AuthRepository {
           .collection("users")
           .doc(uid)
           .collection("income");
-      final List<Map<String, dynamic>> income = [
-        {"name": "給料", "seq": 0},
-        {"name": "ボーナス", "seq": 1},
-        {"name": "お小遣い", "seq": 2},
-        {"name": "副業", "seq": 3},
-      ];
-      final List<Map<String, dynamic>> expend = [
-        {"name": "食費", "seq": 0},
-        {"name": "交通費", "seq": 1},
-        {"name": "プレゼント", "seq": 2},
-        {"name": "光熱費", "seq": 3},
-      ];
-      for (int i = 0; i < income.length; i++) {
-        await incomeCollectionReference!.add(income[i]);
-      }
-      for (int i = 0; i < expend.length; i++) {
-        await expendCollectionReference!.add(expend[i]);
+      final test = await expendCollectionReference!.get();
+      if (test.docs.isEmpty) {
+        await storeCollectionReference?.doc(uid).set({
+          'uid': uid,
+          'email': email,
+          'name': name,
+          'friends': [],
+          "img": "",
+        });
+        final List<Map<String, dynamic>> income = [
+          {"name": "給料", "seq": 0},
+          {"name": "ボーナス", "seq": 1},
+          {"name": "お小遣い", "seq": 2},
+          {"name": "副業", "seq": 3},
+        ];
+        final List<Map<String, dynamic>> expend = [
+          {"name": "食費", "seq": 0},
+          {"name": "交通費", "seq": 1},
+          {"name": "プレゼント", "seq": 2},
+          {"name": "光熱費", "seq": 3},
+        ];
+        for (int i = 0; i < income.length; i++) {
+          await incomeCollectionReference!.add(income[i]);
+        }
+        for (int i = 0; i < expend.length; i++) {
+          await expendCollectionReference!.add(expend[i]);
+        }
       }
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
