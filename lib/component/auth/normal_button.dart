@@ -21,7 +21,7 @@ class NormalButton extends HookConsumerWidget {
       child: Container(
         margin: const EdgeInsets.only(top: 10),
         width: double.infinity,
-        height: 40,
+        height: 45,
         decoration: BoxDecoration(
           border: Border.all(),
           borderRadius: BorderRadius.circular(10),

@@ -20,7 +20,7 @@ class Auth extends HookConsumerWidget {
     } else if (switcherState == Pages.signIn) {
       return const Top();
     } else if (switcherState == Pages.signUp) {
-      return const Top();
+      return const SignUp();
     } else {
       return const Top();
     }
