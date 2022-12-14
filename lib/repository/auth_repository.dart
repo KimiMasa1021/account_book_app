@@ -16,18 +16,12 @@ abstract class AuthRepository {
   //email passwordでログイン
   Future<String?> signInWithEmail(String email, String password);
   //email password name で新規登録
-  Future<Object?> signUp(String email, String password, String name);
+  Future<void> signUp(String email, String password, String name);
   //新規登録の後にuid email name をstoreに登録
-  Future<void> saveUserData(String name, UserCredential user);
-  //サインアウト
+  // Future<void> saveUserData(String name, UserCredential user);
   Future signOut();
-  //ログイン状態を監視
   Stream<User?> get authStateChange;
-  //ログイン中のユーザーのデータの取得
   User? getCurrentUser();
-  Future<void> addGenre(String genre);
-  Future<void> addGenre2(String genre);
-  Future<UserCredential?> signInWithGoogle();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -62,66 +56,65 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Object?> signUp(String email, String password, String name) async {
+  Future<void> signUp(String email, String password, String name) async {
     try {
-      final aaa =
+      final result =
           await ref.read(firebaseAuthProvider).createUserWithEmailAndPassword(
                 email: email,
                 password: password,
               );
-      return aaa;
-    } on FirebaseAuthException catch (e) {
-      return e.code;
-    }
-  }
-
-  @override
-  Future<void> saveUserData(String name, UserCredential user) async {
-    try {
-      final uid = user.user!.uid;
-      final email = user.user!.email;
-      expendCollectionReference = ref
-          .read(firebaseFireStoreProvider)
-          .collection("users")
-          .doc(uid)
-          .collection("expend");
-      incomeCollectionReference = ref
-          .read(firebaseFireStoreProvider)
-          .collection("users")
-          .doc(uid)
-          .collection("income");
-      final test = await expendCollectionReference!.get();
-      if (test.docs.isEmpty) {
-        await storeCollectionReference?.doc(uid).set({
-          'uid': uid,
-          'email': email,
-          'name': name,
-          'friends': [],
-          "img": "",
-        });
-        final List<Map<String, dynamic>> income = [
-          {"name": "給料", "seq": 0},
-          {"name": "ボーナス", "seq": 1},
-          {"name": "お小遣い", "seq": 2},
-          {"name": "副業", "seq": 3},
-        ];
-        final List<Map<String, dynamic>> expend = [
-          {"name": "食費", "seq": 0},
-          {"name": "交通費", "seq": 1},
-          {"name": "プレゼント", "seq": 2},
-          {"name": "光熱費", "seq": 3},
-        ];
-        for (int i = 0; i < income.length; i++) {
-          await incomeCollectionReference!.add(income[i]);
-        }
-        for (int i = 0; i < expend.length; i++) {
-          await expendCollectionReference!.add(expend[i]);
-        }
-      }
+      result.user!.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
   }
+  // @override
+  // Future<void> saveUserData(String name, UserCredential user) async {
+  //   try {
+  //     final uid = user.user!.uid;
+  //     final email = user.user!.email;
+  //     expendCollectionReference = ref
+  //         .read(firebaseFireStoreProvider)
+  //         .collection("users")
+  //         .doc(uid)
+  //         .collection("expend");
+  //     incomeCollectionReference = ref
+  //         .read(firebaseFireStoreProvider)
+  //         .collection("users")
+  //         .doc(uid)
+  //         .collection("income");
+  //     final test = await expendCollectionReference!.get();
+  //     if (test.docs.isEmpty) {
+  //       await storeCollectionReference?.doc(uid).set({
+  //         'uid': uid,
+  //         'email': email,
+  //         'name': name,
+  //         'friends': [],
+  //         "img": "",
+  //       });
+  //       final List<Map<String, dynamic>> income = [
+  //         {"name": "給料", "seq": 0},
+  //         {"name": "ボーナス", "seq": 1},
+  //         {"name": "お小遣い", "seq": 2},
+  //         {"name": "副業", "seq": 3},
+  //       ];
+  //       final List<Map<String, dynamic>> expend = [
+  //         {"name": "食費", "seq": 0},
+  //         {"name": "交通費", "seq": 1},
+  //         {"name": "プレゼント", "seq": 2},
+  //         {"name": "光熱費", "seq": 3},
+  //       ];
+  //       for (int i = 0; i < income.length; i++) {
+  //         await incomeCollectionReference!.add(income[i]);
+  //       }
+  //       for (int i = 0; i < expend.length; i++) {
+  //         await expendCollectionReference!.add(expend[i]);
+  //       }
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     debugPrint(e.code);
+  //   }
+  // }
 
   @override
   Future signOut() async {
@@ -135,72 +128,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   User? getCurrentUser() {
     try {
+      // ref.read(firebaseAuthProvider).currentUser!.emailVerified;
       return ref.read(firebaseAuthProvider).currentUser;
     } on FirebaseAuthException catch (e) {
       throw (e.code);
     }
-  }
-
-  @override
-  Future<void> addGenre(String genre) async {
-    User? user = ref.read(firebaseAuthProvider).currentUser;
-    final expend = ref.read(expendControllerProvider); // List<GenreState>
-    expendCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user?.uid)
-        .collection("expend");
-    int maxSeq = expend.map((e) => e.seq).reduce(max) + 1;
-
-    try {
-      await expendCollectionReference?.add(
-        {
-          'name': genre,
-          'seq': maxSeq,
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
-    }
-  }
-
-  @override
-  Future<void> addGenre2(String genre) async {
-    User? user = ref.read(firebaseAuthProvider).currentUser;
-    final income = ref.read(incomeControllerProvider); // List<GenreState>
-    incomeCollectionReference = ref
-        .read(firebaseFireStoreProvider)
-        .collection("users")
-        .doc(user?.uid)
-        .collection("income");
-    int maxSeq = income.map((e) => e.seq).reduce(max) + 1;
-
-    try {
-      await incomeCollectionReference?.add(
-        {
-          'name': genre,
-          'seq': maxSeq,
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      debugPrint(e.code);
-    }
-  }
-
-  @override
-  Future<UserCredential?> signInWithGoogle() async {
-    final googleUser = await GoogleSignIn(scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ]).signIn();
-    final googleAuth = await googleUser?.authentication;
-    if (googleAuth == null) {
-      return null;
-    }
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    return FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

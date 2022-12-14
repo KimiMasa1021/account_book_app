@@ -31,13 +31,13 @@ class Top extends HookConsumerWidget {
                 NormalButton(
                   text: "新規登録",
                   function: () {
-                    switcherCTL.state = Pages.signUp;
+                    switcherCTL.state = AuthPages.signUpEmail;
                   },
                 ),
                 NormalButton(
                   text: "ログイン",
                   function: () {
-                    switcherCTL.state = Pages.signIn;
+                    switcherCTL.state = AuthPages.signIn;
                   },
                 ),
               ],

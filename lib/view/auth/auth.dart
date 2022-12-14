@@ -1,6 +1,6 @@
 import 'package:account_book_app/constant/enums.dart';
-import 'package:account_book_app/view/auth/sign_in.dart';
-import 'package:account_book_app/view/auth/sign_up.dart';
+import 'package:account_book_app/view/auth/sign_up_mail.dart';
+import 'package:account_book_app/view/auth/sign_up_pass.dart';
 import 'package:account_book_app/view/auth/top.dart';
 import 'package:flutter/material.dart';
 
@@ -14,15 +14,24 @@ class Auth extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final switcherState = ref.watch(authSwitcherPriovider);
+    final mailController = TextEditingController(text: "");
+    final passController = TextEditingController(text: "");
+    final nameController = TextEditingController(text: "");
 
-    if (switcherState == Pages.top) {
-      return const Top();
-    } else if (switcherState == Pages.signIn) {
-      return const Top();
-    } else if (switcherState == Pages.signUp) {
-      return const SignUp();
-    } else {
-      return const Top();
+    switch (switcherState) {
+      case AuthPages.top:
+        return const Top();
+      case AuthPages.signUpEmail:
+        return SignUpMail(
+          mailController: mailController,
+        );
+      case AuthPages.signUpPassword:
+        return SignUpPassword(
+          nameController: nameController,
+          passController: passController,
+        );
+      default:
+        return const Top();
     }
   }
 }

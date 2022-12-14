@@ -42,53 +42,44 @@ class AuthController extends StateNotifier<User?> {
     }
   }
 
-  Future<void> signUp(String email, String password, String name,
-      ValueNotifier<bool> loading) async {
+  Future<void> signUp(
+    String email,
+    String password,
+    String name,
+  ) async {
     try {
-      if (!validate(email, password, name)) return showToast("no-data");
-
-      final flg =
-          await ref.read(authRepositoryProvider).signUp(email, password, name);
-      loading.value = false;
-      if (flg == String) {
-        showToast(flg.toString());
-      } else {
-        await ref.read(authRepositoryProvider).saveUserData(
-              name,
-              flg as UserCredential,
-            );
-      }
+      await ref.read(authRepositoryProvider).signUp(email, password, name);
     } catch (e) {
       throw e.toString();
     }
   }
 
-  Future<void> signUpWithGoogle(ValueNotifier<bool> loading) async {
-    try {
-      final credential =
-          await ref.read(authRepositoryProvider).signInWithGoogle();
-      if (credential == null) {
-        return;
-      }
-      await ref.read(authRepositoryProvider).saveUserData(
-            credential.user!.displayName!,
-            credential,
-          );
-      loading.value = false;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
+  // Future<void> signUpWithGoogle(ValueNotifier<bool> loading) async {
+  //   try {
+  //     final credential =
+  //         await ref.read(authRepositoryProvider).signInWithGoogle();
+  //     if (credential == null) {
+  //       return;
+  //     }
+  //     // await ref.read(authRepositoryProvider).saveUserData(
+  //     //       credential.user!.displayName!,
+  //     //       credential,
+  //     //     );
+  //     loading.value = false;
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 
-  Future<void> signInWithGoogle(ValueNotifier<bool> loading) async {
-    try {
-      await ref.read(authRepositoryProvider).signInWithGoogle();
+  // Future<void> signInWithGoogle(ValueNotifier<bool> loading) async {
+  //   try {
+  //     await ref.read(authRepositoryProvider).signInWithGoogle();
 
-      loading.value = false;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
+  //     loading.value = false;
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 
   Future<void> signOut(Function() function) async {
     await ref.read(authRepositoryProvider).signOut();
@@ -153,10 +144,10 @@ class AuthController extends StateNotifier<User?> {
   }
 
   Future<void> addGenre(String genre, bool ie) async {
-    if (ie == true) {
-      ref.read(authRepositoryProvider).addGenre(genre);
-    } else {
-      ref.read(authRepositoryProvider).addGenre2(genre);
-    }
+    // if (ie == true) {
+    //   ref.read(authRepositoryProvider).addGenre(genre);
+    // } else {
+    //   ref.read(authRepositoryProvider).addGenre2(genre);
+    // }
   }
 }

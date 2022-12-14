@@ -6,8 +6,9 @@ enum PageType {
   setting,
 }
 
-enum Pages {
+enum AuthPages {
   top,
-  signUp,
+  signUpEmail,
+  signUpPassword,
   signIn,
 }

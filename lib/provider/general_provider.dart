@@ -20,7 +20,7 @@ final authControllerProvider =
         (ref) => AuthController(ref));
 
 final authSwitcherPriovider =
-    StateProvider.autoDispose<Pages>((ref) => Pages.top);
+    StateProvider.autoDispose<AuthPages>((ref) => AuthPages.top);
 
 final pageTypeProvider =
     StateProvider.autoDispose<PageType>((ref) => PageType.account);
