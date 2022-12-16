@@ -1,8 +1,9 @@
+import 'package:account_book_app/component/auth/shadow_button.dart';
+import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../component/auth/normal_button.dart';
-import '../../constant/enums.dart';
-import '../../provider/general_provider.dart';
+
 import '../theme/app_theme.dart';
 
 class Top extends HookConsumerWidget {
@@ -10,40 +11,67 @@ class Top extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final switcherCTL = ref.watch(authSwitcherPriovider.notifier);
     final theme = ref.watch(appThemeProvider);
+    final authCTL = ref.watch(authControllerProvider.notifier);
 
     return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "○○○○",
-                  style: theme.textTheme.fs33
-                      .copyWith(fontWeight: FontWeight.w700),
-                ),
-                const Spacer(),
-                NormalButton(
-                  text: "新規登録",
-                  function: () {
-                    switcherCTL.state = AuthPages.signUpEmail;
-                  },
-                ),
-                NormalButton(
-                  text: "ログイン",
-                  function: () {
-                    switcherCTL.state = AuthPages.signIn;
-                  },
-                ),
-              ],
+      body: Stack(
+        children: [
+          Image.network(
+            "https://i.pinimg.com/736x/63/cd/98/63cd989ececcace76faa147586f2fa47--nice.jpg",
+            fit: BoxFit.fill,
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(height: 50),
+                  Text(
+                    "仮の名前",
+                    style: theme.textTheme.fs33.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "仮の簡単な説明仮の\n仮の簡単な説明仮の仮の",
+                    style: theme.textTheme.fs21,
+                    textAlign: TextAlign.center,
+                  ),
+                  const Spacer(),
+                  ShadowButton(
+                    text: "Googleでサインアップ",
+                    function: () async {
+                      await authCTL.signInWithGoogle();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  ShadowButton(
+                    text: "Appleでサインアップ",
+                    function: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  InkWell(
+                    onTap: () {
+                      // GoRouter.of(context).push('/tab');
+                      GoRouter.of(context).push('/tab2/テストテキスト');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text("利用規約"),
+                        Text(" | "),
+                        Text("プライバシーポリシー"),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

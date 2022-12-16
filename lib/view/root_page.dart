@@ -4,18 +4,13 @@ import 'package:account_book_app/view/pages/setting/setting.dart';
 import 'package:account_book_app/view/pages/statistic/statistic.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../provider/general_provider.dart';
-import 'pages/account/account.dart';
-import 'pages/saving/saving.dart';
 
 class RootPage extends HookConsumerWidget {
   RootPage({super.key});
   static const String id = "root_page";
 
   final List<Widget> _pageList = <Widget>[
-    const Saving(),
-    const AccountPage(),
     const Statistic(),
     const Setting(),
   ];
@@ -23,14 +18,6 @@ class RootPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pageState = ref.watch(pageTypeProvider);
     final tabItems = [
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.savings_outlined),
-        label: '節約',
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.monetization_on),
-        label: '家計簿',
-      ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.stacked_bar_chart),
         label: '統計',

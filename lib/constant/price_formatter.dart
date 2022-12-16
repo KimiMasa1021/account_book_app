@@ -23,4 +23,3 @@ class CustomTextInputFormatter extends TextInputFormatter {
     return newValue;
   }
 }
-// RegExp(r'[0-9]')
