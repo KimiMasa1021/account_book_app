@@ -13,9 +13,6 @@ final authControllerProvider =
     StateNotifierProvider.autoDispose<AuthController, User?>(
         (ref) => AuthController(ref));
 
-final pageTypeProvider =
-    StateProvider.autoDispose<PageType>((ref) => PageType.account);
-
 final incomeExpendSwicherProvider =
     StateProvider.autoDispose<bool>((ref) => true);
 final selectedSavingProvider = StateProvider.autoDispose<int>((ref) => 0);
@@ -24,7 +21,8 @@ final memberListProvider =
 final usersControllerProvider =
     StateNotifierProvider.autoDispose<UsersController, UsersState?>(
         (ref) => UsersController(ref));
-
+final pageTypeProvider =
+    StateProvider.autoDispose<PageType>((ref) => PageType.account);
 final accountControllerPrvider = StateNotifierProvider.autoDispose<
     AccountController,
     AsyncValue<List<AccountState>>>((ref) => AccountController(ref));

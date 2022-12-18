@@ -21,6 +21,7 @@ class AuthController extends StateNotifier<User?> {
     try {
       await ref.read(authRepositoryProvider).signInWithGoogle();
     } catch (e) {
+      debugPrint(e.toString());
       throw e.toString();
     }
   }

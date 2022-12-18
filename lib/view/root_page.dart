@@ -1,9 +1,9 @@
-import 'package:account_book_app/constant/enums.dart';
-import 'package:account_book_app/constant/hex_color.dart';
-import 'package:account_book_app/view/pages/setting/setting.dart';
-import 'package:account_book_app/view/pages/statistic/statistic.dart';
+import 'package:account_book_app/view/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../constant/enums.dart';
+import '../constant/hex_color.dart';
 import '../provider/general_provider.dart';
 
 class RootPage extends HookConsumerWidget {
@@ -11,20 +11,27 @@ class RootPage extends HookConsumerWidget {
   static const String id = "root_page";
 
   final List<Widget> _pageList = <Widget>[
-    const Statistic(),
-    const Setting(),
+    const Home(),
+    Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {},
+          child: const Text("ログアウト"),
+        ),
+      ),
+    ),
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageState = ref.watch(pageTypeProvider);
     final tabItems = [
       const BottomNavigationBarItem(
-        icon: Icon(Icons.stacked_bar_chart),
-        label: '統計',
+        icon: Icon(Icons.savings_outlined),
+        label: 'home',
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings),
-        label: '設定',
+        label: 'setting',
       ),
     ];
     return Scaffold(
