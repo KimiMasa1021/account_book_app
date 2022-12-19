@@ -89,7 +89,7 @@ class HomeDetails extends HookConsumerWidget {
                                     child: Transform.scale(
                                       scale: 1.15,
                                       child: CustomPaint(
-                                        painter: MyPainter(percent: 80),
+                                        painter: MyPainter(percent: 25),
                                       ),
                                     ),
                                   ),
