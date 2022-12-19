@@ -1,4 +1,5 @@
 import 'package:account_book_app/view/auth/top.dart';
+import 'package:account_book_app/view/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/general_provider.dart';
@@ -15,16 +16,7 @@ class Separate extends HookConsumerWidget {
     if (state == null) {
       return const Top();
     } else {
-      return Scaffold(
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              await ttt.signOut(() {});
-            },
-            child: const Text("ログアウト"),
-          ),
-        ),
-      );
+      return RootPage();
     }
   }
 }

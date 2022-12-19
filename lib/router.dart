@@ -1,4 +1,7 @@
 import 'package:account_book_app/view/auth/test2.dart';
+import 'package:account_book_app/view/pages/home/home_details.dart';
+import 'package:account_book_app/view/pages/home/target_add_details.dart';
+import 'package:account_book_app/view/pages/home/target_add_member.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,13 +28,27 @@ final routerProvider = Provider(
           );
         },
       ),
-      // GoRoute(
-      //   path: '/tab/:index/next/:number', // :hoge とすることでパラメタとして値を与えられる
-      //   builder: (context, state) {
-      //     final number = state.params['number'];
-      //     return TabNextScreen(number: number!);
-      //   },
-      // ),
+      GoRoute(
+        path: '/home/target_add_member',
+        name: TargetAddMember.name,
+        builder: (context, state) {
+          return const TargetAddMember();
+        },
+      ),
+      GoRoute(
+        path: '/home/target_add_details',
+        name: TargetAddDetails.name,
+        builder: (context, state) {
+          return const TargetAddDetails();
+        },
+      ),
+      GoRoute(
+        path: '/home/detail',
+        name: HomeDetails.name,
+        builder: (context, state) {
+          return const HomeDetails();
+        },
+      )
     ],
   ),
 );
