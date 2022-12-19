@@ -1,12 +1,11 @@
-import 'package:account_book_app/view/auth/test.dart';
 import 'package:account_book_app/view/pages/home/home.dart';
+import 'package:account_book_app/view/pages/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../constant/enums.dart';
 import '../constant/hex_color.dart';
 import '../provider/general_provider.dart';
-import 'pages/test/path_test.dart';
 
 class RootPage extends HookConsumerWidget {
   RootPage({super.key});
@@ -14,7 +13,7 @@ class RootPage extends HookConsumerWidget {
 
   final List<Widget> _pageList = <Widget>[
     const Home(),
-    const PathTest(),
+    const Setting(),
   ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {

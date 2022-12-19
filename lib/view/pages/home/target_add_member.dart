@@ -72,7 +72,7 @@ class TargetAddMember extends HookConsumerWidget {
                             width: 55,
                             height: 55,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
+                              borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
                               border: Border.all(),
                             ),
@@ -101,15 +101,15 @@ class TargetAddMember extends HookConsumerWidget {
                             width: 55,
                             height: 55,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
                               color: Colors.white,
                               border: Border.all(),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              "君成田昌大君成田昌大君成田昌大君成田昌大君成田昌大",
+                              "君成田昌大",
                               style: theme.textTheme.fs16,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -130,15 +130,15 @@ class TargetAddMember extends HookConsumerWidget {
                             width: 55,
                             height: 55,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
                               color: Colors.white,
                               border: Border.all(),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              "君成田昌大君成田昌大君成田昌大君成田昌大君成田昌大",
+                              "君成田しんや",
                               style: theme.textTheme.fs16,
                               overflow: TextOverflow.ellipsis,
                             ),
