@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+android/app/.json
 
 # IntelliJ related
 *.iml
@@ -31,7 +32,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-android/app/google-services.json
 # Symbolication related
 app.*.symbols
 
@@ -42,4 +42,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/android/app/google-services.json

@@ -59,14 +59,6 @@
           }
         },
         {
-          "client_id": "206137299973-e8m9fviq7op8mh2l480amcvdlpls34c1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.kmass.account_book_app",
-            "certificate_hash": "6083b34ffa777f81e13555fbad2273a538556138"
-          }
-        },
-        {
           "client_id": "206137299973-l7ev45mfnt3rk01jt48agucnj56ijfgp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
