@@ -19,7 +19,10 @@ class AuthController extends StateNotifier<User?> {
 
   Future<void> signInWithGoogle() async {
     try {
-      await ref.read(authRepositoryProvider).signInWithGoogle();
+      final credential =
+          await ref.read(authRepositoryProvider).signInWithGoogle();
+      if (credential == null) return;
+      await ref.read(authRepositoryProvider).saveUsesrData(credential);
     } catch (e) {
       debugPrint(e.toString());
       throw e.toString();

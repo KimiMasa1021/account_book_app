@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../provider/firebase_auth_provider.dart';
 import '../provider/firebase_firestore_provider.dart';
@@ -13,6 +14,7 @@ abstract class AuthRepository {
   Stream<User?> get authStateChange;
   Future<UserCredential?> signInWithGoogle();
   Future<void> signInWithApple();
+  Future<void> saveUsesrData(UserCredential credential);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -35,19 +37,39 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<UserCredential?> signInWithGoogle() async {
-    final googleUser = await GoogleSignIn(scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ]).signIn();
-    final googleAuth = await googleUser?.authentication;
-    if (googleAuth == null) {
+    try {
+      final googleUser = await GoogleSignIn(scopes: [
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ]).signIn();
+      final googleAuth = await googleUser?.authentication;
+      if (googleAuth == null) {
+        return null;
+      }
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      return FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
       return null;
     }
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    return FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  @override
+  Future<void> saveUsesrData(UserCredential credential) async {
+    try {
+      await storeCollectionReference!.doc(credential.user!.uid).set({
+        "friends": [],
+        "name": credential.user?.displayName ?? "名無しさん",
+        "uid": credential.user!.uid,
+        "email": credential.user!.email,
+        "img": credential.user?.photoURL ?? "",
+      });
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
   }
 
   @override

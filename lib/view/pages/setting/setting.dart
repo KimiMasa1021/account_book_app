@@ -2,6 +2,7 @@ import 'package:account_book_app/component/setting/setting_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
 
 class Setting extends HookConsumerWidget {
@@ -10,6 +11,7 @@ class Setting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
+    final userState = ref.watch(usersControllerProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -31,15 +33,25 @@ class Setting extends HookConsumerWidget {
                       height: 60,
                       margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
-                        border: Border.all(),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(userState!.img),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            offset: const Offset(0, 0),
+                            blurRadius: 6,
+                          )
+                        ],
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text("君成田昌大"),
-                        Text("k.massan46@gmail.com"),
+                      children: [
+                        Text(userState.name),
+                        Text(userState.email),
                       ],
                     ),
                     const Spacer(),
