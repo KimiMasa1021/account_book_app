@@ -1,8 +1,7 @@
 import 'package:account_book_app/constant/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
-
+import 'dart:math' as math;
 import '../../../component/home/home_details_tile.dart';
 import '../../theme/app_theme.dart';
 
@@ -42,6 +41,7 @@ class HomeDetails extends HookConsumerWidget {
       ),
       body: SafeArea(
         child: CustomScrollView(
+          clipBehavior: Clip.none,
           slivers: <Widget>[
             SliverAppBar(
               expandedHeight: 230,
@@ -82,34 +82,16 @@ class HomeDetails extends HookConsumerWidget {
                                   ),
                                 ),
                                 Align(
-                                  alignment: const Alignment(213, 123),
-                                  child: SfRadialGauge(
-                                    axes: [
-                                      RadialAxis(
-                                        showLabels: false,
-                                        showTicks: false,
-                                        startAngle: 180,
-                                        endAngle: 0,
-                                        radiusFactor: 1,
-                                        canScaleToFit: true,
-                                        axisLineStyle: const AxisLineStyle(
-                                          thickness: 0.2,
-                                          color: Color.fromARGB(
-                                              255, 153, 153, 153),
-                                          thicknessUnit: GaugeSizeUnit.factor,
-                                          cornerStyle: CornerStyle.bothCurve,
-                                        ),
-                                        pointers: const <GaugePointer>[
-                                          RangePointer(
-                                            color: Colors.red,
-                                            value: 50,
-                                            width: 0.2,
-                                            sizeUnit: GaugeSizeUnit.factor,
-                                            cornerStyle: CornerStyle.bothCurve,
-                                          )
-                                        ],
+                                  alignment: const Alignment(0, 0),
+                                  child: SizedBox(
+                                    width: 200,
+                                    height: 200,
+                                    child: Transform.scale(
+                                      scale: 1.15,
+                                      child: CustomPaint(
+                                        painter: MyPainter(percent: 80),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                                 Align(
@@ -135,22 +117,32 @@ class HomeDetails extends HookConsumerWidget {
                                 ),
                                 Align(
                                   alignment: Alignment.topRight,
-                                  child: Column(
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Text(
-                                        "目標金額",
-                                        style: theme.textTheme.fs19.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          const SizedBox(height: 10),
+                                          Text(
+                                            "目標金額",
+                                            style:
+                                                theme.textTheme.fs19.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            "1,050,300円",
+                                            style:
+                                                theme.textTheme.fs27.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "1,050,300円",
-                                        style: theme.textTheme.fs27.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      const SizedBox(width: 20),
                                     ],
                                   ),
                                 ),
@@ -216,4 +208,52 @@ class HomeDetails extends HookConsumerWidget {
       ),
     );
   }
+}
+
+class MyPainter extends CustomPainter {
+  MyPainter({required this.percent});
+  final double percent;
+  @override
+  void paint(Canvas canvas, Size size) {
+    double storeke = 20;
+    final bottom = Offset(size.width / 2, size.height / 1.2);
+    final backgroundPainter = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..color = Colors.black12
+      ..strokeWidth = storeke;
+    final progressPainter = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..color = const Color.fromARGB(255, 253, 255, 115)
+      ..strokeWidth = storeke;
+    //背景描画
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: bottom,
+        height: size.height,
+        width: size.width,
+      ),
+      math.pi,
+      math.pi,
+      false,
+      backgroundPainter,
+    );
+    //インジゲーター描画
+    double end = percent / 100;
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: bottom,
+        height: size.height,
+        width: size.width,
+      ),
+      math.pi,
+      math.pi * end,
+      false,
+      progressPainter,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
