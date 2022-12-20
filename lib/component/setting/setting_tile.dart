@@ -28,8 +28,8 @@ class SettingTile extends StatelessWidget {
             await leftFunction();
           },
           child: Container(
-            width: size.width * 0.35,
-            height: size.width * 0.35,
+            width: size.width * 0.3,
+            height: size.width * 0.3,
             margin: const EdgeInsets.only(bottom: 10),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -61,7 +61,7 @@ class SettingTile extends StatelessWidget {
               await rightFunction();
             },
             child: Container(
-              height: size.width * 0.35,
+              height: size.width * 0.33,
               margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
