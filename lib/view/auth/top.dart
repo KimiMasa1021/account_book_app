@@ -1,5 +1,6 @@
 import 'package:account_book_app/component/auth/shadow_button.dart';
 import 'package:account_book_app/provider/general_provider.dart';
+import 'package:account_book_app/view/auth/privacy_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -54,8 +55,7 @@ class Top extends HookConsumerWidget {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      // GoRouter.of(context).push('/tab');
-                      GoRouter.of(context).push('/tab2/テストテキスト');
+                      GoRouter.of(context).pushNamed(PrivacyPolicy.name);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

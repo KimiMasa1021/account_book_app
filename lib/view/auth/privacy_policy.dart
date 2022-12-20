@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Test extends StatelessWidget {
-  const Test({Key? key}) : super(key: key);
+class PrivacyPolicy extends StatelessWidget {
+  const PrivacyPolicy({Key? key}) : super(key: key);
+  static String name = "privacy_policy";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Tab',
+          'PrivacyPolicy',
         ),
       ),
     );

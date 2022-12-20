@@ -1,11 +1,9 @@
-import 'package:account_book_app/view/auth/test2.dart';
 import 'package:account_book_app/view/pages/home/home_details.dart';
 import 'package:account_book_app/view/pages/home/target_add_details.dart';
 import 'package:account_book_app/view/pages/home/target_add_member.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'view/auth/test.dart';
+import 'view/auth/privacy_policy.dart';
 import 'view/separate.dart';
 
 final routerProvider = Provider(
@@ -16,17 +14,8 @@ final routerProvider = Provider(
         builder: (context, state) => const Separate(),
       ),
       GoRoute(
-        path: '/tab',
-        builder: (context, state) => const Test(),
-      ),
-      GoRoute(
-        path: '/tab2/:text',
-        builder: (context, state) {
-          final text = state.params['text'];
-          return Test2(
-            testText: text!,
-          );
-        },
+        path: '/privacy_policy',
+        builder: (context, state) => const PrivacyPolicy(),
       ),
       GoRoute(
         path: '/home/target_add_member',
