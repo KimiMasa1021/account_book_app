@@ -22,11 +22,13 @@ TargetState _$TargetStateFromJson(Map<String, dynamic> json) {
 mixin _$TargetState {
   @TimestampConverter()
   DateTime get registeTime => throw _privateConstructorUsedError;
-  String get groupName => throw _privateConstructorUsedError;
   List<String> get members => throw _privateConstructorUsedError;
   String get target => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
+  String get targetDescription => throw _privateConstructorUsedError;
   int get targetPrice => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime get targetDate => throw _privateConstructorUsedError;
+  String get img => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,11 +44,12 @@ abstract class $TargetStateCopyWith<$Res> {
   @useResult
   $Res call(
       {@TimestampConverter() DateTime registeTime,
-      String groupName,
       List<String> members,
       String target,
-      String id,
-      int targetPrice});
+      String targetDescription,
+      int targetPrice,
+      @TimestampConverter() DateTime targetDate,
+      String img});
 }
 
 /// @nodoc
@@ -63,21 +66,18 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
   @override
   $Res call({
     Object? registeTime = null,
-    Object? groupName = null,
     Object? members = null,
     Object? target = null,
-    Object? id = null,
+    Object? targetDescription = null,
     Object? targetPrice = null,
+    Object? targetDate = null,
+    Object? img = null,
   }) {
     return _then(_value.copyWith(
       registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      groupName: null == groupName
-          ? _value.groupName
-          : groupName // ignore: cast_nullable_to_non_nullable
-              as String,
       members: null == members
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
@@ -86,14 +86,22 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      targetDescription: null == targetDescription
+          ? _value.targetDescription
+          : targetDescription // ignore: cast_nullable_to_non_nullable
               as String,
       targetPrice: null == targetPrice
           ? _value.targetPrice
           : targetPrice // ignore: cast_nullable_to_non_nullable
               as int,
+      targetDate: null == targetDate
+          ? _value.targetDate
+          : targetDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      img: null == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -108,11 +116,12 @@ abstract class _$$_TargetStateCopyWith<$Res>
   @useResult
   $Res call(
       {@TimestampConverter() DateTime registeTime,
-      String groupName,
       List<String> members,
       String target,
-      String id,
-      int targetPrice});
+      String targetDescription,
+      int targetPrice,
+      @TimestampConverter() DateTime targetDate,
+      String img});
 }
 
 /// @nodoc
@@ -127,21 +136,18 @@ class __$$_TargetStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? registeTime = null,
-    Object? groupName = null,
     Object? members = null,
     Object? target = null,
-    Object? id = null,
+    Object? targetDescription = null,
     Object? targetPrice = null,
+    Object? targetDate = null,
+    Object? img = null,
   }) {
     return _then(_$_TargetState(
       registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      groupName: null == groupName
-          ? _value.groupName
-          : groupName // ignore: cast_nullable_to_non_nullable
-              as String,
       members: null == members
           ? _value._members
           : members // ignore: cast_nullable_to_non_nullable
@@ -150,14 +156,22 @@ class __$$_TargetStateCopyWithImpl<$Res>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as String,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      targetDescription: null == targetDescription
+          ? _value.targetDescription
+          : targetDescription // ignore: cast_nullable_to_non_nullable
               as String,
       targetPrice: null == targetPrice
           ? _value.targetPrice
           : targetPrice // ignore: cast_nullable_to_non_nullable
               as int,
+      targetDate: null == targetDate
+          ? _value.targetDate
+          : targetDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      img: null == img
+          ? _value.img
+          : img // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -167,11 +181,12 @@ class __$$_TargetStateCopyWithImpl<$Res>
 class _$_TargetState extends _TargetState {
   _$_TargetState(
       {@TimestampConverter() required this.registeTime,
-      this.groupName = "",
       final List<String> members = const [],
       this.target = "",
-      this.id = "",
-      this.targetPrice = 0})
+      this.targetDescription = "",
+      this.targetPrice = 0,
+      @TimestampConverter() required this.targetDate,
+      this.img = ""})
       : _members = members,
         super._();
 
@@ -181,9 +196,6 @@ class _$_TargetState extends _TargetState {
   @override
   @TimestampConverter()
   final DateTime registeTime;
-  @override
-  @JsonKey()
-  final String groupName;
   final List<String> _members;
   @override
   @JsonKey()
@@ -197,14 +209,20 @@ class _$_TargetState extends _TargetState {
   final String target;
   @override
   @JsonKey()
-  final String id;
+  final String targetDescription;
   @override
   @JsonKey()
   final int targetPrice;
+  @override
+  @TimestampConverter()
+  final DateTime targetDate;
+  @override
+  @JsonKey()
+  final String img;
 
   @override
   String toString() {
-    return 'TargetState(registeTime: $registeTime, groupName: $groupName, members: $members, target: $target, id: $id, targetPrice: $targetPrice)';
+    return 'TargetState(registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img)';
   }
 
   @override
@@ -214,19 +232,28 @@ class _$_TargetState extends _TargetState {
             other is _$_TargetState &&
             (identical(other.registeTime, registeTime) ||
                 other.registeTime == registeTime) &&
-            (identical(other.groupName, groupName) ||
-                other.groupName == groupName) &&
             const DeepCollectionEquality().equals(other._members, _members) &&
             (identical(other.target, target) || other.target == target) &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.targetDescription, targetDescription) ||
+                other.targetDescription == targetDescription) &&
             (identical(other.targetPrice, targetPrice) ||
-                other.targetPrice == targetPrice));
+                other.targetPrice == targetPrice) &&
+            (identical(other.targetDate, targetDate) ||
+                other.targetDate == targetDate) &&
+            (identical(other.img, img) || other.img == img));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, registeTime, groupName,
-      const DeepCollectionEquality().hash(_members), target, id, targetPrice);
+  int get hashCode => Object.hash(
+      runtimeType,
+      registeTime,
+      const DeepCollectionEquality().hash(_members),
+      target,
+      targetDescription,
+      targetPrice,
+      targetDate,
+      img);
 
   @JsonKey(ignore: true)
   @override
@@ -245,11 +272,12 @@ class _$_TargetState extends _TargetState {
 abstract class _TargetState extends TargetState {
   factory _TargetState(
       {@TimestampConverter() required final DateTime registeTime,
-      final String groupName,
       final List<String> members,
       final String target,
-      final String id,
-      final int targetPrice}) = _$_TargetState;
+      final String targetDescription,
+      final int targetPrice,
+      @TimestampConverter() required final DateTime targetDate,
+      final String img}) = _$_TargetState;
   _TargetState._() : super._();
 
   factory _TargetState.fromJson(Map<String, dynamic> json) =
@@ -259,15 +287,18 @@ abstract class _TargetState extends TargetState {
   @TimestampConverter()
   DateTime get registeTime;
   @override
-  String get groupName;
-  @override
   List<String> get members;
   @override
   String get target;
   @override
-  String get id;
+  String get targetDescription;
   @override
   int get targetPrice;
+  @override
+  @TimestampConverter()
+  DateTime get targetDate;
+  @override
+  String get img;
   @override
   @JsonKey(ignore: true)
   _$$_TargetStateCopyWith<_$_TargetState> get copyWith =>

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../component/setting/friend_tile_with_radio.dart';
+import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
 
 class TargetAddMember extends HookConsumerWidget {
@@ -13,11 +15,19 @@ class TargetAddMember extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
+    final friends = ref.watch(friendsListControllerProvider);
+    final userState = ref.watch(usersControllerProvider);
+    final targetInit = ref.watch(targetInitControllerProvider);
+    final targetInitCTL = ref.watch(targetInitControllerProvider.notifier);
 
+    debugPrint(targetInit.targetController.toString());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text("メンバーを選択", style: theme.textTheme.fs16),
+        title: Text(
+          "メンバーを選択",
+          style: theme.textTheme.fs16,
+        ),
         titleTextStyle: const TextStyle(
           color: Colors.black,
         ),
@@ -71,88 +81,80 @@ class TargetAddMember extends HookConsumerWidget {
                           Container(
                             width: 55,
                             height: 55,
+                            margin: const EdgeInsets.only(bottom: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
-                              border: Border.all(),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  userState!.img,
+                                ),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  offset: const Offset(0, 0),
+                                  blurRadius: 6,
+                                )
+                              ],
                             ),
                           ),
                           Text("あなた", style: theme.textTheme.fs16)
                         ],
                       ),
                     ),
+                    ...List.generate(
+                      targetInit.selectedUserList.length,
+                      (index) => SizedBox(
+                        width: 60,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 55,
+                              height: 55,
+                              margin: const EdgeInsets.only(bottom: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    targetInit.selectedUserList[index].img,
+                                  ),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    offset: const Offset(0, 0),
+                                    blurRadius: 6,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Text(
+                              targetInit.selectedUserList[index].name,
+                              style: theme.textTheme.fs16,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
             ),
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 55,
-                            height: 55,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              "君成田昌大",
-                              style: theme.textTheme.fs16,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Radio(
-                            value: true,
-                            onChanged: (val) {},
-                            groupValue: "null",
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 55,
-                            height: 55,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              "君成田しんや",
-                              style: theme.textTheme.fs16,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Radio(
-                            value: true,
-                            onChanged: (val) {},
-                            groupValue: "null",
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: ListView.builder(
+                itemCount: friends.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return FriendTileWithRadio(
+                    usersState: friends[index],
+                  );
+                },
               ),
             ),
           ),

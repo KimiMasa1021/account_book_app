@@ -116,20 +116,21 @@ class HomeDetails extends HookConsumerWidget {
                                   ),
                                 ),
                                 Align(
-                                  alignment: Alignment.topRight,
+                                  alignment: Alignment.topLeft,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
+                                      const SizedBox(width: 10),
                                       Column(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          const SizedBox(height: 10),
+                                          const SizedBox(height: 0),
                                           Text(
                                             "目標金額",
                                             style:
-                                                theme.textTheme.fs19.copyWith(
+                                                theme.textTheme.fs16.copyWith(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -142,7 +143,6 @@ class HomeDetails extends HookConsumerWidget {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(width: 20),
                                     ],
                                   ),
                                 ),

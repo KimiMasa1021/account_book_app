@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../constant/timestamp_converter.dart';
 part 'saving_state.freezed.dart';
 part 'saving_state.g.dart';
@@ -10,10 +9,11 @@ part 'saving_state.g.dart';
 class SavingState with _$SavingState {
   const SavingState._();
   factory SavingState({
-    @TimestampConverter() required DateTime registeTime,
-    @Default(0) int price,
+    @TimestampConverter() required DateTime createdAt,
+    @Default("") String productId,
+    @Default("") String userId,
     @Default("") String memo,
-    @Default("") String member,
+    @Default(0) int price,
   }) = _SavingState;
 
   factory SavingState.fromJson(Map<String, dynamic> json) =>

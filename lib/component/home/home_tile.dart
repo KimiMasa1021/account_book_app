@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constant/hex_color.dart';
+import '../../model/target_state.dart';
 import '../../view/theme/app_theme.dart';
 
 class HomeTile extends HookConsumerWidget {
@@ -11,10 +12,12 @@ class HomeTile extends HookConsumerWidget {
     required this.target,
     required this.description,
     required this.percent,
+    required this.state,
   });
   final String target;
   final String description;
   final double percent;
+  final TargetState state;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,6 +42,18 @@ class HomeTile extends HookConsumerWidget {
                   decoration: BoxDecoration(
                     color: Colors.red,
                     borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        state.img,
+                      ),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.3),
+                        offset: const Offset(0, 0),
+                        blurRadius: 3,
+                      )
+                    ],
                   ),
                 ),
                 Expanded(
@@ -46,13 +61,13 @@ class HomeTile extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        target,
+                        state.target,
                         style: theme.textTheme.fs19.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        description,
+                        state.targetDescription,
                         style: theme.textTheme.fs16,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

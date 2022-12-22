@@ -1,5 +1,7 @@
 import 'package:account_book_app/component/setting/setting_tile.dart';
+import 'package:account_book_app/view/pages/setting/friends_management/friends_management.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../provider/general_provider.dart';
@@ -68,7 +70,9 @@ class Setting extends HookConsumerWidget {
                   leftFunction: () {},
                   rightIcon: Icons.groups,
                   rightTitle: "フレンド管理",
-                  rightFunction: () {},
+                  rightFunction: () {
+                    context.pushNamed(FriendsManagement.name);
+                  },
                 ),
                 SettingTile(
                   leftIcon: Icons.help,

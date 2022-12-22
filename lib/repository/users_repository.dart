@@ -75,10 +75,9 @@ class GenreRepositoryImple implements UsersRepository {
     final date = DateTime.now().toString();
 
     String uploadName = "$date$userId.png";
-    final storageRef = ref
-        .read(firebaseStorageProvider)
-        .ref()
-        .child('usersImage/$userId/$uploadName');
+    final storageRef = ref.read(firebaseStorageProvider).ref().child(
+          'Image/$uploadName',
+        );
 
     await storageRef.putFile(image);
     return await storageRef.getDownloadURL();

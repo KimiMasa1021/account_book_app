@@ -1,5 +1,6 @@
 import 'package:account_book_app/component/home/home_tile.dart';
 import 'package:account_book_app/constant/hex_color.dart';
+import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/view/pages/home/target_add_member.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +13,7 @@ class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
+    final target = ref.watch(targetControllerProvider);
 
     return SafeArea(
       child: Padding(
@@ -60,20 +62,14 @@ class Home extends HookConsumerWidget {
                         child: Text("広告"),
                       ),
                     ),
-                    const HomeTile(
-                      target: "新しいパソコン",
-                      description: "gtx4090新しいパソコン新しいパソコン新しいパソコン新しいパソコン",
-                      percent: 0.7,
-                    ),
-                    const HomeTile(
-                      target: "草津温泉旅行",
-                      description: "gtx409",
-                      percent: 0.249,
-                    ),
-                    const HomeTile(
-                      target: "新しいパソコン",
-                      description: "gtx4090新しいパソコン新しいパソコン新しいパソコン新しいパソコン",
-                      percent: 0.46,
+                    ...List.generate(
+                      target.length,
+                      (index) => HomeTile(
+                        state: target[index],
+                        target: target[index].target,
+                        description: "gtx4090新しいパソコン新しいパソコン新しいパソコン新しいパソコン",
+                        percent: 0.46,
+                      ),
                     ),
                   ],
                 ),
