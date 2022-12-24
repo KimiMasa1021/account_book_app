@@ -13,45 +13,68 @@ final targetRepositoryProvider =
 abstract class TargetRepository {
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachTarget();
   Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving();
+  Future<void> addSaving(SavingState state);
 }
 
 class TargetRepositoryImple implements TargetRepository {
   final Ref ref;
-  CollectionReference? collectionReference;
+  CollectionReference? targetCollectionReference;
+
   User? user;
 
   TargetRepositoryImple(this.ref) {
-    collectionReference =
+    targetCollectionReference =
         ref.read(firebaseFireStoreProvider).collection("targets");
+
     user = ref.read(firebaseAuthProvider).currentUser;
   }
 
   @override
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachTarget() async* {
-    final stateRef = collectionReference!
-        .where("members", arrayContains: user!.uid)
-        .orderBy("registeTime")
-        .withConverter<TargetState>(
-          fromFirestore: (snapshot, _) =>
-              TargetState.fromJson(snapshot.data()!),
-          toFirestore: (data, _) => data.toJson(),
-        );
+    try {
+      final stateRef = targetCollectionReference!
+          .where("members", arrayContains: user!.uid)
+          .orderBy("registeTime")
+          .withConverter<TargetState>(
+            fromFirestore: (snapshot, _) =>
+                TargetState.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          );
 
-    yield* stateRef.snapshots().map((doc) => doc.docs);
+      yield* stateRef.snapshots().map((doc) => doc.docs);
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
   }
 
   @override
   Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving() async* {
-    final stateRef = ref
-        .read(firebaseFireStoreProvider)
-        .collectionGroup("saving")
-        .orderBy("registeTime")
-        .withConverter<SavingState>(
-          fromFirestore: (snapshot, _) =>
-              SavingState.fromJson(snapshot.data()!),
-          toFirestore: (data, _) => data.toJson(),
-        );
+    try {
+      final stateRef = ref
+          .read(firebaseFireStoreProvider)
+          .collectionGroup("saving")
+          // .orderBy("registeTime")
+          .withConverter<SavingState>(
+            fromFirestore: (snapshot, _) =>
+                SavingState.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          );
 
-    yield* stateRef.snapshots().map((doc) => doc.docs);
+      yield* stateRef.snapshots().map((doc) => doc.docs);
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> addSaving(SavingState state) async {
+    try {
+      await targetCollectionReference!
+          .doc(state.productId)
+          .collection("saving")
+          .add(state.toJson());
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
   }
 }

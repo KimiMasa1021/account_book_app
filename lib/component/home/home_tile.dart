@@ -1,6 +1,4 @@
-import 'package:account_book_app/view/pages/home/home_details.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constant/hex_color.dart';
 import '../../model/target_state.dart';
@@ -9,23 +7,24 @@ import '../../view/theme/app_theme.dart';
 class HomeTile extends HookConsumerWidget {
   const HomeTile({
     super.key,
-    required this.target,
-    required this.description,
-    required this.percent,
+    required this.sum,
     required this.state,
+    required this.function,
   });
-  final String target;
-  final String description;
-  final double percent;
+
+  final int sum;
   final TargetState state;
+  final Function() function;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
 
+    final percent = sum / state.targetPrice;
+
     return InkWell(
-      onTap: () {
-        context.pushNamed(HomeDetails.name);
+      onTap: () async {
+        await function();
       },
       child: Container(
         margin: const EdgeInsets.only(top: 12),
@@ -61,7 +60,7 @@ class HomeTile extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        state.target,
+                        "${state.target} (${state.members.length})",
                         style: theme.textTheme.fs19.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -110,7 +109,7 @@ class HomeTile extends HookConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Text(
-                    "${(percent * 100).floor()}%",
+                    "${(percent * 100).toStringAsFixed(1)}%",
                     style: theme.textTheme.fs19.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

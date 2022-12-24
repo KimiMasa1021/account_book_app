@@ -6,10 +6,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../../component/large_text_field.dart';
-import '../../../constant/price_formatter.dart';
-import '../../../provider/general_provider.dart';
-import '../../theme/app_theme.dart';
+import '../../../../component/large_text_field.dart';
+import '../../../../constant/price_formatter.dart';
+import '../../../../provider/general_provider.dart';
+import '../../../theme/app_theme.dart';
 
 class TargetAddDetails extends HookConsumerWidget {
   const TargetAddDetails({super.key});

@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../provider/general_provider.dart';
 import '../../view/theme/app_theme.dart';
 
 class HomeDetailsTile extends HookConsumerWidget {
-  const HomeDetailsTile({super.key});
+  const HomeDetailsTile({
+    super.key,
+    required this.price,
+    required this.member,
+    required this.memo,
+  });
+  final int price;
+  final String member;
+  final String memo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
+    final savingCTL = ref.watch(savingControllerProvider.notifier);
 
     return Container(
       height: 70,
@@ -29,9 +39,10 @@ class HomeDetailsTile extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "50,000円",
+                savingCTL.formatYen(price),
                 style: theme.textTheme.fs27.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -40,7 +51,7 @@ class HomeDetailsTile extends HookConsumerWidget {
                 children: [
                   const Icon(Icons.person),
                   Text(
-                    "君成田昌大",
+                    member,
                     style: theme.textTheme.fs16,
                   ),
                 ],
@@ -48,10 +59,7 @@ class HomeDetailsTile extends HookConsumerWidget {
             ],
           ),
           const Spacer(),
-          Text(
-            "缶ジュース",
-            style: theme.textTheme.fs16,
-          )
+          Text(memo, style: theme.textTheme.fs16)
         ],
       ),
     );

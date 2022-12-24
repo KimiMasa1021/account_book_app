@@ -2,7 +2,6 @@ import 'package:account_book_app/view/pages/setting/friends_management/friends_a
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
 
@@ -12,7 +11,8 @@ class FriendsManagement extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final friends = ref.watch(friendsListControllerProvider);
+    final userState = ref.watch(usersControllerProvider);
+    final friends = ref.watch(friendsControllerProvider(userState!.friends));
     final theme = ref.watch(appThemeProvider);
 
     return Scaffold(

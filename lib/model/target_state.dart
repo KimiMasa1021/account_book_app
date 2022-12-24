@@ -9,6 +9,7 @@ part 'target_state.g.dart';
 class TargetState with _$TargetState {
   const TargetState._();
   factory TargetState({
+    @Default("") String docId,
     @TimestampConverter() required DateTime registeTime,
     @Default([]) List<String> members,
     @Default("") String target,

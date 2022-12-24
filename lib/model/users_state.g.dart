@@ -11,7 +11,10 @@ _$_UsersState _$$_UsersStateFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String? ?? "",
       uid: json['uid'] as String? ?? "",
       name: json['name'] as String? ?? "",
-      friends: json['friends'] as List<dynamic>? ?? const [],
+      friends: (json['friends'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       img: json['img'] as String? ?? "",
     );
 

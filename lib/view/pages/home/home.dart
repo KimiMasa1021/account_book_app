@@ -1,11 +1,12 @@
 import 'package:account_book_app/component/home/home_tile.dart';
 import 'package:account_book_app/constant/hex_color.dart';
 import 'package:account_book_app/provider/general_provider.dart';
-import 'package:account_book_app/view/pages/home/target_add_member.dart';
+import 'package:account_book_app/view/pages/home/additional_screen/target_add_member.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../theme/app_theme.dart';
+import 'detail/details.dart';
 
 class Home extends HookConsumerWidget {
   const Home({super.key});
@@ -14,6 +15,8 @@ class Home extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
     final target = ref.watch(targetControllerProvider);
+    final saving = ref.watch(savingControllerProvider);
+    final allUser = ref.watch(allUsersControllerProvider);
 
     return SafeArea(
       child: Padding(
@@ -33,8 +36,7 @@ class Home extends HookConsumerWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      GoRouter.of(context).pushNamed(TargetAddMember.name);
-                      // context.go("/home/target");
+                      context.goNamed(TargetAddMember.name);
                     },
                     child: const Icon(
                       Icons.group_add,
@@ -64,12 +66,32 @@ class Home extends HookConsumerWidget {
                     ),
                     ...List.generate(
                       target.length,
-                      (index) => HomeTile(
-                        state: target[index],
-                        target: target[index].target,
-                        description: "gtx4090新しいパソコン新しいパソコン新しいパソコン新しいパソコン",
-                        percent: 0.46,
-                      ),
+                      (index) {
+                        final priceList = saving
+                            .where((e) => e.productId == target[index].docId)
+                            .map((e) => e.price)
+                            .toList();
+                        int? sum;
+                        if (priceList.isEmpty) {
+                          sum = 0;
+                        } else {
+                          sum = priceList.reduce((a, b) => a + b);
+                        }
+
+                        return HomeTile(
+                          state: target[index],
+                          sum: sum,
+                          function: () {
+                            context.pushNamed(
+                              HomeDetails.name,
+                              params: {
+                                'docId': target[index].docId,
+                                'sum': sum.toString(),
+                              },
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),

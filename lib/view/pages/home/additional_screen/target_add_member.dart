@@ -1,12 +1,12 @@
 import 'package:account_book_app/constant/hex_color.dart';
-import 'package:account_book_app/view/pages/home/target_add_details.dart';
+import 'package:account_book_app/view/pages/home/additional_screen/target_add_details.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../component/setting/friend_tile_with_radio.dart';
-import '../../../provider/general_provider.dart';
-import '../../theme/app_theme.dart';
+import '../../../../component/setting/friend_tile_with_radio.dart';
+import '../../../../provider/general_provider.dart';
+import '../../../theme/app_theme.dart';
 
 class TargetAddMember extends HookConsumerWidget {
   const TargetAddMember({super.key});
@@ -15,12 +15,10 @@ class TargetAddMember extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
-    final friends = ref.watch(friendsListControllerProvider);
     final userState = ref.watch(usersControllerProvider);
+    final friends = ref.watch(friendsControllerProvider(userState!.friends));
     final targetInit = ref.watch(targetInitControllerProvider);
-    final targetInitCTL = ref.watch(targetInitControllerProvider.notifier);
 
-    debugPrint(targetInit.targetController.toString());
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
