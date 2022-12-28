@@ -8,12 +8,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../theme/app_theme.dart';
 
 class Top extends HookConsumerWidget {
-  const Top({super.key});
+  const Top({
+    super.key,
+    required this.flg,
+  });
+  static String name = "top";
+  final ValueNotifier<bool> flg;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
     final authCTL = ref.watch(authControllerProvider.notifier);
+    final tags = ref.watch(tagsControllerProvider);
+    final tagsCTL = ref.watch(tagsControllerProvider.notifier);
 
     return Scaffold(
       body: Stack(
@@ -44,7 +51,12 @@ class Top extends HookConsumerWidget {
                   ShadowButton(
                     text: "Googleでサインアップ",
                     function: () async {
-                      await authCTL.signInWithGoogle();
+                      flg.value = false;
+                      final newUser = await authCTL.signInWithGoogle();
+                      if (newUser || tags.isEmpty) {
+                        await tagsCTL.insertTags();
+                      }
+                      flg.value = true;
                     },
                   ),
                   const SizedBox(height: 20),

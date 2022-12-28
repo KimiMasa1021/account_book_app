@@ -29,9 +29,7 @@ class AllUsersRepositoryImple implements AllUsersRepository {
 
   @override
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachFriends() async* {
-    final stateRef = collectionReference!
-        // .where('friends', arrayContains: userId)
-        .withConverter<UsersState>(
+    final stateRef = collectionReference!.withConverter<UsersState>(
       fromFirestore: (snapshot, _) => UsersState.fromJson(snapshot.data()!),
       toFirestore: (data, _) => data.toJson(),
     );

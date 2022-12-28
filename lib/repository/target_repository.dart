@@ -53,7 +53,7 @@ class TargetRepositoryImple implements TargetRepository {
       final stateRef = ref
           .read(firebaseFireStoreProvider)
           .collectionGroup("saving")
-          // .orderBy("registeTime")
+          .orderBy("createdAt")
           .withConverter<SavingState>(
             fromFirestore: (snapshot, _) =>
                 SavingState.fromJson(snapshot.data()!),

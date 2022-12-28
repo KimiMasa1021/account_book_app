@@ -36,7 +36,7 @@ class Home extends HookConsumerWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      context.goNamed(TargetAddMember.name);
+                      context.pushNamed(TargetAddMember.name);
                     },
                     child: const Icon(
                       Icons.group_add,
@@ -67,26 +67,13 @@ class Home extends HookConsumerWidget {
                     ...List.generate(
                       target.length,
                       (index) {
-                        final priceList = saving
-                            .where((e) => e.productId == target[index].docId)
-                            .map((e) => e.price)
-                            .toList();
-                        int? sum;
-                        if (priceList.isEmpty) {
-                          sum = 0;
-                        } else {
-                          sum = priceList.reduce((a, b) => a + b);
-                        }
-
                         return HomeTile(
                           state: target[index],
-                          sum: sum,
                           function: () {
                             context.pushNamed(
                               HomeDetails.name,
                               params: {
                                 'docId': target[index].docId,
-                                'sum': sum.toString(),
                               },
                             );
                           },

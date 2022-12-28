@@ -7,7 +7,7 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double storeke = 20;
-    final bottom = Offset(size.width / 2, size.height / 1.2);
+    final bottom = Offset(size.width / 2, size.height / 1.1);
     final backgroundPainter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round

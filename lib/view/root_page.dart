@@ -8,15 +8,15 @@ import '../constant/hex_color.dart';
 import '../provider/general_provider.dart';
 
 class RootPage extends HookConsumerWidget {
-  RootPage({super.key});
-  static const String id = "root_page";
+  const RootPage({super.key});
+  static const String name = "root_page";
 
-  final List<Widget> _pageList = <Widget>[
-    const Home(),
-    const Setting(),
-  ];
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final List<Widget> _pageList = <Widget>[
+      const Home(),
+      const Setting(),
+    ];
     final pageState = ref.watch(pageTypeProvider);
     final tabItems = [
       const BottomNavigationBarItem(

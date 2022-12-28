@@ -1,5 +1,6 @@
 import 'package:account_book_app/constant/hex_color.dart';
 import 'package:account_book_app/view/pages/home/additional_screen/target_add_details.dart';
+import 'package:account_book_app/view/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,7 +32,7 @@ class TargetAddMember extends HookConsumerWidget {
         ),
         leading: InkWell(
           onTap: () {
-            context.go("/");
+            context.pop();
           },
           child: const Icon(
             Icons.arrow_back,
@@ -85,7 +86,7 @@ class TargetAddMember extends HookConsumerWidget {
                               color: Colors.white,
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  userState!.img,
+                                  userState.img,
                                 ),
                               ),
                               boxShadow: [

@@ -17,12 +17,16 @@ class AuthController extends StateNotifier<User?> {
         .listen((user) => state = user);
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     try {
       final credential =
           await ref.read(authRepositoryProvider).signInWithGoogle();
-      if (credential == null) return;
-      await ref.read(authRepositoryProvider).saveUsesrData(credential);
+
+      if (credential == null) return false;
+      if (credential.additionalUserInfo!.isNewUser) {
+        await ref.read(authRepositoryProvider).saveUsesrData(credential);
+      }
+      return credential.additionalUserInfo!.isNewUser;
     } catch (e) {
       debugPrint(e.toString());
       throw e.toString();

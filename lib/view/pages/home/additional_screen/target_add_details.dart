@@ -32,7 +32,7 @@ class TargetAddDetails extends HookConsumerWidget {
         ),
         leading: InkWell(
           onTap: () {
-            Navigator.pop(context);
+            context.pop();
           },
           child: const Icon(
             Icons.arrow_back,
