@@ -3,20 +3,18 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
 import '../../../../provider/general_provider.dart';
 
 class FriendsQrScan extends HookConsumerWidget {
   FriendsQrScan({super.key});
 
-  static String name = "friends_qr_scan";
   QRViewController? controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
     final loading = useState(false);
-    // final friendCTL = ref.watch(friendsListControllerProvider.notifier);
+    final friendCTL = ref.watch(friendControllerProvider.notifier);
     final usersState = ref.watch(usersControllerProvider);
 
     return Stack(
@@ -43,18 +41,19 @@ class FriendsQrScan extends HookConsumerWidget {
                       QRView(
                         key: qrKey,
                         onQRViewCreated: (controller) async {
-                          // this.controller = controller;
-                          // controller.pauseCamera();
-                          // controller.resumeCamera();
-                          // controller.scannedDataStream.listen(
-                          //   (scanData) async {
-                          //     loading.value = true;
-                          //     await Future.delayed(const Duration(seconds: 2));
-                          //     await friendCTL
-                          //         .searchUser(scanData.code.toString());
-                          //     loading.value = false;
-                          //   },
-                          // );
+                          this.controller = controller;
+                          controller.pauseCamera();
+                          controller.resumeCamera();
+                          controller.scannedDataStream.listen(
+                            (scanData) async {
+                              loading.value = true;
+                              await friendCTL.testFriendAdd(
+                                usersState!.uid,
+                                scanData.code.toString(),
+                              );
+                              loading.value = false;
+                            },
+                          );
                         },
                         overlay: QrScannerOverlayShape(
                           borderColor: Colors.white,

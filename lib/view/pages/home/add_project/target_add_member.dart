@@ -1,17 +1,14 @@
 import 'package:account_book_app/constant/hex_color.dart';
-import 'package:account_book_app/view/pages/home/additional_screen/target_add_details.dart';
-import 'package:account_book_app/view/root_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../component/setting/friend_tile_with_radio.dart';
 import '../../../../provider/general_provider.dart';
+import '../../../../provider/route/routes.dart';
 import '../../../theme/app_theme.dart';
 
 class TargetAddMember extends HookConsumerWidget {
   const TargetAddMember({super.key});
-  static String name = "target_add_member";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +22,7 @@ class TargetAddMember extends HookConsumerWidget {
         elevation: 0,
         title: Text(
           "メンバーを選択",
-          style: theme.textTheme.fs16,
+          style: theme.textTheme.fs19,
         ),
         titleTextStyle: const TextStyle(
           color: Colors.black,
@@ -43,7 +40,7 @@ class TargetAddMember extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.pushNamed(TargetAddDetails.name);
+              context.pushNamed(Routes.name().addProjectDetails);
             },
             padding: const EdgeInsets.only(right: 10),
             icon: Text(
@@ -84,11 +81,13 @@ class TargetAddMember extends HookConsumerWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  userState.img,
-                                ),
-                              ),
+                              image: userState.img != ""
+                                  ? DecorationImage(
+                                      image: NetworkImage(
+                                        userState.img,
+                                      ),
+                                    )
+                                  : null,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.3),
@@ -115,11 +114,15 @@ class TargetAddMember extends HookConsumerWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.white,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    targetInit.selectedUserList[index].img,
-                                  ),
-                                ),
+                                image:
+                                    targetInit.selectedUserList[index].img != ""
+                                        ? DecorationImage(
+                                            image: NetworkImage(
+                                              targetInit
+                                                  .selectedUserList[index].img,
+                                            ),
+                                          )
+                                        : null,
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.3),

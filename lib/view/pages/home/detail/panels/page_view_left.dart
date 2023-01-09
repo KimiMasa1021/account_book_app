@@ -1,13 +1,12 @@
-import 'dart:math';
 import 'package:account_book_app/component/detail/graph_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../../constant/hex_color.dart';
-import '../../../../model/target_state.dart';
-import '../../../../provider/general_provider.dart';
-import '../../../theme/app_theme.dart';
+import '../../../../../constant/hex_color.dart';
+import '../../../../../model/target_state.dart';
+import '../../../../../provider/general_provider.dart';
+import '../../../../theme/app_theme.dart';
 
 class PageViewLeft extends HookConsumerWidget {
   const PageViewLeft({
@@ -24,11 +23,10 @@ class PageViewLeft extends HookConsumerWidget {
 
     final date = useState(DateTime.now());
     final additionalDay = date.value.subtract(const Duration(days: 7));
-    final savingList = saving
-        .where((e) =>
-            e.productId == target.docId && e.createdAt.isAfter(additionalDay))
-        .toList();
-
+    final savingList =
+        saving.where((e) => e.productId == target.docId).toList();
+    final dateDifference =
+        target.targetDate.difference(target.registeTime).inDays;
     final week = [
       "月",
       "火",
@@ -57,7 +55,7 @@ class PageViewLeft extends HookConsumerWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      date.value = date.value.add(const Duration(days: 7));
+                      date.value = date.value.subtract(const Duration(days: 7));
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(right: 10),
@@ -77,7 +75,7 @@ class PageViewLeft extends HookConsumerWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      date.value = date.value.subtract(const Duration(days: 7));
+                      date.value = date.value.add(const Duration(days: 7));
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),
@@ -99,8 +97,6 @@ class PageViewLeft extends HookConsumerWidget {
                     return const CircularProgressIndicator();
                   }
                   final doubleList = snapshot.data!;
-                  final weeklySaving =
-                      target.targetDate.difference(DateTime.now()).inDays / 7;
 
                   return SizedBox(
                     height: double.infinity,
@@ -110,7 +106,7 @@ class PageViewLeft extends HookConsumerWidget {
                         7,
                         (index) {
                           double percent = doubleList[index] /
-                              (target.targetPrice / weeklySaving);
+                              (target.targetPrice / dateDifference);
                           return GraphBar(
                             weekText: week[date.value
                                     .subtract(Duration(days: index))
@@ -120,12 +116,20 @@ class PageViewLeft extends HookConsumerWidget {
                             color: index != 6
                                 ? HexColor("#70D4F7")
                                 : Colors.red.withOpacity(0.8),
+                            price: doubleList[index],
                           );
                         },
                       ),
                     ),
                   );
                 },
+              ),
+            ),
+            Text(
+              "１日当たり${(target.targetPrice / dateDifference).round()}円で達成できます!!",
+              style: theme.textTheme.fs16.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
             ),
           ],

@@ -5,15 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../provider/route/routes.dart';
 import '../theme/app_theme.dart';
 
-class Top extends HookConsumerWidget {
-  const Top({
-    super.key,
-    required this.flg,
-  });
-  static String name = "top";
-  final ValueNotifier<bool> flg;
+class Auth extends HookConsumerWidget {
+  const Auth({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,12 +47,10 @@ class Top extends HookConsumerWidget {
                   ShadowButton(
                     text: "Googleでサインアップ",
                     function: () async {
-                      flg.value = false;
                       final newUser = await authCTL.signInWithGoogle();
                       if (newUser || tags.isEmpty) {
                         await tagsCTL.insertTags();
                       }
-                      flg.value = true;
                     },
                   ),
                   const SizedBox(height: 20),
@@ -67,7 +61,7 @@ class Top extends HookConsumerWidget {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      GoRouter.of(context).pushNamed(PrivacyPolicy.name);
+                      context.goNamed(Routes.name().privacyPolicy);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

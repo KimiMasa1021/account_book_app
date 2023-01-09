@@ -12,7 +12,6 @@ class SavingAdd extends HookConsumerWidget {
     super.key,
     required this.docId,
   });
-  static String name = "saving_add";
   final String docId;
 
   @override
@@ -46,25 +45,30 @@ class SavingAdd extends HookConsumerWidget {
             child: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
-                color: Colors.grey,
+                color: Color.fromARGB(255, 243, 231, 255),
               ),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Wrap(
-                    spacing: 5,
-                    runSpacing: 10,
-                    alignment: WrapAlignment.center,
-                    children: List.generate(
-                      tags.length,
-                      (index) => Tag(
-                        tagValue: tagValue,
-                        tag: tags[index],
+              child: FutureBuilder<void>(
+                future: tagsCTL.getTags(),
+                builder: (context, snapshot) {
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      child: Wrap(
+                        spacing: 5,
+                        runSpacing: 10,
+                        alignment: WrapAlignment.center,
+                        children: List.generate(
+                          tags.length,
+                          (index) => Tag(
+                            tagValue: tagValue,
+                            tag: tags[index],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           ),
@@ -83,6 +87,9 @@ class SavingAdd extends HookConsumerWidget {
                       inputFormatters: [
                         CustomTextInputFormatter(),
                       ],
+                      onFieldSubmitted: (val) {
+                        debugPrint(val.toString());
+                      },
                       style: theme.textTheme.fs27,
                       decoration: InputDecoration(
                         hintText: "金額を入力",
@@ -97,14 +104,16 @@ class SavingAdd extends HookConsumerWidget {
                 ),
                 InkWell(
                   onTap: () async {
-                    await savingCTL.addSaving(
-                      docId,
-                      tags.singleWhere((e) => e.id == tagValue.value).tag,
-                      priceController.text,
-                      () {
-                        context.pop();
-                      },
-                    );
+                    if (savingCTL.checkSavingAdd(priceController, tagValue)) {
+                      await savingCTL.addSaving(
+                        docId,
+                        tags.singleWhere((e) => e.id == tagValue.value).tag,
+                        priceController.text,
+                        () {
+                          context.pop();
+                        },
+                      );
+                    }
                   },
                   child: Container(
                     width: 90,

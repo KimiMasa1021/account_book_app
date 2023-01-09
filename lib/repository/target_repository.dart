@@ -1,11 +1,11 @@
 import 'package:account_book_app/model/saving_state.dart';
 import 'package:account_book_app/model/target_state.dart';
-import 'package:account_book_app/provider/firebase_firestore_provider.dart';
+import 'package:account_book_app/provider/firebase/firebase_firestore_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../provider/firebase_auth_provider.dart';
+import '../provider/firebase/firebase_auth_provider.dart';
 
 final targetRepositoryProvider =
     Provider<TargetRepository>((ref) => TargetRepositoryImple(ref));
@@ -53,7 +53,10 @@ class TargetRepositoryImple implements TargetRepository {
       final stateRef = ref
           .read(firebaseFireStoreProvider)
           .collectionGroup("saving")
-          .orderBy("createdAt")
+          .orderBy(
+            "createdAt",
+            descending: true,
+          )
           .withConverter<SavingState>(
             fromFirestore: (snapshot, _) =>
                 SavingState.fromJson(snapshot.data()!),

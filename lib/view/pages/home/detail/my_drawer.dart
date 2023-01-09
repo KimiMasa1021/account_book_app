@@ -1,5 +1,7 @@
 import 'package:account_book_app/model/target_state.dart';
+import 'package:account_book_app/view/pages/home/detail/edit_project.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -54,12 +56,14 @@ class MyDrawer extends HookConsumerWidget {
                     margin: const EdgeInsets.only(right: 7, bottom: 5),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          target.img,
-                        ),
-                      ),
+                      shape: BoxShape.circle,
+                      image: target.img != ""
+                          ? DecorationImage(
+                              image: NetworkImage(
+                                target.img,
+                              ),
+                            )
+                          : null,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
@@ -68,6 +72,14 @@ class MyDrawer extends HookConsumerWidget {
                         )
                       ],
                     ),
+                    child: target.img == ""
+                        ? FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Text(
+                              target.target.substring(0, 3),
+                            ),
+                          )
+                        : const SizedBox(),
                   ),
                   Expanded(
                     child: Column(
@@ -111,7 +123,8 @@ class MyDrawer extends HookConsumerWidget {
                 title: "プロジェクトの編集",
                 icon: Icons.settings,
                 function: () {
-                  debugPrint("プロジェクトの編集");
+                  Navigator.pop(context);
+                  // context.goNamed(EditProject.name);
                 },
               ),
               DrawerTile(

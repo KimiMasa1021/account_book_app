@@ -1,13 +1,12 @@
-import 'package:account_book_app/view/pages/setting/friends_management/friends_add_description.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/general_provider.dart';
+import '../../../../provider/route/routes.dart';
 import '../../../theme/app_theme.dart';
 
 class FriendsManagement extends HookConsumerWidget {
   const FriendsManagement({super.key});
-  static String name = "friends_management";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +20,7 @@ class FriendsManagement extends HookConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              context.pushNamed(FriendsAddDescription.name);
+              context.pushNamed(Routes.name().addFriendDescription);
             },
             icon: const Icon(Icons.person_add),
           ),

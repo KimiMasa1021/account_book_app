@@ -1,12 +1,10 @@
-import 'package:account_book_app/view/pages/setting/friends_management/friends_qr_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../component/auth/shadow_button.dart';
+import '../../../../provider/route/routes.dart';
 
 class FriendsAddDescription extends StatelessWidget {
   const FriendsAddDescription({super.key});
-  static String name = "friends_add_description";
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class FriendsAddDescription extends StatelessWidget {
             ShadowButton(
               text: "QRコードで追加",
               function: () {
-                context.pushNamed(FriendsQrScan.name);
+                context.pushNamed(Routes.name().scanQr);
               },
             ),
             const SizedBox(height: 20),

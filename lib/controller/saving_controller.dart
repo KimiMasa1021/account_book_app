@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SavingController extends StateNotifier<List<SavingState>> {
   final Ref ref;
@@ -33,6 +34,19 @@ class SavingController extends StateNotifier<List<SavingState>> {
     return '${numberFormat.format(targetPrice)}円';
   }
 
+  String formatDate(DateTime date) {
+    final week = [
+      "月",
+      "火",
+      "水",
+      "木",
+      "金",
+      "土",
+      "日",
+    ];
+    return "${DateFormat("MM月dd日(").format(date)}${week[date.weekday - 1]})";
+  }
+
   Future<List<int>> culcWeeklyList(
     List<SavingState> savingList,
     ValueNotifier<DateTime> date,
@@ -59,5 +73,36 @@ class SavingController extends StateNotifier<List<SavingState>> {
 
       return test.reduce((a, b) => a + b);
     });
+  }
+
+  bool checkSavingAdd(
+    TextEditingController priceController,
+    ValueNotifier<int?> tagValue,
+  ) {
+    if (priceController.text == "" && tagValue.value == null) {
+      showToast("すべて入力してね");
+      return false;
+    }
+    if (priceController.text == "") {
+      showToast("金額を入力してね");
+      return false;
+    }
+    if (tagValue.value == null) {
+      showToast("タグを選択してね");
+      return false;
+    }
+    return true;
+  }
+
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      textColor: const Color.fromARGB(255, 255, 255, 255),
+      fontSize: 16.0,
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:account_book_app/controller/auth_controller.dart';
+import 'package:account_book_app/controller/friend_controller.dart';
 import 'package:account_book_app/controller/target_init_controller.dart';
 import 'package:account_book_app/model/target_init.dart';
 import 'package:account_book_app/model/target_state.dart';
@@ -28,7 +29,7 @@ final allUsersControllerProvider =
     StateNotifierProvider<AllUsersController, List<UsersState>>(
         (ref) => AllUsersController(ref));
 final targetControllerProvider =
-    StateNotifierProvider<TargetController, List<TargetState>>(
+    StateNotifierProvider<TargetController, AsyncValue<List<TargetState>>>(
         (ref) => TargetController(ref));
 
 final targetInitControllerProvider =
@@ -48,3 +49,6 @@ final friendsControllerProvider = Provider.family(
 final tagsControllerProvider =
     StateNotifierProvider<TagsController, List<Tags>>(
         (ref) => TagsController(ref));
+final friendControllerProvider =
+    StateNotifierProvider<FriendController, String>(
+        (ref) => FriendController(ref));

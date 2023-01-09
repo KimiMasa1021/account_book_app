@@ -31,12 +31,26 @@ class TagsController extends StateNotifier<List<Tags>> {
       });
     });
   }
+  final List<String> tagList = [
+    "お菓子",
+    "課金",
+    "ジュース",
+    "食費",
+    "たばこ",
+    "酒",
+    "外食費",
+    "日用品",
+    "被服費・美容費",
+    "娯楽",
+    "交通費",
+    "自炊した！！",
+    "コンビニ",
+  ];
   Future<void> insertTags() async {
     await database.transaction((txn) async {
-      await txn.rawInsert('INSERT INTO tags(tag) VALUES("たばこ")');
-      await txn.rawInsert('INSERT INTO tags(tag) VALUES("酒")');
-      await txn.rawInsert('INSERT INTO tags(tag) VALUES("お菓子")');
-      await txn.rawInsert('INSERT INTO tags(tag) VALUES("課金")');
+      for (var tag in tagList) {
+        await txn.rawInsert('INSERT INTO tags(tag) VALUES("$tag")');
+      }
     });
   }
 

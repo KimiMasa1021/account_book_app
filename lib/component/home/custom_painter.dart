@@ -31,7 +31,7 @@ class MyPainter extends CustomPainter {
       backgroundPainter,
     );
     //インジゲーター描画
-    double end = percent / 100;
+    double end = percent;
     canvas.drawArc(
       Rect.fromCenter(
         center: bottom,

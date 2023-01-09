@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:account_book_app/model/target_init.dart';
 import 'package:account_book_app/model/target_state.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -79,6 +80,12 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
     );
   }
 
+  void removeImage() {
+    state = state.copyWith(
+      file: null,
+    );
+  }
+
   final DateTime _date = DateTime.now();
 
   Future<void> pickTargetDate(BuildContext context) async {
@@ -99,8 +106,9 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
   }
 
   Future<void> createNewTarget(Function() function) async {
-    final url =
-        await ref.read(usersRepositoryProvider).uploadImage(state.file!);
+    final url = state.file != null
+        ? await ref.read(usersRepositoryProvider).uploadImage(state.file!)
+        : "";
     final members = state.selectedUserList.map((e) => e.uid).toList();
     final price =
         int.parse(state.targetPriceController!.text.replaceAll(",", ""));
@@ -116,5 +124,28 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
     );
     await ref.read(targetInitRepositoryProvider).createTarget(targetState);
     function();
+  }
+
+  bool checkDetails() {
+    if (state.targetController!.text == "" ||
+        state.targetPriceController!.text == "" ||
+        state.targetDescriptionController!.text == "" ||
+        state.targetDateController == null) {
+      shwoToast("すべて必須項目です");
+      return false;
+    }
+    return true;
+  }
+
+  void shwoToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      textColor: const Color.fromARGB(255, 255, 255, 255),
+      fontSize: 16.0,
+    );
   }
 }

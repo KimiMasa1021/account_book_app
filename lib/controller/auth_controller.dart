@@ -7,11 +7,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class AuthController extends StateNotifier<User?> {
   final Ref ref;
 
-  StreamSubscription<User?>? _authStateChangesSubscription;
+  StreamSubscription<User?>? authStateChangesSubscription;
 
   AuthController(this.ref) : super(null) {
-    _authStateChangesSubscription?.cancel();
-    _authStateChangesSubscription = ref
+    authStateChangesSubscription?.cancel();
+    authStateChangesSubscription = ref
         .read(authRepositoryProvider)
         .authStateChange
         .listen((user) => state = user);
@@ -40,7 +40,7 @@ class AuthController extends StateNotifier<User?> {
 
   @override
   void dispose() {
-    _authStateChangesSubscription?.cancel();
+    authStateChangesSubscription?.cancel();
     super.dispose();
   }
 }

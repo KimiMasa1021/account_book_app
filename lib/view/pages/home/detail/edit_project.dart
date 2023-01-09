@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PrivacyPolicy extends StatelessWidget {
-  const PrivacyPolicy({Key? key}) : super(key: key);
+class EditProject extends StatelessWidget {
+  const EditProject({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'PrivacyPolicy',
-        ),
+        title: const Text("プロジェクトの編集"),
       ),
     );
   }

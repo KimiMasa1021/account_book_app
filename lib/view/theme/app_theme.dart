@@ -50,11 +50,11 @@ class AppTheme {
     );
   }
   factory AppTheme.dark() {
-    const mode = ThemeMode.light;
-    final appColors = AppColors.light();
-    final themeData = ThemeData.light().copyWith(
+    const mode = ThemeMode.dark;
+    final appColors = AppColors.dark();
+    final themeData = ThemeData.dark().copyWith(
       scaffoldBackgroundColor: appColors.background,
-      textTheme: GoogleFonts.notoSansTextTheme(ThemeData.light().textTheme),
+      textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: appColors.err,
         behavior: SnackBarBehavior.floating,

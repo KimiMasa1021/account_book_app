@@ -1,9 +1,8 @@
 import 'package:account_book_app/component/setting/setting_tile.dart';
-import 'package:account_book_app/view/pages/setting/friends_management/friends_management.dart';
+import 'package:account_book_app/provider/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -37,9 +36,13 @@ class Setting extends HookConsumerWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: NetworkImage(userState!.img),
-                        ),
+                        image: userState!.img != ""
+                            ? DecorationImage(
+                                image: NetworkImage(
+                                  userState.img,
+                                ),
+                              )
+                            : null,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.3),
@@ -71,7 +74,7 @@ class Setting extends HookConsumerWidget {
                   rightIcon: Icons.groups,
                   rightTitle: "フレンド管理",
                   rightFunction: () {
-                    context.pushNamed(FriendsManagement.name);
+                    context.pushNamed(Routes.name().friendManagement);
                   },
                 ),
                 SettingTile(

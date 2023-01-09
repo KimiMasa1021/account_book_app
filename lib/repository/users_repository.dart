@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:account_book_app/provider/firebase_storage.dart';
+import 'package:account_book_app/provider/firebase/firebase_storage.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/users_state.dart';
-import '../provider/firebase_firestore_provider.dart';
+import '../provider/firebase/firebase_firestore_provider.dart';
 
 final usersRepositoryProvider =
     Provider<UsersRepository>((ref) => GenreRepositoryImple(ref));
