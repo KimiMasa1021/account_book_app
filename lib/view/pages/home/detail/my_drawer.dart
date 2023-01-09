@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../component/detail/drawer_panel.dart';
-import '../../../../component/detail/drawer_tile.dart';
+import '../../../component/detail/drawer_panel.dart';
+import '../../../component/detail/drawer_tile.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../../component/home/custom_painter.dart';
+import '../../../../component/home/custom_painter.dart';
 import '../../../../../constant/hex_color.dart';
 import '../../../../../model/target_state.dart';
 import '../../../../../provider/general_provider.dart';

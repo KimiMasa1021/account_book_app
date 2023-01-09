@@ -1,4 +1,4 @@
-import 'package:account_book_app/component/setting/setting_tile.dart';
+import 'package:account_book_app/view/component/setting/setting_tile.dart';
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

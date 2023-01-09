@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../constant/hex_color.dart';
-import '../../model/target_state.dart';
-import '../../provider/general_provider.dart';
-import '../../view/theme/app_theme.dart';
+import '../../../constant/hex_color.dart';
+import '../../../model/target_state.dart';
+import '../../../provider/general_provider.dart';
+import '../../theme/app_theme.dart';
 
 class HomeTile extends HookConsumerWidget {
   const HomeTile({

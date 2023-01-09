@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../view/theme/app_theme.dart';
+import '../../theme/app_theme.dart';
 
 class Tag extends HookConsumerWidget {
   const Tag({

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../component/init/picture_dialog.dart';
+import '../../../component/init/picture_dialog.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
 

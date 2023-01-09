@@ -1,4 +1,4 @@
-import 'package:account_book_app/component/home/home_tile.dart';
+import 'package:account_book_app/view/component/home/home_tile.dart';
 import 'package:account_book_app/constant/hex_color.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';

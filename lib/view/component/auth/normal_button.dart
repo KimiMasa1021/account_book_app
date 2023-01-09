@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../view/theme/app_theme.dart';
+import '../../theme/app_theme.dart';
 
 class NormalButton extends HookConsumerWidget {
   const NormalButton({

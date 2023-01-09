@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constant/hex_color.dart';
+import '../../../constant/hex_color.dart';
 
 class PictureDialog extends StatelessWidget {
   const PictureDialog({

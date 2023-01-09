@@ -1,10 +1,10 @@
-import 'package:account_book_app/component/normal_text_field.dart';
+import 'package:account_book_app/view/component/normal_text_field.dart';
 import 'package:account_book_app/constant/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../../component/large_text_field.dart';
+import '../../../component/large_text_field.dart';
 import '../../../../constant/price_formatter.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';

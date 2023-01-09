@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../component/auth/shadow_button.dart';
+import '../../../component/auth/shadow_button.dart';
 import '../../../../provider/route/routes.dart';
 
 class FriendsAddDescription extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:account_book_app/component/auth/shadow_button.dart';
+import 'package:account_book_app/view/component/auth/shadow_button.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/view/auth/privacy_policy.dart';
 import 'package:flutter/material.dart';
