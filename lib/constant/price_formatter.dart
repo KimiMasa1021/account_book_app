@@ -8,7 +8,7 @@ class CustomTextInputFormatter extends TextInputFormatter {
     if (newValue.text.length > 24) {
       return oldValue;
     }
-    if (newValue.text.contains(RegExp(r'[a-zA-Z-._]'))) {
+    if (newValue.text.contains(RegExp(r'[a-zA-Z-._ ]'))) {
       return oldValue;
     }
     if (newValue.text.length >= 4) {

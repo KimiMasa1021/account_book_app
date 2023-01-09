@@ -21,10 +21,11 @@ SavingState _$SavingStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SavingState {
   @TimestampConverter()
-  DateTime get registeTime => throw _privateConstructorUsedError;
-  int get price => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  String get productId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
-  String get member => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,10 +40,11 @@ abstract class $SavingStateCopyWith<$Res> {
       _$SavingStateCopyWithImpl<$Res, SavingState>;
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime registeTime,
-      int price,
+      {@TimestampConverter() DateTime createdAt,
+      String productId,
+      String userId,
       String memo,
-      String member});
+      int price});
 }
 
 /// @nodoc
@@ -58,28 +60,33 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? registeTime = null,
-    Object? price = null,
+    Object? createdAt = null,
+    Object? productId = null,
+    Object? userId = null,
     Object? memo = null,
-    Object? member = null,
+    Object? price = null,
   }) {
     return _then(_value.copyWith(
-      registeTime: null == registeTime
-          ? _value.registeTime
-          : registeTime // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int,
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      member: null == member
-          ? _value.member
-          : member // ignore: cast_nullable_to_non_nullable
-              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -93,10 +100,11 @@ abstract class _$$_SavingStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime registeTime,
-      int price,
+      {@TimestampConverter() DateTime createdAt,
+      String productId,
+      String userId,
       String memo,
-      String member});
+      int price});
 }
 
 /// @nodoc
@@ -110,28 +118,33 @@ class __$$_SavingStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? registeTime = null,
-    Object? price = null,
+    Object? createdAt = null,
+    Object? productId = null,
+    Object? userId = null,
     Object? memo = null,
-    Object? member = null,
+    Object? price = null,
   }) {
     return _then(_$_SavingState(
-      registeTime: null == registeTime
-          ? _value.registeTime
-          : registeTime // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int,
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
-      member: null == member
-          ? _value.member
-          : member // ignore: cast_nullable_to_non_nullable
-              as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -140,10 +153,11 @@ class __$$_SavingStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SavingState extends _SavingState {
   _$_SavingState(
-      {@TimestampConverter() required this.registeTime,
-      this.price = 0,
+      {@TimestampConverter() required this.createdAt,
+      this.productId = "",
+      this.userId = "",
       this.memo = "",
-      this.member = ""})
+      this.price = 0})
       : super._();
 
   factory _$_SavingState.fromJson(Map<String, dynamic> json) =>
@@ -151,20 +165,23 @@ class _$_SavingState extends _SavingState {
 
   @override
   @TimestampConverter()
-  final DateTime registeTime;
+  final DateTime createdAt;
   @override
   @JsonKey()
-  final int price;
+  final String productId;
+  @override
+  @JsonKey()
+  final String userId;
   @override
   @JsonKey()
   final String memo;
   @override
   @JsonKey()
-  final String member;
+  final int price;
 
   @override
   String toString() {
-    return 'SavingState(registeTime: $registeTime, price: $price, memo: $memo, member: $member)';
+    return 'SavingState(createdAt: $createdAt, productId: $productId, userId: $userId, memo: $memo, price: $price)';
   }
 
   @override
@@ -172,17 +189,19 @@ class _$_SavingState extends _SavingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SavingState &&
-            (identical(other.registeTime, registeTime) ||
-                other.registeTime == registeTime) &&
-            (identical(other.price, price) || other.price == price) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.memo, memo) || other.memo == memo) &&
-            (identical(other.member, member) || other.member == member));
+            (identical(other.price, price) || other.price == price));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, registeTime, price, memo, member);
+      Object.hash(runtimeType, createdAt, productId, userId, memo, price);
 
   @JsonKey(ignore: true)
   @override
@@ -200,10 +219,11 @@ class _$_SavingState extends _SavingState {
 
 abstract class _SavingState extends SavingState {
   factory _SavingState(
-      {@TimestampConverter() required final DateTime registeTime,
-      final int price,
+      {@TimestampConverter() required final DateTime createdAt,
+      final String productId,
+      final String userId,
       final String memo,
-      final String member}) = _$_SavingState;
+      final int price}) = _$_SavingState;
   _SavingState._() : super._();
 
   factory _SavingState.fromJson(Map<String, dynamic> json) =
@@ -211,13 +231,15 @@ abstract class _SavingState extends SavingState {
 
   @override
   @TimestampConverter()
-  DateTime get registeTime;
+  DateTime get createdAt;
   @override
-  int get price;
+  String get productId;
+  @override
+  String get userId;
   @override
   String get memo;
   @override
-  String get member;
+  int get price;
   @override
   @JsonKey(ignore: true)
   _$$_SavingStateCopyWith<_$_SavingState> get copyWith =>

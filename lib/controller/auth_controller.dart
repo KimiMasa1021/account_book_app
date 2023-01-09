@@ -7,22 +7,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class AuthController extends StateNotifier<User?> {
   final Ref ref;
 
-  StreamSubscription<User?>? _authStateChangesSubscription;
+  StreamSubscription<User?>? authStateChangesSubscription;
 
   AuthController(this.ref) : super(null) {
-    _authStateChangesSubscription?.cancel();
-    _authStateChangesSubscription = ref
+    authStateChangesSubscription?.cancel();
+    authStateChangesSubscription = ref
         .read(authRepositoryProvider)
         .authStateChange
         .listen((user) => state = user);
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     try {
       final credential =
           await ref.read(authRepositoryProvider).signInWithGoogle();
-      if (credential == null) return;
-      await ref.read(authRepositoryProvider).saveUsesrData(credential);
+
+      if (credential == null) return false;
+      if (credential.additionalUserInfo!.isNewUser) {
+        await ref.read(authRepositoryProvider).saveUsesrData(credential);
+      }
+      return credential.additionalUserInfo!.isNewUser;
     } catch (e) {
       debugPrint(e.toString());
       throw e.toString();
@@ -36,7 +40,7 @@ class AuthController extends StateNotifier<User?> {
 
   @override
   void dispose() {
-    _authStateChangesSubscription?.cancel();
+    authStateChangesSubscription?.cancel();
     super.dispose();
   }
 }

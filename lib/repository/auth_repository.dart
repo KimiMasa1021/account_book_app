@@ -1,10 +1,14 @@
+import 'package:account_book_app/model/tags_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../provider/firebase_auth_provider.dart';
-import '../provider/firebase_firestore_provider.dart';
+import 'package:sqflite/sqflite.dart';
+import '../provider/firebase/firebase_auth_provider.dart';
+import '../provider/firebase/firebase_firestore_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:collection/collection.dart';
+import 'package:path/path.dart';
 
 final authRepositoryProvider =
     Provider<AuthRepository>((ref) => AuthRepositoryImpl(ref));
@@ -50,6 +54,7 @@ class AuthRepositoryImpl implements AuthRepository {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
+
       return FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);

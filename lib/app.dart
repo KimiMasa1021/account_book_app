@@ -1,4 +1,4 @@
-import 'package:account_book_app/router.dart';
+import 'package:account_book_app/provider/route/router_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,12 +14,14 @@ class MyApp extends HookConsumerWidget {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      routeInformationProvider: router.routeInformationProvider,
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
+      routeInformationProvider:
+          ref.watch(routerProvider).routeInformationProvider,
+      routeInformationParser: ref.watch(routerProvider).routeInformationParser,
+      routerDelegate: ref.watch(routerProvider).routerDelegate,
       theme: theme.data,
       darkTheme: AppTheme.dark().data,
-      themeMode: themeMode,
+      // themeMode: themeMode,
+      themeMode: ThemeMode.light,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

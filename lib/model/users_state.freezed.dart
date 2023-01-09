@@ -23,7 +23,7 @@ mixin _$UsersState {
   String get email => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<dynamic> get friends => throw _privateConstructorUsedError;
+  List<String> get friends => throw _privateConstructorUsedError;
   String get img => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $UsersStateCopyWith<$Res> {
       {String email,
       String uid,
       String name,
-      List<dynamic> friends,
+      List<String> friends,
       String img});
 }
 
@@ -81,7 +81,7 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
       friends: null == friends
           ? _value.friends
           : friends // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       img: null == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
@@ -102,7 +102,7 @@ abstract class _$$_UsersStateCopyWith<$Res>
       {String email,
       String uid,
       String name,
-      List<dynamic> friends,
+      List<String> friends,
       String img});
 }
 
@@ -139,7 +139,7 @@ class __$$_UsersStateCopyWithImpl<$Res>
       friends: null == friends
           ? _value._friends
           : friends // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       img: null == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
@@ -155,7 +155,7 @@ class _$_UsersState extends _UsersState {
       {this.email = "",
       this.uid = "",
       this.name = "",
-      final List<dynamic> friends = const [],
+      final List<String> friends = const [],
       this.img = ""})
       : _friends = friends,
         super._();
@@ -172,10 +172,10 @@ class _$_UsersState extends _UsersState {
   @override
   @JsonKey()
   final String name;
-  final List<dynamic> _friends;
+  final List<String> _friends;
   @override
   @JsonKey()
-  List<dynamic> get friends {
+  List<String> get friends {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_friends);
   }
@@ -225,7 +225,7 @@ abstract class _UsersState extends UsersState {
       {final String email,
       final String uid,
       final String name,
-      final List<dynamic> friends,
+      final List<String> friends,
       final String img}) = _$_UsersState;
   _UsersState._() : super._();
 
@@ -239,7 +239,7 @@ abstract class _UsersState extends UsersState {
   @override
   String get name;
   @override
-  List<dynamic> get friends;
+  List<String> get friends;
   @override
   String get img;
   @override
