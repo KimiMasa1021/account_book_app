@@ -28,7 +28,7 @@ String? noAuthGuard(Ref ref, GoRouterState state) {
   final isAuthenticated = ref.read(authProvider).value != null;
 
   if (isAuthenticated && state.location == Routes.path().auth) {
-    return Routes.path().home;
+    return Routes.path().root;
   } else {
     return null;
   }

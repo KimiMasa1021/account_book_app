@@ -1,5 +1,6 @@
 class Routes {
   const Routes({
+    required this.root,
     required this.auth,
     required this.privacyPolicy,
     required this.addProjectMember,
@@ -14,6 +15,7 @@ class Routes {
     required this.addFriendDescription,
     required this.scanQr,
   });
+  final String root;
   final String home;
   final String setting;
   final String auth;
@@ -30,6 +32,7 @@ class Routes {
 
   factory Routes.name() {
     return const Routes(
+      root: "root",
       auth: "auth",
       home: "home",
       setting: "setting",
@@ -51,8 +54,10 @@ class Routes {
       // ログイン
       auth: "/auth",
       privacyPolicy: "privacy_policy",
+      //ボトムバー
+      root: "/root",
       //　ホームタブ
-      home: "/home",
+      home: "home",
       addProjectMember: "add_project_member",
       addProjectDetails: "add_project_details",
       addProjectImage: "add_project_image",
@@ -60,7 +65,7 @@ class Routes {
       editProject: "edit_project",
       addSaving: "add_saving:targetId",
       //　設定タブ
-      setting: "/setting",
+      setting: "setting",
       friendManagement: "friend_management",
       addFriendDescription: "add_friend_description",
       scanQr: "scan_qr",

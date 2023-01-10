@@ -1,4 +1,5 @@
 import 'package:account_book_app/provider/route/routes.dart';
+import 'package:account_book_app/provider/route/transition_route.dart';
 import 'package:account_book_app/view/auth/auth.dart';
 import 'package:account_book_app/view/pages/home/add_project/target_add_image.dart';
 import 'package:account_book_app/view/pages/home/detail/details.dart';
@@ -10,26 +11,20 @@ import 'package:account_book_app/view/pages/setting/friends_management/friends_a
 import 'package:account_book_app/view/pages/setting/friends_management/friends_management.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_qr_scan.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
+import 'package:account_book_app/view/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../view/auth/privacy_policy.dart';
 import '../../view/pages/home/detail/saving_add.dart';
-import '../../view/top.dart';
 import 'guard.dart';
-
-final GlobalKey<NavigatorState> _rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'root');
-final GlobalKey<NavigatorState> _shellNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'shell');
 
 final routerProvider = Provider(
   (ref) => GoRouter(
-    navigatorKey: _rootNavigatorKey,
     refreshListenable: authStateNotifier,
     redirect: (context, state) => noAuthGuard(ref, state),
-    initialLocation: Routes.path().home,
+    initialLocation: Routes.path().root,
     routes: [
       //　ログイン画面
       GoRoute(
@@ -45,13 +40,14 @@ final routerProvider = Provider(
           ),
         ],
       ),
-
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (BuildContext context, GoRouterState state, Widget child) {
-          return ScaffoldWithNavBar(child: child);
+      GoRoute(
+        path: Routes.path().root,
+        name: Routes.name().root,
+        builder: (BuildContext context, GoRouterState state) {
+          return const RootPage();
         },
-        routes: <RouteBase>[
+        redirect: (context, state) => authGuard(ref, state),
+        routes: [
           GoRoute(
             path: Routes.path().home,
             name: Routes.name().home,
@@ -89,10 +85,14 @@ final routerProvider = Provider(
               GoRoute(
                 path: Routes.path().projectDetails,
                 name: Routes.name().projectDetails,
-                builder: (context, state) {
+                pageBuilder: (context, state) {
                   String docId = state.params['docId']!;
-                  return HomeDetails(
-                    docId: docId,
+                  return buildPageWithDefaultTransition<void>(
+                    context: context,
+                    state: state,
+                    child: HomeDetails(
+                      docId: docId,
+                    ),
                   );
                 },
                 routes: [
