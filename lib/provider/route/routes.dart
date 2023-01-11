@@ -9,15 +9,13 @@ class Routes {
     required this.projectDetails,
     required this.editProject,
     required this.addSaving,
-    required this.home,
-    required this.setting,
     required this.friendManagement,
     required this.addFriendDescription,
     required this.scanQr,
+    required this.memberList,
+    required this.inviteMember,
   });
   final String root;
-  final String home;
-  final String setting;
   final String auth;
   final String privacyPolicy;
   final String addProjectMember;
@@ -29,13 +27,13 @@ class Routes {
   final String friendManagement;
   final String addFriendDescription;
   final String scanQr;
+  final String memberList;
+  final String inviteMember;
 
   factory Routes.name() {
     return const Routes(
       root: "root",
       auth: "auth",
-      home: "home",
-      setting: "setting",
       privacyPolicy: "privacyPolicy",
       addProjectMember: "addProjectMember",
       addProjectDetails: "addProjectDetails",
@@ -46,6 +44,8 @@ class Routes {
       friendManagement: "friendManagement",
       addFriendDescription: "addFriendDescription",
       scanQr: "scanQr",
+      memberList: "memberList",
+      inviteMember: "inviteMember",
     );
   }
 
@@ -57,15 +57,15 @@ class Routes {
       //ボトムバー
       root: "/root",
       //　ホームタブ
-      home: "home",
       addProjectMember: "add_project_member",
       addProjectDetails: "add_project_details",
       addProjectImage: "add_project_image",
-      projectDetails: "project_details:docId",
-      editProject: "edit_project",
-      addSaving: "add_saving:targetId",
+      projectDetails: "project_details/:docId",
+      editProject: "edit_project/:targetId",
+      memberList: "memberList/:targetId",
+      inviteMember: "invite_member/:targetId",
+      addSaving: "add_saving/:targetId",
       //　設定タブ
-      setting: "setting",
       friendManagement: "friend_management",
       addFriendDescription: "add_friend_description",
       scanQr: "scan_qr",

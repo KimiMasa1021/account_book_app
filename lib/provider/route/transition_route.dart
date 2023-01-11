@@ -10,26 +10,17 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
   return CustomTransitionPage<T>(
     key: state.pageKey,
     child: child,
-    transitionDuration: const Duration(milliseconds: 200),
-    transitionsBuilder: (
-      context,
-      animation,
-      secondaryAnimation,
-      child,
-    ) =>
-        FadeTransition(
-      opacity: animation,
-      child: SlideTransition(
-        position: animation.drive(
-          Tween<Offset>(
-            begin: const Offset(1, 0),
-            end: Offset.zero,
-          ).chain(
-            CurveTween(curve: Curves.easeIn),
-          ),
-        ),
+    transitionDuration: const Duration(milliseconds: 300),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(1.0, 0.0);
+      var end = Offset.zero;
+      var tween = Tween(begin: begin, end: end);
+      var offsetAnimation = animation.drive(tween);
+
+      return SlideTransition(
+        position: offsetAnimation,
         child: child,
-      ),
-    ),
+      );
+    },
   );
 }

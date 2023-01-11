@@ -1,14 +1,15 @@
 import 'package:account_book_app/model/target_state.dart';
-import 'package:account_book_app/view/pages/home/detail/edit_project.dart';
+import 'package:account_book_app/provider/route/routes.dart';
+import 'package:account_book_app/view/pages/home/detail/drawers/edit_project.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../../component/detail/drawer_panel.dart';
-import '../../../component/detail/drawer_tile.dart';
-import '../../../../provider/general_provider.dart';
-import '../../../theme/app_theme.dart';
+import '../../../../component/detail/drawer_panel.dart';
+import '../../../../component/detail/drawer_tile.dart';
+import '../../../../../provider/general_provider.dart';
+import '../../../../theme/app_theme.dart';
 
 class MyDrawer extends HookConsumerWidget {
   const MyDrawer({super.key, required this.target});
@@ -123,19 +124,31 @@ class MyDrawer extends HookConsumerWidget {
                 title: "プロジェクトの編集",
                 icon: Icons.settings,
                 function: () {
-                  Navigator.pop(context);
-                  // context.goNamed(EditProject.name);
+                  context.pushNamed(
+                    Routes.name().editProject,
+                    params: {'targetId': target.docId},
+                  );
                 },
               ),
               DrawerTile(
                 title: "メンバー",
                 icon: Icons.people_alt_outlined,
-                function: () {},
+                function: () {
+                  context.pushNamed(
+                    Routes.name().memberList,
+                    params: {'targetId': target.docId},
+                  );
+                },
               ),
               DrawerTile(
                 title: "招待",
                 icon: Icons.person_add_sharp,
-                function: () {},
+                function: () {
+                  context.pushNamed(
+                    Routes.name().inviteMember,
+                    params: {'targetId': target.docId},
+                  );
+                },
               ),
               DrawerTile(
                 title: "退会",

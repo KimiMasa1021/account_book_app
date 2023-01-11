@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'dart:math';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../constant/price_formatter.dart';
+
 class SavingController extends StateNotifier<List<SavingState>> {
   final Ref ref;
   SavingController(this.ref) : super([]) {
@@ -15,7 +17,11 @@ class SavingController extends StateNotifier<List<SavingState>> {
     });
   }
   Future<void> addSaving(
-      String productId, String memo, String price, Function() fucntion) async {
+    String productId,
+    String memo,
+    String price,
+    Function() fucntion,
+  ) async {
     final priceInt = int.parse(price.replaceAll(",", ""));
     final uid = ref.read(authControllerProvider)!.uid;
     final state = SavingState(
@@ -104,5 +110,35 @@ class SavingController extends StateNotifier<List<SavingState>> {
       textColor: const Color.fromARGB(255, 255, 255, 255),
       fontSize: 16.0,
     );
+  }
+
+  void calcButtonFunction(
+    int index,
+    TextEditingController priceController,
+  ) {
+    if (index != 3) {
+      final preText = priceController.text;
+      final tapedText = index >= 4 && index <= 9
+          ? index.toString()
+          : index == 10
+              ? "0"
+              : (index + 1).toString();
+      final newText = preText + tapedText;
+
+      priceController.value = CustomTextInputFormatter().formatEditUpdate(
+        TextEditingValue(text: preText),
+        TextEditingValue(text: newText),
+      );
+      return;
+    } else if (index == 3 && priceController.text.isNotEmpty) {
+      final preText = priceController.text;
+      final newText = preText.substring(0, preText.length - 1);
+
+      priceController.value = CustomTextInputFormatter().formatEditUpdate(
+        TextEditingValue(text: preText),
+        TextEditingValue(text: newText),
+      );
+      return;
+    }
   }
 }

@@ -86,16 +86,14 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
     );
   }
 
-  final DateTime _date = DateTime.now();
+  final DateTime _now = DateTime.now();
 
   Future<void> pickTargetDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _date,
-      firstDate: DateTime(2016),
-      lastDate: DateTime.now().add(
-        const Duration(days: 3000),
-      ),
+      initialDate: _now,
+      firstDate: _now,
+      lastDate: DateTime(2050),
     );
 
     if (picked == null) return;

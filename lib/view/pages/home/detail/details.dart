@@ -1,14 +1,13 @@
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/pages/home/detail/panels/page_view_left.dart';
 import 'package:account_book_app/view/pages/home/detail/panels/page_view_right.dart';
-import 'package:account_book_app/view/pages/home/detail/saving_add.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/home/home_details_tile.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
-import 'my_drawer.dart';
+import 'drawers/my_drawer.dart';
 import 'panels/page_view_center.dart';
 
 class HomeDetails extends HookConsumerWidget {
