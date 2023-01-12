@@ -203,7 +203,7 @@ class _TagShape extends ShapeBorder {
     double edge = 5;
 
     return Path()
-      ..moveTo(rect.left, rect.top)
+      ..moveTo(rect.left + 5, rect.top)
       ..lineTo(rect.right - radius, rect.top)
       ..arcToPoint(
         Offset(rect.right, rect.top + radius),
@@ -214,21 +214,24 @@ class _TagShape extends ShapeBorder {
         Offset(rect.right - radius, rect.bottom),
         radius: Radius.circular(radius),
       )
-      ..lineTo(rect.left, rect.bottom)
-      ..lineTo(rect.left, rect.bottom - edge)
+      ..lineTo(rect.left + 5, rect.bottom)
+      ..lineTo(rect.left + 5, rect.bottom - edge)
       ..lineTo(rect.right - 20, rect.bottom - edge)
       ..arcToPoint(
         Offset(rect.right - 20, rect.bottom - edge - 20),
         radius: const Radius.circular(5),
         clockwise: false,
       )
-      ..lineTo(rect.left, rect.bottom - 25)
+      ..lineTo(rect.left + 5, rect.bottom - 25)
+      ..lineTo(rect.left + 5, rect.bottom - 30)
       ..lineTo(rect.left, rect.bottom - 30)
       ..arcToPoint(
         Offset(rect.left, rect.top + edge),
         radius: const Radius.circular(36),
         clockwise: false,
       )
+      ..lineTo(rect.left + 5, rect.top + edge)
+      ..lineTo(rect.left + 5, rect.top)
       ..close();
   }
 
@@ -259,24 +262,24 @@ class _TagShape2 extends ShapeBorder {
 
     return Path()
       ..moveTo(rect.left, rect.top)
-      ..lineTo(rect.right - 3, rect.top)
-      ..lineTo(rect.right - 3, rect.top + edge)
+      ..lineTo(rect.right - 5, rect.top)
+      ..lineTo(rect.right - 5, rect.top + edge)
       ..lineTo(rect.right, rect.top + edge)
       ..arcToPoint(
         Offset(rect.right, rect.bottom - 30),
         radius: const Radius.circular(36),
         clockwise: false,
       )
-      ..lineTo(rect.right - 3, rect.bottom - 30)
-      ..lineTo(rect.right - 3, rect.bottom - 25)
+      ..lineTo(rect.right - 5, rect.bottom - 30)
+      ..lineTo(rect.right - 5, rect.bottom - 25)
       ..lineTo(rect.left + 20, rect.bottom - 25)
       ..arcToPoint(
         Offset(rect.left + 20, rect.bottom - 5),
         radius: const Radius.circular(5),
         clockwise: false,
       )
-      ..lineTo(rect.right - 3, rect.bottom - 5)
-      ..lineTo(rect.right - 3, rect.bottom)
+      ..lineTo(rect.right - 5, rect.bottom - 5)
+      ..lineTo(rect.right - 5, rect.bottom)
       ..lineTo(rect.left + radius, rect.bottom)
       ..arcToPoint(
         Offset(rect.left, rect.bottom - radius),

@@ -14,87 +14,85 @@ class Setting extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final userState = ref.watch(usersControllerProvider);
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "設定",
-                  style: theme.textTheme.fs27,
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        image: userState!.img != ""
-                            ? DecorationImage(
-                                image: NetworkImage(
-                                  userState.img,
-                                ),
-                              )
-                            : null,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            offset: const Offset(0, 0),
-                            blurRadius: 6,
-                          )
-                        ],
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(userState.name),
-                        Text(userState.email),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "設定",
+                style: theme.textTheme.fs27,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      image: userState!.img != ""
+                          ? DecorationImage(
+                              image: NetworkImage(
+                                userState.img,
+                              ),
+                            )
+                          : null,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(0, 0),
+                          blurRadius: 6,
+                        )
                       ],
                     ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child: const Icon(Icons.more_vert),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 25),
-                SettingTile(
-                  leftIcon: Icons.person,
-                  leftTitle: "アカウント設定",
-                  leftFunction: () {},
-                  rightIcon: Icons.groups,
-                  rightTitle: "フレンド管理",
-                  rightFunction: () {
-                    context.pushNamed(Routes.name().friendManagement);
-                  },
-                ),
-                SettingTile(
-                  leftIcon: Icons.help,
-                  leftTitle: "使用上のヒント",
-                  leftFunction: () {},
-                  rightIcon: Icons.palette,
-                  rightTitle: "テーマの変更",
-                  rightFunction: () {},
-                ),
-                SettingTile(
-                  leftIcon: Icons.logout,
-                  leftTitle: "ログアウト",
-                  leftFunction: () {},
-                  rightIcon: Icons.lightbulb_sharp,
-                  rightTitle: "○○について",
-                  rightFunction: () {},
-                ),
-              ],
-            ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(userState.name),
+                      Text(userState.email),
+                    ],
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {},
+                    child: const Icon(Icons.more_vert),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 25),
+              SettingTile(
+                leftIcon: Icons.person,
+                leftTitle: "アカウント設定",
+                leftFunction: () {},
+                rightIcon: Icons.groups,
+                rightTitle: "フレンド管理",
+                rightFunction: () {
+                  context.pushNamed(Routes.name().friendManagement);
+                },
+              ),
+              SettingTile(
+                leftIcon: Icons.help,
+                leftTitle: "使用上のヒント",
+                leftFunction: () {},
+                rightIcon: Icons.palette,
+                rightTitle: "テーマの変更",
+                rightFunction: () {},
+              ),
+              SettingTile(
+                leftIcon: Icons.logout,
+                leftTitle: "ログアウト",
+                leftFunction: () {},
+                rightIcon: Icons.lightbulb_sharp,
+                rightTitle: "○○について",
+                rightFunction: () {},
+              ),
+            ],
           ),
         ),
       ),

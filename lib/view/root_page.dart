@@ -31,7 +31,7 @@ class RootPage extends HookConsumerWidget {
       ),
     ];
     return Scaffold(
-      backgroundColor: HexColor("F5F5F5"),
+      backgroundColor: HexColor("#F5F5F5"),
       body: _pageList[pageState.index],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageState.index,

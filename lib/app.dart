@@ -20,7 +20,6 @@ class MyApp extends HookConsumerWidget {
       routerDelegate: ref.watch(routerProvider).routerDelegate,
       theme: theme.data,
       darkTheme: AppTheme.dark().data,
-      // themeMode: themeMode,
       themeMode: ThemeMode.light,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

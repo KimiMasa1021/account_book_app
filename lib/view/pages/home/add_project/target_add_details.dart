@@ -18,6 +18,7 @@ class TargetAddDetails extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final targetInit = ref.watch(targetInitControllerProvider);
     final targetInitCTL = ref.watch(targetInitControllerProvider.notifier);
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(

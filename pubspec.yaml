@@ -71,7 +71,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/img/profile.png
+    - assets/img/
+    - assets/json/
 
 flutter_icons:
   android: true 

@@ -103,7 +103,7 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
     );
   }
 
-  Future<void> createNewTarget(Function() function) async {
+  Future<void> createNewTarget() async {
     final url = state.file != null
         ? await ref.read(usersRepositoryProvider).uploadImage(state.file!)
         : "";
@@ -121,7 +121,6 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
       img: url,
     );
     await ref.read(targetInitRepositoryProvider).createTarget(targetState);
-    function();
   }
 
   bool checkDetails() {
@@ -130,6 +129,10 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
         state.targetDescriptionController!.text == "" ||
         state.targetDateController == null) {
       shwoToast("すべて必須項目です");
+      return false;
+    }
+    if (state.targetController!.text.length <= 2) {
+      shwoToast("目標は３文字以上設定しよう！");
       return false;
     }
     return true;

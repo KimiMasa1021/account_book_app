@@ -1,10 +1,8 @@
 import 'package:account_book_app/view/component/auth/shadow_button.dart';
 import 'package:account_book_app/provider/general_provider.dart';
-import 'package:account_book_app/view/auth/privacy_policy.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../provider/route/routes.dart';
 import '../theme/app_theme.dart';
 
