@@ -1,11 +1,10 @@
 import 'package:account_book_app/constant/hex_color.dart';
-import 'package:account_book_app/provider/route/routes.dart';
+import 'package:account_book_app/view/pages/home/add_project/lottie_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
 import '../../../component/init/picture_dialog.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
@@ -175,91 +174,9 @@ class TargetAddImage extends HookConsumerWidget {
             ],
           ),
         ),
-        flg.value == TargetInitFlg.creating ||
-                flg.value == TargetInitFlg.complete
-            ? Material(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: size.width,
-                      height: size.height,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                      child: flg.value == TargetInitFlg.creating
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset(
-                                  'assets/json/cat_loading.json',
-                                  width: 230,
-                                  height: 230,
-                                  frameRate: FrameRate(60),
-                                  repeat: true,
-                                ),
-                                Text(
-                                  "creating...",
-                                  style: theme.textTheme.fs19.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            )
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset(
-                                  'assets/json/complete.json',
-                                  width: 230,
-                                  height: 230,
-                                  frameRate: FrameRate(60),
-                                  repeat: false,
-                                ),
-                                Text(
-                                  "完了しました",
-                                  style: theme.textTheme.fs19.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                    ),
-                    flg.value == TargetInitFlg.complete
-                        ? Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 30),
-                              child: InkWell(
-                                onTap: () {
-                                  context.go(Routes.path().root);
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  width: double.infinity,
-                                  height: 55,
-                                  decoration: BoxDecoration(
-                                    color: HexColor("#296BFF"),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "ホームに戻る",
-                                      style: theme.textTheme.fs19.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : const SizedBox()
-                  ],
-                ),
-              )
-            : const SizedBox(),
+        LottieLoading(
+          flg: flg.value,
+        ),
       ],
     );
   }

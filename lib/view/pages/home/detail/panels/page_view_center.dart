@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../component/home/custom_painter.dart';
+import '../../../../component/detail/detail_percent_painter.dart';
 import '../../../../../constant/hex_color.dart';
 import '../../../../../model/target_state.dart';
 import '../../../../../provider/general_provider.dart';
@@ -43,7 +43,8 @@ class PageViewCenter extends HookConsumerWidget {
             child: AspectRatio(
               aspectRatio: 1,
               child: CustomPaint(
-                painter: MyPainter(percent: percent >= 1.0 ? 1.0 : percent),
+                painter: DetailPercentPainter(
+                    percent: percent >= 1.0 ? 1.0 : percent),
                 child: Stack(
                   children: [
                     Align(

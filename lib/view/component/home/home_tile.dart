@@ -5,6 +5,7 @@ import '../../../constant/hex_color.dart';
 import '../../../model/target_state.dart';
 import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
+import '../shapes.dart';
 
 class HomeTile extends HookConsumerWidget {
   const HomeTile({
@@ -49,7 +50,7 @@ class HomeTile extends HookConsumerWidget {
                   width: 45,
                   decoration: ShapeDecoration(
                     color: theme.appColors.primary,
-                    shape: _TagShape2(),
+                    shape: LeftShape(),
                     shadows: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
@@ -65,7 +66,7 @@ class HomeTile extends HookConsumerWidget {
                     height: 115,
                     decoration: ShapeDecoration(
                       color: theme.appColors.primary,
-                      shape: _TagShape(),
+                      shape: RightShape(),
                       shadows: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),
@@ -183,121 +184,5 @@ class HomeTile extends HookConsumerWidget {
         ),
       ),
     );
-  }
-}
-
-class _TagShape extends ShapeBorder {
-  @override
-  EdgeInsetsGeometry get dimensions {
-    return const EdgeInsets.only();
-  }
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return getOuterPath(rect, textDirection: textDirection!);
-  }
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    double radius = 20;
-    double edge = 5;
-
-    return Path()
-      ..moveTo(rect.left + 5, rect.top)
-      ..lineTo(rect.right - radius, rect.top)
-      ..arcToPoint(
-        Offset(rect.right, rect.top + radius),
-        radius: Radius.circular(radius),
-      )
-      ..lineTo(rect.right, rect.bottom - radius)
-      ..arcToPoint(
-        Offset(rect.right - radius, rect.bottom),
-        radius: Radius.circular(radius),
-      )
-      ..lineTo(rect.left + 5, rect.bottom)
-      ..lineTo(rect.left + 5, rect.bottom - edge)
-      ..lineTo(rect.right - 20, rect.bottom - edge)
-      ..arcToPoint(
-        Offset(rect.right - 20, rect.bottom - edge - 20),
-        radius: const Radius.circular(5),
-        clockwise: false,
-      )
-      ..lineTo(rect.left + 5, rect.bottom - 25)
-      ..lineTo(rect.left + 5, rect.bottom - 30)
-      ..lineTo(rect.left, rect.bottom - 30)
-      ..arcToPoint(
-        Offset(rect.left, rect.top + edge),
-        radius: const Radius.circular(36),
-        clockwise: false,
-      )
-      ..lineTo(rect.left + 5, rect.top + edge)
-      ..lineTo(rect.left + 5, rect.top)
-      ..close();
-  }
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
-
-  @override
-  ShapeBorder scale(double t) {
-    return this;
-  }
-}
-
-class _TagShape2 extends ShapeBorder {
-  @override
-  EdgeInsetsGeometry get dimensions {
-    return const EdgeInsets.only();
-  }
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return getOuterPath(rect, textDirection: textDirection!);
-  }
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    double radius = 20;
-    double edge = 5;
-
-    return Path()
-      ..moveTo(rect.left, rect.top)
-      ..lineTo(rect.right - 5, rect.top)
-      ..lineTo(rect.right - 5, rect.top + edge)
-      ..lineTo(rect.right, rect.top + edge)
-      ..arcToPoint(
-        Offset(rect.right, rect.bottom - 30),
-        radius: const Radius.circular(36),
-        clockwise: false,
-      )
-      ..lineTo(rect.right - 5, rect.bottom - 30)
-      ..lineTo(rect.right - 5, rect.bottom - 25)
-      ..lineTo(rect.left + 20, rect.bottom - 25)
-      ..arcToPoint(
-        Offset(rect.left + 20, rect.bottom - 5),
-        radius: const Radius.circular(5),
-        clockwise: false,
-      )
-      ..lineTo(rect.right - 5, rect.bottom - 5)
-      ..lineTo(rect.right - 5, rect.bottom)
-      ..lineTo(rect.left + radius, rect.bottom)
-      ..arcToPoint(
-        Offset(rect.left, rect.bottom - radius),
-        radius: Radius.circular(radius),
-      )
-      ..lineTo(rect.left, rect.top + radius)
-      ..arcToPoint(
-        Offset(rect.left + radius, rect.top),
-        radius: Radius.circular(radius),
-      )
-      ..close();
-  }
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
-
-  @override
-  ShapeBorder scale(double t) {
-    return this;
   }
 }

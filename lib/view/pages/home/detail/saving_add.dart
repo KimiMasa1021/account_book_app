@@ -105,7 +105,9 @@ class SavingAdd extends HookConsumerWidget {
                     InkWell(
                       onTap: () async {
                         if (savingCTL.checkSavingAdd(
-                            priceController, tagValue)) {
+                          priceController,
+                          tagValue,
+                        )) {
                           await savingCTL.addSaving(
                             docId,
                             tags.singleWhere((e) => e.id == tagValue.value).tag,

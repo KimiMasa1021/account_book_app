@@ -1,7 +1,6 @@
 import 'package:account_book_app/view/component/home/home_tile.dart';
 import 'package:account_book_app/constant/hex_color.dart';
 import 'package:account_book_app/provider/general_provider.dart';
-import 'package:account_book_app/view/pages/home/detail/details.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,17 +29,13 @@ class Home extends HookConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "積み立てつもり貯金",
-                    style: theme.textTheme.fs27,
-                  ),
                   InkWell(
                     onTap: () {
                       context.pushNamed(Routes.name().addProjectMember);
                     },
-                    child: const Icon(
-                      Icons.group_add,
-                      size: 30,
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.group_add),
                     ),
                   )
                 ],

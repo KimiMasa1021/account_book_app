@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CalculatorButton extends StatelessWidget {
   const CalculatorButton({
@@ -20,7 +18,7 @@ class CalculatorButton extends StatelessWidget {
         },
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(4.0),
+            padding: const EdgeInsets.all(4.0),
             child: title,
           ),
         ),

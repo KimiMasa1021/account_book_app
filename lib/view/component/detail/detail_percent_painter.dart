@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class MyPainter extends CustomPainter {
-  MyPainter({required this.percent});
+class DetailPercentPainter extends CustomPainter {
+  DetailPercentPainter({required this.percent});
   final double percent;
   @override
   void paint(Canvas canvas, Size size) {

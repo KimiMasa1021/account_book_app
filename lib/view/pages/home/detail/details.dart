@@ -4,7 +4,7 @@ import 'package:account_book_app/view/pages/home/detail/panels/page_view_right.d
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../component/home/home_details_tile.dart';
+import '../../../component/detail/details_tile.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
 import 'drawers/my_drawer.dart';
@@ -181,7 +181,7 @@ class HomeDetails extends HookConsumerWidget {
                                 ),
                               ),
                             ),
-                            HomeDetailsTile(
+                            DetailsTile(
                               price: savingList[index].price,
                               member: allUser
                                   .singleWhere(
@@ -221,7 +221,7 @@ class HomeDetails extends HookConsumerWidget {
                                   ),
                                 )
                               : const SizedBox(),
-                          HomeDetailsTile(
+                          DetailsTile(
                             price: savingList[index].price,
                             member: allUser
                                 .singleWhere(
@@ -240,10 +240,10 @@ class HomeDetails extends HookConsumerWidget {
         );
       },
       loading: () {
-        return SizedBox();
+        return const SizedBox();
       },
       error: (e, s) {
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

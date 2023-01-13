@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
 
-class HomeDetailsTile extends HookConsumerWidget {
-  const HomeDetailsTile({
+class DetailsTile extends HookConsumerWidget {
+  const DetailsTile({
     super.key,
     required this.price,
     required this.member,

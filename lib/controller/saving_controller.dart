@@ -4,9 +4,7 @@ import 'package:account_book_app/repository/target_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'dart:math';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../constant/price_formatter.dart';
 
 class SavingController extends StateNotifier<List<SavingState>> {
