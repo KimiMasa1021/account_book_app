@@ -31,7 +31,7 @@ class GraphBar extends HookConsumerWidget {
               weekText,
               style: theme.textTheme.fs16.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: color,
               ),
             ),
           ),

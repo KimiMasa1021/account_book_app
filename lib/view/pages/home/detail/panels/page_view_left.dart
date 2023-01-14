@@ -108,14 +108,13 @@ class PageViewLeft extends HookConsumerWidget {
                           double percent = doubleList[index] /
                               (target.targetPrice / dateDifference);
                           return GraphBar(
-                            weekText: week[date.value
-                                    .subtract(Duration(days: index))
-                                    .weekday -
-                                1],
+                            weekText: week[index],
                             percent: percent >= 1 ? 1 : percent,
-                            color: index != 6
+                            color: index == 5
                                 ? HexColor("#70D4F7")
-                                : Colors.red.withOpacity(0.8),
+                                : index == 6
+                                    ? Colors.red.withOpacity(0.8)
+                                    : Colors.white,
                             price: doubleList[index],
                           );
                         },
