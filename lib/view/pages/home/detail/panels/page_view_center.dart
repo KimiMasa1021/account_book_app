@@ -35,7 +35,7 @@ class PageViewCenter extends HookConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: HexColor("#B3FFFC"),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(0),
       ),
       child: Column(
         children: [

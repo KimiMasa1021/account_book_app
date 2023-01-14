@@ -36,7 +36,7 @@ class TargetAddMember extends HookConsumerWidget {
             color: Colors.black,
           ),
         ),
-        backgroundColor: HexColor("#FFF8DC"),
+        backgroundColor: HexColor("#70D4F7"),
         actions: [
           IconButton(
             onPressed: () {
@@ -57,7 +57,7 @@ class TargetAddMember extends HookConsumerWidget {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: HexColor("#FFF8DC"),
+              color: HexColor("#70D4F7"),
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(20),
                 bottomLeft: Radius.circular(20),

@@ -19,6 +19,22 @@ class LottieLoading extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final theme = ref.watch(appThemeProvider);
 
+    final loadingLottie = Lottie.asset(
+      'assets/json/cat_loading.json',
+      width: 230,
+      height: 230,
+      frameRate: FrameRate(60),
+      repeat: true,
+    );
+
+    final finishLottie = Lottie.asset(
+      'assets/json/complete.json',
+      width: 230,
+      height: 230,
+      frameRate: FrameRate(60),
+      repeat: false,
+    );
+
     return flg == TargetInitFlg.creating || flg == TargetInitFlg.complete
         ? Material(
             child: Stack(
@@ -33,13 +49,7 @@ class LottieLoading extends HookConsumerWidget {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Lottie.asset(
-                              'assets/json/cat_loading.json',
-                              width: 230,
-                              height: 230,
-                              frameRate: FrameRate(60),
-                              repeat: true,
-                            ),
+                            loadingLottie,
                             Text(
                               "作成中...",
                               style: theme.textTheme.fs19.copyWith(
@@ -51,13 +61,7 @@ class LottieLoading extends HookConsumerWidget {
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Lottie.asset(
-                              'assets/json/complete.json',
-                              width: 230,
-                              height: 230,
-                              frameRate: FrameRate(60),
-                              repeat: false,
-                            ),
+                            finishLottie,
                             Text(
                               "作成できました",
                               style: theme.textTheme.fs19.copyWith(

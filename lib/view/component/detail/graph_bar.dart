@@ -8,13 +8,15 @@ class GraphBar extends HookConsumerWidget {
     super.key,
     required this.weekText,
     required this.percent,
-    required this.color,
+    required this.barColor,
     required this.price,
+    required this.textCol0r,
   });
   final String weekText;
   final double percent;
-  final Color color;
+  final Color barColor;
   final int price;
+  final Color textCol0r;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +33,7 @@ class GraphBar extends HookConsumerWidget {
               weekText,
               style: theme.textTheme.fs16.copyWith(
                 fontWeight: FontWeight.bold,
-                color: color,
+                color: textCol0r,
               ),
             ),
           ),
@@ -55,7 +57,7 @@ class GraphBar extends HookConsumerWidget {
                       heightFactor: percent,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: color,
+                          color: barColor,
                           borderRadius: BorderRadius.circular(100),
                         ),
                       ),

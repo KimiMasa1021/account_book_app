@@ -22,7 +22,6 @@ class PageViewLeft extends HookConsumerWidget {
     final savingCTL = ref.watch(savingControllerProvider.notifier);
 
     final date = useState(DateTime.now());
-    final additionalDay = date.value.subtract(const Duration(days: 7));
     final savingList =
         saving.where((e) => e.productId == target.docId).toList();
     final dateDifference =
@@ -36,12 +35,14 @@ class PageViewLeft extends HookConsumerWidget {
       "土",
       "日",
     ];
-
+    final startWeekDate =
+        date.value.subtract(Duration(days: date.value.weekday - 1));
+    final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         color: HexColor("#FFB0B0"),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(0),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -67,7 +68,7 @@ class PageViewLeft extends HookConsumerWidget {
                     ),
                   ),
                   Text(
-                    "${DateFormat('yyyy年MM月').format(date.value)}${additionalDay.day}~${date.value.day}日",
+                    "${DateFormat('MM月dd日').format(startWeekDate)}から${DateFormat('MM月dd日').format(endWeekDate)}",
                     style: theme.textTheme.fs16.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -97,7 +98,6 @@ class PageViewLeft extends HookConsumerWidget {
                     return const CircularProgressIndicator();
                   }
                   final doubleList = snapshot.data!;
-
                   return SizedBox(
                     height: double.infinity,
                     child: Row(
@@ -107,15 +107,17 @@ class PageViewLeft extends HookConsumerWidget {
                         (index) {
                           double percent = doubleList[index] /
                               (target.targetPrice / dateDifference);
+
                           return GraphBar(
                             weekText: week[index],
                             percent: percent >= 1 ? 1 : percent,
-                            color: index == 5
+                            textCol0r: index == 5
                                 ? HexColor("#70D4F7")
                                 : index == 6
                                     ? Colors.red.withOpacity(0.8)
                                     : Colors.white,
                             price: doubleList[index],
+                            barColor: HexColor("#70D4F7"),
                           );
                         },
                       ),

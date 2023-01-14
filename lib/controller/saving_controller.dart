@@ -55,27 +55,27 @@ class SavingController extends StateNotifier<List<SavingState>> {
     List<SavingState> savingList,
     ValueNotifier<DateTime> date,
   ) async {
-    final additionalDay = date.value.subtract(const Duration(days: 6));
-    return List.generate(7, (index) {
-      final test = savingList
-          .where(
-            (e) =>
-                DateTime(
-                  e.createdAt.year,
-                  e.createdAt.month,
-                  e.createdAt.day,
-                ) ==
-                DateTime(
-                  additionalDay.year,
-                  additionalDay.month,
-                  additionalDay.day + index,
-                ),
-          )
-          .map((e) => e.price)
-          .toList();
-      if (test.isEmpty) return 0;
+    //週初め？？
+    final startWeekDate =
+        date.value.subtract(Duration(days: date.value.weekday - 1));
 
-      return test.reduce((a, b) => a + b);
+    //週末
+    final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
+
+    final weekSavingList = savingList.where(
+      (e) =>
+          e.createdAt.isBefore(endWeekDate) &&
+          e.createdAt.isAfter(startWeekDate),
+    );
+
+    return List.generate(7, (index) {
+      final weeklySaving = weekSavingList
+          .where((e) => e.createdAt.weekday == index + 1)
+          .map((e) => e.price);
+      if (weeklySaving.isEmpty) {
+        return 0;
+      }
+      return weeklySaving.reduce((v, e) => v + e);
     });
   }
 

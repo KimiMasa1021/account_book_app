@@ -45,7 +45,6 @@ dependencies:
   webview_flutter: ^3.0.4
   google_sign_in: ^5.4.2
   app_review: ^2.1.2+1
-  flutter_launcher_icons: ^0.11.0
   google_fonts: ^3.0.1
   sensors_plus: ^2.0.1
   syncfusion_flutter_gauges: ^20.3.61
@@ -65,6 +64,7 @@ dev_dependencies:
   build_runner: ^2.2.1
   freezed: ^2.1.0+1
   json_serializable: ^6.4.0
+  flutter_launcher_icons: ^0.11.0
 
 flutter:
 
@@ -77,4 +77,3 @@ flutter:
 flutter_icons:
   android: true 
   ios: true
-  image_path: "assets/img/icon.png"

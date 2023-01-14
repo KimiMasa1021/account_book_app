@@ -39,7 +39,7 @@ class TargetAddDetails extends HookConsumerWidget {
             color: Colors.black,
           ),
         ),
-        backgroundColor: HexColor("#FFF8DC"),
+        backgroundColor: HexColor("#70D4F7"),
         actions: [
           IconButton(
             onPressed: () async {

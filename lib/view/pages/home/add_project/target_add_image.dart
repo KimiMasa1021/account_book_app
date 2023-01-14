@@ -48,7 +48,7 @@ class TargetAddImage extends HookConsumerWidget {
                 color: Colors.black,
               ),
             ),
-            backgroundColor: HexColor("#FFF8DC"),
+            backgroundColor: HexColor("#70D4F7"),
             actions: [
               IconButton(
                 onPressed: () async {
@@ -75,7 +75,7 @@ class TargetAddImage extends HookConsumerWidget {
                     height: 100,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: HexColor("#FFF8DC"),
+                      color: HexColor("#70D4F7"),
                       borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
@@ -93,7 +93,7 @@ class TargetAddImage extends HookConsumerWidget {
                 ],
               ),
               Positioned(
-                top: 40,
+                top: 25,
                 left: size.width / 2 - 75,
                 child: Stack(
                   clipBehavior: Clip.none,

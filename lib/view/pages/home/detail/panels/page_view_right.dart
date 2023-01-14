@@ -12,7 +12,7 @@ class PageViewRight extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         color: HexColor("#E0FED9"),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(0),
       ),
     );
   }

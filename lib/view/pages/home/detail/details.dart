@@ -71,10 +71,11 @@ class HomeDetails extends HookConsumerWidget {
                       width: size.width,
                       color: Colors.white,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 17),
+                          // const SizedBox(height: 17),
                           SizedBox(
-                            height: size.height * 0.35,
+                            height: size.height * 0.37,
                             width: size.width,
                             child: PageView(
                               controller: pageController,
