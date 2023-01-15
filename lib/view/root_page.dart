@@ -1,10 +1,9 @@
-import 'package:account_book_app/view/pages/home/home.dart';
+import 'package:account_book_app/view/pages/home/home/home.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../constant/enums.dart';
-import '../constant/hex_color.dart';
+import '../model/enums.dart';
+import '../utility/hex_color.dart';
 import '../provider/general_provider.dart';
 
 class RootPage extends HookConsumerWidget {

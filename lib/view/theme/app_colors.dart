@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constant/hex_color.dart';
+import '../../utility/hex_color.dart';
 
 class AppColors {
   const AppColors({

@@ -1,13 +1,13 @@
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/provider/route/transition_route.dart';
-import 'package:account_book_app/view/auth/auth.dart';
+import 'package:account_book_app/view/pages/auth/auth.dart';
 import 'package:account_book_app/view/pages/home/add_project/target_add_image.dart';
 import 'package:account_book_app/view/pages/home/detail/details.dart';
 import 'package:account_book_app/view/pages/home/add_project/target_add_details.dart';
 import 'package:account_book_app/view/pages/home/add_project/target_add_member.dart';
-import 'package:account_book_app/view/pages/home/detail/drawers/edit_project.dart';
-import 'package:account_book_app/view/pages/home/detail/drawers/invite_member.dart';
-import 'package:account_book_app/view/pages/home/detail/drawers/member_list.dart';
+import 'package:account_book_app/view/pages/home/detail/drawers/edit_project/edit_project.dart';
+import 'package:account_book_app/view/pages/home/detail/drawers/invite_member/invite_member.dart';
+import 'package:account_book_app/view/pages/home/detail/drawers/member_list/member_list.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_add_description.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_management.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_qr_scan.dart';
@@ -16,8 +16,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../view/auth/privacy_policy.dart';
-import '../../view/pages/home/detail/saving_add.dart';
+import '../../view/pages/auth/privacy_policy.dart';
+import '../../view/pages/home/detail/add_saving/saving_add.dart';
 import 'guard.dart';
 
 final routerProvider = Provider(

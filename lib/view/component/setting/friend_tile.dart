@@ -1,6 +1,6 @@
-import 'package:account_book_app/model/users_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../model/user/users_state.dart';
 import '../../theme/app_theme.dart';
 
 class FriendTile extends HookConsumerWidget {

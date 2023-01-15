@@ -1,20 +1,15 @@
-import 'package:account_book_app/constant/hex_color.dart';
-import 'package:account_book_app/view/pages/home/add_project/lottie_loading.dart';
+import 'package:account_book_app/utility/hex_color.dart';
+import 'package:account_book_app/view/component/lottie_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../../model/enums.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../component/init/picture_dialog.dart';
+import '../../../component/dialog/picture_dialog.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
-
-enum TargetInitFlg {
-  inputing,
-  creating,
-  complete,
-}
 
 class TargetAddImage extends HookConsumerWidget {
   const TargetAddImage({super.key});

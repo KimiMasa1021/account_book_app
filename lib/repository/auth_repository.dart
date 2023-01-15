@@ -1,4 +1,4 @@
-import 'package:account_book_app/model/tags_state.dart';
+import 'package:account_book_app/model/saving/tags_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/user/users_state.dart';
-import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
 
-class FriendTileWithRadio extends HookConsumerWidget {
-  const FriendTileWithRadio({
+class MemberTIle extends HookConsumerWidget {
+  const MemberTIle({
     super.key,
     required this.usersState,
+    required this.newMembers,
   });
   final UsersState usersState;
+  final ValueNotifier<List<String>> newMembers;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
     final selectFlg = useState(false);
-    final targetInit = ref.watch(targetInitControllerProvider(null));
-    final targetInitCTL =
-        ref.watch(targetInitControllerProvider(null).notifier);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -57,9 +55,11 @@ class FriendTileWithRadio extends HookConsumerWidget {
             onChanged: (val) {
               selectFlg.value = val!;
               if (val) {
-                targetInitCTL.addMember(usersState);
+                newMembers.value = List.of(newMembers.value)
+                  ..add(usersState.uid);
               } else {
-                targetInitCTL.removeMember(usersState);
+                newMembers.value = List.of(newMembers.value)
+                  ..remove(usersState.uid);
               }
             },
           ),

@@ -3,19 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '../model/enums.dart';
+
 final friendRepositoryProvider =
     Provider<FriendRepository>((ref) => FriendRepositoryImple(ref));
 
 abstract class FriendRepository {
   Future<FrendRequestResult> addFriend(String user1Uid, String user2Uid);
-}
-
-enum FrendRequestResult {
-  success,
-  alreadyRegistered,
-  error,
-  injustice,
-  notExist,
 }
 
 class FriendRepositoryImple implements FriendRepository {

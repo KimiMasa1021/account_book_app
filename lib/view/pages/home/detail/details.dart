@@ -4,10 +4,10 @@ import 'package:account_book_app/view/pages/home/detail/panels/page_view_right.d
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../component/detail/details_tile.dart';
+import '../../../component/panel/saving_panel.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
-import 'drawers/my_drawer.dart';
+import 'drawers/drawer.dart';
 import 'panels/page_view_center.dart';
 
 class HomeDetails extends HookConsumerWidget {
@@ -73,7 +73,6 @@ class HomeDetails extends HookConsumerWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // const SizedBox(height: 17),
                           SizedBox(
                             height: size.height * 0.37,
                             width: size.width,
@@ -182,7 +181,7 @@ class HomeDetails extends HookConsumerWidget {
                                 ),
                               ),
                             ),
-                            DetailsTile(
+                            SavingPanel(
                               price: savingList[index].price,
                               member: allUser
                                   .singleWhere(
@@ -222,7 +221,7 @@ class HomeDetails extends HookConsumerWidget {
                                   ),
                                 )
                               : const SizedBox(),
-                          DetailsTile(
+                          SavingPanel(
                             price: savingList[index].price,
                             member: allUser
                                 .singleWhere(

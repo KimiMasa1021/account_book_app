@@ -1,4 +1,4 @@
-import 'package:account_book_app/constant/hex_color.dart';
+import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

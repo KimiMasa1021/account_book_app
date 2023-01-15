@@ -1,19 +1,19 @@
-import 'package:account_book_app/controller/auth_controller.dart';
-import 'package:account_book_app/controller/friend_controller.dart';
-import 'package:account_book_app/controller/target_init_controller.dart';
-import 'package:account_book_app/model/target_init.dart';
-import 'package:account_book_app/model/target_state.dart';
+import 'package:account_book_app/view_model/auth_controller.dart';
+import 'package:account_book_app/view_model/friend_controller.dart';
+import 'package:account_book_app/view_model/target_init_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../constant/enums.dart';
-import '../controller/all_users_controller.dart';
-import '../controller/saving_controller.dart';
-import '../controller/tags_controller.dart';
-import '../controller/target_controller.dart';
-import '../controller/users_controller.dart';
-import '../model/saving_state.dart';
-import '../model/tags_state.dart';
-import '../model/users_state.dart';
+import '../model/enums.dart';
+import '../model/saving/saving_state.dart';
+import '../model/target/target_init.dart';
+import '../model/target/target_state.dart';
+import '../model/user/users_state.dart';
+import '../view_model/all_users_controller.dart';
+import '../view_model/saving_controller.dart';
+import '../view_model/tags_controller.dart';
+import '../view_model/target_controller.dart';
+import '../view_model/users_controller.dart';
+import '../model/saving/tags_state.dart';
 
 final authControllerProvider =
     StateNotifierProvider.autoDispose<AuthController, User?>(
@@ -23,7 +23,7 @@ final usersControllerProvider =
     StateNotifierProvider.autoDispose<UsersController, UsersState?>(
         (ref) => UsersController(ref));
 final pageTypeProvider =
-    StateProvider.autoDispose<PageType>((ref) => PageType.account);
+    StateProvider.autoDispose<PageType>((ref) => PageType.home);
 
 final allUsersControllerProvider =
     StateNotifierProvider<AllUsersController, List<UsersState>>(

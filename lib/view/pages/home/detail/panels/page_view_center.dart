@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-
+import '../../../../../model/target/target_state.dart';
 import '../../../../component/detail/detail_percent_painter.dart';
-import '../../../../../constant/hex_color.dart';
-import '../../../../../model/target_state.dart';
+import '../../../../../utility/hex_color.dart';
 import '../../../../../provider/general_provider.dart';
 import '../../../../theme/app_theme.dart';
 

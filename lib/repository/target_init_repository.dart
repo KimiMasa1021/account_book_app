@@ -1,8 +1,8 @@
-import 'package:account_book_app/model/target_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../model/target/target_state.dart';
 import '../provider/firebase/firebase_auth_provider.dart';
 import '../provider/firebase/firebase_firestore_provider.dart';
 
@@ -12,6 +12,7 @@ final targetInitRepositoryProvider =
 abstract class TargetInitRepository {
   Future<void> createTarget(TargetState state);
   Future<void> updateTarget(TargetState state, String docId);
+  Future<void> updateMember(List<String> member, String docId);
 }
 
 class TargetInitRepositoryImpl implements TargetInitRepository {
@@ -37,6 +38,17 @@ class TargetInitRepositoryImpl implements TargetInitRepository {
   Future<void> updateTarget(TargetState state, String docId) async {
     try {
       await collectionReference!.doc(docId).update(state.toJson());
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> updateMember(List<String> member, String docId) async {
+    try {
+      await collectionReference!.doc(docId).update({
+        "members": member,
+      });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }
