@@ -1,3 +1,4 @@
+import 'package:account_book_app/constant/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -35,8 +36,8 @@ class LargeTextField extends HookConsumerWidget {
           width: double.infinity,
           height: 90,
           decoration: BoxDecoration(
-            border: Border.all(),
             borderRadius: BorderRadius.circular(10),
+            color: HexColor("#E1EBFF"),
           ),
           child: TextFormField(
             controller: controller,

@@ -11,6 +11,7 @@ final targetInitRepositoryProvider =
 
 abstract class TargetInitRepository {
   Future<void> createTarget(TargetState state);
+  Future<void> updateTarget(TargetState state, String docId);
 }
 
 class TargetInitRepositoryImpl implements TargetInitRepository {
@@ -27,6 +28,15 @@ class TargetInitRepositoryImpl implements TargetInitRepository {
   Future<void> createTarget(TargetState state) async {
     try {
       await collectionReference!.add(state.toJson());
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    }
+  }
+
+  @override
+  Future<void> updateTarget(TargetState state, String docId) async {
+    try {
+      await collectionReference!.doc(docId).update(state.toJson());
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);
     }

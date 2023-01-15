@@ -55,6 +55,7 @@ class MyDrawer extends HookConsumerWidget {
                     height: 70,
                     width: 70,
                     margin: const EdgeInsets.only(right: 7, bottom: 5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,

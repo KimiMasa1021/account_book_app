@@ -5,22 +5,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../constant/hex_color.dart';
-import '../../../../provider/route/routes.dart';
 import '../../../theme/app_theme.dart';
 
 class LottieLoading extends HookConsumerWidget {
   const LottieLoading({
     super.key,
     required this.flg,
+    required this.loadingPath,
+    required this.loadingText,
+    required this.resultPath,
+    required this.resultText,
+    required this.resultFunction,
   });
   final TargetInitFlg flg;
+  final String loadingPath;
+  final String loadingText;
+  final String resultPath;
+  final String resultText;
+  final Function() resultFunction;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final theme = ref.watch(appThemeProvider);
 
     final loadingLottie = Lottie.asset(
-      'assets/json/cat_loading.json',
+      loadingPath,
       width: 230,
       height: 230,
       frameRate: FrameRate(60),
@@ -28,7 +37,7 @@ class LottieLoading extends HookConsumerWidget {
     );
 
     final finishLottie = Lottie.asset(
-      'assets/json/complete.json',
+      resultPath,
       width: 230,
       height: 230,
       frameRate: FrameRate(60),
@@ -51,7 +60,7 @@ class LottieLoading extends HookConsumerWidget {
                           children: [
                             loadingLottie,
                             Text(
-                              "作成中...",
+                              loadingText,
                               style: theme.textTheme.fs19.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -63,7 +72,7 @@ class LottieLoading extends HookConsumerWidget {
                           children: [
                             finishLottie,
                             Text(
-                              "作成できました",
+                              resultText,
                               style: theme.textTheme.fs19.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -78,7 +87,8 @@ class LottieLoading extends HookConsumerWidget {
                           padding: const EdgeInsets.only(bottom: 30),
                           child: InkWell(
                             onTap: () {
-                              context.go(Routes.path().root);
+                              // context.go(Routes.path().root);
+                              resultFunction();
                             },
                             child: Container(
                               margin:

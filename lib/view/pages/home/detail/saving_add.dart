@@ -25,7 +25,6 @@ class SavingAdd extends HookConsumerWidget {
     final ValueNotifier<int?> tagValue = useState(null);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final size = MediaQuery.of(context).size;
-    debugPrint(docId);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

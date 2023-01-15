@@ -32,9 +32,9 @@ final targetControllerProvider =
     StateNotifierProvider<TargetController, AsyncValue<List<TargetState>>>(
         (ref) => TargetController(ref));
 
-final targetInitControllerProvider =
-    StateNotifierProvider.autoDispose<TargetInitCntroller, TargetInit>(
-        (ref) => TargetInitCntroller(ref));
+final targetInitControllerProvider = StateNotifierProvider.autoDispose
+    .family<TargetInitCntroller, TargetInit, TargetState?>(
+        (ref, target) => TargetInitCntroller(ref, target: target));
 
 final savingControllerProvider =
     StateNotifierProvider<SavingController, List<SavingState>>(

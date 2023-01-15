@@ -15,7 +15,7 @@ class TargetAddMember extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final userState = ref.watch(usersControllerProvider);
     final friends = ref.watch(friendsControllerProvider(userState!.friends));
-    final targetInit = ref.watch(targetInitControllerProvider);
+    final targetInit = ref.watch(targetInitControllerProvider(null));
 
     return Scaffold(
       appBar: AppBar(

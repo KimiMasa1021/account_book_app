@@ -126,13 +126,13 @@ class PageViewLeft extends HookConsumerWidget {
                 },
               ),
             ),
-            Text(
-              "１日当たり${(target.targetPrice / dateDifference).round()}円で達成できます!!",
-              style: theme.textTheme.fs16.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+            // Text(
+            //   "１日当たり${(target.targetPrice / dateDifference).round()}円で達成できます!!",
+            //   style: theme.textTheme.fs16.copyWith(
+            //     fontWeight: FontWeight.bold,
+            //     color: Colors.white,
+            //   ),
+            // ),
           ],
         ),
       ),

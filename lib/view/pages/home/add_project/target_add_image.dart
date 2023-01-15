@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../../provider/route/routes.dart';
 import '../../../component/init/picture_dialog.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../theme/app_theme.dart';
@@ -23,8 +24,9 @@ class TargetAddImage extends HookConsumerWidget {
     final theme = ref.watch(appThemeProvider);
     final size = MediaQuery.of(context).size;
 
-    final targetInit = ref.watch(targetInitControllerProvider);
-    final targetInitCTL = ref.watch(targetInitControllerProvider.notifier);
+    final targetInit = ref.watch(targetInitControllerProvider(null));
+    final targetInitCTL =
+        ref.watch(targetInitControllerProvider(null).notifier);
     final flg = useState(TargetInitFlg.inputing);
 
     return Stack(
@@ -176,7 +178,14 @@ class TargetAddImage extends HookConsumerWidget {
         ),
         LottieLoading(
           flg: flg.value,
-        ),
+          loadingPath: 'assets/json/cat_loading.json',
+          loadingText: '作成中...',
+          resultPath: 'assets/json/complete.json',
+          resultText: '作成できました',
+          resultFunction: () {
+            context.go(Routes.path().root);
+          },
+        )
       ],
     );
   }

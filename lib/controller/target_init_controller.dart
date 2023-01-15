@@ -15,18 +15,30 @@ import '../repository/users_repository.dart';
 class TargetInitCntroller extends StateNotifier<TargetInit> {
   final Ref ref;
   String? userId;
+  final TargetState? target;
 
-  TargetInitCntroller(this.ref)
+  TargetInitCntroller(this.ref, {this.target})
       : super(
           TargetInit(),
         ) {
     userId = ref.read(authControllerProvider)!.uid;
 
-    state = state.copyWith(
-      targetController: TextEditingController(text: ""),
-      targetPriceController: TextEditingController(text: ""),
-      targetDescriptionController: TextEditingController(text: ""),
-    );
+    if (target == null) {
+      state = state.copyWith(
+        targetController: TextEditingController(text: ""),
+        targetPriceController: TextEditingController(text: ""),
+        targetDescriptionController: TextEditingController(text: ""),
+      );
+    } else {
+      state = state.copyWith(
+        targetController: TextEditingController(text: target!.target),
+        targetPriceController:
+            TextEditingController(text: target!.targetPrice.toString()),
+        targetDescriptionController:
+            TextEditingController(text: target!.targetDescription),
+        targetDateController: target!.registeTime,
+      );
+    }
   }
   final picker = ImagePicker();
   Future<void> getImage(ImageSource source) async {
@@ -148,5 +160,26 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
       textColor: const Color.fromARGB(255, 255, 255, 255),
       fontSize: 16.0,
     );
+  }
+
+  Future<void> updateTarget(TargetState target, String docId) async {
+    final url = state.file != null
+        ? await ref.read(usersRepositoryProvider).uploadImage(state.file!)
+        : "";
+    final price =
+        int.parse(state.targetPriceController!.text.replaceAll(",", ""));
+
+    final targetState = TargetState(
+      target: state.targetController!.text,
+      targetPrice: price,
+      targetDescription: state.targetDescriptionController!.text,
+      registeTime: target.registeTime,
+      targetDate: state.targetDateController!,
+      members: target.members,
+      img: url,
+    );
+    await ref
+        .read(targetInitRepositoryProvider)
+        .updateTarget(targetState, docId);
   }
 }

@@ -1,13 +1,10 @@
 import 'package:account_book_app/model/users_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../provider/general_provider.dart';
 import '../../theme/app_theme.dart';
 
-class FriendTileWithRadio extends HookConsumerWidget {
-  const FriendTileWithRadio({
+class FriendTile extends HookConsumerWidget {
+  const FriendTile({
     super.key,
     required this.usersState,
   });
@@ -16,10 +13,6 @@ class FriendTileWithRadio extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
-    final selectFlg = useState(false);
-    final targetInit = ref.watch(targetInitControllerProvider(null));
-    final targetInitCTL =
-        ref.watch(targetInitControllerProvider(null).notifier);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -52,17 +45,6 @@ class FriendTileWithRadio extends HookConsumerWidget {
               style: theme.textTheme.fs19,
               overflow: TextOverflow.ellipsis,
             ),
-          ),
-          Checkbox(
-            value: selectFlg.value,
-            onChanged: (val) {
-              selectFlg.value = val!;
-              if (val) {
-                targetInitCTL.addMember(usersState);
-              } else {
-                targetInitCTL.removeMember(usersState);
-              }
-            },
           ),
         ],
       ),

@@ -16,8 +16,9 @@ class TargetAddDetails extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
-    final targetInit = ref.watch(targetInitControllerProvider);
-    final targetInitCTL = ref.watch(targetInitControllerProvider.notifier);
+    final targetInit = ref.watch(targetInitControllerProvider(null));
+    final targetInitCTL =
+        ref.watch(targetInitControllerProvider(null).notifier);
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -101,7 +102,7 @@ class TargetAddDetails extends HookConsumerWidget {
                       width: double.infinity,
                       height: 45,
                       decoration: BoxDecoration(
-                        border: Border.all(),
+                        color: HexColor("#E1EBFF"),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
