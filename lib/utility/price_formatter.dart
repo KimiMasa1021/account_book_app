@@ -5,7 +5,13 @@ class CustomTextInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.length > 24) {
+    if (newValue.text.length > 20) {
+      return oldValue;
+    }
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+    if (newValue.text.substring(0) == "0") {
       return oldValue;
     }
     if (newValue.text.contains(RegExp(r'[a-zA-Z-._ ]'))) {

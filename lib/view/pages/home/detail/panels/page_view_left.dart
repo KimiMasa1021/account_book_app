@@ -35,9 +35,13 @@ class PageViewLeft extends HookConsumerWidget {
       "土",
       "日",
     ];
+    int dailyPrice = (target.targetPrice / dateDifference).isInfinite
+        ? 1
+        : (target.targetPrice / dateDifference).round();
     final startWeekDate =
         date.value.subtract(Duration(days: date.value.weekday - 1));
     final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
@@ -126,13 +130,13 @@ class PageViewLeft extends HookConsumerWidget {
                 },
               ),
             ),
-            // Text(
-            //   "１日当たり${(target.targetPrice / dateDifference).round()}円で達成できます!!",
-            //   style: theme.textTheme.fs16.copyWith(
-            //     fontWeight: FontWeight.bold,
-            //     color: Colors.white,
-            //   ),
-            // ),
+            Text(
+              "１日当たり${dailyPrice}円で達成できます!!",
+              style: theme.textTheme.fs16.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
           ],
         ),
       ),

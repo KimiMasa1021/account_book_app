@@ -1,7 +1,7 @@
 import 'package:account_book_app/model/saving/tags_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 
 class TagsController extends StateNotifier<List<Tags>> {
   final Ref ref;
@@ -9,7 +9,7 @@ class TagsController extends StateNotifier<List<Tags>> {
 
   TagsController(this.ref) : super([]) {
     Future(() async {
-      String path = join(await getDatabasesPath(), 'tags.db');
+      String path = p.join(await getDatabasesPath(), 'tags.db');
       database = await openDatabase(
         path,
         onCreate: (db, version) {

@@ -31,6 +31,7 @@ class PageViewCenter extends HookConsumerWidget {
     final percent = sum / target.targetPrice;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: HexColor("#B3FFFC"),
         borderRadius: BorderRadius.circular(0),

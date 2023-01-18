@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/general_provider.dart';
+import '../../component/panel/setting_panel.dart';
 import '../../theme/app_theme.dart';
 
 class Setting extends HookConsumerWidget {
@@ -21,9 +22,27 @@ class Setting extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "設定",
-                style: theme.textTheme.fs27,
+              Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(0, 0),
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    "プレミアム機能紹介",
+                    style: theme.textTheme.fs27,
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               Row(
@@ -65,32 +84,74 @@ class Setting extends HookConsumerWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 25),
-              SettingTile(
-                leftIcon: Icons.person,
-                leftTitle: "アカウント設定",
-                leftFunction: () {},
-                rightIcon: Icons.groups,
-                rightTitle: "フレンド管理",
-                rightFunction: () {
-                  context.pushNamed(Routes.name().friendManagement);
-                },
+              const SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(0, 0),
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    SettingPanel(
+                      text: 'アカウントの管理',
+                      icon: Icons.manage_accounts_outlined,
+                      function: () {},
+                    ),
+                    SettingPanel(
+                      text: 'フレンドの管理',
+                      icon: Icons.group_outlined,
+                      function: () {
+                        context.pushNamed(Routes.name().friendManagement);
+                      },
+                    ),
+                    SettingPanel(
+                      text: 'ログアウト',
+                      icon: Icons.logout_outlined,
+                      function: () {},
+                    ),
+                  ],
+                ),
               ),
-              SettingTile(
-                leftIcon: Icons.help,
-                leftTitle: "使用上のヒント",
-                leftFunction: () {},
-                rightIcon: Icons.palette,
-                rightTitle: "テーマの変更",
-                rightFunction: () {},
-              ),
-              SettingTile(
-                leftIcon: Icons.logout,
-                leftTitle: "ログアウト",
-                leftFunction: () {},
-                rightIcon: Icons.lightbulb_sharp,
-                rightTitle: "○○について",
-                rightFunction: () {},
+              const SizedBox(height: 20),
+              Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(0, 0),
+                      blurRadius: 6,
+                    )
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    SettingPanel(
+                      text: 'ヒント',
+                      icon: Icons.tips_and_updates_outlined,
+                      function: () {},
+                    ),
+                    SettingPanel(
+                      text: 'このアプリについて',
+                      icon: Icons.help_outline,
+                      function: () {},
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

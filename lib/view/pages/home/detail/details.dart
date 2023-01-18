@@ -26,17 +26,15 @@ class HomeDetails extends HookConsumerWidget {
     final target = ref.watch(targetControllerProvider);
 
     final pageController = PageController(
-      viewportFraction: 0.9,
+      viewportFraction: 0.85,
       initialPage: 1,
     );
-    final scaffoldKey = GlobalKey();
     return target.when(
       data: (target) {
         final nowTarget = target.singleWhere((e) => e.docId == docId);
         final savingList =
             saving.where((e) => e.productId == nowTarget.docId).toList();
         return Scaffold(
-          key: scaffoldKey,
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.white,
@@ -65,6 +63,15 @@ class HomeDetails extends HookConsumerWidget {
                   backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                   elevation: 0,
                   automaticallyImplyLeading: false,
+                  actions: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.black.withOpacity(0),
+                      ),
+                    )
+                  ],
                   flexibleSpace: FlexibleSpaceBar(
                     background: Container(
                       height: size.height * 0.4,
@@ -211,7 +218,8 @@ class HomeDetails extends HookConsumerWidget {
                                   )
                               ? Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
+                                    horizontal: 20,
+                                  ),
                                   child: Text(
                                     savingCTL.formatDate(
                                         savingList[index].createdAt),

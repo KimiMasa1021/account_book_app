@@ -10,8 +10,6 @@ class MyApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(appThemeProvider);
-    final themeMode = ref.watch(appThemeModeProvider);
-    final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
       routeInformationProvider:
