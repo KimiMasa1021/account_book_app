@@ -8,7 +8,7 @@ import '../../../component/textfield/large_text_field.dart';
 import '../../../../utility/price_formatter.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/v1/app_theme.dart';
 
 class TargetAddDetails extends HookConsumerWidget {
   const TargetAddDetails({super.key});

@@ -8,7 +8,7 @@ import '../../../../../model/target/target_state.dart';
 import '../../../../component/panel/drawer_info_panel.dart';
 import '../../../../component/panel/drawer_action_panel.dart';
 import '../../../../../provider/general_provider.dart';
-import '../../../../theme/app_theme.dart';
+import '../../../../theme/v1/app_theme.dart';
 
 class MyDrawer extends HookConsumerWidget {
   const MyDrawer({super.key, required this.target});

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/route/routes.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/v1/app_theme.dart';
 
 class Auth extends HookConsumerWidget {
   const Auth({super.key});

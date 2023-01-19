@@ -1,22 +1,24 @@
+import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/provider/route/router_provider.dart';
+import 'package:account_book_app/view/theme/my_theme_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'view/theme/app_theme.dart';
+import 'view/theme/v1/app_theme.dart';
 
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
+    final mode = ref.watch(themeControllerProvider);
 
     return MaterialApp.router(
       routeInformationProvider:
           ref.watch(routerProvider).routeInformationProvider,
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,
       routerDelegate: ref.watch(routerProvider).routerDelegate,
-      theme: theme.data,
+      theme: mode.themeData,
       darkTheme: AppTheme.dark().data,
       themeMode: ThemeMode.light,
       localizationsDelegates: const [

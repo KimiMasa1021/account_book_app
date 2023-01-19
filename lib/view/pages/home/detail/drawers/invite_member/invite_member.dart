@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../model/enums.dart';
 import '../../../../../../provider/general_provider.dart';
 import '../../../../../component/detail/member_tile.dart';
-import '../../../../../theme/app_theme.dart';
+import '../../../../../theme/v1/app_theme.dart';
 import '../../../../../component/lottie_loading.dart';
 
 class InviteMember extends HookConsumerWidget {

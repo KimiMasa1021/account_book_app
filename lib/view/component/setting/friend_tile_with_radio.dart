@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/user/users_state.dart';
 import '../../../provider/general_provider.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/v1/app_theme.dart';
 
 class FriendTileWithRadio extends HookConsumerWidget {
   const FriendTileWithRadio({

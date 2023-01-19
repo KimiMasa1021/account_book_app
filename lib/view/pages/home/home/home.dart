@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/v1/app_theme.dart';
 
 class Home extends HookConsumerWidget {
   const Home({super.key});
@@ -16,7 +16,6 @@ class Home extends HookConsumerWidget {
     final target = ref.watch(targetControllerProvider);
     final saving = ref.watch(savingControllerProvider);
     final allUser = ref.watch(allUsersControllerProvider);
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
@@ -25,7 +24,9 @@ class Home extends HookConsumerWidget {
             Container(
               height: 58,
               width: double.infinity,
-              decoration: const BoxDecoration(),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/target/target_state.dart';
 import '../../../utility/hex_color.dart';
 import '../../../provider/general_provider.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/v1/app_theme.dart';
 import '../shapes.dart';
 
 class TargetPanel extends HookConsumerWidget {

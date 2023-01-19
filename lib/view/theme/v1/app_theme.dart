@@ -1,4 +1,4 @@
-import 'package:account_book_app/view/theme/app_text_theme.dart';
+import 'package:account_book_app/view/theme/v1/app_text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

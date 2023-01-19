@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/panel/saving_panel.dart';
 import '../../../../provider/general_provider.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/v1/app_theme.dart';
 import 'drawers/drawer.dart';
 import 'panels/page_view_center.dart';
 

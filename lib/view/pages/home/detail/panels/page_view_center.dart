@@ -4,7 +4,7 @@ import '../../../../../model/target/target_state.dart';
 import '../../../../component/detail/detail_percent_painter.dart';
 import '../../../../../utility/hex_color.dart';
 import '../../../../../provider/general_provider.dart';
-import '../../../../theme/app_theme.dart';
+import '../../../../theme/v1/app_theme.dart';
 
 class PageViewCenter extends HookConsumerWidget {
   const PageViewCenter({

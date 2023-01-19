@@ -24,12 +24,10 @@ class RootPage extends HookConsumerWidget {
       const BottomNavigationBarItem(
         icon: Icon(Icons.savings_outlined),
         activeIcon: Icon(Icons.savings),
-        label: null,
       ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings_outlined),
         activeIcon: Icon(Icons.settings),
-        label: null,
       ),
     ];
     return Scaffold(

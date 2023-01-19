@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../utility/hex_color.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/v1/app_theme.dart';
 
 class ShadowButton extends HookConsumerWidget {
   const ShadowButton({

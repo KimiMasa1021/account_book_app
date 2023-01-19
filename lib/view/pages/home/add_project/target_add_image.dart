@@ -9,7 +9,7 @@ import '../../../../model/enums.dart';
 import '../../../../provider/route/routes.dart';
 import '../../../component/dialog/picture_dialog.dart';
 import '../../../../provider/general_provider.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/v1/app_theme.dart';
 
 class TargetAddImage extends HookConsumerWidget {
   const TargetAddImage({super.key});

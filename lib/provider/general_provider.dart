@@ -2,16 +2,19 @@ import 'package:account_book_app/view_model/auth_controller.dart';
 import 'package:account_book_app/view_model/friend_controller.dart';
 import 'package:account_book_app/view_model/target_init_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/enums.dart';
 import '../model/saving/saving_state.dart';
 import '../model/target/target_init.dart';
 import '../model/target/target_state.dart';
 import '../model/user/users_state.dart';
+import '../view/theme/my_theme_mode.dart';
 import '../view_model/all_users_controller.dart';
 import '../view_model/saving_controller.dart';
 import '../view_model/tags_controller.dart';
 import '../view_model/target_controller.dart';
+import '../view_model/theme_controller.dart';
 import '../view_model/users_controller.dart';
 import '../model/saving/tags_state.dart';
 
@@ -52,3 +55,12 @@ final tagsControllerProvider =
 final friendControllerProvider =
     StateNotifierProvider<FriendController, String>(
         (ref) => FriendController(ref));
+
+final themeControllerProvider =
+    StateNotifierProvider.autoDispose<ThemeController, ExThemeMode>(
+  (ref) => throw UnimplementedError(),
+);
+final themeControllerProviderFamily =
+    StateNotifierProvider.family.autoDispose<ThemeController, ExThemeMode, int>(
+  (ref, int id) => ThemeController(ref, id),
+);

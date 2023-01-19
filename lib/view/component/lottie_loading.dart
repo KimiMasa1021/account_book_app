@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import '../../model/enums.dart';
 import '../../utility/hex_color.dart';
-import '../theme/app_theme.dart';
+import '../theme/v1/app_theme.dart';
 
 class LottieLoading extends HookConsumerWidget {
   const LottieLoading({

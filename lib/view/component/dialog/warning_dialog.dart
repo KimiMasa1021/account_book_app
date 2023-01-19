@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/v1/app_theme.dart';
 import '../button/painted_button.dart';
 
 class WarningDialog extends HookConsumerWidget {

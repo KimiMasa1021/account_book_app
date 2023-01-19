@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/general_provider.dart';
 import '../../component/panel/setting_panel.dart';
-import '../../theme/app_theme.dart';
+import '../../theme/v1/app_theme.dart';
 
 class Setting extends HookConsumerWidget {
   const Setting({super.key});

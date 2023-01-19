@@ -12,7 +12,7 @@ import '../../../../../../provider/general_provider.dart';
 import '../../../../../component/dialog/picture_dialog.dart';
 import '../../../../../component/textfield/large_text_field.dart';
 import '../../../../../component/textfield/normal_text_field.dart';
-import '../../../../../theme/app_theme.dart';
+import '../../../../../theme/v1/app_theme.dart';
 
 class EditProject extends HookConsumerWidget {
   const EditProject({

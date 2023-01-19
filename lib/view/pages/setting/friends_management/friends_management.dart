@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/v1/app_theme.dart';
 
 class FriendsManagement extends HookConsumerWidget {
   const FriendsManagement({super.key});

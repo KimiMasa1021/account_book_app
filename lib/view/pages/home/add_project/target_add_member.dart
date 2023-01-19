@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/setting/friend_tile_with_radio.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/v1/app_theme.dart';
 
 class TargetAddMember extends HookConsumerWidget {
   const TargetAddMember({super.key});
