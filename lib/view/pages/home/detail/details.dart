@@ -6,7 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/panel/saving_panel.dart';
 import '../../../../provider/general_provider.dart';
-import '../../../theme/v1/app_theme.dart';
 import 'drawers/drawer.dart';
 import 'panels/page_view_center.dart';
 
@@ -19,7 +18,6 @@ class HomeDetails extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final theme = ref.watch(appThemeProvider);
     final saving = ref.watch(savingControllerProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final allUser = ref.watch(allUsersControllerProvider);
@@ -48,7 +46,9 @@ class HomeDetails extends HookConsumerWidget {
               ),
             ),
             title: Text(nowTarget.target),
-            titleTextStyle: theme.textTheme.fs19.copyWith(color: Colors.black),
+            // titleTextStyle: theme.textTheme.fs19.copyWith(
+            //   color: Colors.black,
+            // ),
             actionsIconTheme: const IconThemeData(color: Colors.black),
           ),
           endDrawer: MyDrawer(
@@ -128,10 +128,10 @@ class HomeDetails extends HookConsumerWidget {
                                 const SizedBox(width: 10),
                                 Text(
                                   "貯金する！！(つもり)",
-                                  style: theme.textTheme.fs19.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                                  // style: theme.textTheme.fs19.copyWith(
+                                  //   fontWeight: FontWeight.bold,
+                                  //   color: Colors.white,
+                                  // ),
                                 ),
                               ],
                             ),
@@ -168,10 +168,10 @@ class HomeDetails extends HookConsumerWidget {
                                     const SizedBox(width: 10),
                                     Text(
                                       "貯金する！！(つもり)",
-                                      style: theme.textTheme.fs19.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
+                                      // style: theme.textTheme.fs19.copyWith(
+                                      //   fontWeight: FontWeight.bold,
+                                      //   color: Colors.white,
+                                      // ),
                                     ),
                                   ],
                                 ),
@@ -183,9 +183,9 @@ class HomeDetails extends HookConsumerWidget {
                               child: Text(
                                 savingCTL
                                     .formatDate(savingList[index].createdAt),
-                                style: theme.textTheme.fs16.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                // style: theme.textTheme.fs16.copyWith(
+                                //   fontWeight: FontWeight.bold,
+                                // ),
                               ),
                             ),
                             SavingPanel(
@@ -223,9 +223,9 @@ class HomeDetails extends HookConsumerWidget {
                                   child: Text(
                                     savingCTL.formatDate(
                                         savingList[index].createdAt),
-                                    style: theme.textTheme.fs16.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    // style: theme.textTheme.fs16.copyWith(
+                                    //   fontWeight: FontWeight.bold,
+                                    // ),
                                   ),
                                 )
                               : const SizedBox(),

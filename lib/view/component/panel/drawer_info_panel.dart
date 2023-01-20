@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../theme/v1/app_theme.dart';
-
 class DrawerInfoPanel extends HookConsumerWidget {
   const DrawerInfoPanel({
     super.key,
@@ -16,7 +14,6 @@ class DrawerInfoPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     return Row(
       children: [
         Icon(
@@ -30,14 +27,14 @@ class DrawerInfoPanel extends HookConsumerWidget {
             children: [
               Text(
                 title,
-                style: theme.textTheme.fs16,
+                // style: theme.textTheme.fs16,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
                 content,
-                style: theme.textTheme.fs21.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                // style: theme.textTheme.fs21.copyWith(
+                //   fontWeight: FontWeight.bold,
+                // ),
                 overflow: TextOverflow.ellipsis,
               ),
             ],

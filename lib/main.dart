@@ -11,7 +11,7 @@ Future<void> main() async {
     ProviderScope(
       overrides: [
         themeControllerProvider
-            .overrideWithProvider(themeControllerProviderFamily(0003))
+            .overrideWithProvider(themeControllerProviderFamily(null))
       ],
       child: const MyApp(),
     ),

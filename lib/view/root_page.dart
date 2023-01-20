@@ -31,20 +31,16 @@ class RootPage extends HookConsumerWidget {
       ),
     ];
     return Scaffold(
-      backgroundColor: HexColor("#F5F5F5"),
       body: pageList[pageState.index],
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: pageState.index,
         height: 60,
-        backgroundColor: Colors.white,
         onTap: (index) {
           ref.watch(pageTypeProvider.notifier).state = PageType.values[index];
         },
         items: tabItems,
         border: const Border(),
         iconSize: 33,
-        inactiveColor: Colors.black,
-        activeColor: Colors.black,
       ),
     );
   }

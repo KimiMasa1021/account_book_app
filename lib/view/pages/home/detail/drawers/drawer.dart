@@ -8,7 +8,6 @@ import '../../../../../model/target/target_state.dart';
 import '../../../../component/panel/drawer_info_panel.dart';
 import '../../../../component/panel/drawer_action_panel.dart';
 import '../../../../../provider/general_provider.dart';
-import '../../../../theme/v1/app_theme.dart';
 
 class MyDrawer extends HookConsumerWidget {
   const MyDrawer({super.key, required this.target});
@@ -17,7 +16,6 @@ class MyDrawer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final theme = ref.watch(appThemeProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final saving = ref.watch(savingControllerProvider);
 
@@ -88,13 +86,13 @@ class MyDrawer extends HookConsumerWidget {
                       children: [
                         Text(
                           "${target.target} ",
-                          style: theme.textTheme.fs19.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          // style: theme.textTheme.fs19.copyWith(
+                          //   fontWeight: FontWeight.bold,
+                          // ),
                         ),
                         Text(
                           target.targetDescription,
-                          style: theme.textTheme.fs16,
+                          // style: theme.textTheme.fs16,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),

@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../model/enums.dart';
 import '../../../../../../provider/general_provider.dart';
 import '../../../../../component/detail/member_tile.dart';
-import '../../../../../theme/v1/app_theme.dart';
 import '../../../../../component/lottie_loading.dart';
 
 class InviteMember extends HookConsumerWidget {
@@ -21,7 +20,6 @@ class InviteMember extends HookConsumerWidget {
     final friends = ref.watch(friendsControllerProvider(userState!.friends));
     final target = ref.watch(targetControllerProvider);
     final ValueNotifier<List<String>> newMembers = useState([]);
-    final theme = ref.watch(appThemeProvider);
     final flg = useState(TargetInitFlg.inputing);
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
@@ -56,11 +54,11 @@ class InviteMember extends HookConsumerWidget {
                     padding: const EdgeInsets.only(right: 10),
                     icon: Text(
                       "追加",
-                      style: theme.textTheme.fs16.copyWith(
-                        color: newMembers.value.isNotEmpty
-                            ? Colors.white
-                            : const Color.fromARGB(255, 205, 205, 205),
-                      ),
+                      // style: theme.textTheme.fs16.copyWith(
+                      //   color: newMembers.value.isNotEmpty
+                      //       ? Colors.white
+                      //       : const Color.fromARGB(255, 205, 205, 205),
+                      // ),
                     ),
                   ),
                 ],

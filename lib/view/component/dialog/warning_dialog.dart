@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import '../../theme/v1/app_theme.dart';
 import '../button/painted_button.dart';
 
 class WarningDialog extends HookConsumerWidget {
@@ -14,7 +13,6 @@ class WarningDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final theme = ref.watch(appThemeProvider);
 
     return Dialog(
       child: SizedBox(
@@ -38,14 +36,14 @@ class WarningDialog extends HookConsumerWidget {
                     children: [
                       Text(
                         "注意",
-                        style: theme.textTheme.fs27.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        // style: theme.textTheme.fs27.copyWith(
+                        //   fontWeight: FontWeight.bold,
+                        // ),
                       ),
                       const SizedBox(height: 10),
                       Text(
                         "退会した場合はフレンドに招待してもらわなければ再参加出来ません。",
-                        style: theme.textTheme.fs19.copyWith(),
+                        // style: theme.textTheme.fs19.copyWith(),
                         textAlign: TextAlign.center,
                       ),
                       const Spacer(),

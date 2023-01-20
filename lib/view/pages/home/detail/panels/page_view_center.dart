@@ -4,7 +4,6 @@ import '../../../../../model/target/target_state.dart';
 import '../../../../component/detail/detail_percent_painter.dart';
 import '../../../../../utility/hex_color.dart';
 import '../../../../../provider/general_provider.dart';
-import '../../../../theme/v1/app_theme.dart';
 
 class PageViewCenter extends HookConsumerWidget {
   const PageViewCenter({
@@ -15,7 +14,6 @@ class PageViewCenter extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final saving = ref.watch(savingControllerProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final priceList = saving
@@ -53,15 +51,15 @@ class PageViewCenter extends HookConsumerWidget {
                         children: [
                           Text(
                             "達成金額",
-                            style: theme.textTheme.fs19.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            // style: theme.textTheme.fs19.copyWith(
+                            //   fontWeight: FontWeight.bold,
+                            // ),
                           ),
                           Text(
                             savingCTL.formatYen(sum),
-                            style: theme.textTheme.fs33.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            // style: theme.textTheme.fs33.copyWith(
+                            //   fontWeight: FontWeight.bold,
+                            // ),
                           ),
                           const SizedBox(height: 20),
                         ],
@@ -76,14 +74,14 @@ class PageViewCenter extends HookConsumerWidget {
                           children: [
                             Text(
                               "目標金額",
-                              style: theme.textTheme.fs16,
+                              // style: theme.textTheme.fs16,
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               savingCTL.formatYen(target.targetPrice),
-                              style: theme.textTheme.fs21.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              // style: theme.textTheme.fs21.copyWith(
+                              //   fontWeight: FontWeight.bold,
+                              // ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],

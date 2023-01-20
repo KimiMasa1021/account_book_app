@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/target/target_state.dart';
-import '../../../utility/hex_color.dart';
 import '../../../provider/general_provider.dart';
-import '../../theme/v1/app_theme.dart';
 import '../shapes.dart';
 
 class TargetPanel extends HookConsumerWidget {
@@ -19,7 +17,6 @@ class TargetPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final saving = ref.watch(savingControllerProvider);
     final size = MediaQuery.of(context).size;
     final priceList = saving
@@ -49,12 +46,11 @@ class TargetPanel extends HookConsumerWidget {
                   height: 115,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: theme.appColors.primary,
+                    color: Theme.of(context).cardColor,
                     shape: LeftShape(),
-                    shadows: [
+                    shadows: const [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        offset: const Offset(0, 0),
+                        offset: Offset(0, 0),
                         blurRadius: 3,
                       )
                     ],
@@ -65,12 +61,11 @@ class TargetPanel extends HookConsumerWidget {
                   child: Container(
                     height: 115,
                     decoration: ShapeDecoration(
-                      color: theme.appColors.primary,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                       shape: RightShape(),
-                      shadows: [
+                      shadows: const [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          offset: const Offset(0, 0),
+                          offset: Offset(0, 0),
                           blurRadius: 3,
                         )
                       ],
@@ -82,14 +77,14 @@ class TargetPanel extends HookConsumerWidget {
                         children: [
                           Text(
                             "${state.target} (${state.members.length})",
-                            style: theme.textTheme.fs16.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                            // style: theme.textTheme.fs16.copyWith(
+                            //   fontWeight: FontWeight.bold,
+                            // ),
                             maxLines: 1,
                           ),
                           Text(
                             state.targetDescription,
-                            style: theme.textTheme.fs16,
+                            // style: theme.textTheme.fs16,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -106,8 +101,8 @@ class TargetPanel extends HookConsumerWidget {
               padding: const EdgeInsets.all(5),
               margin: const EdgeInsets.only(top: 10, left: 11),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 230, 242, 255),
                 shape: BoxShape.circle,
+                color: Theme.of(context).cardColor,
                 image: state.img != ""
                     ? DecorationImage(
                         image: NetworkImage(
@@ -115,10 +110,9 @@ class TargetPanel extends HookConsumerWidget {
                         ),
                       )
                     : null,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    offset: const Offset(0, 0),
+                    offset: Offset(0, 0),
                     blurRadius: 2,
                   )
                 ],
@@ -144,7 +138,7 @@ class TargetPanel extends HookConsumerWidget {
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: HexColor("#70D4F7"),
+                      color: Theme.of(context).hintColor,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

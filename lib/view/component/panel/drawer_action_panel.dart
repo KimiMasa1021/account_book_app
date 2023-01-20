@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../theme/v1/app_theme.dart';
 
 class DrawerActionPanel extends HookConsumerWidget {
   const DrawerActionPanel({
@@ -15,7 +14,6 @@ class DrawerActionPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     return InkWell(
       onTap: () async {
         await function();
@@ -32,7 +30,7 @@ class DrawerActionPanel extends HookConsumerWidget {
             Expanded(
               child: Text(
                 title,
-                style: theme.textTheme.fs21,
+                // style: theme.textTheme.fs21,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

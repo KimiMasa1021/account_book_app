@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/user/users_state.dart';
-import '../../theme/v1/app_theme.dart';
 
 class FriendTile extends HookConsumerWidget {
   const FriendTile({
@@ -12,8 +11,6 @@ class FriendTile extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
@@ -42,7 +39,7 @@ class FriendTile extends HookConsumerWidget {
           Expanded(
             child: Text(
               usersState.name,
-              style: theme.textTheme.fs19,
+              // style: theme.textTheme.fs19,
               overflow: TextOverflow.ellipsis,
             ),
           ),

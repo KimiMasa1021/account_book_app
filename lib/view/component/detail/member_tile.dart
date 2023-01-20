@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/user/users_state.dart';
-import '../../theme/v1/app_theme.dart';
 
 class MemberTIle extends HookConsumerWidget {
   const MemberTIle({
@@ -15,7 +14,6 @@ class MemberTIle extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final selectFlg = useState(false);
 
     return Padding(
@@ -46,7 +44,7 @@ class MemberTIle extends HookConsumerWidget {
           Expanded(
             child: Text(
               usersState.name,
-              style: theme.textTheme.fs19,
+              // style: theme.textTheme.fs19,
               overflow: TextOverflow.ellipsis,
             ),
           ),

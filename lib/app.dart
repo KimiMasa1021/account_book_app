@@ -4,7 +4,6 @@ import 'package:account_book_app/view/theme/my_theme_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'view/theme/v1/app_theme.dart';
 
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
@@ -19,7 +18,7 @@ class MyApp extends HookConsumerWidget {
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,
       routerDelegate: ref.watch(routerProvider).routerDelegate,
       theme: mode.themeData,
-      darkTheme: AppTheme.dark().data,
+      // darkTheme: AppTheme.dark().data,
       themeMode: ThemeMode.light,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

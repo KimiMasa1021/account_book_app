@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/user/users_state.dart';
 import '../../../provider/general_provider.dart';
-import '../../theme/v1/app_theme.dart';
 
 class FriendTileWithRadio extends HookConsumerWidget {
   const FriendTileWithRadio({
@@ -14,7 +13,6 @@ class FriendTileWithRadio extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final selectFlg = useState(false);
     final targetInit = ref.watch(targetInitControllerProvider(null));
     final targetInitCTL =
@@ -48,7 +46,7 @@ class FriendTileWithRadio extends HookConsumerWidget {
           Expanded(
             child: Text(
               usersState.name,
-              style: theme.textTheme.fs19,
+              // style: theme.textTheme.fs19,
               overflow: TextOverflow.ellipsis,
             ),
           ),

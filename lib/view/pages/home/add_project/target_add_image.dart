@@ -9,16 +9,13 @@ import '../../../../model/enums.dart';
 import '../../../../provider/route/routes.dart';
 import '../../../component/dialog/picture_dialog.dart';
 import '../../../../provider/general_provider.dart';
-import '../../../theme/v1/app_theme.dart';
 
 class TargetAddImage extends HookConsumerWidget {
   const TargetAddImage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final size = MediaQuery.of(context).size;
-
     final targetInit = ref.watch(targetInitControllerProvider(null));
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
@@ -31,7 +28,7 @@ class TargetAddImage extends HookConsumerWidget {
             elevation: 0,
             title: Text(
               "画像設定",
-              style: theme.textTheme.fs19,
+              // style: theme.textTheme.fs19,
             ),
             titleTextStyle: const TextStyle(
               color: Colors.black,
@@ -57,9 +54,9 @@ class TargetAddImage extends HookConsumerWidget {
                 padding: const EdgeInsets.only(right: 10),
                 icon: Text(
                   "作成",
-                  style: theme.textTheme.fs16.copyWith(
-                    color: Colors.black,
-                  ),
+                  // style: theme.textTheme.fs16.copyWith(
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ],

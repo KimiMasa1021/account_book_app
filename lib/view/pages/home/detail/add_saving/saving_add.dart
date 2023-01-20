@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../utility/price_formatter.dart';
 import '../../../../component/button/calculator_button.dart';
-import '../../../../theme/v1/app_theme.dart';
 import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -18,7 +16,6 @@ class SavingAdd extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
     final priceController = useTextEditingController(text: "");
@@ -39,7 +36,7 @@ class SavingAdd extends HookConsumerWidget {
           ),
         ),
         title: const Text("追加"),
-        titleTextStyle: theme.textTheme.fs19.copyWith(color: Colors.black),
+        // titleTextStyle: theme.textTheme.fs19.copyWith(color: Colors.black),
       ),
       body: Column(
         children: [
@@ -88,11 +85,11 @@ class SavingAdd extends HookConsumerWidget {
                           controller: priceController,
                           autofocus: true,
                           keyboardType: TextInputType.none,
-                          style: theme.textTheme.fs33,
+                          // style: theme.textTheme.fs33,
                           cursorWidth: 0,
                           decoration: InputDecoration(
                             hintText: "金額を入力",
-                            hintStyle: theme.textTheme.fs33,
+                            // hintStyle: theme.textTheme.fs33,
                             contentPadding: EdgeInsets.zero,
                             isCollapsed: true,
                             focusedBorder: InputBorder.none,
@@ -128,9 +125,9 @@ class SavingAdd extends HookConsumerWidget {
                         child: Center(
                           child: Text(
                             "追加する",
-                            style: theme.textTheme.fs16.copyWith(
-                              color: Colors.white,
-                            ),
+                            // style: theme.textTheme.fs16.copyWith(
+                            //   color: Colors.white,
+                            // ),
                           ),
                         ),
                       ),

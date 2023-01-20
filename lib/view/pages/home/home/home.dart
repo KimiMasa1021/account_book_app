@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/v1/app_theme.dart';
 
 class Home extends HookConsumerWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final target = ref.watch(targetControllerProvider);
     final saving = ref.watch(savingControllerProvider);
     final allUser = ref.watch(allUsersControllerProvider);
@@ -24,9 +22,6 @@ class Home extends HookConsumerWidget {
             Container(
               height: 58,
               width: double.infinity,
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

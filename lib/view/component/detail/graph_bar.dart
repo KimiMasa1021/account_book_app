@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/general_provider.dart';
-import '../../theme/v1/app_theme.dart';
 
 class GraphBar extends HookConsumerWidget {
   const GraphBar({
@@ -20,7 +19,6 @@ class GraphBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
 
     return Tooltip(
@@ -31,10 +29,10 @@ class GraphBar extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: Text(
               weekText,
-              style: theme.textTheme.fs16.copyWith(
-                fontWeight: FontWeight.bold,
-                color: textCol0r,
-              ),
+              // style: theme.textTheme.fs16.copyWith(
+              //   fontWeight: FontWeight.bold,
+              //   color: textCol0r,
+              // ),
             ),
           ),
           Expanded(

@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/v1/app_theme.dart';
 
 class FriendsManagement extends HookConsumerWidget {
   const FriendsManagement({super.key});
@@ -12,7 +11,6 @@ class FriendsManagement extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
     final friends = ref.watch(friendsControllerProvider(userState!.friends));
-    final theme = ref.watch(appThemeProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -56,9 +54,9 @@ class FriendsManagement extends HookConsumerWidget {
                       children: [
                         Text(
                           friends[index].name,
-                          style: theme.textTheme.fs19.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          // style: theme.textTheme.fs19.copyWith(
+                          //   fontWeight: FontWeight.bold,
+                          // ),
                         ),
                         Text(
                           friends[index].email,

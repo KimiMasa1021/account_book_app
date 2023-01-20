@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../utility/hex_color.dart';
-import '../../theme/v1/app_theme.dart';
 
 class ShadowButton extends HookConsumerWidget {
   const ShadowButton({
@@ -16,7 +14,6 @@ class ShadowButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     return InkWell(
       onTap: () async {
         await function();
@@ -49,7 +46,7 @@ class ShadowButton extends HookConsumerWidget {
               child: Center(
                 child: Text(
                   text,
-                  style: theme.textTheme.fs19,
+                  // style: theme.textTheme.fs19,
                 ),
               ),
             ),

@@ -5,14 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/setting/friend_tile_with_radio.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/v1/app_theme.dart';
 
 class TargetAddMember extends HookConsumerWidget {
   const TargetAddMember({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final userState = ref.watch(usersControllerProvider);
     final friends = ref.watch(friendsControllerProvider(userState!.friends));
     final targetInit = ref.watch(targetInitControllerProvider(null));
@@ -22,7 +20,7 @@ class TargetAddMember extends HookConsumerWidget {
         elevation: 0,
         title: Text(
           "メンバーを選択",
-          style: theme.textTheme.fs19,
+          // style: theme.textTheme.fs19,
         ),
         titleTextStyle: const TextStyle(
           color: Colors.black,
@@ -45,9 +43,9 @@ class TargetAddMember extends HookConsumerWidget {
             padding: const EdgeInsets.only(right: 10),
             icon: Text(
               "次へ",
-              style: theme.textTheme.fs16.copyWith(
-                color: Colors.black,
-              ),
+              // style: theme.textTheme.fs16.copyWith(
+              //   color: Colors.black,
+              // ),
             ),
           ),
         ],
@@ -97,7 +95,10 @@ class TargetAddMember extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          Text("あなた", style: theme.textTheme.fs16)
+                          Text(
+                            "あなた",
+                            // style: theme.textTheme.fs16,
+                          )
                         ],
                       ),
                     ),
@@ -134,7 +135,7 @@ class TargetAddMember extends HookConsumerWidget {
                             ),
                             Text(
                               targetInit.selectedUserList[index].name,
-                              style: theme.textTheme.fs16,
+                              // style: theme.textTheme.fs16,
                               overflow: TextOverflow.ellipsis,
                             )
                           ],

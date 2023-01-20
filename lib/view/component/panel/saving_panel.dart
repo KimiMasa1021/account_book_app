@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../provider/general_provider.dart';
-import '../../theme/v1/app_theme.dart';
 
 class SavingPanel extends HookConsumerWidget {
   const SavingPanel({
@@ -17,7 +15,6 @@ class SavingPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
 
     return Container(
@@ -43,23 +40,26 @@ class SavingPanel extends HookConsumerWidget {
             children: [
               Text(
                 savingCTL.formatYen(price),
-                style: theme.textTheme.fs27.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                // style: theme.textTheme.fs27.copyWith(
+                //   fontWeight: FontWeight.bold,
+                // ),
               ),
               Row(
                 children: [
                   const Icon(Icons.person),
                   Text(
                     member,
-                    style: theme.textTheme.fs16,
+                    // style: theme.textTheme.fs16,
                   ),
                 ],
               )
             ],
           ),
           const Spacer(),
-          Text(memo, style: theme.textTheme.fs16)
+          Text(
+            memo,
+            // style: theme.textTheme.fs16,
+          )
         ],
       ),
     );

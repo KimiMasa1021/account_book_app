@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import '../../model/enums.dart';
-import '../../utility/hex_color.dart';
-import '../theme/v1/app_theme.dart';
 
 class LottieLoading extends HookConsumerWidget {
   const LottieLoading({
@@ -24,7 +22,6 @@ class LottieLoading extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final theme = ref.watch(appThemeProvider);
 
     final loadingLottie = Lottie.asset(
       loadingPath,
@@ -49,9 +46,6 @@ class LottieLoading extends HookConsumerWidget {
                 Container(
                   width: size.width,
                   height: size.height,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
                   child: flg == TargetInitFlg.creating
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -59,9 +53,9 @@ class LottieLoading extends HookConsumerWidget {
                             loadingLottie,
                             Text(
                               loadingText,
-                              style: theme.textTheme.fs19.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              // style: theme.textTheme.fs19.copyWith(
+                              //   fontWeight: FontWeight.bold,
+                              // ),
                             )
                           ],
                         )
@@ -71,9 +65,9 @@ class LottieLoading extends HookConsumerWidget {
                             finishLottie,
                             Text(
                               resultText,
-                              style: theme.textTheme.fs19.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              // style: theme.textTheme.fs19.copyWith(
+                              //   fontWeight: FontWeight.bold,
+                              // ),
                             ),
                           ],
                         ),
@@ -94,16 +88,14 @@ class LottieLoading extends HookConsumerWidget {
                               width: double.infinity,
                               height: 55,
                               decoration: BoxDecoration(
-                                color: HexColor("#296BFF"),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
                                 child: Text(
                                   "ホームに戻る",
-                                  style: theme.textTheme.fs19.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                                  // style: theme.textTheme.fs19.copyWith(
+                                  //   fontWeight: FontWeight.bold,
+                                  // ),
                                 ),
                               ),
                             ),

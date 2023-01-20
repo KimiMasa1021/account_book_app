@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/route/routes.dart';
-import '../../theme/v1/app_theme.dart';
 
 class Auth extends HookConsumerWidget {
   const Auth({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final authCTL = ref.watch(authControllerProvider.notifier);
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
@@ -32,13 +30,13 @@ class Auth extends HookConsumerWidget {
                   const SizedBox(height: 50),
                   Text(
                     "仮の名前",
-                    style: theme.textTheme.fs33.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    // style: theme.textTheme.fs33.copyWith(
+                    //   fontWeight: FontWeight.bold,
+                    // ),
                   ),
                   Text(
                     "仮の簡単な説明仮の\n仮の簡単な説明仮の仮の",
-                    style: theme.textTheme.fs21,
+                    // style: theme.textTheme.fs21,
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),

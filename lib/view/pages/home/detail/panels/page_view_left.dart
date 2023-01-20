@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../../../../../model/target/target_state.dart';
 import '../../../../../utility/hex_color.dart';
 import '../../../../../provider/general_provider.dart';
-import '../../../../theme/v1/app_theme.dart';
 
 class PageViewLeft extends HookConsumerWidget {
   const PageViewLeft({
@@ -17,7 +16,6 @@ class PageViewLeft extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final saving = ref.watch(savingControllerProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
 
@@ -73,10 +71,10 @@ class PageViewLeft extends HookConsumerWidget {
                   ),
                   Text(
                     "${DateFormat('MM月dd日').format(startWeekDate)}から${DateFormat('MM月dd日').format(endWeekDate)}",
-                    style: theme.textTheme.fs16.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    // style: theme.textTheme.fs16.copyWith(
+                    //   fontWeight: FontWeight.bold,
+                    //   color: Colors.white,
+                    // ),
                   ),
                   InkWell(
                     onTap: () {
@@ -132,10 +130,10 @@ class PageViewLeft extends HookConsumerWidget {
             ),
             Text(
               "１日当たり${dailyPrice}円で達成できます!!",
-              style: theme.textTheme.fs16.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              // style: theme.textTheme.fs16.copyWith(
+              //   fontWeight: FontWeight.bold,
+              //   color: Colors.white,
+              // ),
             ),
           ],
         ),

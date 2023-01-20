@@ -8,14 +8,12 @@ import '../../../component/textfield/large_text_field.dart';
 import '../../../../utility/price_formatter.dart';
 import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../theme/v1/app_theme.dart';
 
 class TargetAddDetails extends HookConsumerWidget {
   const TargetAddDetails({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final targetInit = ref.watch(targetInitControllerProvider(null));
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
@@ -26,7 +24,7 @@ class TargetAddDetails extends HookConsumerWidget {
         elevation: 0,
         title: Text(
           "詳細設定",
-          style: theme.textTheme.fs19,
+          // style: theme.textTheme.fs19,
         ),
         titleTextStyle: const TextStyle(
           color: Colors.black,
@@ -51,9 +49,9 @@ class TargetAddDetails extends HookConsumerWidget {
             padding: const EdgeInsets.only(right: 10),
             icon: Text(
               "次へ",
-              style: theme.textTheme.fs16.copyWith(
-                color: Colors.black,
-              ),
+              // style: theme.textTheme.fs16.copyWith(
+              //   color: Colors.black,
+              // ),
             ),
           ),
         ],
@@ -91,7 +89,10 @@ class TargetAddDetails extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  Text("達成予定年月日", style: theme.textTheme.fs16),
+                  Text(
+                    "達成予定年月日",
+                    // style: theme.textTheme.fs16,
+                  ),
                   InkWell(
                     onTap: () async {
                       primaryFocus?.unfocus();

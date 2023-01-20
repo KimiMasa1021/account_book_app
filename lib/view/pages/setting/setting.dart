@@ -1,18 +1,15 @@
-import 'package:account_book_app/view/component/setting/setting_tile.dart';
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/general_provider.dart';
 import '../../component/panel/setting_panel.dart';
-import '../../theme/v1/app_theme.dart';
 
 class Setting extends HookConsumerWidget {
   const Setting({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(appThemeProvider);
     final userState = ref.watch(usersControllerProvider);
 
     return SafeArea(
@@ -40,7 +37,7 @@ class Setting extends HookConsumerWidget {
                 child: Center(
                   child: Text(
                     "プレミアム機能紹介",
-                    style: theme.textTheme.fs27,
+                    // style: theme.textTheme.fs27,
                   ),
                 ),
               ),
