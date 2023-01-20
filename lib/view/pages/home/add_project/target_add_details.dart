@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../../../view_model/target_init_controller.dart';
 import '../../../component/textfield/large_text_field.dart';
 import '../../../../utility/price_formatter.dart';
-import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
 
 class TargetAddDetails extends HookConsumerWidget {

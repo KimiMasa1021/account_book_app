@@ -2,8 +2,10 @@ import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../view_model/friend_controller.dart';
+import '../../../../view_model/target_init_controller.dart';
+import '../../../../view_model/users_controller.dart';
 import '../../../component/setting/friend_tile_with_radio.dart';
-import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
 
 class TargetAddMember extends HookConsumerWidget {
@@ -12,7 +14,7 @@ class TargetAddMember extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
-    final friends = ref.watch(friendsControllerProvider(userState!.friends));
+    final friends = ref.watch(friendsControllerProvider);
     final targetInit = ref.watch(targetInitControllerProvider(null));
 
     return Scaffold(
@@ -79,10 +81,10 @@ class TargetAddMember extends HookConsumerWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: Colors.white,
-                              image: userState.img != ""
+                              image: userState?.img != ""
                                   ? DecorationImage(
                                       image: NetworkImage(
-                                        userState.img,
+                                        userState!.img,
                                       ),
                                     )
                                   : null,

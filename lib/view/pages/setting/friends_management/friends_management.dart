@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../provider/general_provider.dart';
 import '../../../../provider/route/routes.dart';
+import '../../../../view_model/friend_controller.dart';
 
 class FriendsManagement extends HookConsumerWidget {
   const FriendsManagement({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userState = ref.watch(usersControllerProvider);
-    final friends = ref.watch(friendsControllerProvider(userState!.friends));
+    final friends = ref.watch(friendsControllerProvider);
 
     return Scaffold(
       appBar: AppBar(

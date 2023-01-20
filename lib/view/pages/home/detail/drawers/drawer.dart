@@ -5,9 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../../model/target/target_state.dart';
+import '../../../../../view_model/saving_controller.dart';
 import '../../../../component/panel/drawer_info_panel.dart';
 import '../../../../component/panel/drawer_action_panel.dart';
-import '../../../../../provider/general_provider.dart';
 
 class MyDrawer extends HookConsumerWidget {
   const MyDrawer({super.key, required this.target});
@@ -134,7 +134,7 @@ class MyDrawer extends HookConsumerWidget {
                 function: () {
                   context.pushNamed(
                     Routes.name().memberList,
-                    params: {'targetId': target.docId},
+                    extra: target,
                   );
                 },
               ),

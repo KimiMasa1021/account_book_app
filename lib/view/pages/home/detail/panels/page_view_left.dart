@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../../model/target/target_state.dart';
 import '../../../../../utility/hex_color.dart';
-import '../../../../../provider/general_provider.dart';
+import '../../../../../view_model/saving_controller.dart';
 
 class PageViewLeft extends HookConsumerWidget {
   const PageViewLeft({

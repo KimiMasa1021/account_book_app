@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/target/target_state.dart';
-import '../../../provider/general_provider.dart';
+import '../../../view_model/saving_controller.dart';
 import '../shapes.dart';
 
 class TargetPanel extends HookConsumerWidget {

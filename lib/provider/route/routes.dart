@@ -60,9 +60,9 @@ class Routes {
       addProjectMember: "add_project_member",
       addProjectDetails: "add_project_details",
       addProjectImage: "add_project_image",
-      projectDetails: "project_details/:docId",
+      projectDetails: "project_details",
       editProject: "edit_project/:targetId",
-      memberList: "memberList/:targetId",
+      memberList: "memberList",
       inviteMember: "invite_member/:targetId",
       addSaving: "add_saving/:targetId",
       //　設定タブ

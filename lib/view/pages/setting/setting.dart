@@ -2,7 +2,7 @@ import 'package:account_book_app/provider/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../provider/general_provider.dart';
+import '../../../view_model/users_controller.dart';
 import '../../component/panel/setting_panel.dart';
 
 class Setting extends HookConsumerWidget {

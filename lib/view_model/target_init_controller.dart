@@ -7,9 +7,13 @@ import 'package:image_picker/image_picker.dart';
 import '../model/target/target_init.dart';
 import '../model/target/target_state.dart';
 import '../model/user/users_state.dart';
-import '../provider/general_provider.dart';
 import '../repository/target_init_repository.dart';
 import '../repository/users_repository.dart';
+import 'auth_controller.dart';
+
+final targetInitControllerProvider = StateNotifierProvider.autoDispose
+    .family<TargetInitCntroller, TargetInit, TargetState?>(
+        (ref, target) => TargetInitCntroller(ref, target: target));
 
 class TargetInitCntroller extends StateNotifier<TargetInit> {
   final Ref ref;

@@ -1,4 +1,3 @@
-import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/repository/target_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,6 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/saving/saving_state.dart';
 import '../utility/price_formatter.dart';
+import 'auth_controller.dart';
+
+final savingControllerProvider =
+    StateNotifierProvider<SavingController, List<SavingState>>(
+        (ref) => SavingController(ref));
 
 class SavingController extends StateNotifier<List<SavingState>> {
   final Ref ref;

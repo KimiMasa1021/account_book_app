@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../model/target/target_state.dart';
+import '../../../../../view_model/saving_controller.dart';
 import '../../../../component/detail/detail_percent_painter.dart';
 import '../../../../../utility/hex_color.dart';
-import '../../../../../provider/general_provider.dart';
 
 class PageViewCenter extends HookConsumerWidget {
   const PageViewCenter({

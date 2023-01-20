@@ -7,8 +7,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../model/enums.dart';
 import '../../../../provider/route/routes.dart';
+import '../../../../view_model/target_init_controller.dart';
 import '../../../component/dialog/picture_dialog.dart';
-import '../../../../provider/general_provider.dart';
 
 class TargetAddImage extends HookConsumerWidget {
   const TargetAddImage({super.key});

@@ -1,9 +1,9 @@
-import 'package:account_book_app/provider/general_provider.dart';
 import 'package:account_book_app/provider/route/router_provider.dart';
 import 'package:account_book_app/view/theme/my_theme_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'view_model/theme_controller.dart';
 
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});

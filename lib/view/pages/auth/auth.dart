@@ -1,9 +1,10 @@
 import 'package:account_book_app/view/component/button/shadow_button.dart';
-import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/route/routes.dart';
+import '../../../view_model/auth_controller.dart';
+import '../../../view_model/tags_controller.dart';
 
 class Auth extends HookConsumerWidget {
   const Auth({super.key});

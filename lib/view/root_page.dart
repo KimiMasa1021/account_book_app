@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/enums.dart';
-import '../utility/hex_color.dart';
-import '../provider/general_provider.dart';
+import '../view_model/auth_controller.dart';
+import '../view_model/users_controller.dart';
+
+final pageTypeProvider =
+    StateProvider.autoDispose<PageType>((ref) => PageType.home);
 
 class RootPage extends HookConsumerWidget {
   const RootPage({super.key});
@@ -15,6 +18,7 @@ class RootPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
     final authCTL = ref.watch(authControllerProvider);
+
     final List<Widget> pageList = <Widget>[
       const Home(),
       const Setting(),

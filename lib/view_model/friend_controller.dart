@@ -1,18 +1,26 @@
+import 'package:account_book_app/model/user/users_state.dart';
 import 'package:account_book_app/repository/friend_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/enums.dart';
 
-class FriendController extends StateNotifier<String> {
+final friendsControllerProvider =
+    StateNotifierProvider<FriendController, List<UsersState>>(
+        (ref) => FriendController(ref));
+
+class FriendController extends StateNotifier<List<UsersState>> {
   final Ref ref;
 
-  FriendController(this.ref) : super("");
+  FriendController(this.ref) : super([]) {
+    ref.read(friendRepositoryProvider).feachFriends().listen((data) {
+      state = data.map((doc) => doc.data()).toList();
+    });
+  }
 
   Future<void> testFriendAdd(String user1Uid, String user2Uid) async {
     final res =
         await ref.read(friendRepositoryProvider).addFriend(user1Uid, user2Uid);
-    debugPrint("あ$res");
     switch (res) {
       case FrendRequestResult.success:
         showToast("フレンド登録が完了しました。");

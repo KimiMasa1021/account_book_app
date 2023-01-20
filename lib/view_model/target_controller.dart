@@ -2,6 +2,10 @@ import 'package:account_book_app/repository/target_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/target/target_state.dart';
 
+final targetControllerProvider =
+    StateNotifierProvider<TargetController, AsyncValue<List<TargetState>>>(
+        (ref) => TargetController(ref));
+
 class TargetController extends StateNotifier<AsyncValue<List<TargetState>>> {
   final Ref ref;
   TargetController(this.ref)

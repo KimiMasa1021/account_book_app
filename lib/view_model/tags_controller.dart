@@ -3,6 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
 
+final tagsControllerProvider =
+    StateNotifierProvider<TagsController, List<Tags>>(
+        (ref) => TagsController(ref));
+
 class TagsController extends StateNotifier<List<Tags>> {
   final Ref ref;
   late Database database;

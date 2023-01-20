@@ -1,20 +1,18 @@
 import 'dart:io';
 import 'package:account_book_app/provider/firebase/firebase_storage.dart';
-import 'package:account_book_app/provider/general_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/user/users_state.dart';
 import '../provider/firebase/firebase_firestore_provider.dart';
+import '../view_model/auth_controller.dart';
 
 final usersRepositoryProvider =
     Provider<UsersRepository>((ref) => GenreRepositoryImple(ref));
 
 abstract class UsersRepository {
   Stream<UsersState?> feachGenreList();
-  Future<UsersState?> searchUser(String uid);
-  Future<void> makeFriend(String uid, List friendList, List myList);
   Future<String> uploadImage(File image);
   Future<void> saveImageUrl(String url);
   Future<void> reName(String newName);
@@ -37,36 +35,6 @@ class GenreRepositoryImple implements UsersRepository {
           toFirestore: (data, _) => data.toJson(),
         );
     yield* stateRef.snapshots().map((snap) => snap.data());
-  }
-
-  @override
-  Future<UsersState?> searchUser(String uid) async {
-    try {
-      if (uid.contains("//")) {
-        return null;
-      }
-      final docSnapshot =
-          collectionReference!.doc(uid).withConverter<UsersState>(
-                fromFirestore: (snapshot, _) =>
-                    UsersState.fromJson(snapshot.data()!),
-                toFirestore: (data, _) => data.toJson(),
-              );
-      final docSnap = await docSnapshot.get();
-      final result = docSnap.data();
-      return result;
-    } on FirebaseAuthException {
-      return null;
-    }
-  }
-
-  @override
-  Future<void> makeFriend(String uid, List friendList, List myList) async {
-    await collectionReference!.doc(uid).update({
-      'friends': friendList,
-    });
-    await collectionReference!.doc(userId).update({
-      'friends': myList,
-    });
   }
 
   @override

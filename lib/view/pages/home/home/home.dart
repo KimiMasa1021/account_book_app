@@ -1,10 +1,10 @@
 import 'package:account_book_app/view/component/panel/target_panel.dart';
 import 'package:account_book_app/utility/hex_color.dart';
-import 'package:account_book_app/provider/general_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/route/routes.dart';
+import '../../../../view_model/target_controller.dart';
 
 class Home extends HookConsumerWidget {
   const Home({super.key});
@@ -12,8 +12,6 @@ class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final target = ref.watch(targetControllerProvider);
-    final saving = ref.watch(savingControllerProvider);
-    final allUser = ref.watch(allUsersControllerProvider);
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
@@ -67,9 +65,7 @@ class Home extends HookConsumerWidget {
                                   function: () {
                                     context.pushNamed(
                                       Routes.name().projectDetails,
-                                      params: {
-                                        'docId': val[index].docId,
-                                      },
+                                      extra: val[index],
                                     );
                                   },
                                 );

@@ -3,7 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../model/enums.dart';
-import '../../../../../../provider/general_provider.dart';
+import '../../../../../../view_model/friend_controller.dart';
+import '../../../../../../view_model/target_controller.dart';
+import '../../../../../../view_model/target_init_controller.dart';
 import '../../../../../component/detail/member_tile.dart';
 import '../../../../../component/lottie_loading.dart';
 
@@ -16,8 +18,7 @@ class InviteMember extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userState = ref.watch(usersControllerProvider);
-    final friends = ref.watch(friendsControllerProvider(userState!.friends));
+    final friends = ref.watch(friendsControllerProvider);
     final target = ref.watch(targetControllerProvider);
     final ValueNotifier<List<String>> newMembers = useState([]);
     final flg = useState(TargetInitFlg.inputing);

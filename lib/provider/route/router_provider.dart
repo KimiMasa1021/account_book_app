@@ -16,6 +16,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../model/target/target_state.dart';
 import '../../view/pages/auth/privacy_policy.dart';
 import '../../view/pages/home/detail/add_saving/saving_add.dart';
 import 'guard.dart';
@@ -78,12 +79,13 @@ final routerProvider = Provider(
             path: Routes.path().projectDetails,
             name: Routes.name().projectDetails,
             pageBuilder: (context, state) {
-              String docId = state.params['docId']!;
+              // final target = state.params['docId']! as TargetState;
+              final target = state.extra as TargetState;
               return buildPageWithDefaultTransition<void>(
                 context: context,
                 state: state,
                 child: HomeDetails(
-                  docId: docId,
+                  target: target,
                 ),
               );
             },
@@ -115,9 +117,9 @@ final routerProvider = Provider(
             path: Routes.path().memberList,
             name: Routes.name().memberList,
             builder: (context, state) {
-              String targetId = state.params['targetId']!;
+              final target = state.extra as TargetState;
               return MemberList(
-                docId: targetId,
+                target: target,
               );
             },
           ),

@@ -3,7 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import '../../../../provider/general_provider.dart';
+import '../../../../view_model/friend_controller.dart';
+import '../../../../view_model/users_controller.dart';
 
 class FriendsQrScan extends HookConsumerWidget {
   FriendsQrScan({super.key});
@@ -14,7 +15,7 @@ class FriendsQrScan extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
     final loading = useState(false);
-    final friendCTL = ref.watch(friendControllerProvider.notifier);
+    final friendCTL = ref.watch(friendsControllerProvider.notifier);
     final usersState = ref.watch(usersControllerProvider);
 
     return Stack(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../provider/general_provider.dart';
+import '../../../view_model/saving_controller.dart';
 
 class GraphBar extends HookConsumerWidget {
   const GraphBar({
