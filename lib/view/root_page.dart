@@ -34,17 +34,20 @@ class RootPage extends HookConsumerWidget {
         activeIcon: Icon(Icons.settings),
       ),
     ];
-    return Scaffold(
-      body: pageList[pageState.index],
-      bottomNavigationBar: CupertinoTabBar(
-        currentIndex: pageState.index,
-        height: 60,
-        onTap: (index) {
-          ref.watch(pageTypeProvider.notifier).state = PageType.values[index];
-        },
-        items: tabItems,
-        border: const Border(),
-        iconSize: 33,
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+      child: Scaffold(
+        body: pageList[pageState.index],
+        bottomNavigationBar: CupertinoTabBar(
+          currentIndex: pageState.index,
+          height: 60,
+          onTap: (index) {
+            ref.watch(pageTypeProvider.notifier).state = PageType.values[index];
+          },
+          items: tabItems,
+          border: const Border(),
+          iconSize: 33,
+        ),
       ),
     );
   }

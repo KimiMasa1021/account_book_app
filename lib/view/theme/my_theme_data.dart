@@ -1,3 +1,4 @@
+import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,17 @@ class MyThemeData {
   });
   final ThemeData theme;
 
+  // TODO material builderいまいち使いこなせないから
+  // それぞれのモードの画面と設定を突き合わせて作っていくぅ～！
+
   //ライトテーマ
   factory MyThemeData.light() {
     return MyThemeData(
-      theme: ThemeData.from(colorScheme: const ColorScheme.light()),
+      theme: ThemeData.from(
+        colorScheme: const ColorScheme.light().copyWith(
+          background: HexColor("#ECECEC"),
+        ),
+      ),
     );
   }
   //ダークテーマ

@@ -85,10 +85,4 @@ class UsersController extends StateNotifier<UsersState> {
     await ref.read(usersRepositoryProvider).reName(newName);
     function();
   }
-
-  void requestReview() {
-    AppReview.requestReview.then((onValue) {
-      debugPrint(onValue);
-    });
-  }
 }

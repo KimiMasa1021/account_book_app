@@ -196,7 +196,6 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
     String docId,
   ) async {
     final member = [...preMembers, ...newMembers];
-    debugPrint(member.toString());
     await ref.read(targetInitRepositoryProvider).updateMember(member, docId);
   }
 }

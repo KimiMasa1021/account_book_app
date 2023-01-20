@@ -48,12 +48,12 @@ class TargetPanel extends HookConsumerWidget {
                   decoration: ShapeDecoration(
                     color: Theme.of(context).cardColor,
                     shape: LeftShape(),
-                    shadows: const [
-                      BoxShadow(
-                        offset: Offset(0, 0),
-                        blurRadius: 3,
-                      )
-                    ],
+                    // shadows: const [
+                    //   BoxShadow(
+                    //     offset: Offset(0, 0),
+                    //     blurRadius: 3,
+                    //   )
+                    // ],
                   ),
                 ),
                 const SizedBox(width: 2),
@@ -61,14 +61,14 @@ class TargetPanel extends HookConsumerWidget {
                   child: Container(
                     height: 115,
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      color: Theme.of(context).cardColor,
                       shape: RightShape(),
-                      shadows: const [
-                        BoxShadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3,
-                        )
-                      ],
+                      // shadows: const [
+                      //   BoxShadow(
+                      //     offset: Offset(0, 0),
+                      //     blurRadius: 3,
+                      //   )
+                      // ],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 45, top: 5),
@@ -110,12 +110,12 @@ class TargetPanel extends HookConsumerWidget {
                         ),
                       )
                     : null,
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(0, 0),
-                    blurRadius: 2,
-                  )
-                ],
+                // boxShadow: const [
+                //   BoxShadow(
+                //     offset: Offset(0, 0),
+                //     blurRadius: 2,
+                //   )
+                // ],
               ),
               child: state.img == ""
                   ? FittedBox(
@@ -138,7 +138,7 @@ class TargetPanel extends HookConsumerWidget {
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).hintColor,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
@@ -161,12 +161,11 @@ class TargetPanel extends HookConsumerWidget {
                             width: 5,
                           ),
                         ),
-                        child: Center(
+                        child: FittedBox(
                           child: Text(
                             "済",
                             style: GoogleFonts.yujiBoku(
                               color: Colors.red,
-                              fontSize: 45,
                             ),
                           ),
                         ),
