@@ -3,8 +3,11 @@ import 'package:account_book_app/view/pages/home/detail/panels/page_view_left.da
 import 'package:account_book_app/view/pages/home/detail/panels/page_view_right.dart';
 import 'package:account_book_app/view_model/target_members_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../provider/route/routes.dart';
 import '../../../../view_model/saving_controller.dart';
+import '../../../component/button/saving_add_button.dart';
 import '../../../component/panel/saving_panel.dart';
 import '../../../theme/app_text_theme.dart';
 import 'drawers/drawer.dart';
@@ -94,37 +97,19 @@ class HomeDetails extends HookConsumerWidget {
               delegate: targetMembers.when(
                 data: (data) {
                   return SliverChildBuilderDelegate(
-                    childCount: savingList.length,
+                    childCount: savingList.isEmpty ? 1 : savingList.length,
                     (_, int index) {
-                      // // savingListが空の場合
-                      // if (savingList.isEmpty) {
-                      //   return SavingAddButton(
-                      //     function: () {
-                      //       context.pushNamed(
-                      //         Routes.name().addSaving,
-                      //         params: {'targetId': target.docId},
-                      //       );
-                      //     },
-                      //   );
-                      // }
-
-                      // final iDate = savingList[index].createdAt;
-                      // final backDate = savingList[index - 1].createdAt;
-
-                      // //上記以外の場合
-                      // return Column(
-                      //   crossAxisAlignment: CrossAxisAlignment.start,
-                      //   children: [
-                      //     SavingPanel(
-                      //       price: savingList[index].price,
-                      //       member: data
-                      //           .singleWhere(
-                      //               (e) => e.uid == savingList[index].userId)
-                      //           .name,
-                      //       memo: savingList[index].memo,
-                      //     ),
-                      //   ],
-                      // );
+                      // savingListが空の場合
+                      if (savingList.isEmpty) {
+                        return SavingAddButton(
+                          function: () {
+                            context.pushNamed(
+                              Routes.name().addSaving,
+                              params: {'targetId': target.docId},
+                            );
+                          },
+                        );
+                      }
                       final test = savingList
                           .where((e) =>
                               e.createdAt
@@ -133,9 +118,21 @@ class HomeDetails extends HookConsumerWidget {
                               0)
                           .toList();
                       if (index == 0) {
-                        return SavingPanel(
-                          state: test,
-                          target: target,
+                        return Column(
+                          children: [
+                            SavingAddButton(
+                              function: () {
+                                context.pushNamed(
+                                  Routes.name().addSaving,
+                                  params: {'targetId': target.docId},
+                                );
+                              },
+                            ),
+                            SavingPanel(
+                              state: test,
+                              target: target,
+                            ),
+                          ],
                         );
                       }
                       if (savingList[index - 1]
