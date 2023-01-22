@@ -8,6 +8,8 @@ import 'package:account_book_app/view/pages/home/add_project/target_add_member.d
 import 'package:account_book_app/view/pages/home/detail/drawers/edit_project/edit_project.dart';
 import 'package:account_book_app/view/pages/home/detail/drawers/invite_member/invite_member.dart';
 import 'package:account_book_app/view/pages/home/detail/drawers/member_list/member_list.dart';
+import 'package:account_book_app/view/pages/setting/account_management/accunt_management.dart';
+import 'package:account_book_app/view/pages/setting/design_management/design_management.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_add_description.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_management.dart';
 import 'package:account_book_app/view/pages/setting/friends_management/friends_qr_scan.dart';
@@ -161,6 +163,20 @@ final routerProvider = Provider(
                 ],
               ),
             ],
+          ),
+          GoRoute(
+            path: Routes.path().designManagement,
+            name: Routes.name().designManagement,
+            builder: (context, state) {
+              return const DesignManagement();
+            },
+          ),
+          GoRoute(
+            path: Routes.path().accountManagement,
+            name: Routes.name().accountManagement,
+            builder: (context, state) {
+              return const AccountManagement();
+            },
           ),
         ],
       ),

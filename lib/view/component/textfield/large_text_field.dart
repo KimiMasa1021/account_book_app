@@ -36,7 +36,8 @@ class LargeTextField extends HookConsumerWidget {
           height: 90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: HexColor("#E1EBFF"),
+            // color: HexColor("#E1EBFF"),
+            color: Theme.of(context).colorScheme.surface,
           ),
           child: TextFormField(
             controller: controller,

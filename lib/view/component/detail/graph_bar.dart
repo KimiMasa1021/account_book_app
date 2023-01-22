@@ -44,7 +44,7 @@ class GraphBar extends HookConsumerWidget {
                   Container(
                     width: 20,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
+                      color: Theme.of(context).backgroundColor,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

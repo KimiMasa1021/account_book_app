@@ -1,5 +1,6 @@
 import 'package:account_book_app/view/theme/my_theme_mode.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final themeControllerProvider =
     StateNotifierProvider.autoDispose<ThemeController, ExThemeMode>(
@@ -20,5 +21,11 @@ class ThemeController extends StateNotifier<ExThemeMode> {
       (e) => e.id == id,
       orElse: () => ExThemeMode.light,
     );
+  }
+
+  Future<void> changeTheme(ExThemeMode theme) async {
+    state = theme;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(key, theme.id);
   }
 }

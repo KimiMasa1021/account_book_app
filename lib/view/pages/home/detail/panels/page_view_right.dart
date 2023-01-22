@@ -11,8 +11,8 @@ class PageViewRight extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       height: 200,
       decoration: BoxDecoration(
-        color: HexColor("#E0FED9"),
-        borderRadius: BorderRadius.circular(0),
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(30),
       ),
     );
   }

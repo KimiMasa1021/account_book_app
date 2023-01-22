@@ -49,8 +49,9 @@ class WarningDialog extends HookConsumerWidget {
                       const Spacer(),
                       PaintedButton(
                         text: '退会する',
-                        textColor: Colors.red,
+                        textColor: Theme.of(context).colorScheme.error,
                         backgroundColor: Colors.white,
+                        borderColor: Theme.of(context).colorScheme.error,
                         fucntion: () {
                           context.go(Routes.path().root);
                         },
@@ -58,7 +59,9 @@ class WarningDialog extends HookConsumerWidget {
                       const SizedBox(height: 10),
                       PaintedButton(
                         text: 'キャンセル',
-                        textColor: Colors.white,
+                        textColor: Theme.of(context).colorScheme.onError,
+                        backgroundColor: Theme.of(context).colorScheme.error,
+                        borderColor: Theme.of(context).colorScheme.error,
                         fucntion: () {
                           context.pop();
                         },

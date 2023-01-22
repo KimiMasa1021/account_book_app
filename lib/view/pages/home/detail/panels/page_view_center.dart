@@ -31,8 +31,8 @@ class PageViewCenter extends HookConsumerWidget {
       margin: const EdgeInsets.symmetric(horizontal: 5),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: HexColor("#B3FFFC"),
-        borderRadius: BorderRadius.circular(0),
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
         children: [
@@ -41,7 +41,10 @@ class PageViewCenter extends HookConsumerWidget {
               aspectRatio: 1,
               child: CustomPaint(
                 painter: DetailPercentPainter(
-                    percent: percent >= 1.0 ? 1.0 : percent),
+                  percent: percent >= 1.0 ? 1.0 : percent,
+                  barColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  backColor: Theme.of(context).backgroundColor,
+                ),
                 child: Stack(
                   children: [
                     Align(
@@ -49,7 +52,7 @@ class PageViewCenter extends HookConsumerWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
+                          const Text(
                             "達成金額",
                             // style: theme.textTheme.fs19.copyWith(
                             //   fontWeight: FontWeight.bold,
@@ -72,7 +75,7 @@ class PageViewCenter extends HookConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "目標金額",
                               // style: theme.textTheme.fs16,
                               overflow: TextOverflow.ellipsis,

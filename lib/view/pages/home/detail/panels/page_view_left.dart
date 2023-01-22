@@ -43,8 +43,8 @@ class PageViewLeft extends HookConsumerWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
-        color: HexColor("#FFB0B0"),
-        borderRadius: BorderRadius.circular(0),
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -114,12 +114,14 @@ class PageViewLeft extends HookConsumerWidget {
                             weekText: week[index],
                             percent: percent >= 1 ? 1 : percent,
                             textCol0r: index == 5
-                                ? HexColor("#70D4F7")
+                                ? Colors.red
                                 : index == 6
                                     ? Colors.red.withOpacity(0.8)
                                     : Colors.white,
                             price: doubleList[index],
-                            barColor: HexColor("#70D4F7"),
+                            barColor: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
                           );
                         },
                       ),

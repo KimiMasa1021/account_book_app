@@ -19,28 +19,28 @@ class Setting extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: const Offset(0, 0),
-                      blurRadius: 6,
-                    )
-                  ],
-                ),
-                child: Center(
-                  child: Text(
-                    "プレミアム機能紹介",
-                    // style: theme.textTheme.fs27,
-                  ),
-                ),
-              ),
+              // Container(
+              //   width: double.infinity,
+              //   padding:
+              //       const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+              //   decoration: BoxDecoration(
+              //     color: Colors.blue,
+              //     borderRadius: BorderRadius.circular(20),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: Colors.black.withOpacity(0.3),
+              //         offset: const Offset(0, 0),
+              //         blurRadius: 6,
+              //       )
+              //     ],
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       "プレミアム機能紹介",
+              //       // style: theme.textTheme.fs27,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Row(
                 children: [
@@ -87,22 +87,17 @@ class Setting extends HookConsumerWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: const Offset(0, 0),
-                      blurRadius: 6,
-                    )
-                  ],
                 ),
                 child: Column(
                   children: [
                     SettingPanel(
                       text: 'アカウントの管理',
                       icon: Icons.manage_accounts_outlined,
-                      function: () {},
+                      function: () {
+                        context.pushNamed(Routes.name().accountManagement);
+                      },
                     ),
                     SettingPanel(
                       text: 'フレンドの管理',
@@ -112,9 +107,11 @@ class Setting extends HookConsumerWidget {
                       },
                     ),
                     SettingPanel(
-                      text: 'ログアウト',
-                      icon: Icons.logout_outlined,
-                      function: () {},
+                      text: 'デザインの変更',
+                      icon: Icons.format_paint_rounded,
+                      function: () {
+                        context.pushNamed(Routes.name().designManagement);
+                      },
                     ),
                   ],
                 ),
@@ -125,15 +122,8 @@ class Setting extends HookConsumerWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: const Offset(0, 0),
-                      blurRadius: 6,
-                    )
-                  ],
                 ),
                 child: Column(
                   children: [
@@ -145,6 +135,11 @@ class Setting extends HookConsumerWidget {
                     SettingPanel(
                       text: 'このアプリについて',
                       icon: Icons.help_outline,
+                      function: () {},
+                    ),
+                    SettingPanel(
+                      text: 'ログアウト',
+                      icon: Icons.logout_outlined,
                       function: () {},
                     ),
                   ],

@@ -44,7 +44,7 @@ extension Extension on ExThemeMode {
   String get themeName {
     switch (this) {
       case ExThemeMode.system:
-        return "ライトテーマ";
+        return "システム";
       case ExThemeMode.light:
         return "ライトテーマ";
       case ExThemeMode.dark:

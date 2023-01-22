@@ -14,6 +14,8 @@ class Routes {
     required this.scanQr,
     required this.memberList,
     required this.inviteMember,
+    required this.designManagement,
+    required this.accountManagement,
   });
   final String root;
   final String auth;
@@ -29,6 +31,8 @@ class Routes {
   final String scanQr;
   final String memberList;
   final String inviteMember;
+  final String designManagement;
+  final String accountManagement;
 
   factory Routes.name() {
     return const Routes(
@@ -46,6 +50,8 @@ class Routes {
       scanQr: "scanQr",
       memberList: "memberList",
       inviteMember: "inviteMember",
+      designManagement: "designManagement",
+      accountManagement: "accountManagement",
     );
   }
 
@@ -69,6 +75,8 @@ class Routes {
       friendManagement: "friend_management",
       addFriendDescription: "add_friend_description",
       scanQr: "scan_qr",
+      designManagement: "design_management",
+      accountManagement: "account_management",
     );
   }
 }

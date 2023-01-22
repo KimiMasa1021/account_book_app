@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class DetailPercentPainter extends CustomPainter {
-  DetailPercentPainter({required this.percent});
+  DetailPercentPainter({
+    required this.percent,
+    required this.barColor,
+    required this.backColor,
+  });
   final double percent;
+  final Color barColor;
+  final Color backColor;
   @override
   void paint(Canvas canvas, Size size) {
     double storeke = 20;
@@ -11,12 +17,12 @@ class DetailPercentPainter extends CustomPainter {
     final backgroundPainter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..color = Colors.black12
+      ..color = backColor
       ..strokeWidth = storeke;
     final progressPainter = Paint()
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..color = const Color.fromARGB(255, 253, 255, 115)
+      ..color = barColor
       ..strokeWidth = storeke;
     //背景描画
     canvas.drawArc(

@@ -29,7 +29,6 @@ class FriendsQrScan extends HookConsumerWidget {
               child: const Icon(
                 Icons.arrow_back,
                 size: 30,
-                color: Colors.white,
               ),
             ),
           ),

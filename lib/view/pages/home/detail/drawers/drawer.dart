@@ -39,8 +39,8 @@ class MyDrawer extends HookConsumerWidget {
           width: size.width * 0.9,
           height: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: Theme.of(context).backgroundColor,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class MyDrawer extends HookConsumerWidget {
                     margin: const EdgeInsets.only(right: 7, bottom: 5),
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       shape: BoxShape.circle,
                       image: target.img != ""
                           ? DecorationImage(

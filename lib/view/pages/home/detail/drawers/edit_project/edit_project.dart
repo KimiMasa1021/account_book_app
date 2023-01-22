@@ -38,13 +38,9 @@ class EditProject extends HookConsumerWidget {
           children: [
             Scaffold(
               appBar: AppBar(
-                elevation: 0,
                 title: Text(
                   "プロジェクトの編集",
                   // style: theme.textTheme.fs19,
-                ),
-                titleTextStyle: const TextStyle(
-                  color: Colors.black,
                 ),
                 leading: InkWell(
                   onTap: () {
@@ -52,10 +48,8 @@ class EditProject extends HookConsumerWidget {
                   },
                   child: const Icon(
                     Icons.arrow_back,
-                    color: Colors.black,
                   ),
                 ),
-                backgroundColor: HexColor("#70D4F7"),
                 actions: [
                   IconButton(
                     onPressed: () async {
@@ -94,7 +88,7 @@ class EditProject extends HookConsumerWidget {
                               height: size.width / 3,
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.surface,
                                 borderRadius: BorderRadius.circular(10),
                                 image: targetInit.file != null
                                     ? DecorationImage(
@@ -150,7 +144,8 @@ class EditProject extends HookConsumerWidget {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
                                     border: Border.all(),
                                     shape: BoxShape.circle,
                                   ),
@@ -207,7 +202,8 @@ class EditProject extends HookConsumerWidget {
                                 width: double.infinity,
                                 height: 45,
                                 decoration: BoxDecoration(
-                                  color: HexColor("#E1EBFF"),
+                                  // color: HexColor("#E1EBFF"),
+                                  color: Theme.of(context).colorScheme.surface,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Row(

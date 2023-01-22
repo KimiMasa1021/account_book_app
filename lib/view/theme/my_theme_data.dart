@@ -1,5 +1,4 @@
 import 'package:account_book_app/utility/hex_color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyThemeData {
@@ -8,15 +7,25 @@ class MyThemeData {
   });
   final ThemeData theme;
 
-  // TODO material builderいまいち使いこなせないから
-  // それぞれのモードの画面と設定を突き合わせて作っていくぅ～！
-
   //ライトテーマ
   factory MyThemeData.light() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: const ColorScheme.light().copyWith(
+        useMaterial3: true,
+        colorScheme: ColorScheme.light(
           background: HexColor("#ECECEC"),
+        ),
+        textTheme: Typography.material2021().black,
+      ).copyWith(
+        colorScheme: const ColorScheme.light().copyWith(
+          primary: const Color.fromARGB(255, 255, 205, 201),
+          tertiary: Colors.white,
+          onPrimaryContainer: Colors.yellow,
+          secondaryContainer: Colors.red,
+          tertiaryContainer: HexColor("#0C83FB"),
+        ),
+        iconTheme: IconThemeData(
+          color: HexColor("#090B0C"),
         ),
       ),
     );
@@ -24,31 +33,43 @@ class MyThemeData {
   //ダークテーマ
   factory MyThemeData.dark() {
     return MyThemeData(
-      theme: ThemeData.from(colorScheme: const ColorScheme.dark()),
+      theme: ThemeData.from(
+        colorScheme: const ColorScheme.dark().copyWith(
+          background: HexColor("#15191C"),
+        ),
+        useMaterial3: true,
+      ).copyWith(
+        colorScheme: ColorScheme.dark(
+          primary: Color.fromARGB(255, 74, 29, 156),
+          onPrimaryContainer: Colors.yellow,
+          surface: HexColor("#2B2F54"),
+          tertiary: HexColor("#2B2F54"),
+          tertiaryContainer: Color.fromARGB(255, 99, 39, 212),
+        ),
+        cardColor: HexColor("#2B2F54"),
+      ),
     );
   }
   //アイアンマンテーマ
+
   factory MyThemeData.heroDarkTheme() {
-    const primaryColor = Color(0xFF68D4C7);
-    const secondaryColor = Color(0xFF40CCBB);
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: const ColorScheme.dark().copyWith(
-          primary: primaryColor,
-          secondary: secondaryColor,
-        ),
+        colorScheme: const ColorScheme.dark(
+            // background: Colors.red,
+            ),
+        textTheme: Typography.material2021().black,
       ).copyWith(
-        brightness: Brightness.dark,
-        primaryColor: secondaryColor,
-        buttonTheme: const ButtonThemeData(
-          buttonColor: secondaryColor,
+        colorScheme: const ColorScheme.dark().copyWith(
+          primary: const Color.fromARGB(255, 221, 249, 255),
+          onPrimaryContainer: Colors.yellow,
+          secondaryContainer: HexColor("#2B2F54"),
+          surface: HexColor("#E43928"),
+          tertiary: const Color.fromARGB(255, 255, 203, 59),
         ),
-        iconTheme: const IconThemeData(
-          color: primaryColor,
-        ),
-        toggleableActiveColor: primaryColor,
-        cupertinoOverrideTheme: const CupertinoThemeData(
-          textTheme: CupertinoTextThemeData(),
+        cardColor: HexColor("#E43928"),
+        iconTheme: IconThemeData(
+          color: HexColor("#090B0C"),
         ),
       ),
     );

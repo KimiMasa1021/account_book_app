@@ -143,4 +143,17 @@ class SavingController extends StateNotifier<List<SavingState>> {
       return;
     }
   }
+
+  String formatWeek(int weekIndex) {
+    final week = [
+      "月",
+      "火",
+      "水",
+      "木",
+      "金",
+      "土",
+      "日",
+    ];
+    return week[weekIndex - 1];
+  }
 }

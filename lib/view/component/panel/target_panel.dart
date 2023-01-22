@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/target/target_state.dart';
 import '../../../view_model/saving_controller.dart';
+import '../../theme/app_text_theme.dart';
 import '../shapes.dart';
 
 class TargetPanel extends HookConsumerWidget {
@@ -19,6 +20,7 @@ class TargetPanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final saving = ref.watch(savingControllerProvider);
     final size = MediaQuery.of(context).size;
+    final font = ref.watch(myTextTheme);
     final priceList = saving
         .where((e) => e.productId == state.docId)
         .map((e) => e.price)
@@ -46,14 +48,8 @@ class TargetPanel extends HookConsumerWidget {
                   height: 115,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.surface,
                     shape: LeftShape(),
-                    // shadows: const [
-                    //   BoxShadow(
-                    //     offset: Offset(0, 0),
-                    //     blurRadius: 3,
-                    //   )
-                    // ],
                   ),
                 ),
                 const SizedBox(width: 2),
@@ -63,12 +59,6 @@ class TargetPanel extends HookConsumerWidget {
                     decoration: ShapeDecoration(
                       color: Theme.of(context).cardColor,
                       shape: RightShape(),
-                      // shadows: const [
-                      //   BoxShadow(
-                      //     offset: Offset(0, 0),
-                      //     blurRadius: 3,
-                      //   )
-                      // ],
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 45, top: 5),
@@ -76,15 +66,15 @@ class TargetPanel extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${state.target} (${state.members.length})",
-                            // style: theme.textTheme.fs16.copyWith(
-                            //   fontWeight: FontWeight.bold,
-                            // ),
+                            state.target,
+                            style: font.fs16.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                             maxLines: 1,
                           ),
                           Text(
                             state.targetDescription,
-                            // style: theme.textTheme.fs16,
+                            style: font.fs16,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -102,7 +92,7 @@ class TargetPanel extends HookConsumerWidget {
               margin: const EdgeInsets.only(top: 10, left: 11),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
+                color: Theme.of(context).colorScheme.tertiary,
                 image: state.img != ""
                     ? DecorationImage(
                         image: NetworkImage(
@@ -110,12 +100,6 @@ class TargetPanel extends HookConsumerWidget {
                         ),
                       )
                     : null,
-                // boxShadow: const [
-                //   BoxShadow(
-                //     offset: Offset(0, 0),
-                //     blurRadius: 2,
-                //   )
-                // ],
               ),
               child: state.img == ""
                   ? FittedBox(
@@ -138,7 +122,7 @@ class TargetPanel extends HookConsumerWidget {
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

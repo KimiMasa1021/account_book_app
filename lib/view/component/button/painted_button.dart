@@ -36,10 +36,7 @@ class PaintedButton extends HookConsumerWidget {
         child: Center(
           child: Text(
             text,
-            // style: theme.textTheme.fs21.copyWith(
-            //   fontWeight: FontWeight.bold,
-            //   color: textColor,
-            // ),
+            style: TextStyle(color: textColor),
           ),
         ),
       ),

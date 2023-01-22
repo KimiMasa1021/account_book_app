@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-const lightColorScheme = ColorScheme(
+import '../../utility/hex_color.dart';
+
+final lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF596400),
-  onPrimary: Color(0xFFFFFFFF),
+  primary: Colors.white,
+  onPrimary: Color(0xFF000000),
   primaryContainer: Color(0xFFDCEC79),
   onPrimaryContainer: Color(0xFF191E00),
   secondary: Color(0xFF9C4147),
@@ -18,7 +20,7 @@ const lightColorScheme = ColorScheme(
   errorContainer: Color(0xFFFFDAD6),
   onError: Color(0xFFFFFFFF),
   onErrorContainer: Color(0xFF410002),
-  background: Color(0xFFF8FDFF),
+  background: HexColor("#ECECEC"),
   onBackground: Color(0xFF001F25),
   surface: Color(0xFFF8FDFF),
   onSurface: Color(0xFF001F25),
