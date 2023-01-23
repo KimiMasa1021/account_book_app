@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../view_model/users_controller.dart';
 import '../../component/panel/setting_panel.dart';
+import '../../theme/app_text_theme.dart';
 
 class Setting extends HookConsumerWidget {
   const Setting({super.key});
@@ -11,6 +12,7 @@ class Setting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
+    final font = ref.watch(myTextTheme);
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -70,14 +72,27 @@ class Setting extends HookConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(userState.name),
-                      Text(userState.email),
+                      Text(
+                        userState.name,
+                        style: font.fs16.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      ),
+                      Text(
+                        userState.email,
+                        style: font.fs16.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      ),
                     ],
                   ),
                   const Spacer(),
                   InkWell(
                     onTap: () {},
-                    child: const Icon(Icons.more_vert),
+                    child: Icon(
+                      Icons.more_vert,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
                   ),
                 ],
               ),
@@ -87,7 +102,7 @@ class Setting extends HookConsumerWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+                  color: Theme.of(context).colorScheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
@@ -122,7 +137,7 @@ class Setting extends HookConsumerWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+                  color: Theme.of(context).colorScheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(

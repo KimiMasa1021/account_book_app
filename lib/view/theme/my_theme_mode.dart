@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../view_model/theme_controller.dart';
 import 'my_theme_data.dart';
 
 enum ExThemeMode {
@@ -50,7 +48,7 @@ extension Extension on ExThemeMode {
       case ExThemeMode.dark:
         return "ダークテーマ";
       case ExThemeMode.hero:
-        return "ヒーローテーマ";
+        return "うんち_/(^^)/";
       default:
         return "??????";
     }

@@ -27,9 +27,12 @@ class Home extends HookConsumerWidget {
                     onTap: () {
                       context.pushNamed(Routes.name().addProjectMember);
                     },
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(Icons.group_add),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.group_add,
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                     ),
                   )
                 ],
@@ -39,20 +42,20 @@ class Home extends HookConsumerWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10, top: 10),
-                      height: 60,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: HexColor("#FFEFEF"),
-                        border: Border.all(
-                          color: HexColor("#FF0000"),
-                        ),
-                      ),
-                      child: const Center(
-                        child: Text("広告"),
-                      ),
-                    ),
+                    // Container(
+                    //   margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    //   height: 60,
+                    //   width: double.infinity,
+                    //   decoration: BoxDecoration(
+                    //     color: HexColor("#FFEFEF"),
+                    //     border: Border.all(
+                    //       color: HexColor("#FF0000"),
+                    //     ),
+                    //   ),
+                    //   child: const Center(
+                    //     child: Text("広告"),
+                    //   ),
+                    // ),
                     target.when(
                       data: (val) {
                         return Column(

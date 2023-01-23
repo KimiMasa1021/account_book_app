@@ -12,8 +12,9 @@ class MyThemeData {
   factory MyThemeData.light() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: colorScheme,
-        textTheme: textTheme,
+        colorScheme: lightColorScheme,
+        textTheme: lightTextTheme,
+        useMaterial3: true,
       ),
     );
   }
@@ -21,18 +22,19 @@ class MyThemeData {
   factory MyThemeData.dark() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: colorScheme,
-        textTheme: textTheme,
+        colorScheme: darkColorScheme,
+        textTheme: darkTextTheme,
+        useMaterial3: true,
       ),
     );
   }
-  //
-
+  //テーマ３
   factory MyThemeData.heroDarkTheme() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: colorScheme,
-        textTheme: textTheme,
+        colorScheme: noNameColorScheme,
+        textTheme: lightTextTheme,
+        useMaterial3: true,
       ),
     );
   }

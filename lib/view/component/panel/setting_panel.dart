@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../theme/app_text_theme.dart';
+
 class SettingPanel extends HookConsumerWidget {
   const SettingPanel({
     super.key,
@@ -14,6 +16,8 @@ class SettingPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return InkWell(
       onTap: () async {
         await function();
@@ -27,15 +31,19 @@ class SettingPanel extends HookConsumerWidget {
               child: Icon(
                 icon,
                 size: 35,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             Text(
               text,
-              // style: theme.textTheme.fs21,
+              style: font.fs16.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
             const Spacer(),
-            const Icon(
+            Icon(
               Icons.arrow_forward_ios,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
             )
           ],
         ),

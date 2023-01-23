@@ -40,7 +40,7 @@ class DesignManagement extends HookConsumerWidget {
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 width: size.width / 3.2,
                                 child: AspectRatio(
-                                  aspectRatio: 9 / 16,
+                                  aspectRatio: 1,
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 5,
@@ -64,9 +64,6 @@ class DesignManagement extends HookConsumerWidget {
                                   ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              ExThemeMode.values[index].themeName,
                             ),
                           ],
                         )

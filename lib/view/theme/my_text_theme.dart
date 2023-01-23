@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'my_base_color.dart';
 
-final textTheme = const TextTheme().apply(
-  displayColor: AppColor.baseTextColor,
-  bodyColor: AppColor.baseTextColor,
+final lightTextTheme = const TextTheme().apply(
+  displayColor: LightColor.baseTextColor,
+  bodyColor: LightColor.baseTextColor,
+);
+
+final darkTextTheme = const TextTheme().apply(
+  displayColor: DarkColor.baseTextColor,
+  bodyColor: DarkColor.baseTextColor,
 );
