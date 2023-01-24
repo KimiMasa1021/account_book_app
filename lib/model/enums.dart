@@ -19,3 +19,10 @@ enum TargetInitFlg {
   creating,
   complete,
 }
+
+// ユーザーの操作の状態
+enum WebViewType {
+  privacyPolicy,
+  appHint,
+  aboutApp,
+}

@@ -2,7 +2,6 @@ class Routes {
   const Routes({
     required this.root,
     required this.auth,
-    required this.privacyPolicy,
     required this.addProjectMember,
     required this.addProjectDetails,
     required this.addProjectImage,
@@ -16,10 +15,10 @@ class Routes {
     required this.inviteMember,
     required this.designManagement,
     required this.accountManagement,
+    required this.webView,
   });
   final String root;
   final String auth;
-  final String privacyPolicy;
   final String addProjectMember;
   final String addProjectDetails;
   final String addProjectImage;
@@ -33,12 +32,12 @@ class Routes {
   final String inviteMember;
   final String designManagement;
   final String accountManagement;
+  final String webView;
 
   factory Routes.name() {
     return const Routes(
       root: "root",
       auth: "auth",
-      privacyPolicy: "privacyPolicy",
       addProjectMember: "addProjectMember",
       addProjectDetails: "addProjectDetails",
       addProjectImage: "addProjectImage",
@@ -52,6 +51,7 @@ class Routes {
       inviteMember: "inviteMember",
       designManagement: "designManagement",
       accountManagement: "accountManagement",
+      webView: "webView",
     );
   }
 
@@ -59,7 +59,6 @@ class Routes {
     return const Routes(
       // ログイン
       auth: "/auth",
-      privacyPolicy: "privacy_policy",
       //ボトムバー
       root: "/root",
       //　ホームタブ
@@ -77,6 +76,8 @@ class Routes {
       scanQr: "scan_qr",
       designManagement: "design_management",
       accountManagement: "account_management",
+      //その他
+      webView: "web_view",
     );
   }
 }

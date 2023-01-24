@@ -1,5 +1,4 @@
 import 'package:account_book_app/model/user/users_state.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../repository/friend_repository.dart';
 

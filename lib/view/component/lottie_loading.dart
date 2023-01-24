@@ -1,3 +1,4 @@
+import 'package:account_book_app/view/component/my_lottie_data.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -7,24 +8,18 @@ class LottieLoading extends HookConsumerWidget {
   const LottieLoading({
     super.key,
     required this.flg,
-    required this.loadingPath,
-    required this.loadingText,
-    required this.resultPath,
-    required this.resultText,
+    required this.lottieData,
     required this.resultFunction,
   });
   final TargetInitFlg flg;
-  final String loadingPath;
-  final String loadingText;
-  final String resultPath;
-  final String resultText;
+  final MyLottieData lottieData;
   final Function() resultFunction;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
 
     final loadingLottie = Lottie.asset(
-      loadingPath,
+      lottieData.loadingPath,
       width: 230,
       height: 230,
       frameRate: FrameRate(60),
@@ -32,7 +27,7 @@ class LottieLoading extends HookConsumerWidget {
     );
 
     final finishLottie = Lottie.asset(
-      resultPath,
+      lottieData.resultPath,
       width: 230,
       height: 230,
       frameRate: FrameRate(60),
@@ -43,7 +38,7 @@ class LottieLoading extends HookConsumerWidget {
         ? Material(
             child: Stack(
               children: [
-                Container(
+                SizedBox(
                   width: size.width,
                   height: size.height,
                   child: flg == TargetInitFlg.creating
@@ -52,7 +47,7 @@ class LottieLoading extends HookConsumerWidget {
                           children: [
                             loadingLottie,
                             Text(
-                              loadingText,
+                              lottieData.loadingText,
                               // style: theme.textTheme.fs19.copyWith(
                               //   fontWeight: FontWeight.bold,
                               // ),
@@ -64,7 +59,7 @@ class LottieLoading extends HookConsumerWidget {
                           children: [
                             finishLottie,
                             Text(
-                              resultText,
+                              lottieData.resultText,
                               // style: theme.textTheme.fs19.copyWith(
                               //   fontWeight: FontWeight.bold,
                               // ),
@@ -90,7 +85,7 @@ class LottieLoading extends HookConsumerWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "ホームに戻る",
                                   // style: theme.textTheme.fs19.copyWith(

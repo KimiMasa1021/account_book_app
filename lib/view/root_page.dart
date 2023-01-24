@@ -1,4 +1,4 @@
-import 'package:account_book_app/view/pages/home/home/home.dart';
+import 'package:account_book_app/view/pages/home/home.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +12,11 @@ final pageTypeProvider =
 
 class RootPage extends HookConsumerWidget {
   const RootPage({super.key});
-  static const String name = "root_page";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userState = ref.watch(usersControllerProvider);
-    final authCTL = ref.watch(authControllerProvider);
+    ref.watch(authControllerProvider);
+    ref.watch(usersControllerProvider);
 
     final List<Widget> pageList = <Widget>[
       const Home(),
