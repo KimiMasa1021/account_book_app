@@ -2,6 +2,7 @@ import 'package:account_book_app/view/component/shadow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../model/enums.dart';
 import '../../../provider/route/routes.dart';
 import '../../../view_model/auth_controller.dart';
 import '../../../view_model/tags_controller.dart';
@@ -29,13 +30,13 @@ class Login extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const SizedBox(height: 50),
-                  Text(
+                  const Text(
                     "仮の名前",
                     // style: theme.textTheme.fs33.copyWith(
                     //   fontWeight: FontWeight.bold,
                     // ),
                   ),
-                  Text(
+                  const Text(
                     "仮の簡単な説明仮の\n仮の簡単な説明仮の仮の",
                     // style: theme.textTheme.fs21,
                     textAlign: TextAlign.center,
@@ -58,7 +59,10 @@ class Login extends HookConsumerWidget {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      context.goNamed(Routes.name().privacyPolicy);
+                      context.goNamed(
+                        Routes.name().webView,
+                        extra: WebViewType.privacyPolicy,
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

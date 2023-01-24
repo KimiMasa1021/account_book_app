@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../utility/hex_color.dart';
-
 class PageViewRight extends StatelessWidget {
   const PageViewRight({super.key});
 

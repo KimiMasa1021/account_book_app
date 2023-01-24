@@ -4,6 +4,7 @@ import 'package:account_book_app/model/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+// ignore: must_be_immutable
 class WebViewPage extends StatelessWidget {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();

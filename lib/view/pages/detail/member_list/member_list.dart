@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
-import '../../../../view_model/friend_controller.dart';
-import '../../../../view_model/target_controller.dart';
 import '../../../../view_model/target_members_controller.dart';
 import '../../../component/friend_tile.dart';
 
@@ -15,7 +13,6 @@ class MemberList extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final friendCTL = ref.watch(friendsControllerProvider.notifier);
     final targetMembers =
         ref.watch(targetMembersControllerProvider(target.members));
     return Scaffold(

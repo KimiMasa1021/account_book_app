@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../../model/target/target_state.dart';
-import '../../../../../utility/hex_color.dart';
 import '../../../../../view_model/saving_controller.dart';
 
 class PageViewLeft extends HookConsumerWidget {
@@ -131,7 +130,7 @@ class PageViewLeft extends HookConsumerWidget {
               ),
             ),
             Text(
-              "１日当たり${dailyPrice}円で達成できます!!",
+              "１日当たり$dailyPrice円で達成できます!!",
               // style: theme.textTheme.fs16.copyWith(
               //   fontWeight: FontWeight.bold,
               //   color: Colors.white,

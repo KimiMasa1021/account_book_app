@@ -154,7 +154,7 @@ class MyDrawer extends HookConsumerWidget {
                 function: () {
                   showDialog(
                     context: context,
-                    builder: (context) => WarningDialog(),
+                    builder: (context) => const WarningDialog(),
                   );
                 },
               ),

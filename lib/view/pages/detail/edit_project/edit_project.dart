@@ -1,4 +1,6 @@
+import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/component/lottie_loading.dart';
+import 'package:account_book_app/view/component/my_lottie_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +8,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/enums.dart';
-import '../../../../utility/hex_color.dart';
 import '../../../../utility/price_formatter.dart';
 import '../../../../view_model/target_controller.dart';
 import '../../../../view_model/target_init_controller.dart';
@@ -38,7 +39,7 @@ class EditProject extends HookConsumerWidget {
           children: [
             Scaffold(
               appBar: AppBar(
-                title: Text(
+                title: const Text(
                   "プロジェクトの編集",
                   // style: theme.textTheme.fs19,
                 ),
@@ -62,7 +63,7 @@ class EditProject extends HookConsumerWidget {
                       }
                     },
                     padding: const EdgeInsets.only(right: 10),
-                    icon: Text(
+                    icon: const Text(
                       "編集",
                       // style: theme.textTheme.fs16.copyWith(
                       //   color: Colors.black,
@@ -187,7 +188,7 @@ class EditProject extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            Text(
+                            const Text(
                               "達成予定年月日",
                               // style: theme.textTheme.fs16,
                             ),
@@ -228,22 +229,19 @@ class EditProject extends HookConsumerWidget {
             ),
             LottieLoading(
               flg: flg.value,
-              loadingPath: 'assets/json/yellow_loading.json',
-              loadingText: '編集中...',
-              resultPath: 'assets/json/complete.json',
-              resultText: '編集できました',
+              lottieData: MyLottieData.editProject(),
               resultFunction: () {
-                context.pop();
+                context.go(Routes.path().root);
               },
             )
           ],
         );
       },
       error: (e, s) {
-        return SizedBox();
+        return const SizedBox();
       },
       loading: () {
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

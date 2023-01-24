@@ -35,7 +35,6 @@ final routerProvider = Provider(
         path: Routes.path().auth,
         name: Routes.name().auth,
         builder: (context, state) => const Login(),
-        routes: [],
       ),
       GoRoute(
         path: Routes.path().root,

@@ -14,7 +14,6 @@ class FriendTileWithRadio extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectFlg = useState(false);
-    final targetInit = ref.watch(targetInitControllerProvider(null));
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
 

@@ -20,7 +20,7 @@ class TargetAddMember extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           "メンバーを選択",
           // style: theme.textTheme.fs19,
         ),
@@ -43,7 +43,7 @@ class TargetAddMember extends HookConsumerWidget {
               context.pushNamed(Routes.name().addProjectDetails);
             },
             padding: const EdgeInsets.only(right: 10),
-            icon: Text(
+            icon: const Text(
               "次へ",
               // style: theme.textTheme.fs16.copyWith(
               //   color: Colors.black,
@@ -97,7 +97,7 @@ class TargetAddMember extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          Text(
+                          const Text(
                             "あなた",
                             // style: theme.textTheme.fs16,
                           )

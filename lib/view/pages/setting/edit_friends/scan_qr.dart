@@ -6,7 +6,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import '../../../../view_model/friend_controller.dart';
 import '../../../../view_model/users_controller.dart';
 
-@immutable
+// ignore: must_be_immutable
 class ScanQr extends HookConsumerWidget {
   ScanQr({super.key});
 

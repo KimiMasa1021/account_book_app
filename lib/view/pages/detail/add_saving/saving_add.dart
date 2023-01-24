@@ -22,7 +22,6 @@ class SavingAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final ValueNotifier<int?> tagValue = useState(null);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -88,7 +87,7 @@ class SavingAdd extends HookConsumerWidget {
                           keyboardType: TextInputType.none,
                           // style: theme.textTheme.fs33,
                           cursorWidth: 0,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "金額を入力",
                             // hintStyle: theme.textTheme.fs33,
                             contentPadding: EdgeInsets.zero,
@@ -123,7 +122,7 @@ class SavingAdd extends HookConsumerWidget {
                           color: Colors.purple,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "追加する",
                             // style: theme.textTheme.fs16.copyWith(

@@ -35,7 +35,7 @@ class SavingPricePanel extends HookConsumerWidget {
                   style: font.fs16.copyWith(),
                   overflow: TextOverflow.ellipsis,
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   savingCTL.formatYen(state.price),
                   style: font.fs16.copyWith(),

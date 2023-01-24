@@ -1,3 +1,4 @@
+import 'package:account_book_app/view/component/my_lottie_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -53,7 +54,7 @@ class InviteMember extends HookConsumerWidget {
                       }
                     },
                     padding: const EdgeInsets.only(right: 10),
-                    icon: Text(
+                    icon: const Text(
                       "追加",
                       // style: theme.textTheme.fs16.copyWith(
                       //   color: newMembers.value.isNotEmpty
@@ -83,10 +84,7 @@ class InviteMember extends HookConsumerWidget {
             ),
             LottieLoading(
               flg: flg.value,
-              loadingPath: 'assets/json/invent_loading.json',
-              loadingText: '招待中...',
-              resultPath: 'assets/json/complete.json',
-              resultText: 'メンバーに追加されました！',
+              lottieData: MyLottieData.inviteMember(),
               resultFunction: () {
                 context.pop();
               },
@@ -103,4 +101,3 @@ class InviteMember extends HookConsumerWidget {
     );
   }
 }
-// invent_loading.json

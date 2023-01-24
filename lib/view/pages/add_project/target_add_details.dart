@@ -17,12 +17,11 @@ class TargetAddDetails extends HookConsumerWidget {
     final targetInit = ref.watch(targetInitControllerProvider(null));
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
+        title: const Text(
           "詳細設定",
           // style: theme.textTheme.fs19,
         ),
@@ -47,7 +46,7 @@ class TargetAddDetails extends HookConsumerWidget {
               }
             },
             padding: const EdgeInsets.only(right: 10),
-            icon: Text(
+            icon: const Text(
               "次へ",
               // style: theme.textTheme.fs16.copyWith(
               //   color: Colors.black,
@@ -89,7 +88,7 @@ class TargetAddDetails extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  Text(
+                  const Text(
                     "達成予定年月日",
                     // style: theme.textTheme.fs16,
                   ),

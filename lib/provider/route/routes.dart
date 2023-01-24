@@ -2,7 +2,6 @@ class Routes {
   const Routes({
     required this.root,
     required this.auth,
-    required this.privacyPolicy,
     required this.addProjectMember,
     required this.addProjectDetails,
     required this.addProjectImage,
@@ -20,7 +19,6 @@ class Routes {
   });
   final String root;
   final String auth;
-  final String privacyPolicy;
   final String addProjectMember;
   final String addProjectDetails;
   final String addProjectImage;
@@ -40,7 +38,6 @@ class Routes {
     return const Routes(
       root: "root",
       auth: "auth",
-      privacyPolicy: "privacyPolicy",
       addProjectMember: "addProjectMember",
       addProjectDetails: "addProjectDetails",
       addProjectImage: "addProjectImage",
@@ -62,7 +59,6 @@ class Routes {
     return const Routes(
       // ログイン
       auth: "/auth",
-      privacyPolicy: "privacy_policy",
       //ボトムバー
       root: "/root",
       //　ホームタブ

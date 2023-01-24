@@ -9,7 +9,6 @@ import '../../../provider/route/routes.dart';
 import '../../../view_model/saving_controller.dart';
 import 'widgets/saving_add_button.dart';
 import 'widgets/saving_panel.dart';
-import '../../theme/app_text_theme.dart';
 import 'drawer/drawer.dart';
 import 'widgets/panels/page_view_center.dart';
 
@@ -23,10 +22,8 @@ class HomeDetails extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final saving = ref.watch(savingControllerProvider);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
     final targetMembers =
         ref.watch(targetMembersControllerProvider(target.members));
-    final font = ref.watch(myTextTheme);
 
     final pageController = PageController(
       viewportFraction: 0.85,
@@ -140,7 +137,7 @@ class HomeDetails extends HookConsumerWidget {
                               .difference(savingList[index].createdAt)
                               .inDays ==
                           0) {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                       return SavingPanel(
                         state: test,
@@ -152,13 +149,17 @@ class HomeDetails extends HookConsumerWidget {
                 error: (e, s) {
                   return SliverChildBuilderDelegate(
                     childCount: 0,
-                    (_, int index) {},
+                    (_, int index) {
+                      return null;
+                    },
                   );
                 },
                 loading: () {
                   return SliverChildBuilderDelegate(
                     childCount: 0,
-                    (_, int index) {},
+                    (_, int index) {
+                      return null;
+                    },
                   );
                 },
               ),

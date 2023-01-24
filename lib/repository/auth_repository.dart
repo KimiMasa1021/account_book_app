@@ -6,7 +6,6 @@ import '../provider/firebase/firebase_auth_provider.dart';
 import '../provider/firebase/firebase_firestore_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
 final authRepositoryProvider =
     Provider<AuthRepository>((ref) => AuthRepositoryImpl(ref));
 
@@ -21,7 +20,6 @@ abstract class AuthRepository {
 class AuthRepositoryImpl implements AuthRepository {
   CollectionReference? storeCollectionReference;
   CollectionReference? expendCollectionReference;
-  CollectionReference? incomeCollectionReference;
   User? user;
   final Ref ref;
 

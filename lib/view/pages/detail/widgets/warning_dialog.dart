@@ -34,14 +34,14 @@ class WarningDialog extends HookConsumerWidget {
                   decoration: const BoxDecoration(),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         "注意",
                         // style: theme.textTheme.fs27.copyWith(
                         //   fontWeight: FontWeight.bold,
                         // ),
                       ),
                       const SizedBox(height: 10),
-                      Text(
+                      const Text(
                         "退会した場合はフレンドに招待してもらわなければ再参加出来ません。",
                         // style: theme.textTheme.fs19.copyWith(),
                         textAlign: TextAlign.center,

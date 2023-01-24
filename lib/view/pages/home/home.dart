@@ -16,7 +16,7 @@ class Home extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 58,
               width: double.infinity,
               child: Row(

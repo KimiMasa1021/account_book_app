@@ -1,5 +1,6 @@
 import 'package:account_book_app/utility/hex_color.dart';
 import 'package:account_book_app/view/component/lottie_loading.dart';
+import 'package:account_book_app/view/component/my_lottie_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +27,7 @@ class TargetAddImage extends HookConsumerWidget {
         Scaffold(
           appBar: AppBar(
             elevation: 0,
-            title: Text(
+            title: const Text(
               "画像設定",
               // style: theme.textTheme.fs19,
             ),
@@ -52,7 +53,7 @@ class TargetAddImage extends HookConsumerWidget {
                   flg.value = TargetInitFlg.complete;
                 },
                 padding: const EdgeInsets.only(right: 10),
-                icon: Text(
+                icon: const Text(
                   "作成",
                   // style: theme.textTheme.fs16.copyWith(
                   //   color: Colors.black,
@@ -170,10 +171,7 @@ class TargetAddImage extends HookConsumerWidget {
         ),
         LottieLoading(
           flg: flg.value,
-          loadingPath: 'assets/json/cat_loading.json',
-          loadingText: '作成中...',
-          resultPath: 'assets/json/complete.json',
-          resultText: '作成できました',
+          lottieData: MyLottieData.addProject(),
           resultFunction: () {
             context.go(Routes.path().root);
           },
