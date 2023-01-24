@@ -1,9 +1,10 @@
+import 'package:account_book_app/model/enums.dart';
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../view_model/users_controller.dart';
-import '../../component/panel/setting_panel.dart';
+import 'widgets/setting_panel.dart';
 import '../../theme/app_text_theme.dart';
 
 class Setting extends HookConsumerWidget {
@@ -145,17 +146,32 @@ class Setting extends HookConsumerWidget {
                     SettingPanel(
                       text: 'ヒント',
                       icon: Icons.tips_and_updates_outlined,
-                      function: () {},
+                      function: () {
+                        context.goNamed(
+                          Routes.name().webView,
+                          extra: WebViewType.appHint,
+                        );
+                      },
                     ),
                     SettingPanel(
                       text: 'このアプリについて',
                       icon: Icons.help_outline,
-                      function: () {},
+                      function: () {
+                        context.goNamed(
+                          Routes.name().webView,
+                          extra: WebViewType.aboutApp,
+                        );
+                      },
                     ),
                     SettingPanel(
                       text: 'ログアウト',
                       icon: Icons.logout_outlined,
-                      function: () {},
+                      function: () {
+                        context.goNamed(
+                          Routes.name().webView,
+                          extra: WebViewType.privacyPolicy,
+                        );
+                      },
                     ),
                   ],
                 ),

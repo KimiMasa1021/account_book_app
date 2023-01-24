@@ -18,7 +18,6 @@ class MyApp extends HookConsumerWidget {
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,
       routerDelegate: ref.watch(routerProvider).routerDelegate,
       theme: mode.themeData,
-      // darkTheme: AppTheme.dark().data,
       themeMode: ThemeMode.light,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

@@ -1,26 +1,27 @@
+import 'package:account_book_app/model/enums.dart';
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/provider/route/transition_route.dart';
-import 'package:account_book_app/view/pages/auth/auth.dart';
-import 'package:account_book_app/view/pages/home/add_project/target_add_image.dart';
-import 'package:account_book_app/view/pages/home/detail/details.dart';
-import 'package:account_book_app/view/pages/home/add_project/target_add_details.dart';
-import 'package:account_book_app/view/pages/home/add_project/target_add_member.dart';
-import 'package:account_book_app/view/pages/home/detail/drawers/edit_project/edit_project.dart';
-import 'package:account_book_app/view/pages/home/detail/drawers/invite_member/invite_member.dart';
-import 'package:account_book_app/view/pages/home/detail/drawers/member_list/member_list.dart';
-import 'package:account_book_app/view/pages/setting/account_management/accunt_management.dart';
-import 'package:account_book_app/view/pages/setting/design_management/design_management.dart';
-import 'package:account_book_app/view/pages/setting/friends_management/friends_add_description.dart';
-import 'package:account_book_app/view/pages/setting/friends_management/friends_management.dart';
-import 'package:account_book_app/view/pages/setting/friends_management/friends_qr_scan.dart';
+import 'package:account_book_app/view/pages/login/login.dart';
+import 'package:account_book_app/view/pages/add_project/target_add_image.dart';
+import 'package:account_book_app/view/pages/detail/details.dart';
+import 'package:account_book_app/view/pages/add_project/target_add_details.dart';
+import 'package:account_book_app/view/pages/add_project/target_add_member.dart';
+import 'package:account_book_app/view/pages/detail/edit_project/edit_project.dart';
+import 'package:account_book_app/view/pages/detail/invite_member/invite_member.dart';
+import 'package:account_book_app/view/pages/detail/member_list/member_list.dart';
+import 'package:account_book_app/view/pages/setting/edit_profile/accunt_management.dart';
+import 'package:account_book_app/view/pages/setting/edit_design/design_management.dart';
+import 'package:account_book_app/view/pages/setting/edit_friends/add_friend_selector.dart';
+import 'package:account_book_app/view/pages/setting/edit_friends/friend_list.dart';
+import 'package:account_book_app/view/pages/setting/edit_friends/scan_qr.dart';
+import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:account_book_app/view/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../model/target/target_state.dart';
-import '../../view/pages/auth/privacy_policy.dart';
-import '../../view/pages/home/detail/add_saving/saving_add.dart';
+import '../../view/pages/detail/add_saving/saving_add.dart';
 import 'guard.dart';
 
 final routerProvider = Provider(
@@ -33,15 +34,8 @@ final routerProvider = Provider(
       GoRoute(
         path: Routes.path().auth,
         name: Routes.name().auth,
-        builder: (context, state) => const Auth(),
-        routes: [
-          //　プライバシーポリシー
-          GoRoute(
-            path: Routes.path().privacyPolicy,
-            name: Routes.name().privacyPolicy,
-            builder: (context, state) => const PrivacyPolicy(),
-          ),
-        ],
+        builder: (context, state) => const Login(),
+        routes: [],
       ),
       GoRoute(
         path: Routes.path().root,
@@ -141,7 +135,7 @@ final routerProvider = Provider(
             path: Routes.path().friendManagement,
             name: Routes.name().friendManagement,
             builder: (context, state) {
-              return const FriendsManagement();
+              return const FriendList();
             },
             routes: [
               //フレンド登録手段の選択　QR or Search
@@ -157,7 +151,7 @@ final routerProvider = Provider(
                     path: Routes.path().scanQr,
                     name: Routes.name().scanQr,
                     builder: (context, state) {
-                      return FriendsQrScan();
+                      return ScanQr();
                     },
                   ),
                 ],
@@ -176,6 +170,16 @@ final routerProvider = Provider(
             name: Routes.name().accountManagement,
             builder: (context, state) {
               return const AccountManagement();
+            },
+          ),
+          GoRoute(
+            path: Routes.path().webView,
+            name: Routes.name().webView,
+            builder: (context, state) {
+              final type = state.extra as WebViewType;
+              return WebViewPage(
+                type: type,
+              );
             },
           ),
         ],

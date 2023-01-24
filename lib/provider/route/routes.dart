@@ -16,6 +16,7 @@ class Routes {
     required this.inviteMember,
     required this.designManagement,
     required this.accountManagement,
+    required this.webView,
   });
   final String root;
   final String auth;
@@ -33,6 +34,7 @@ class Routes {
   final String inviteMember;
   final String designManagement;
   final String accountManagement;
+  final String webView;
 
   factory Routes.name() {
     return const Routes(
@@ -52,6 +54,7 @@ class Routes {
       inviteMember: "inviteMember",
       designManagement: "designManagement",
       accountManagement: "accountManagement",
+      webView: "webView",
     );
   }
 
@@ -77,6 +80,8 @@ class Routes {
       scanQr: "scan_qr",
       designManagement: "design_management",
       accountManagement: "account_management",
+      //その他
+      webView: "web_view",
     );
   }
 }

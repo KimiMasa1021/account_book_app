@@ -43,7 +43,7 @@ class LottieLoading extends HookConsumerWidget {
         ? Material(
             child: Stack(
               children: [
-                Container(
+                SizedBox(
                   width: size.width,
                   height: size.height,
                   child: flg == TargetInitFlg.creating
