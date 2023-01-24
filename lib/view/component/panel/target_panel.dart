@@ -132,7 +132,7 @@ class TargetPanel extends HookConsumerWidget {
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

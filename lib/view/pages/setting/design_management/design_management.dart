@@ -18,61 +18,101 @@ class DesignManagement extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text("デザインの変更"),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const SizedBox(width: 20),
-                ...List.generate(
-                  ExThemeMode.values.length,
-                  (index) => ExThemeMode.values[index] != ExThemeMode.system
-                      ? Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                modeCTL.changeTheme(ExThemeMode.values[index]);
-                              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            // const SizedBox(height: 20),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 20,
+                childAspectRatio: 1 / 1.35,
+                children: [
+                  ...List.generate(
+                    ExThemeMode.values.length,
+                    (index) => InkWell(
+                      onTap: () {
+                        modeCTL.changeTheme(ExThemeMode.values[index]);
+                      },
+                      child: Column(
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              padding: const EdgeInsets.all(7),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: ExThemeMode.values[index] == mode
+                                    ? Border.all(
+                                        width: 3,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                      )
+                                    : null,
+                              ),
                               child: Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                width: size.width / 3.2,
-                                child: AspectRatio(
-                                  aspectRatio: 1,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 5,
-                                      vertical: 5 * 1.2,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: ExThemeMode.values[index] == mode
-                                          ? Border.all(
-                                              width: 3,
-                                              color: Colors.blue,
-                                            )
-                                          : null,
-                                    ),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(13),
-                                        color: Colors.white,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 3,
+                                    color: ExThemeMode.values[index].themeData
+                                        .colorScheme.surfaceVariant,
+                                  ),
+                                ),
+                                child: Container(
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          color: ExThemeMode.values[index]
+                                              .themeData.backgroundColor,
+                                        ),
                                       ),
-                                    ),
+                                      Expanded(
+                                        child: Container(
+                                          color: ExThemeMode
+                                              .values[index]
+                                              .themeData
+                                              .colorScheme
+                                              .surfaceVariant,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          color: ExThemeMode
+                                              .values[index]
+                                              .themeData
+                                              .colorScheme
+                                              .tertiaryContainer,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        )
-                      : const SizedBox(),
-                ),
-              ],
-            ),
-          ),
-        ],
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            ExThemeMode.values[index].themeName,
+                            style: const TextStyle(fontSize: 16),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
