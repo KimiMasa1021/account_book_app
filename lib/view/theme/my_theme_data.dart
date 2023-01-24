@@ -8,10 +8,10 @@ class MyThemeData {
   final ThemeData theme;
 
   //ライトテーマ
-  factory MyThemeData.light() {
+  factory MyThemeData.tea() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: lightColorScheme,
+        colorScheme: teaColorScheme,
         textTheme: textTheme,
         useMaterial3: true,
       ),

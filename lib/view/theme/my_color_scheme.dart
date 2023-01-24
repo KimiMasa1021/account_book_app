@@ -1,66 +1,34 @@
+import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/material.dart';
 
-const lightColorScheme = ColorScheme(
+final teaColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF785A00),
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFFFDF9B),
-  onPrimaryContainer: Color(0xFF251A00),
-  secondary: Color(0xFF6B5D3F),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0xFFF4E0BB),
-  onSecondaryContainer: Color(0xFF241A04),
-  tertiary: Color(0xFF256C2C),
-  onTertiary: Color(0xFFFFFFFF),
-  tertiaryContainer: Color.fromARGB(255, 34, 169, 27),
-  onTertiaryContainer: Color(0xFF002205),
-  error: Color(0xFFBA1A1A),
-  errorContainer: Color(0xFFFFDAD6),
-  onError: Color(0xFFFFFFFF),
-  onErrorContainer: Color(0xFF410002),
-  background: Color(0xFFFFFBFF),
-  onBackground: Color(0xFF1E1B16),
-  surface: Color(0xFFFFFBFF),
-  onSurface: Color(0xFF1E1B16),
-  surfaceVariant: Color(0xFFEDE1CF),
-  onSurfaceVariant: Color(0xFF4D4639),
-  outline: Color(0xFF7F7667),
-  onInverseSurface: Color(0xFFF7F0E7),
-  inverseSurface: Color(0xFF33302A),
-  inversePrimary: Color(0xFFF1C048),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF785A00),
+  background: HexColor("#abd1c6"), //background
+  onBackground: HexColor("#001e1d"), //headline
+  primary: HexColor("#001e1d"), // headline
+  onPrimary: HexColor("#fffffe"), // card headline
+  secondary: HexColor("#f9bc60"), // highlight
+  onSecondary: HexColor("#abd1c6"), // card paragraph
+  surface: HexColor("#004643"), // card back
+  onSurface: HexColor("#fffffe"), //headline
+  tertiary: HexColor("#e16162"), // tertiary
+  onError: const Color(0xFFBA1A1A),
+  error: const Color.fromARGB(255, 255, 250, 250),
 );
-const lemon = ColorScheme(
+
+final lemon = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF984061),
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFFFD9E2),
-  onPrimaryContainer: Color(0xFF3E001D),
-  secondary: Color(0xFF006874),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0xFF97F0FF),
-  onSecondaryContainer: Color(0xFF001F24),
-  tertiary: Color(0xFF676000),
-  onTertiary: Color(0xFFFFFFFF),
-  tertiaryContainer: Color(0xFFF1E66A),
-  onTertiaryContainer: Color(0xFF1F1C00),
-  error: Color(0xFFBA1A1A),
-  errorContainer: Color(0xFFFFDAD6),
-  onError: Color(0xFFFFFFFF),
-  onErrorContainer: Color(0xFF410002),
-  background: Color.fromARGB(255, 237, 237, 237),
-  onBackground: Color(0xFF221B00),
-  surface: Color(0xFFFFFBFF),
-  onSurface: Color(0xFF221B00),
-  surfaceVariant: Color.fromARGB(255, 255, 255, 255),
-  onSurfaceVariant: Color(0xFF514347),
-  outline: Color(0xFF837377),
-  onInverseSurface: Color(0xFFFFF0C0),
-  inverseSurface: Color(0xFF3A3000),
-  inversePrimary: Color(0xFFFFB1C8),
-  shadow: Color(0xFF000000),
-  surfaceTint: Color(0xFF984061),
+  background: HexColor("#e3f6f5"), //background
+  onBackground: HexColor("#272343"), //headline
+  primary: HexColor("#272343"), // headline
+  onPrimary: HexColor("#272343"), // card headline
+  secondary: HexColor("#ffd803"), // highlight
+  onSecondary: HexColor("#2d334a"), // card paragraph
+  surface: HexColor("#fffffe"), // card back
+  onSurface: HexColor("#272343"), //headline
+  tertiary: HexColor("#bae8e8"), // tertiary
+  onError: const Color(0xFFBA1A1A),
+  error: const Color.fromARGB(255, 255, 250, 250),
 );
 
 const darkColorScheme = ColorScheme(

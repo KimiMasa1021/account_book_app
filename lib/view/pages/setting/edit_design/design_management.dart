@@ -59,7 +59,7 @@ class DesignManagement extends HookConsumerWidget {
                                   border: Border.all(
                                     width: 3,
                                     color: ExThemeMode.values[index].themeData
-                                        .colorScheme.surfaceVariant,
+                                        .colorScheme.primary,
                                   ),
                                 ),
                                 child: Container(
@@ -77,11 +77,8 @@ class DesignManagement extends HookConsumerWidget {
                                       ),
                                       Expanded(
                                         child: Container(
-                                          color: ExThemeMode
-                                              .values[index]
-                                              .themeData
-                                              .colorScheme
-                                              .surfaceVariant,
+                                          color: ExThemeMode.values[index]
+                                              .themeData.colorScheme.secondary,
                                         ),
                                       ),
                                       Expanded(

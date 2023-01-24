@@ -31,19 +31,19 @@ class SettingPanel extends HookConsumerWidget {
               child: Icon(
                 icon,
                 size: 35,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             Text(
               text,
               style: font.fs16.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const Spacer(),
             Icon(
               Icons.arrow_forward_ios,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              color: Theme.of(context).colorScheme.onSurface,
             )
           ],
         ),

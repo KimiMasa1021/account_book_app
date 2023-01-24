@@ -48,7 +48,7 @@ class TargetPanel extends HookConsumerWidget {
                   height: 115,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: Theme.of(context).colorScheme.surfaceVariant,
+                    color: Theme.of(context).colorScheme.surface,
                     shape: LeftShape(),
                   ),
                 ),
@@ -57,7 +57,7 @@ class TargetPanel extends HookConsumerWidget {
                   child: Container(
                     height: 115,
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(context).colorScheme.surface,
                       shape: RightShape(),
                     ),
                     child: Padding(
@@ -69,18 +69,14 @@ class TargetPanel extends HookConsumerWidget {
                             state.target,
                             style: font.fs16.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                             maxLines: 1,
                           ),
                           Text(
                             state.targetDescription,
                             style: font.fs16.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
+                              color: Theme.of(context).colorScheme.onSecondary,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -95,11 +91,11 @@ class TargetPanel extends HookConsumerWidget {
             Container(
               height: 70,
               width: 70,
-              padding: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(15),
               margin: const EdgeInsets.only(top: 10, left: 11),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.surfaceVariant,
+                color: Theme.of(context).colorScheme.surface,
                 image: state.img != ""
                     ? DecorationImage(
                         image: NetworkImage(
@@ -112,9 +108,9 @@ class TargetPanel extends HookConsumerWidget {
                   ? FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        state.target.substring(0, 3),
+                        state.target.substring(0, 1),
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     )
@@ -132,7 +128,7 @@ class TargetPanel extends HookConsumerWidget {
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
