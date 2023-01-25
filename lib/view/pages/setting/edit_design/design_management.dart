@@ -22,7 +22,6 @@ class DesignManagement extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            // const SizedBox(height: 20),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 3,
@@ -59,7 +58,7 @@ class DesignManagement extends HookConsumerWidget {
                                   border: Border.all(
                                     width: 3,
                                     color: ExThemeMode.values[index].themeData
-                                        .colorScheme.primary,
+                                        .colorScheme.secondary,
                                   ),
                                 ),
                                 child: Container(

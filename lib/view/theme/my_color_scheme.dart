@@ -16,19 +16,13 @@ final teaColorScheme = ColorScheme(
   error: const Color.fromARGB(255, 255, 250, 250),
 );
 
-final lemon = ColorScheme(
+final lemon = ColorScheme.fromSwatch(
   brightness: Brightness.light,
-  background: HexColor("#e3f6f5"), //background
-  onBackground: HexColor("#272343"), //headline
-  primary: HexColor("#272343"), // headline
-  onPrimary: HexColor("#272343"), // card headline
-  secondary: HexColor("#ffd803"), // highlight
-  onSecondary: HexColor("#2d334a"), // card paragraph
-  surface: HexColor("#fffffe"), // card back
-  onSurface: HexColor("#272343"), //headline
-  tertiary: HexColor("#bae8e8"), // tertiary
-  onError: const Color(0xFFBA1A1A),
-  error: const Color.fromARGB(255, 255, 250, 250),
+  primarySwatch: Colors.blue,
+  backgroundColor: HexColor("#e3f6f5"),
+  cardColor: HexColor("#fffffe"),
+  accentColor: HexColor("#ffd803"),
+  errorColor: Colors.blue,
 );
 
 const darkColorScheme = ColorScheme(

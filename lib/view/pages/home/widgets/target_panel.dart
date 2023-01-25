@@ -57,7 +57,7 @@ class TargetPanel extends HookConsumerWidget {
                   child: Container(
                     height: 115,
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).cardColor,
                       shape: RightShape(),
                     ),
                     child: Padding(
