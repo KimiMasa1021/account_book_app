@@ -48,7 +48,7 @@ class TargetPanel extends HookConsumerWidget {
                   height: 115,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).cardColor,
                     shape: LeftShape(),
                   ),
                 ),
@@ -69,7 +69,7 @@ class TargetPanel extends HookConsumerWidget {
                             state.target,
                             style: font.fs16.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                             maxLines: 1,
                           ),
@@ -95,7 +95,7 @@ class TargetPanel extends HookConsumerWidget {
               margin: const EdgeInsets.only(top: 10, left: 11),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).cardColor,
                 image: state.img != ""
                     ? DecorationImage(
                         image: NetworkImage(
@@ -130,6 +130,7 @@ class TargetPanel extends HookConsumerWidget {
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.circular(100),
+                      // border: Border.all(),
                     ),
                   ),
                 ),

@@ -57,8 +57,8 @@ class DesignManagement extends HookConsumerWidget {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     width: 3,
-                                    color: ExThemeMode.values[index].themeData
-                                        .colorScheme.secondary,
+                                    color: ExThemeMode
+                                        .values[index].themeData.cardColor,
                                   ),
                                 ),
                                 child: Container(
@@ -77,7 +77,7 @@ class DesignManagement extends HookConsumerWidget {
                                       Expanded(
                                         child: Container(
                                           color: ExThemeMode.values[index]
-                                              .themeData.colorScheme.secondary,
+                                              .themeData.cardColor,
                                         ),
                                       ),
                                       Expanded(

@@ -11,7 +11,7 @@ class MyThemeData {
   factory MyThemeData.tea() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: teaColorScheme,
+        colorScheme: scheme1,
         textTheme: textTheme,
         useMaterial3: true,
       ),
@@ -21,7 +21,7 @@ class MyThemeData {
   factory MyThemeData.lemon() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: lemon,
+        colorScheme: scheme2,
         textTheme: textTheme,
         useMaterial3: true,
       ),
@@ -31,7 +31,7 @@ class MyThemeData {
   factory MyThemeData.dark() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: darkColorScheme,
+        colorScheme: scheme3,
         textTheme: textTheme,
         useMaterial3: true,
       ),
@@ -41,7 +41,7 @@ class MyThemeData {
   factory MyThemeData.heroDarkTheme() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: noNameColorScheme,
+        colorScheme: scheme3,
         textTheme: textTheme,
         useMaterial3: true,
       ),
@@ -51,7 +51,7 @@ class MyThemeData {
   factory MyThemeData.chocolate() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: chocolate,
+        colorScheme: scheme3,
         textTheme: textTheme,
         useMaterial3: true,
       ),
