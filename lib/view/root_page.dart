@@ -38,6 +38,7 @@ class RootPage extends HookConsumerWidget {
       child: Scaffold(
         body: pageList[pageState.index],
         bottomNavigationBar: CupertinoTabBar(
+          backgroundColor: Theme.of(context).cardColor,
           currentIndex: pageState.index,
           height: 60,
           onTap: (index) {

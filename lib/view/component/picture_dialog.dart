@@ -23,6 +23,7 @@ class PictureDialog extends StatelessWidget {
             cameraFunction();
             Navigator.pop(context);
           },
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: const Text(
             "写真を撮る",
             style: TextStyle(fontSize: 16, color: Colors.white),
@@ -33,6 +34,7 @@ class PictureDialog extends StatelessWidget {
             galleryFunction();
             Navigator.pop(context);
           },
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: const Text(
             "フォルダから画像を選択",
             style: TextStyle(fontSize: 16, color: Colors.white),
@@ -43,6 +45,7 @@ class PictureDialog extends StatelessWidget {
             deleteFunction();
             Navigator.pop(context);
           },
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: const Text(
             "削除する",
             style: TextStyle(fontSize: 16, color: Colors.white),

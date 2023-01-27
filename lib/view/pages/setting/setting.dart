@@ -1,5 +1,6 @@
 import 'package:account_book_app/model/enums.dart';
 import 'package:account_book_app/provider/route/routes.dart';
+import 'package:account_book_app/view_model/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,6 +13,7 @@ class Setting extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authCTL = ref.watch(authControllerProvider.notifier);
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -71,7 +73,9 @@ class Setting extends HookConsumerWidget {
                   SettingPanel(
                     text: 'ログアウト',
                     icon: Icons.logout_outlined,
-                    function: () {},
+                    function: () async {
+                      await authCTL.signOut(() => {});
+                    },
                   ),
                 ],
               ),

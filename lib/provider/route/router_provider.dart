@@ -9,8 +9,8 @@ import 'package:account_book_app/view/pages/add_project/target_add_member.dart';
 import 'package:account_book_app/view/pages/detail/edit_project/edit_project.dart';
 import 'package:account_book_app/view/pages/detail/invite_member/invite_member.dart';
 import 'package:account_book_app/view/pages/detail/member_list/member_list.dart';
-import 'package:account_book_app/view/pages/setting/edit_profile/accunt_management.dart';
-import 'package:account_book_app/view/pages/setting/edit_design/design_management.dart';
+import 'package:account_book_app/view/pages/setting/edit_profile/edit_profile.dart';
+import 'package:account_book_app/view/pages/setting/edit_design/edit_design.dart';
 import 'package:account_book_app/view/pages/setting/edit_friends/add_friend_selector.dart';
 import 'package:account_book_app/view/pages/setting/edit_friends/friend_list.dart';
 import 'package:account_book_app/view/pages/setting/edit_friends/scan_qr.dart';
@@ -30,7 +30,6 @@ final routerProvider = Provider(
     redirect: (context, state) => noAuthGuard(ref, state),
     initialLocation: Routes.path().root,
     routes: [
-      //　ログイン画面
       GoRoute(
         path: Routes.path().auth,
         name: Routes.name().auth,
@@ -44,8 +43,6 @@ final routerProvider = Provider(
         },
         redirect: (context, state) => authGuard(ref, state),
         routes: [
-          //　プロジェクトの追加
-          // メンバー
           GoRoute(
             path: Routes.path().addProjectMember,
             name: Routes.name().addProjectMember,
@@ -161,14 +158,14 @@ final routerProvider = Provider(
             path: Routes.path().designManagement,
             name: Routes.name().designManagement,
             builder: (context, state) {
-              return const DesignManagement();
+              return const EditDesign();
             },
           ),
           GoRoute(
             path: Routes.path().accountManagement,
             name: Routes.name().accountManagement,
             builder: (context, state) {
-              return const AccountManagement();
+              return const EditProfile();
             },
           ),
           GoRoute(

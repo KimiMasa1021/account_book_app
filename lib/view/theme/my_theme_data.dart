@@ -7,8 +7,7 @@ class MyThemeData {
   });
   final ThemeData theme;
 
-  //ライトテーマ
-  factory MyThemeData.tea() {
+  factory MyThemeData.themeData1() {
     return MyThemeData(
       theme: ThemeData.from(
         colorScheme: scheme1,
@@ -17,8 +16,7 @@ class MyThemeData {
       ),
     );
   }
-  //レモン
-  factory MyThemeData.lemon() {
+  factory MyThemeData.themeData2() {
     return MyThemeData(
       theme: ThemeData.from(
         colorScheme: scheme2,
@@ -27,8 +25,7 @@ class MyThemeData {
       ),
     );
   }
-  //ダークテーマ
-  factory MyThemeData.dark() {
+  factory MyThemeData.themeData3() {
     return MyThemeData(
       theme: ThemeData.from(
         colorScheme: scheme3,
@@ -37,21 +34,28 @@ class MyThemeData {
       ),
     );
   }
-  //テーマ３
-  factory MyThemeData.heroDarkTheme() {
+  factory MyThemeData.themeData4() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: scheme3,
+        colorScheme: scheme4,
         textTheme: textTheme,
         useMaterial3: true,
       ),
     );
   }
-  //チョコレート
-  factory MyThemeData.chocolate() {
+  factory MyThemeData.themeData5() {
     return MyThemeData(
       theme: ThemeData.from(
-        colorScheme: scheme3,
+        colorScheme: scheme5,
+        textTheme: textTheme,
+        useMaterial3: true,
+      ),
+    );
+  }
+  factory MyThemeData.themeData6() {
+    return MyThemeData(
+      theme: ThemeData.from(
+        colorScheme: scheme6,
         textTheme: textTheme,
         useMaterial3: true,
       ),

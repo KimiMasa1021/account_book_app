@@ -35,20 +35,19 @@ class UsersController extends StateNotifier<UsersState> {
   }
 
   final picker = ImagePicker();
-  Future<void> getImage(ValueNotifier<File?> value, ImageSource source) async {
+  Future<File?> getImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(
       source: source,
       imageQuality: 80,
     );
     if (pickedFile == null) {
-      value.value = null;
-      return;
+      return null;
     }
     final croppedFile = await cropImage(pickedFile.path);
     if (croppedFile == null) {
-      return;
+      return null;
     }
-    value.value = File(croppedFile.path);
+    return File(croppedFile.path);
   }
 
   Future<File?> cropImage(String path) async {
@@ -74,14 +73,17 @@ class UsersController extends StateNotifier<UsersState> {
     return File(croppedFile.path);
   }
 
-  Future<void> updateImage(File image, Function() function) async {
-    final url = await ref.read(usersRepositoryProvider).uploadImage(image);
-    await ref.read(usersRepositoryProvider).saveImageUrl(url);
-    function();
-  }
+  Future<void> editProfile(
+    File? image,
+    String newUserName,
+    Function() popFucntion,
+  ) async {
+    String? imageUrl;
+    if (image != null) {
+      imageUrl = await ref.read(usersRepositoryProvider).uploadImage(image);
+    }
 
-  Future<void> reName(String newName, Function() function) async {
-    await ref.read(usersRepositoryProvider).reName(newName);
-    function();
+    await ref.read(usersRepositoryProvider).editProfile(imageUrl, newUserName);
+    popFucntion();
   }
 }

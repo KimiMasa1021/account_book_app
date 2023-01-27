@@ -1,13 +1,12 @@
 import 'package:account_book_app/view/component/shadow_button.dart';
+import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/enums.dart';
-import '../../../provider/route/routes.dart';
 import '../../../view_model/auth_controller.dart';
 import '../../../view_model/tags_controller.dart';
 
-class Login extends HookConsumerWidget {
+class Login extends ConsumerWidget {
   const Login({super.key});
 
   @override
@@ -59,9 +58,17 @@ class Login extends HookConsumerWidget {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      context.goNamed(
-                        Routes.name().webView,
-                        extra: WebViewType.privacyPolicy,
+                      // context.goNamed(
+                      //   Routes.name().webView,
+                      //   extra: WebViewType.privacyPolicy,
+                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WebViewPage(
+                            type: WebViewType.privacyPolicy,
+                          ),
+                        ),
                       );
                     },
                     child: Row(

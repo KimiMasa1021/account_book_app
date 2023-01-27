@@ -26,6 +26,7 @@ final scheme2 = ColorScheme.fromSwatch(
   onSurface: HexColor("#272343"),
   onSecondary: HexColor("#2d334a"),
 );
+
 final scheme3 = ColorScheme.fromSwatch(
   brightness: Brightness.light,
   primarySwatch: Colors.blue,
@@ -37,4 +38,41 @@ final scheme3 = ColorScheme.fromSwatch(
   onBackground: HexColor("#0e172c"),
   onSurface: HexColor("#0e172c"),
   onSecondary: HexColor("#0e172c"),
+);
+
+final scheme4 = ColorScheme.fromSwatch(
+  brightness: Brightness.dark,
+  primarySwatch: Colors.blue,
+  backgroundColor: HexColor("#242629"),
+  cardColor: HexColor("#16161a"),
+  accentColor: HexColor("#7f5af0"),
+  errorColor: Colors.blue,
+).copyWith(
+  onBackground: HexColor("#fffffe"),
+  onSurface: HexColor("#fffffe"),
+  onSecondary: HexColor("#94a1b2"),
+);
+final scheme5 = ColorScheme.fromSwatch(
+  brightness: Brightness.dark,
+  primarySwatch: Colors.blue,
+  backgroundColor: HexColor("#271c19"),
+  cardColor: HexColor("#55423d"),
+  accentColor: HexColor("#7f5af0"),
+  errorColor: Colors.blue,
+).copyWith(
+  onBackground: HexColor("#fffffe"),
+  onSurface: HexColor("#fffffe"),
+  onSecondary: HexColor("#fff3ec"),
+);
+final scheme6 = ColorScheme.fromSwatch(
+  brightness: Brightness.dark,
+  primarySwatch: Colors.blue,
+  backgroundColor: HexColor("#0f0e17"),
+  cardColor: HexColor("#ff8906"),
+  accentColor: HexColor("#fffffe"),
+  errorColor: Colors.blue,
+).copyWith(
+  onBackground: HexColor("#fffffe"),
+  onSurface: HexColor("#fffffe"),
+  onSecondary: HexColor("#fffffe"),
 );

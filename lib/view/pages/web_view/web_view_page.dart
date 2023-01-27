@@ -61,7 +61,6 @@ class WebViewPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
       ),
       body: Column(
         children: [
