@@ -38,14 +38,14 @@ class TargetPanel extends HookConsumerWidget {
       },
       child: Container(
         width: double.infinity,
-        height: 115,
+        height: 120,
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         child: Stack(
           children: [
             Row(
               children: [
                 Container(
-                  height: 115,
+                  height: 120,
                   width: 45,
                   decoration: ShapeDecoration(
                     color: Theme.of(context).cardColor,
@@ -55,7 +55,7 @@ class TargetPanel extends HookConsumerWidget {
                 const SizedBox(width: 2),
                 Expanded(
                   child: Container(
-                    height: 115,
+                    height: 120,
                     decoration: ShapeDecoration(
                       color: Theme.of(context).cardColor,
                       shape: RightShape(),
@@ -108,7 +108,7 @@ class TargetPanel extends HookConsumerWidget {
                   ? FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        state.target.substring(0, 1),
+                        state.target.substring(0, 3),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
@@ -118,19 +118,18 @@ class TargetPanel extends HookConsumerWidget {
             ),
             Positioned(
               bottom: 8.5,
-              left: 14,
+              left: 11,
               child: SizedBox(
-                height: 13,
-                width: size.width - 58,
+                height: 18,
+                width: size.width - 52,
                 child: FractionallySizedBox(
                   alignment: Alignment.centerLeft,
                   widthFactor: percent >= 1.0 ? 1.0 : percent,
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(100),
-                      // border: Border.all(),
                     ),
                   ),
                 ),
