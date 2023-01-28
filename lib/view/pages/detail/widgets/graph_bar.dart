@@ -9,13 +9,13 @@ class GraphBar extends HookConsumerWidget {
     required this.percent,
     required this.barColor,
     required this.price,
-    required this.textCol0r,
+    required this.textColor,
   });
   final String weekText;
   final double percent;
   final Color barColor;
   final int price;
-  final Color textCol0r;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -37,7 +37,6 @@ class TargetAddDetails extends HookConsumerWidget {
             color: Colors.black,
           ),
         ),
-        backgroundColor: HexColor("#70D4F7"),
         actions: [
           IconButton(
             onPressed: () async {
@@ -100,9 +99,9 @@ class TargetAddDetails extends HookConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       width: double.infinity,
-                      height: 45,
+                      height: 55,
                       decoration: BoxDecoration(
-                        color: HexColor("#E1EBFF"),
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(

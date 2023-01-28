@@ -31,19 +31,14 @@ class TargetAddImage extends HookConsumerWidget {
               "画像設定",
               // style: theme.textTheme.fs19,
             ),
-            titleTextStyle: const TextStyle(
-              color: Colors.black,
-            ),
             leading: InkWell(
               onTap: () {
                 context.pop();
               },
               child: const Icon(
                 Icons.arrow_back,
-                color: Colors.black,
               ),
             ),
-            backgroundColor: HexColor("#70D4F7"),
             actions: [
               IconButton(
                 onPressed: () async {
@@ -70,7 +65,7 @@ class TargetAddImage extends HookConsumerWidget {
                     height: 100,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: HexColor("#70D4F7"),
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: const BorderRadius.only(
                         bottomRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20),

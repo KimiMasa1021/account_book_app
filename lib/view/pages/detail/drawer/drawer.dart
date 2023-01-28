@@ -1,5 +1,5 @@
 import 'package:account_book_app/provider/route/routes.dart';
-import 'package:account_book_app/view/pages/detail/widgets/warning_dialog.dart';
+import 'package:account_book_app/view/component/lottie_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -154,7 +154,18 @@ class MyDrawer extends HookConsumerWidget {
                 function: () {
                   showDialog(
                     context: context,
-                    builder: (context) => const WarningDialog(),
+                    builder: (context) => LottieDialog(
+                      url: "assets/json/warning.json",
+                      title: '注意',
+                      subTitle: '退会した場合はフレンドに招待してもらわなければ再参加出来ません。',
+                      button1Title: '退会する',
+                      onTap1: () {
+                        context.go(Routes.path().root);
+                      },
+                      onTap2: () {
+                        context.pop();
+                      },
+                    ),
                   );
                 },
               ),

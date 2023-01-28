@@ -135,34 +135,34 @@ class TargetPanel extends HookConsumerWidget {
                 ),
               ),
             ),
-            percent >= 1.0
-                ? Positioned(
-                    right: 10,
-                    top: 10,
-                    child: Transform.rotate(
-                      angle: -0.2,
-                      child: Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 5,
-                          ),
-                        ),
-                        child: FittedBox(
-                          child: Text(
-                            "済",
-                            style: GoogleFonts.yujiBoku(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
+            // percent >= 1.0
+            //     ? Positioned(
+            //         right: 10,
+            //         top: 10,
+            //         child: Transform.rotate(
+            //           angle: -0.2,
+            //           child: Container(
+            //             width: 80,
+            //             height: 80,
+            //             decoration: BoxDecoration(
+            //               shape: BoxShape.circle,
+            //               border: Border.all(
+            //                 color: Colors.red,
+            //                 width: 5,
+            //               ),
+            //             ),
+            //             child: FittedBox(
+            //               child: Text(
+            //                 "済",
+            //                 style: GoogleFonts.yujiBoku(
+            //                   color: Colors.red,
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     : const SizedBox(),
           ],
         ),
       ),

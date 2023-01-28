@@ -112,15 +112,13 @@ class PageViewLeft extends HookConsumerWidget {
                           return GraphBar(
                             weekText: week[index],
                             percent: percent >= 1 ? 1 : percent,
-                            textCol0r: index == 5
+                            textColor: index == 5
                                 ? Colors.red
                                 : index == 6
                                     ? Colors.red.withOpacity(0.8)
                                     : Colors.white,
                             price: doubleList[index],
-                            barColor: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
+                            barColor: Theme.of(context).colorScheme.secondary,
                           );
                         },
                       ),

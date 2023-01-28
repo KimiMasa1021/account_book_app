@@ -35,7 +35,6 @@ class NormalTextField extends HookConsumerWidget {
           width: double.infinity,
           height: 55,
           decoration: BoxDecoration(
-            // color: HexColor("#E1EBFF"),
             color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(10),
           ),

@@ -104,8 +104,11 @@ class EditProfile extends HookConsumerWidget {
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          border: Border.all(),
+                          color: Theme.of(context).colorScheme.background,
+                          border: Border.all(
+                            width: 3,
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
                           shape: BoxShape.circle,
                         ),
                         child: const Center(

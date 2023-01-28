@@ -4,6 +4,7 @@ import 'package:account_book_app/view_model/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../component/lottie_dialog.dart';
 import 'widgets/setting_palent_container.dart';
 import 'widgets/setting_panel.dart';
 import 'widgets/user_data_panel.dart';
@@ -74,7 +75,21 @@ class Setting extends HookConsumerWidget {
                     text: 'ログアウト',
                     icon: Icons.logout_outlined,
                     function: () async {
-                      await authCTL.signOut(() => {});
+                      showDialog(
+                        context: context,
+                        builder: (context) => LottieDialog(
+                          url: "assets/json/logout.json",
+                          title: 'ログアウト',
+                          subTitle: '本当にログアウトしますか？',
+                          button1Title: 'ログアウト',
+                          onTap1: () async {
+                            await authCTL.signOut(() => {});
+                          },
+                          onTap2: () {
+                            context.pop();
+                          },
+                        ),
+                      );
                     },
                   ),
                 ],

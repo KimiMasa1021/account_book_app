@@ -24,19 +24,14 @@ class TargetAddMember extends HookConsumerWidget {
           "メンバーを選択",
           // style: theme.textTheme.fs19,
         ),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-        ),
         leading: InkWell(
           onTap: () {
             context.pop();
           },
           child: const Icon(
             Icons.arrow_back,
-            color: Colors.black,
           ),
         ),
-        backgroundColor: HexColor("#70D4F7"),
         actions: [
           IconButton(
             onPressed: () {
@@ -57,7 +52,7 @@ class TargetAddMember extends HookConsumerWidget {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: HexColor("#70D4F7"),
+              color: Theme.of(context).cardColor,
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
@@ -106,41 +101,46 @@ class TargetAddMember extends HookConsumerWidget {
                     ),
                     ...List.generate(
                       targetInit.selectedUserList.length,
-                      (index) => SizedBox(
-                        width: 60,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 55,
-                              height: 55,
-                              margin: const EdgeInsets.only(bottom: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                image:
-                                    targetInit.selectedUserList[index].img != ""
-                                        ? DecorationImage(
-                                            image: NetworkImage(
-                                              targetInit
-                                                  .selectedUserList[index].img,
-                                            ),
-                                          )
-                                        : null,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 6,
-                                  )
-                                ],
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: SizedBox(
+                          width: 60,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 55,
+                                height: 55,
+                                margin: const EdgeInsets.only(bottom: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  image:
+                                      targetInit.selectedUserList[index].img !=
+                                              ""
+                                          ? DecorationImage(
+                                              image: NetworkImage(
+                                                targetInit
+                                                    .selectedUserList[index]
+                                                    .img,
+                                              ),
+                                            )
+                                          : null,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      offset: const Offset(0, 0),
+                                      blurRadius: 6,
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            Text(
-                              targetInit.selectedUserList[index].name,
-                              // style: theme.textTheme.fs16,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
+                              Text(
+                                targetInit.selectedUserList[index].name,
+                                // style: theme.textTheme.fs16,
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     )
