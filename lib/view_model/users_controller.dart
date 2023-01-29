@@ -76,7 +76,6 @@ class UsersController extends StateNotifier<UsersState> {
   Future<void> editProfile(
     File? image,
     String newUserName,
-    Function() popFucntion,
   ) async {
     String? imageUrl;
     if (image != null) {
@@ -84,6 +83,5 @@ class UsersController extends StateNotifier<UsersState> {
     }
 
     await ref.read(usersRepositoryProvider).editProfile(imageUrl, newUserName);
-    popFucntion();
   }
 }

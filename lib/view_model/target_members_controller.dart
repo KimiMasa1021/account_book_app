@@ -2,10 +2,9 @@ import 'package:account_book_app/model/user/users_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../repository/friend_repository.dart';
 
-final targetMembersControllerProvider = StateNotifierProvider.autoDispose
-    .family<TargetMembersController, AsyncValue<List<UsersState>>,
-            List<String>>(
-        (ref, List<String> members) => TargetMembersController(ref, members));
+final targetMembersControllerProvider = StateNotifierProvider.family<
+        TargetMembersController, AsyncValue<List<UsersState>>, List<String>>(
+    (ref, List<String> members) => TargetMembersController(ref, members));
 
 class TargetMembersController
     extends StateNotifier<AsyncValue<List<UsersState>>> {

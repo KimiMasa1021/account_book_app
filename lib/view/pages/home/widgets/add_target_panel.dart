@@ -56,7 +56,7 @@ class AddTargetPanel extends HookConsumerWidget {
                             maxLines: 1,
                           ),
                           Text(
-                            "タップすることで新しいプロジェクトを作成することが出来ます！！",
+                            "新しいプロジェクトを作成はこちらから！！",
                             style: font.fs16.copyWith(
                               color: Theme.of(context).colorScheme.onSecondary,
                             ),

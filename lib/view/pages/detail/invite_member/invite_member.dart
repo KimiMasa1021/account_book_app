@@ -54,14 +54,7 @@ class InviteMember extends HookConsumerWidget {
                       }
                     },
                     padding: const EdgeInsets.only(right: 10),
-                    icon: const Text(
-                      "追加",
-                      // style: theme.textTheme.fs16.copyWith(
-                      //   color: newMembers.value.isNotEmpty
-                      //       ? Colors.white
-                      //       : const Color.fromARGB(255, 205, 205, 205),
-                      // ),
-                    ),
+                    icon: const Text("追加"),
                   ),
                 ],
               ),

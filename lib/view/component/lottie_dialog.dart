@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import '../theme/app_text_theme.dart';
 import 'painted_button.dart';
 
-class LottieDialog extends HookConsumerWidget {
+class LottieDialog extends ConsumerWidget {
   const LottieDialog({
     super.key,
     required this.url,
@@ -26,6 +27,7 @@ class LottieDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final font = ref.watch(myTextTheme);
 
     return Dialog(
       clipBehavior: Clip.hardEdge,
@@ -50,30 +52,31 @@ class LottieDialog extends HookConsumerWidget {
                     children: [
                       Text(
                         title,
-                        // style: theme.textTheme.fs27.copyWith(
-                        //   fontWeight: FontWeight.bold,
-                        // ),
+                        style: font.fs21.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Text(
                         subTitle,
-                        // style: theme.textTheme.fs19.copyWith(),
+                        style: font.fs19.copyWith(),
                         textAlign: TextAlign.center,
                       ),
                       const Spacer(),
                       PaintedButton(
                         text: button1Title,
-                        textColor: Theme.of(context).colorScheme.error,
-                        backgroundColor: Colors.white,
-                        borderColor: Theme.of(context).colorScheme.error,
+                        textColor: Theme.of(context).colorScheme.onBackground,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        borderColor: Theme.of(context).cardColor,
                         fucntion: () async => await onTap1(),
                       ),
                       const SizedBox(height: 10),
                       PaintedButton(
                         text: 'キャンセル',
-                        textColor: Theme.of(context).colorScheme.onError,
-                        backgroundColor: Theme.of(context).colorScheme.error,
-                        borderColor: Theme.of(context).colorScheme.error,
+                        textColor: Theme.of(context).colorScheme.onSecondary,
+                        backgroundColor: Theme.of(context).cardColor,
+                        borderColor: Theme.of(context).cardColor,
                         fucntion: () => onTap2(),
                       ),
                     ],

@@ -14,13 +14,14 @@ class Home extends HookConsumerWidget {
     final target = ref.watch(targetControllerProvider);
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         child: Column(
           children: [
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    const SizedBox(height: 20),
                     target.when(
                       data: (val) {
                         return Column(
@@ -56,6 +57,7 @@ class Home extends HookConsumerWidget {
                         context.pushNamed(Routes.name().addProjectMember);
                       },
                     ),
+                    const SizedBox(height: 30),
                   ],
                 ),
               ),

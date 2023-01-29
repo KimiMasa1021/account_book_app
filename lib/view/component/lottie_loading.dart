@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import '../../model/enums.dart';
+import '../theme/app_text_theme.dart';
 
-class LottieLoading extends HookConsumerWidget {
+class LottieLoading extends ConsumerWidget {
   const LottieLoading({
     super.key,
     required this.flg,
@@ -17,6 +18,7 @@ class LottieLoading extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final font = ref.watch(myTextTheme);
 
     final loadingLottie = Lottie.asset(
       lottieData.loadingPath,
@@ -48,9 +50,9 @@ class LottieLoading extends HookConsumerWidget {
                             loadingLottie,
                             Text(
                               lottieData.loadingText,
-                              // style: theme.textTheme.fs19.copyWith(
-                              //   fontWeight: FontWeight.bold,
-                              // ),
+                              style: font.fs19.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             )
                           ],
                         )
@@ -60,9 +62,9 @@ class LottieLoading extends HookConsumerWidget {
                             finishLottie,
                             Text(
                               lottieData.resultText,
-                              // style: theme.textTheme.fs19.copyWith(
-                              //   fontWeight: FontWeight.bold,
-                              // ),
+                              style: font.fs19.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
@@ -74,7 +76,6 @@ class LottieLoading extends HookConsumerWidget {
                           padding: const EdgeInsets.only(bottom: 30),
                           child: InkWell(
                             onTap: () {
-                              // context.go(Routes.path().root);
                               resultFunction();
                             },
                             child: Container(
@@ -85,12 +86,12 @@ class LottieLoading extends HookConsumerWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   "ホームに戻る",
-                                  // style: theme.textTheme.fs19.copyWith(
-                                  //   fontWeight: FontWeight.bold,
-                                  // ),
+                                  style: font.fs19.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),

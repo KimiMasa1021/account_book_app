@@ -1,14 +1,14 @@
-import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../view_model/friend_controller.dart';
 import '../../../view_model/target_init_controller.dart';
 import '../../../view_model/users_controller.dart';
+import '../../theme/app_text_theme.dart';
 import 'widgets/friend_tile_with_radio.dart';
 import '../../../provider/route/routes.dart';
 
-class TargetAddMember extends HookConsumerWidget {
+class TargetAddMember extends ConsumerWidget {
   const TargetAddMember({super.key});
 
   @override
@@ -16,21 +16,17 @@ class TargetAddMember extends HookConsumerWidget {
     final userState = ref.watch(usersControllerProvider);
     final friends = ref.watch(friendsControllerProvider);
     final targetInit = ref.watch(targetInitControllerProvider(null));
+    final font = ref.watch(myTextTheme);
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text(
-          "メンバーを選択",
-          // style: theme.textTheme.fs19,
-        ),
+        title: const Text("メンバーを選択"),
         leading: InkWell(
           onTap: () {
             context.pop();
           },
-          child: const Icon(
-            Icons.arrow_back,
-          ),
+          child: const Icon(Icons.arrow_back),
         ),
         actions: [
           IconButton(
@@ -38,12 +34,7 @@ class TargetAddMember extends HookConsumerWidget {
               context.pushNamed(Routes.name().addProjectDetails);
             },
             padding: const EdgeInsets.only(right: 10),
-            icon: const Text(
-              "次へ",
-              // style: theme.textTheme.fs16.copyWith(
-              //   color: Colors.black,
-              // ),
-            ),
+            icon: const Text("次へ"),
           ),
         ],
       ),
@@ -54,8 +45,8 @@ class TargetAddMember extends HookConsumerWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
               ),
             ),
             child: SingleChildScrollView(
@@ -92,9 +83,11 @@ class TargetAddMember extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          const Text(
+                          Text(
                             "あなた",
-                            // style: theme.textTheme.fs16,
+                            style: font.fs16.copyWith(
+                              color: Theme.of(context).colorScheme.onSecondary,
+                            ),
                           )
                         ],
                       ),
@@ -136,7 +129,10 @@ class TargetAddMember extends HookConsumerWidget {
                               ),
                               Text(
                                 targetInit.selectedUserList[index].name,
-                                // style: theme.textTheme.fs16,
+                                style: font.fs16.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
                                 overflow: TextOverflow.ellipsis,
                               )
                             ],

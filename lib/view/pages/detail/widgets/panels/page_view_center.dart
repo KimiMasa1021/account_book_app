@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../model/target/target_state.dart';
 import '../../../../../view_model/saving_controller.dart';
+import '../../../../theme/app_text_theme.dart';
 import '../detail_percent_painter.dart';
 
 class PageViewCenter extends HookConsumerWidget {
@@ -19,6 +20,7 @@ class PageViewCenter extends HookConsumerWidget {
         .where((e) => e.productId == target.docId)
         .map((e) => e.price)
         .toList();
+    final font = ref.watch(myTextTheme);
     int sum;
     if (priceList.isEmpty) {
       sum = 0;
@@ -51,17 +53,17 @@ class PageViewCenter extends HookConsumerWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text(
+                          Text(
                             "達成金額",
-                            // style: theme.textTheme.fs19.copyWith(
-                            //   fontWeight: FontWeight.bold,
-                            // ),
+                            style: font.fs19.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             savingCTL.formatYen(sum),
-                            // style: theme.textTheme.fs33.copyWith(
-                            //   fontWeight: FontWeight.bold,
-                            // ),
+                            style: font.fs33.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(height: 20),
                         ],
@@ -74,16 +76,16 @@ class PageViewCenter extends HookConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "目標金額",
-                              // style: theme.textTheme.fs16,
+                              style: font.fs16,
                               overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               savingCTL.formatYen(target.targetPrice),
-                              // style: theme.textTheme.fs21.copyWith(
-                              //   fontWeight: FontWeight.bold,
-                              // ),
+                              style: font.fs21.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../view_model/saving_controller.dart';
+import '../../../theme/app_text_theme.dart';
 
 class GraphBar extends HookConsumerWidget {
   const GraphBar({
@@ -9,17 +10,16 @@ class GraphBar extends HookConsumerWidget {
     required this.percent,
     required this.barColor,
     required this.price,
-    required this.textColor,
   });
   final String weekText;
   final double percent;
   final Color barColor;
   final int price;
-  final Color textColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final font = ref.watch(myTextTheme);
 
     return Tooltip(
       message: savingCTL.formatYen(price),
@@ -29,10 +29,9 @@ class GraphBar extends HookConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 5),
             child: Text(
               weekText,
-              // style: theme.textTheme.fs16.copyWith(
-              //   fontWeight: FontWeight.bold,
-              //   color: textCol0r,
-              // ),
+              style: font.fs16.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Expanded(

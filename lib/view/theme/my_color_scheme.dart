@@ -77,7 +77,7 @@ final scheme5 = ColorScheme.fromSwatch(
 final scheme6 = ColorScheme.fromSwatch(
   brightness: Brightness.dark,
   primarySwatch: Colors.blue,
-  backgroundColor: HexColor("#b8c1ec"),
+  backgroundColor: HexColor("#6571A7"),
   cardColor: HexColor("#232946"),
   accentColor: HexColor("#fffffe"),
   errorColor: Colors.blue,

@@ -1,5 +1,4 @@
 import 'package:account_book_app/view/component/normal_text_field.dart';
-import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,8 +7,9 @@ import '../../../view_model/target_init_controller.dart';
 import '../../component/large_text_field.dart';
 import '../../../utility/price_formatter.dart';
 import '../../../provider/route/routes.dart';
+import '../../theme/app_text_theme.dart';
 
-class TargetAddDetails extends HookConsumerWidget {
+class TargetAddDetails extends ConsumerWidget {
   const TargetAddDetails({super.key});
 
   @override
@@ -17,6 +17,7 @@ class TargetAddDetails extends HookConsumerWidget {
     final targetInit = ref.watch(targetInitControllerProvider(null));
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
+    final font = ref.watch(myTextTheme);
 
     return Scaffold(
       appBar: AppBar(
@@ -74,9 +75,11 @@ class TargetAddDetails extends HookConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  const Text(
+                  Text(
                     "達成予定年月日",
-                    // style: theme.textTheme.fs16,
+                    style: font.fs16.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
                   ),
                   InkWell(
                     onTap: () async {

@@ -38,24 +38,27 @@ class UserDataPanel extends ConsumerWidget {
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                userState.name,
-                style: font.fs16.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  userState.name,
+                  style: font.fs16.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-              Text(
-                userState.email,
-                style: font.fs16.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
+                Text(
+                  userState.email,
+                  style: font.fs16.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          const Spacer(),
           InkWell(
             onTap: () {},
             child: Icon(

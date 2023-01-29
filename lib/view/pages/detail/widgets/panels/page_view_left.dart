@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../../model/target/target_state.dart';
 import '../../../../../view_model/saving_controller.dart';
+import '../../../../theme/app_text_theme.dart';
 
 class PageViewLeft extends HookConsumerWidget {
   const PageViewLeft({
@@ -17,7 +18,7 @@ class PageViewLeft extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final saving = ref.watch(savingControllerProvider);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
-
+    final font = ref.watch(myTextTheme);
     final date = useState(DateTime.now());
     final savingList =
         saving.where((e) => e.productId == target.docId).toList();
@@ -61,19 +62,14 @@ class PageViewLeft extends HookConsumerWidget {
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(right: 10),
-                      child: Icon(
-                        Icons.arrow_circle_left,
-                        size: 30,
-                        color: Colors.white,
-                      ),
+                      child: Icon(Icons.arrow_circle_left_outlined),
                     ),
                   ),
                   Text(
                     "${DateFormat('MM月dd日').format(startWeekDate)}から${DateFormat('MM月dd日').format(endWeekDate)}",
-                    // style: theme.textTheme.fs16.copyWith(
-                    //   fontWeight: FontWeight.bold,
-                    //   color: Colors.white,
-                    // ),
+                    style: font.fs16.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -81,11 +77,7 @@ class PageViewLeft extends HookConsumerWidget {
                     },
                     child: const Padding(
                       padding: EdgeInsets.only(left: 10),
-                      child: Icon(
-                        Icons.arrow_circle_right,
-                        size: 30,
-                        color: Colors.white,
-                      ),
+                      child: Icon(Icons.arrow_circle_right_outlined),
                     ),
                   ),
                 ],
@@ -112,11 +104,6 @@ class PageViewLeft extends HookConsumerWidget {
                           return GraphBar(
                             weekText: week[index],
                             percent: percent >= 1 ? 1 : percent,
-                            textColor: index == 5
-                                ? Colors.red
-                                : index == 6
-                                    ? Colors.red.withOpacity(0.8)
-                                    : Colors.white,
                             price: doubleList[index],
                             barColor: Theme.of(context).colorScheme.secondary,
                           );
@@ -128,11 +115,10 @@ class PageViewLeft extends HookConsumerWidget {
               ),
             ),
             Text(
-              "１日当たり$dailyPrice円で達成できます!!",
-              // style: theme.textTheme.fs16.copyWith(
-              //   fontWeight: FontWeight.bold,
-              //   color: Colors.white,
-              // ),
+              "１日当たり$dailyPrice円で達成できます",
+              style: font.fs16.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

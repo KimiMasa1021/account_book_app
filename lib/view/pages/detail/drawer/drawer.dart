@@ -6,10 +6,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/target/target_state.dart';
 import '../../../../view_model/saving_controller.dart';
+import '../../../theme/app_text_theme.dart';
 import 'widgets/drawer_info_panel.dart';
 import 'widgets/drawer_action_panel.dart';
 
-class MyDrawer extends HookConsumerWidget {
+class MyDrawer extends ConsumerWidget {
   const MyDrawer({super.key, required this.target});
   final TargetState target;
 
@@ -18,6 +19,7 @@ class MyDrawer extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final saving = ref.watch(savingControllerProvider);
+    final font = ref.watch(myTextTheme);
 
     final priceList = saving
         .where((e) => e.productId == target.docId)
@@ -86,13 +88,15 @@ class MyDrawer extends HookConsumerWidget {
                       children: [
                         Text(
                           "${target.target} ",
-                          // style: theme.textTheme.fs19.copyWith(
-                          //   fontWeight: FontWeight.bold,
-                          // ),
+                          style: font.fs19.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           target.targetDescription,
-                          // style: theme.textTheme.fs16,
+                          style: font.fs16,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -101,7 +105,7 @@ class MyDrawer extends HookConsumerWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               DrawerInfoPanel(
                 title: "目標金額",
                 content: savingCTL.formatYen(target.targetPrice),
@@ -117,7 +121,7 @@ class MyDrawer extends HookConsumerWidget {
                 content: DateFormat('yyyy年MM月dd日').format(target.targetDate),
                 icon: Icons.calendar_today,
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               DrawerActionPanel(
                 title: "プロジェクトの編集",
                 icon: Icons.settings,

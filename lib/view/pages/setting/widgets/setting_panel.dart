@@ -30,7 +30,7 @@ class SettingPanel extends HookConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Icon(
                 icon,
-                size: 35,
+                size: 30,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),

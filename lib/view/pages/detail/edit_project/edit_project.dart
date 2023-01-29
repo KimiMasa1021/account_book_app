@@ -14,6 +14,7 @@ import '../../../../view_model/target_init_controller.dart';
 import '../../../component/picture_dialog.dart';
 import '../../../component/large_text_field.dart';
 import '../../../component/normal_text_field.dart';
+import '../../../theme/app_text_theme.dart';
 
 class EditProject extends HookConsumerWidget {
   const EditProject({
@@ -26,6 +27,7 @@ class EditProject extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final target = ref.watch(targetControllerProvider);
+    final font = ref.watch(myTextTheme);
 
     return target.when(
       data: (data) {
@@ -182,9 +184,12 @@ class EditProject extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               "達成予定年月日",
-                              // style: theme.textTheme.fs16,
+                              style: font.fs16.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -197,7 +202,6 @@ class EditProject extends HookConsumerWidget {
                                 width: double.infinity,
                                 height: 45,
                                 decoration: BoxDecoration(
-                                  // color: HexColor("#E1EBFF"),
                                   color: Theme.of(context).colorScheme.surface,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
