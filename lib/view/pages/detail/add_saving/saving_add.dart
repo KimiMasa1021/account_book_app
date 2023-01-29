@@ -22,30 +22,26 @@ class SavingAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final ValueNotifier<int?> tagValue = useState(null);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back_ios_new,
-            color: Colors.black,
           ),
         ),
         title: const Text("追加"),
-        // titleTextStyle: theme.textTheme.fs19.copyWith(color: Colors.black),
       ),
       body: Column(
         children: [
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 243, 231, 255),
-              ),
+              decoration: const BoxDecoration(),
               child: FutureBuilder<void>(
                 future: tagsCTL.getTags(),
                 builder: (context, snapshot) {
@@ -73,9 +69,12 @@ class SavingAdd extends HookConsumerWidget {
           ),
           Column(
             children: [
-              SizedBox(
+              Container(
                 width: double.infinity,
-                height: 90,
+                // height: 90,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -98,62 +97,63 @@ class SavingAdd extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    InkWell(
-                      onTap: () async {
-                        if (savingCTL.checkSavingAdd(
-                          priceController,
-                          tagValue,
-                        )) {
-                          await savingCTL.addSaving(
-                            docId,
-                            tags.singleWhere((e) => e.id == tagValue.value).tag,
-                            priceController.text,
-                            () {
-                              context.pop();
-                            },
-                          );
-                        }
-                      },
-                      child: Container(
-                        width: 90,
-                        height: 50,
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.purple,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "追加する",
-                            // style: theme.textTheme.fs16.copyWith(
-                            //   color: Colors.white,
-                            // ),
-                          ),
-                        ),
-                      ),
-                    )
+                    // InkWell(
+                    // onTap: () async {
+                    // if (savingCTL.checkSavingAdd(
+                    //   priceController,
+                    //   tagValue,
+                    // )) {
+                    //   await savingCTL.addSaving(
+                    //     docId,
+                    //     tags.singleWhere((e) => e.id == tagValue.value).tag,
+                    //     priceController.text,
+                    //     () {
+                    //       context.pop();
+                    //     },
+                    //   );
+                    // }
+                    //   },
+                    //   child: Container(
+                    //     width: 90,
+                    //     height: 50,
+                    //     margin: const EdgeInsets.symmetric(horizontal: 10),
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.purple,
+                    //       borderRadius: BorderRadius.circular(10),
+                    //     ),
+                    //     child: const Center(
+                    //       child: Text(
+                    //         "追加する",
+                    //         // style: theme.textTheme.fs16.copyWith(
+                    //         //   color: Colors.white,
+                    //         // ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
               ),
               Container(
-                // height: size.height / 2 - 90,
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
+                decoration: const BoxDecoration(),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: StaggeredGrid.count(
-                    crossAxisCount: 4,
+                    crossAxisCount: 5,
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
                     children: List.generate(
-                      11,
+                      12,
                       (index) {
                         return StaggeredGridTile.count(
                           crossAxisCellCount: 1,
-                          mainAxisCellCount: index != 3 ? 1 : 2,
+                          mainAxisCellCount: index == 4
+                              ? 3
+                              : index == 3
+                                  ? 2
+                                  : 1,
                           child: CalculatorButton(
                             function: () {
                               savingCTL.calcButtonFunction(
@@ -163,18 +163,19 @@ class SavingAdd extends HookConsumerWidget {
                             },
                             title: FittedBox(
                               fit: BoxFit.fitWidth,
-                              child: index != 3
-                                  ? Text(
-                                      index >= 4
-                                          ? index == 10
-                                              ? "0"
-                                              : index.toString()
-                                          : (index + 1).toString(),
-                                      style: const TextStyle(fontSize: 30),
-                                    )
-                                  : const Icon(
-                                      Icons.backspace_outlined,
-                                    ),
+                              child: index == 4
+                                  ? const Icon(Icons.keyboard_return)
+                                  : index == 3
+                                      ? const Icon(
+                                          Icons.backspace_outlined,
+                                        )
+                                      : Text(
+                                          index <= 2
+                                              ? (index + 1).toString()
+                                              : index == 11
+                                                  ? "0"
+                                                  : (index - 1).toString(),
+                                        ),
                             ),
                           ),
                         );

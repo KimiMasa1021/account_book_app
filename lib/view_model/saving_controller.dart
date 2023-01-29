@@ -118,13 +118,15 @@ class SavingController extends StateNotifier<List<SavingState>> {
     int index,
     TextEditingController priceController,
   ) {
-    if (index != 3) {
+    if (index != 3 && index != 4) {
       final preText = priceController.text;
-      final tapedText = index >= 4 && index <= 9
-          ? index.toString()
-          : index == 10
-              ? "0"
-              : (index + 1).toString();
+      final tapedText = index >= 0 && index <= 2
+          ? (index + 1).toString()
+          : index >= 5 && index <= 10
+              ? (index - 1).toString()
+              : index == 11
+                  ? 0.toString()
+                  : "0";
       final newText = preText + tapedText;
 
       priceController.value = CustomTextInputFormatter().formatEditUpdate(
@@ -140,6 +142,8 @@ class SavingController extends StateNotifier<List<SavingState>> {
         TextEditingValue(text: preText),
         TextEditingValue(text: newText),
       );
+      return;
+    } else if (index == 4) {
       return;
     }
   }
