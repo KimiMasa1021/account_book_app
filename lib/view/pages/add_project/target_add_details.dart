@@ -20,22 +20,14 @@ class TargetAddDetails extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         title: const Text(
           "詳細設定",
-          // style: theme.textTheme.fs19,
-        ),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
         ),
         leading: InkWell(
           onTap: () {
             context.pop();
           },
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
+          child: const Icon(Icons.arrow_back),
         ),
         actions: [
           IconButton(
@@ -45,12 +37,7 @@ class TargetAddDetails extends HookConsumerWidget {
               }
             },
             padding: const EdgeInsets.only(right: 10),
-            icon: const Text(
-              "次へ",
-              // style: theme.textTheme.fs16.copyWith(
-              //   color: Colors.black,
-              // ),
-            ),
+            icon: const Text("次へ"),
           ),
         ],
       ),

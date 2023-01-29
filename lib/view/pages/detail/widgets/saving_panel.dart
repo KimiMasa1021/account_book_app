@@ -64,7 +64,7 @@ class SavingPanel extends HookConsumerWidget {
               margin: const EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).cardColor,
               ),
             ),
             Expanded(
@@ -73,7 +73,7 @@ class SavingPanel extends HookConsumerWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).cardColor,
-                  border: Border.all(),
+                  // border: Border.all(),
                 ),
                 child: Column(
                   children: [

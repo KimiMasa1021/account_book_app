@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/route/routes.dart';
 import '../../../view_model/target_controller.dart';
+import 'widgets/add_target_panel.dart';
 
 class Home extends HookConsumerWidget {
   const Home({super.key});
@@ -13,48 +14,13 @@ class Home extends HookConsumerWidget {
     final target = ref.watch(targetControllerProvider);
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
           children: [
-            SizedBox(
-              height: 58,
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      context.pushNamed(Routes.name().addProjectMember);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.group_add,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // Container(
-                    //   margin: const EdgeInsets.only(bottom: 10, top: 10),
-                    //   height: 60,
-                    //   width: double.infinity,
-                    //   decoration: BoxDecoration(
-                    //     color: HexColor("#FFEFEF"),
-                    //     border: Border.all(
-                    //       color: HexColor("#FF0000"),
-                    //     ),
-                    //   ),
-                    //   child: const Center(
-                    //     child: Text("広告"),
-                    //   ),
-                    // ),
                     target.when(
                       data: (val) {
                         return Column(
@@ -73,7 +39,6 @@ class Home extends HookConsumerWidget {
                                 );
                               },
                             ),
-                            const SizedBox(height: 10),
                           ],
                         );
                       },
@@ -84,6 +49,11 @@ class Home extends HookConsumerWidget {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
+                      },
+                    ),
+                    AddTargetPanel(
+                      onTap: () {
+                        context.pushNamed(Routes.name().addProjectMember);
                       },
                     ),
                   ],

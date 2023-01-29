@@ -24,7 +24,7 @@ class EditProfile extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text("アカウントの管理"),
         actions: [
-          TextButton(
+          IconButton(
             onPressed: () async {
               if (imageFile.value == null && preUserName == controller.text) {
                 return;
@@ -37,7 +37,7 @@ class EditProfile extends HookConsumerWidget {
                 },
               );
             },
-            child: const Text("保存"),
+            icon: const Text("保存"),
           ),
         ],
       ),
