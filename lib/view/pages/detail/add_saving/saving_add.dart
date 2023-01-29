@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../view_model/saving_controller.dart';
 import '../../../../view_model/tags_controller.dart';
+import '../../../theme/app_text_theme.dart';
 import 'widgets/calculator_button.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -22,6 +23,7 @@ class SavingAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final ValueNotifier<int?> tagValue = useState(null);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final font = ref.watch(myTextTheme);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +73,7 @@ class SavingAdd extends HookConsumerWidget {
             children: [
               Container(
                 width: double.infinity,
-                // height: 90,
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
                 ),
@@ -84,7 +86,7 @@ class SavingAdd extends HookConsumerWidget {
                           controller: priceController,
                           autofocus: true,
                           keyboardType: TextInputType.none,
-                          // style: theme.textTheme.fs33,
+                          style: font.fs27,
                           cursorWidth: 0,
                           decoration: const InputDecoration(
                             hintText: "金額を入力",
@@ -97,40 +99,6 @@ class SavingAdd extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    // InkWell(
-                    // onTap: () async {
-                    // if (savingCTL.checkSavingAdd(
-                    //   priceController,
-                    //   tagValue,
-                    // )) {
-                    //   await savingCTL.addSaving(
-                    //     docId,
-                    //     tags.singleWhere((e) => e.id == tagValue.value).tag,
-                    //     priceController.text,
-                    //     () {
-                    //       context.pop();
-                    //     },
-                    //   );
-                    // }
-                    //   },
-                    //   child: Container(
-                    //     width: 90,
-                    //     height: 50,
-                    //     margin: const EdgeInsets.symmetric(horizontal: 10),
-                    //     decoration: BoxDecoration(
-                    //       color: Colors.purple,
-                    //       borderRadius: BorderRadius.circular(10),
-                    //     ),
-                    //     child: const Center(
-                    //       child: Text(
-                    //         "追加する",
-                    //         // style: theme.textTheme.fs16.copyWith(
-                    //         //   color: Colors.white,
-                    //         // ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // )
                   ],
                 ),
               ),
@@ -155,28 +123,32 @@ class SavingAdd extends HookConsumerWidget {
                                   ? 2
                                   : 1,
                           child: CalculatorButton(
-                            function: () {
+                            index: index,
+                            onTap: () {
                               savingCTL.calcButtonFunction(
                                 index,
                                 priceController,
                               );
                             },
-                            title: FittedBox(
-                              fit: BoxFit.fitWidth,
-                              child: index == 4
-                                  ? const Icon(Icons.keyboard_return)
-                                  : index == 3
-                                      ? const Icon(
-                                          Icons.backspace_outlined,
-                                        )
-                                      : Text(
-                                          index <= 2
-                                              ? (index + 1).toString()
-                                              : index == 11
-                                                  ? "0"
-                                                  : (index - 1).toString(),
-                                        ),
-                            ),
+                            enterFucntion: () async {
+                              if (index != 4) return;
+                              if (savingCTL.checkSavingAdd(
+                                priceController,
+                                tagValue,
+                              )) {
+                                await savingCTL.addSaving(
+                                  docId,
+                                  tags
+                                      .singleWhere(
+                                          (e) => e.id == tagValue.value)
+                                      .tag,
+                                  priceController.text,
+                                  () {
+                                    context.pop();
+                                  },
+                                );
+                              }
+                            },
                           ),
                         );
                       },
