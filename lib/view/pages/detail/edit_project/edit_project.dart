@@ -41,7 +41,6 @@ class EditProject extends HookConsumerWidget {
               appBar: AppBar(
                 title: const Text(
                   "プロジェクトの編集",
-                  // style: theme.textTheme.fs19,
                 ),
                 leading: InkWell(
                   onTap: () {
@@ -63,12 +62,7 @@ class EditProject extends HookConsumerWidget {
                       }
                     },
                     padding: const EdgeInsets.only(right: 10),
-                    icon: const Text(
-                      "編集",
-                      // style: theme.textTheme.fs16.copyWith(
-                      //   color: Colors.black,
-                      // ),
-                    ),
+                    icon: const Text("編集"),
                   ),
                 ],
               ),

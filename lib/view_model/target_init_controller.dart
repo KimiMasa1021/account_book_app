@@ -172,7 +172,7 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
   Future<void> updateTarget(TargetState target, String docId) async {
     final url = state.file != null
         ? await ref.read(usersRepositoryProvider).uploadImage(state.file!)
-        : "";
+        : target.img;
     final price =
         int.parse(state.targetPriceController!.text.replaceAll(",", ""));
 
