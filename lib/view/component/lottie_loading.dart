@@ -27,7 +27,6 @@ class LottieLoading extends ConsumerWidget {
       frameRate: FrameRate(60),
       repeat: true,
     );
-
     final finishLottie = Lottie.asset(
       lottieData.resultPath,
       width: 230,

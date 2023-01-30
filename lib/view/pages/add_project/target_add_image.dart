@@ -1,4 +1,3 @@
-import 'package:account_book_app/utility/hex_color.dart';
 import 'package:account_book_app/view/component/lottie_loading.dart';
 import 'package:account_book_app/view/component/my_lottie_data.dart';
 import 'package:flutter/material.dart';

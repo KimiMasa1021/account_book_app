@@ -34,7 +34,7 @@ class CustomNavBar extends StatelessWidget {
           (index) => InkWell(
             onTap: () async => await onTap(index),
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 10,
               ),

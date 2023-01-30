@@ -1,12 +1,13 @@
 import 'package:account_book_app/view/component/shadow_button.dart';
 import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/enums.dart';
 import '../../../view_model/auth_controller.dart';
 import '../../../view_model/tags_controller.dart';
 
-class Login extends ConsumerWidget {
+class Login extends HookConsumerWidget {
   const Login({super.key});
 
   @override
@@ -14,14 +15,12 @@ class Login extends ConsumerWidget {
     final authCTL = ref.watch(authControllerProvider.notifier);
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
+    final size = MediaQuery.of(context).size;
+    final flg = useState(false);
 
     return Scaffold(
       body: Stack(
         children: [
-          Image.network(
-            "https://i.pinimg.com/736x/63/cd/98/63cd989ececcace76faa147586f2fa47--nice.jpg",
-            fit: BoxFit.fill,
-          ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -44,10 +43,12 @@ class Login extends ConsumerWidget {
                   ShadowButton(
                     text: "Googleでサインアップ",
                     function: () async {
+                      flg.value = true;
                       final newUser = await authCTL.signInWithGoogle();
                       if (newUser || tags.isEmpty) {
                         await tagsCTL.insertTags();
                       }
+                      flg.value = false;
                     },
                   ),
                   const SizedBox(height: 20),
@@ -58,10 +59,6 @@ class Login extends ConsumerWidget {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      // context.goNamed(
-                      //   Routes.name().webView,
-                      //   extra: WebViewType.privacyPolicy,
-                      // );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -85,6 +82,15 @@ class Login extends ConsumerWidget {
               ),
             ),
           ),
+          flg.value == true
+              ? Container(
+                  width: size.width,
+                  height: size.height,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );

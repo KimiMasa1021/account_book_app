@@ -71,7 +71,6 @@ final routerProvider = Provider(
             path: Routes.path().projectDetails,
             name: Routes.name().projectDetails,
             pageBuilder: (context, state) {
-              // final target = state.params['docId']! as TargetState;
               final target = state.extra as TargetState;
               return buildPageWithDefaultTransition<void>(
                 context: context,
