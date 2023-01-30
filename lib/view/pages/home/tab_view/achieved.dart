@@ -6,8 +6,8 @@ import '../../../../view_model/target_controller.dart';
 import '../widgets/add_target_panel.dart';
 import '../widgets/target_panel.dart';
 
-class WorkingOn extends ConsumerWidget {
-  const WorkingOn({super.key});
+class Achieved extends ConsumerWidget {
+  const Achieved({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

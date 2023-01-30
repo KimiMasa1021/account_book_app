@@ -6,8 +6,8 @@ import '../../../../view_model/target_controller.dart';
 import '../widgets/add_target_panel.dart';
 import '../widgets/target_panel.dart';
 
-class WorkingOn extends ConsumerWidget {
-  const WorkingOn({super.key});
+class Overdue extends ConsumerWidget {
+  const Overdue({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +21,7 @@ class WorkingOn extends ConsumerWidget {
             data: (val) {
               final workingOnTarget = val
                   .where(
-                    (e) => e.registeTime.isAfter(DateTime.now()),
+                    (e) => e.registeTime.isBefore(DateTime.now()),
                   )
                   .toList();
 

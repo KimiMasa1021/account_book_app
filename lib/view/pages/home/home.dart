@@ -1,3 +1,5 @@
+import 'package:account_book_app/view/pages/home/tab_view/achieved.dart';
+import 'package:account_book_app/view/pages/home/tab_view/overdue.dart';
 import 'package:account_book_app/view/pages/home/tab_view/working_on.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,12 +23,12 @@ class Home extends HookConsumerWidget {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TabBarView(
                   children: [
                     WorkingOn(),
-                    WorkingOn(),
-                    WorkingOn(),
+                    Overdue(),
+                    Achieved(),
                   ],
                 ),
               ),
