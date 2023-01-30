@@ -26,3 +26,11 @@ enum WebViewType {
   appHint,
   aboutApp,
 }
+
+//home画面のタブ種類
+enum TabBarViewState {
+  all,
+  workingOn,
+  overdue,
+  achieved,
+}

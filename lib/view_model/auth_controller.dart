@@ -42,6 +42,11 @@ class AuthController extends StateNotifier<User?> {
     function();
   }
 
+  Future<void> deryFuture(Function() function) async {
+    await Future.delayed(const Duration(seconds: 2));
+    function();
+  }
+
   @override
   void dispose() {
     authStateChangesSubscription?.cancel();

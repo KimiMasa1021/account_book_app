@@ -45,6 +45,7 @@ class UserDataPanel extends ConsumerWidget {
                 Text(
                   userState.name,
                   style: font.fs16.copyWith(
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
                   overflow: TextOverflow.ellipsis,

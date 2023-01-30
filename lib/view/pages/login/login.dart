@@ -1,7 +1,9 @@
+import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/component/shadow_button.dart';
 import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/enums.dart';
 import '../../../view_model/auth_controller.dart';
@@ -27,27 +29,16 @@ class Login extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const SizedBox(height: 50),
-                  const Text(
-                    "仮の名前",
-                    // style: theme.textTheme.fs33.copyWith(
-                    //   fontWeight: FontWeight.bold,
-                    // ),
-                  ),
-                  const Text(
-                    "仮の簡単な説明仮の\n仮の簡単な説明仮の仮の",
-                    // style: theme.textTheme.fs21,
-                    textAlign: TextAlign.center,
-                  ),
                   const Spacer(),
                   ShadowButton(
                     text: "Googleでサインアップ",
                     function: () async {
                       flg.value = true;
-                      final newUser = await authCTL.signInWithGoogle();
-                      if (newUser || tags.isEmpty) {
-                        await tagsCTL.insertTags();
-                      }
+                      await authCTL.signInWithGoogle();
+                      if (tags.isEmpty) await tagsCTL.insertTags();
+                      await authCTL.deryFuture(() {
+                        context.go(Routes.path().root);
+                      });
                       flg.value = false;
                     },
                   ),

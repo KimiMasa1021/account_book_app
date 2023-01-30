@@ -45,7 +45,7 @@ class TagsController extends StateNotifier<List<Tags>> {
     "被服費・美容費",
     "娯楽",
     "交通費",
-    "自炊した！！",
+    "自炊した",
     "コンビニ",
   ];
   Future<void> insertTags() async {

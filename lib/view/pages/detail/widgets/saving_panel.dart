@@ -48,7 +48,6 @@ class SavingPanel extends HookConsumerWidget {
         .substring(1, nameList.length - 1)
         .replaceAll("null", "")
         .replaceAll(",", "");
-    debugPrint(displayName);
     return InkWell(
       onTap: () {
         isOpen.value = !isOpen.value;

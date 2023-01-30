@@ -3,13 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/route/routes.dart';
 import '../../../../view_model/friend_controller.dart';
+import '../../../theme/app_text_theme.dart';
 
-class FriendList extends HookConsumerWidget {
+class FriendList extends ConsumerWidget {
   const FriendList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final friends = ref.watch(friendsControllerProvider);
+    final font = ref.watch(myTextTheme);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,9 +55,9 @@ class FriendList extends HookConsumerWidget {
                       children: [
                         Text(
                           friends[index].name,
-                          // style: theme.textTheme.fs19.copyWith(
-                          //   fontWeight: FontWeight.bold,
-                          // ),
+                          style: font.fs19.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           friends[index].email,
