@@ -21,7 +21,8 @@ class WorkingOn extends ConsumerWidget {
             data: (val) {
               final workingOnTarget = val
                   .where(
-                    (e) => e.registeTime.isAfter(DateTime.now()),
+                    (e) =>
+                        e.targetDate.isAfter(DateTime.now()) && !e.isCompleted,
                   )
                   .toList();
 

@@ -1,3 +1,4 @@
+import 'package:account_book_app/repository/target_init_repository.dart';
 import 'package:account_book_app/repository/target_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,6 +23,7 @@ class SavingController extends StateNotifier<List<SavingState>> {
     String productId,
     String memo,
     String price,
+    int totalSaving,
     Function() fucntion,
   ) async {
     final priceInt = int.parse(price.replaceAll(",", ""));
@@ -33,7 +35,13 @@ class SavingController extends StateNotifier<List<SavingState>> {
       userId: uid,
       memo: memo,
     );
+
+    final newTotalSaving = totalSaving + priceInt;
     await ref.read(targetRepositoryProvider).addSaving(state);
+    await ref
+        .read(targetInitRepositoryProvider)
+        .updateTotalSaving(newTotalSaving, productId);
+
     fucntion();
   }
 

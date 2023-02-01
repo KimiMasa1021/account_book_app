@@ -47,7 +47,7 @@ class AddTargetPanel extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "新規プロジェクト",
+                            "新規プロジェクトの追加",
                             style: font.fs16.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.onSurface,

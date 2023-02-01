@@ -102,7 +102,7 @@ class HomeDetails extends HookConsumerWidget {
                           function: () {
                             context.pushNamed(
                               Routes.name().addSaving,
-                              params: {'targetId': target.docId},
+                              extra: target,
                             );
                           },
                         );
@@ -121,7 +121,7 @@ class HomeDetails extends HookConsumerWidget {
                               function: () {
                                 context.pushNamed(
                                   Routes.name().addSaving,
-                                  params: {'targetId': target.docId},
+                                  extra: target,
                                 );
                               },
                             ),

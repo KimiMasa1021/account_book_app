@@ -21,7 +21,7 @@ class Achieved extends ConsumerWidget {
             data: (val) {
               final workingOnTarget = val
                   .where(
-                    (e) => e.registeTime.isAfter(DateTime.now()),
+                    (e) => e.isCompleted,
                   )
                   .toList();
 

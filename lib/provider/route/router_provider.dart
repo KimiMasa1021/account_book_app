@@ -85,9 +85,9 @@ final routerProvider = Provider(
             path: Routes.path().addSaving,
             name: Routes.name().addSaving,
             builder: (context, state) {
-              String targetId = state.params['targetId']!;
+              final target = state.extra as TargetState;
               return SavingAdd(
-                docId: targetId,
+                target: target,
               );
             },
           ),

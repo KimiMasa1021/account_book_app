@@ -12,7 +12,6 @@ class Overdue extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final target = ref.watch(targetControllerProvider);
-
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -21,7 +20,8 @@ class Overdue extends ConsumerWidget {
             data: (val) {
               final workingOnTarget = val
                   .where(
-                    (e) => e.registeTime.isBefore(DateTime.now()),
+                    (e) =>
+                        e.targetDate.isBefore(DateTime.now()) && !e.isCompleted,
                   )
                   .toList();
 

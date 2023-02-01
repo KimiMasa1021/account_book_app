@@ -69,7 +69,7 @@ class Routes {
       editProject: "edit_project/:targetId",
       memberList: "memberList",
       inviteMember: "invite_member/:targetId",
-      addSaving: "add_saving/:targetId",
+      addSaving: "add_saving",
       //　設定タブ
       friendManagement: "friend_management",
       addFriendDescription: "add_friend_description",

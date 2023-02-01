@@ -30,6 +30,8 @@ mixin _$TargetState {
   @TimestampConverter()
   DateTime get targetDate => throw _privateConstructorUsedError;
   String get img => throw _privateConstructorUsedError;
+  int get totalSaving => throw _privateConstructorUsedError;
+  bool get isCompleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +53,9 @@ abstract class $TargetStateCopyWith<$Res> {
       String targetDescription,
       int targetPrice,
       @TimestampConverter() DateTime targetDate,
-      String img});
+      String img,
+      int totalSaving,
+      bool isCompleted});
 }
 
 /// @nodoc
@@ -75,6 +79,8 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
     Object? targetPrice = null,
     Object? targetDate = null,
     Object? img = null,
+    Object? totalSaving = null,
+    Object? isCompleted = null,
   }) {
     return _then(_value.copyWith(
       docId: null == docId
@@ -109,6 +115,14 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String,
+      totalSaving: null == totalSaving
+          ? _value.totalSaving
+          : totalSaving // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -129,7 +143,9 @@ abstract class _$$_TargetStateCopyWith<$Res>
       String targetDescription,
       int targetPrice,
       @TimestampConverter() DateTime targetDate,
-      String img});
+      String img,
+      int totalSaving,
+      bool isCompleted});
 }
 
 /// @nodoc
@@ -151,6 +167,8 @@ class __$$_TargetStateCopyWithImpl<$Res>
     Object? targetPrice = null,
     Object? targetDate = null,
     Object? img = null,
+    Object? totalSaving = null,
+    Object? isCompleted = null,
   }) {
     return _then(_$_TargetState(
       docId: null == docId
@@ -185,6 +203,14 @@ class __$$_TargetStateCopyWithImpl<$Res>
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String,
+      totalSaving: null == totalSaving
+          ? _value.totalSaving
+          : totalSaving // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -200,7 +226,9 @@ class _$_TargetState extends _TargetState {
       this.targetDescription = "",
       this.targetPrice = 0,
       @TimestampConverter() required this.targetDate,
-      this.img = ""})
+      this.img = "",
+      this.totalSaving = 0,
+      this.isCompleted = false})
       : _members = members,
         super._();
 
@@ -236,10 +264,16 @@ class _$_TargetState extends _TargetState {
   @override
   @JsonKey()
   final String img;
+  @override
+  @JsonKey()
+  final int totalSaving;
+  @override
+  @JsonKey()
+  final bool isCompleted;
 
   @override
   String toString() {
-    return 'TargetState(docId: $docId, registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img)';
+    return 'TargetState(docId: $docId, registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img, totalSaving: $totalSaving, isCompleted: $isCompleted)';
   }
 
   @override
@@ -258,7 +292,11 @@ class _$_TargetState extends _TargetState {
                 other.targetPrice == targetPrice) &&
             (identical(other.targetDate, targetDate) ||
                 other.targetDate == targetDate) &&
-            (identical(other.img, img) || other.img == img));
+            (identical(other.img, img) || other.img == img) &&
+            (identical(other.totalSaving, totalSaving) ||
+                other.totalSaving == totalSaving) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted));
   }
 
   @JsonKey(ignore: true)
@@ -272,7 +310,9 @@ class _$_TargetState extends _TargetState {
       targetDescription,
       targetPrice,
       targetDate,
-      img);
+      img,
+      totalSaving,
+      isCompleted);
 
   @JsonKey(ignore: true)
   @override
@@ -297,7 +337,9 @@ abstract class _TargetState extends TargetState {
       final String targetDescription,
       final int targetPrice,
       @TimestampConverter() required final DateTime targetDate,
-      final String img}) = _$_TargetState;
+      final String img,
+      final int totalSaving,
+      final bool isCompleted}) = _$_TargetState;
   _TargetState._() : super._();
 
   factory _TargetState.fromJson(Map<String, dynamic> json) =
@@ -321,6 +363,10 @@ abstract class _TargetState extends TargetState {
   DateTime get targetDate;
   @override
   String get img;
+  @override
+  int get totalSaving;
+  @override
+  bool get isCompleted;
   @override
   @JsonKey(ignore: true)
   _$$_TargetStateCopyWith<_$_TargetState> get copyWith =>
