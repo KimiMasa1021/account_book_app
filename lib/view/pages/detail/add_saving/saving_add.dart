@@ -139,7 +139,7 @@ class SavingAdd extends HookConsumerWidget {
                                 priceController,
                                 tagValue,
                               )) {
-                                final TTTT = test.value!.singleWhere(
+                                final total = test.value!.singleWhere(
                                     (e) => e.docId == target.docId);
 
                                 await savingCTL.addSaving(
@@ -149,7 +149,7 @@ class SavingAdd extends HookConsumerWidget {
                                           (e) => e.id == tagValue.value)
                                       .tag,
                                   priceController.text,
-                                  TTTT.totalSaving,
+                                  total.totalSaving,
                                   () {
                                     context.pop();
                                   },

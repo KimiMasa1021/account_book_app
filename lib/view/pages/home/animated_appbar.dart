@@ -1,65 +1,42 @@
-import 'package:account_book_app/view/pages/home/tab_view/achieved.dart';
-import 'package:account_book_app/view/pages/home/tab_view/overdue.dart';
-import 'package:account_book_app/view/pages/home/tab_view/working_on.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter/services.dart';
 
-class Home extends HookConsumerWidget {
-  const Home({super.key});
+class AnimatedAppBar extends StatefulWidget {
+  const AnimatedAppBar({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return DefaultTabController(
-      length: 3,
-      child: SafeArea(
-        child: NestedScrollView(
+  _AnimatedAppBarState createState() => _AnimatedAppBarState();
+}
+
+class _AnimatedAppBarState extends State<AnimatedAppBar> {
+  final TextEditingController stateController = TextEditingController();
+  final FocusNode stateFocus = FocusNode();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: NestedScrollView(
           headerSliverBuilder:
               (BuildContext context, bool innnerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 100.0,
+                expandedHeight: 120.0,
                 floating: false,
                 pinned: true,
-                backgroundColor: Theme.of(context).cardColor,
+                backgroundColor: Colors.green,
                 automaticallyImplyLeading: false,
                 titleSpacing: 0.0,
                 toolbarHeight: 50.0, //タブバーの高さ
-                // centerTitle: true,
+                centerTitle: true,
                 elevation: 0.0,
                 leadingWidth: 0.0,
-                // bottom: TabBar(
-                //   indicatorColor: Theme.of(context).colorScheme.onBackground,
-                //   labelColor: Theme.of(context).colorScheme.onBackground,
-                //   unselectedLabelColor:
-                //       Theme.of(context).colorScheme.onBackground,
-                //   tabs: const [
-                //     Tab(text: "取り組み中"),
-                //     Tab(text: "期限超過"),
-                //     Tab(text: "達成済み"),
-                //   ],
-                // ),
                 title: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: 50,
-                      child: TabBar(
-                        indicatorColor:
-                            Theme.of(context).colorScheme.onBackground,
-                        labelColor: Theme.of(context).colorScheme.onBackground,
-                        unselectedLabelColor:
-                            Theme.of(context).colorScheme.onBackground,
-                        tabs: const [
-                          Tab(text: "取り組み中"),
-                          Tab(text: "期限超過"),
-                          Tab(text: "達成済み"),
-                        ],
-                      ),
-                    ),
-                  ],
+                  children: [],
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                  background: SizedBox(
+                  background: Container(
                     width: MediaQuery.of(context).size.width,
                     child: Stack(
                       alignment: Alignment.center,
@@ -70,9 +47,7 @@ class Home extends HookConsumerWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0,
-                                vertical: 10,
-                              ),
+                                  horizontal: 8.0, vertical: 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -101,16 +76,21 @@ class Home extends HookConsumerWidget {
           },
           body: Builder(
             builder: (BuildContext context) {
-              return const Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: TabBarView(
-                    children: [
-                      WorkingOn(),
-                      Overdue(),
-                      Achieved(),
-                    ],
-                  ),
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      itemCount: 100,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text("Index value: $index"),
+                        );
+                      },
+                    )
+                  ],
                 ),
               );
             },
