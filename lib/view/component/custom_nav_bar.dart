@@ -18,14 +18,12 @@ class CustomNavBar extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      margin: const EdgeInsets.only(
-        left: 10,
-        right: 10,
-        bottom: 10,
-      ),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
