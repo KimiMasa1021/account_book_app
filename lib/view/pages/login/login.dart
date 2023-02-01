@@ -37,9 +37,9 @@ class Login extends HookConsumerWidget {
                       await authCTL.signInWithGoogle();
                       if (tags.isEmpty) await tagsCTL.insertTags();
                       await authCTL.deryFuture(() {
+                        flg.value = false;
                         context.go(Routes.path().root);
                       });
-                      flg.value = false;
                     },
                   ),
                   const SizedBox(height: 20),

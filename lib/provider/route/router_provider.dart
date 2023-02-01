@@ -27,7 +27,6 @@ import 'guard.dart';
 final routerProvider = Provider(
   (ref) => GoRouter(
     refreshListenable: authStateNotifier,
-    redirect: (context, state) => noAuthGuard(ref, state),
     initialLocation: Routes.path().root,
     routes: [
       GoRoute(

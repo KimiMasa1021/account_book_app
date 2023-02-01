@@ -1,6 +1,8 @@
 import 'package:account_book_app/model/enums.dart';
+import 'package:account_book_app/provider/firebase/firebase_auth_provider.dart';
 import 'package:account_book_app/provider/route/router_provider.dart';
 import 'package:account_book_app/provider/route/routes.dart';
+import 'package:account_book_app/view_model/auth_controller.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -30,7 +32,7 @@ String? authGuard(Ref ref, GoRouterState state) {
 String? noAuthGuard(Ref ref, GoRouterState state) {
   final isAuthenticated = ref.read(authProvider).value != null;
 
-  if (isAuthenticated && state.location == Routes.path().auth) {
+  if (isAuthenticated) {
     return Routes.path().root;
   } else {
     return null;
