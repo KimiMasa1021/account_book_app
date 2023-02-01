@@ -13,15 +13,18 @@ class Home extends HookConsumerWidget {
       length: 3,
       child: SafeArea(
         child: Column(
-          children: const [
+          children: [
             TabBar(
-              tabs: [
+              indicatorColor: Theme.of(context).colorScheme.onBackground,
+              labelColor: Theme.of(context).colorScheme.onBackground,
+              unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
+              tabs: const [
                 Tab(text: "取り組み中"),
                 Tab(text: "期限超過"),
                 Tab(text: "達成済み"),
               ],
             ),
-            Expanded(
+            const Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TabBarView(
