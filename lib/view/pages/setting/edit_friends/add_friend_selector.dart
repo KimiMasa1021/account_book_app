@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../component/shadow_button.dart';
 import '../../../../provider/route/routes.dart';
+import '../../../theme/app_text_theme.dart';
 
-class FriendsAddDescription extends StatelessWidget {
+class FriendsAddDescription extends ConsumerWidget {
   const FriendsAddDescription({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("フレンド追加"),
@@ -19,10 +23,14 @@ class FriendsAddDescription extends StatelessWidget {
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("フレンド追加"),
+                children: [
                   Text(
-                    "フレンド追加をすることで同じプロジェクトに招待することが出来ます。",
+                    "フレンド追加",
+                    style: font.fs27,
+                  ),
+                  Text(
+                    "フレンド追加をすることでプロジェクトに招待することが出来ます。",
+                    style: font.fs19,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -36,7 +44,7 @@ class FriendsAddDescription extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ShadowButton(
-              text: "メールアドレスで検索して追加",
+              text: "IDで検索して追加",
               function: () {},
             ),
           ],

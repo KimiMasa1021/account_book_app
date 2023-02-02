@@ -39,8 +39,7 @@ class Home extends HookConsumerWidget {
                                 horizontal: 15,
                               ),
                               child: CircleAvatar(
-                                backgroundImage:
-                                    NetworkImage(userState!.img), //NetworkImage
+                                backgroundImage: NetworkImage(userState!.img),
                                 radius: 20.0,
                               ),
                             ),

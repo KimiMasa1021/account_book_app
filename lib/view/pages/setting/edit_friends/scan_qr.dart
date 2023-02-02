@@ -22,17 +22,7 @@ class ScanQr extends HookConsumerWidget {
     return Stack(
       children: [
         Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                size: 30,
-              ),
-            ),
-          ),
+          appBar: AppBar(),
           body: SafeArea(
             child: Column(
               children: [
@@ -112,7 +102,8 @@ class ScanQr extends HookConsumerWidget {
                                           const SizedBox(height: 40),
                                           const Padding(
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 90),
+                                              horizontal: 90,
+                                            ),
                                             child: Text(
                                               "QRコードを読み取って、友達を追加しましょう。",
                                               textAlign: TextAlign.center,
