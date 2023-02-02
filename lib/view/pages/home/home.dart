@@ -1,16 +1,21 @@
-import 'package:account_book_app/view/pages/home/tab_view/achieved.dart';
-import 'package:account_book_app/view/pages/home/tab_view/overdue.dart';
-import 'package:account_book_app/view/pages/home/tab_view/working_on.dart';
+import 'package:account_book_app/view/pages/home/widgets/tab_view_contents.dart';
 import 'package:account_book_app/view/pages/home/widgets/sticky_tab_bar_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../view_model/target_controller.dart';
+import '../../../view_model/users_controller.dart';
 
 class Home extends HookConsumerWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const tabHeight = 60.0;
+    const tabHeight = 55.0;
+    final size = MediaQuery.of(context).size;
+    final userState = ref.watch(usersControllerProvider);
+    final target = ref.watch(targetControllerProvider);
+
     return DefaultTabController(
       length: 3,
       child: SafeArea(
@@ -21,34 +26,35 @@ class Home extends HookConsumerWidget {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Stack(
-                      children: [
-                        Container(
-                          height: tabHeight,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 15,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    "https://images.ctfassets.net/hrltx12pl8hq/2TRIFRwcjrTuNprkTQHVxs/088159eb8e811aaac789c24701d7fdb1/LP_image.jpg?fit=fill&w=632&h=354&fm=webp"), //NetworkImage
-                                radius: 16.0,
+                    Container(
+                      height: tabHeight,
+                      width: size.width,
+                      color: Theme.of(context).cardColor,
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 15,
                               ),
-                              SizedBox()
-                            ],
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(userState!.img), //NetworkImage
+                                radius: 20.0,
+                              ),
+                            ),
                           ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.flutter_dash_rounded,
-                            size: 35,
-                            color: Theme.of(context).colorScheme.onSurface,
+                          Align(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.flutter_dash_rounded,
+                              size: 35,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -68,7 +74,7 @@ class Home extends HookConsumerWidget {
                         height: tabHeight,
                       ),
                       Tab(
-                        text: "期限超過",
+                        text: "期限切れ",
                         height: tabHeight,
                       ),
                       Tab(
@@ -81,20 +87,48 @@ class Home extends HookConsumerWidget {
               ),
             ];
           },
-          body: Builder(
-            builder: (BuildContext context) {
-              return const Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: TabBarView(
+          body: target.when(
+            data: (data) {
+              final workingOnTarget = data
+                  .where(
+                    (e) =>
+                        e.targetDate.isAfter(DateTime.now()) && !e.isCompleted,
+                  )
+                  .toList();
+              final overdueTarget = data
+                  .where(
+                    (e) =>
+                        e.targetDate.isBefore(DateTime.now()) && !e.isCompleted,
+                  )
+                  .toList();
+              final achievedTarget = data
+                  .where(
+                    (e) => e.isCompleted,
+                  )
+                  .toList();
+              return Builder(
+                builder: (context) {
+                  return TabBarView(
                     children: [
-                      WorkingOn(),
-                      Overdue(),
-                      Achieved(),
+                      TabViewContents(
+                        targetList: workingOnTarget,
+                      ),
+                      TabViewContents(
+                        targetList: overdueTarget,
+                      ),
+                      TabViewContents(
+                        targetList: achievedTarget,
+                      ),
                     ],
-                  ),
-                ),
+                  );
+                },
               );
+            },
+            loading: () {
+              return const CircularProgressIndicator();
+            },
+            error: (error, stackTrace) {
+              return const SizedBox();
             },
           ),
         ),

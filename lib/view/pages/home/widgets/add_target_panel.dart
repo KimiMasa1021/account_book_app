@@ -20,7 +20,7 @@ class AddTargetPanel extends HookConsumerWidget {
       child: Container(
         width: double.infinity,
         height: 120,
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        margin: const EdgeInsets.symmetric(vertical: 5),
         child: Stack(
           children: [
             Row(
