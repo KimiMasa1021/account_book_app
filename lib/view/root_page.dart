@@ -1,5 +1,4 @@
 import 'package:account_book_app/view/component/custom_nav_bar.dart';
-import 'package:account_book_app/view/pages/home/animated_appbar.dart';
 import 'package:account_book_app/view/pages/home/home.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
 import 'package:flutter/material.dart';
