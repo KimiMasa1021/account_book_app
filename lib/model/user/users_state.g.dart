@@ -15,6 +15,14 @@ _$_UsersState _$$_UsersStateFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const [],
+      friendsApproval: (json['friendsApproval'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      friendsRequest: (json['friendsRequest'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       img: json['img'] as String? ?? "",
     );
 
@@ -24,5 +32,7 @@ Map<String, dynamic> _$$_UsersStateToJson(_$_UsersState instance) =>
       'uid': instance.uid,
       'name': instance.name,
       'friends': instance.friends,
+      'friendsApproval': instance.friendsApproval,
+      'friendsRequest': instance.friendsRequest,
       'img': instance.img,
     };

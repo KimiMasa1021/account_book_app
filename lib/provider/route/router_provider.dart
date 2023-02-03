@@ -9,10 +9,11 @@ import 'package:account_book_app/view/pages/add_project/target_add_member.dart';
 import 'package:account_book_app/view/pages/detail/edit_project/edit_project.dart';
 import 'package:account_book_app/view/pages/detail/invite_member/invite_member.dart';
 import 'package:account_book_app/view/pages/detail/member_list/member_list.dart';
+import 'package:account_book_app/view/pages/setting/edit_friends/friend_search.dart';
 import 'package:account_book_app/view/pages/setting/edit_profile/edit_profile.dart';
 import 'package:account_book_app/view/pages/setting/edit_design/edit_design.dart';
 import 'package:account_book_app/view/pages/setting/edit_friends/add_friend_selector.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/friend_list.dart';
+import 'package:account_book_app/view/pages/setting/edit_friends/friend_status.dart';
 import 'package:account_book_app/view/pages/setting/edit_friends/scan_qr.dart';
 import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:account_book_app/view/root_page.dart';
@@ -129,7 +130,7 @@ final routerProvider = Provider(
             path: Routes.path().friendManagement,
             name: Routes.name().friendManagement,
             builder: (context, state) {
-              return const FriendList();
+              return const FriendStatus();
             },
             routes: [
               //フレンド登録手段の選択　QR or Search
@@ -145,7 +146,15 @@ final routerProvider = Provider(
                     path: Routes.path().scanQr,
                     name: Routes.name().scanQr,
                     builder: (context, state) {
-                      return ScanQr();
+                      return const ScanQr();
+                    },
+                  ),
+                  // フレンド検索
+                  GoRoute(
+                    path: Routes.path().friendSearch,
+                    name: Routes.name().friendSearch,
+                    builder: (context, state) {
+                      return const FriendSearch();
                     },
                   ),
                 ],

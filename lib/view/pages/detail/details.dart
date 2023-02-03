@@ -54,7 +54,6 @@ class HomeDetails extends HookConsumerWidget {
           slivers: <Widget>[
             SliverAppBar(
               expandedHeight: size.height * 0.4,
-              elevation: 0,
               automaticallyImplyLeading: false,
               actions: [
                 IconButton(

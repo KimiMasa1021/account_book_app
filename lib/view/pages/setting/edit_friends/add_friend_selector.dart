@@ -45,7 +45,9 @@ class FriendsAddDescription extends ConsumerWidget {
             const SizedBox(height: 20),
             ShadowButton(
               text: "IDで検索して追加",
-              function: () {},
+              function: () {
+                context.pushNamed(Routes.name().friendSearch);
+              },
             ),
           ],
         ),

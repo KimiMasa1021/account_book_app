@@ -16,6 +16,7 @@ class Routes {
     required this.designManagement,
     required this.accountManagement,
     required this.webView,
+    required this.friendSearch,
   });
   final String root;
   final String auth;
@@ -33,6 +34,7 @@ class Routes {
   final String designManagement;
   final String accountManagement;
   final String webView;
+  final String friendSearch;
 
   factory Routes.name() {
     return const Routes(
@@ -52,6 +54,7 @@ class Routes {
       designManagement: "designManagement",
       accountManagement: "accountManagement",
       webView: "webView",
+      friendSearch: "friendSearch",
     );
   }
 
@@ -76,6 +79,7 @@ class Routes {
       scanQr: "scan_qr",
       designManagement: "design_management",
       accountManagement: "account_management",
+      friendSearch: "friend_search",
       //その他
       webView: "web_view",
     );
