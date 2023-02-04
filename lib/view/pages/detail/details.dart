@@ -1,7 +1,7 @@
 import 'package:account_book_app/model/target/target_state.dart';
 import 'package:account_book_app/view/pages/detail/widgets/panels/page_view_left.dart';
 import 'package:account_book_app/view/pages/detail/widgets/panels/page_view_right.dart';
-import 'package:account_book_app/view_model/target_members_controller.dart';
+import 'package:account_book_app/view_model/search_users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,7 +23,7 @@ class HomeDetails extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final saving = ref.watch(savingControllerProvider);
     final targetMembers =
-        ref.watch(targetMembersControllerProvider(target.members));
+        ref.watch(searchUsersControllerProvider(target.members));
 
     final pageController = PageController(
       viewportFraction: 0.85,

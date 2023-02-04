@@ -25,8 +25,8 @@ class SavingAdd extends HookConsumerWidget {
     final priceController = useTextEditingController(text: "");
     final ValueNotifier<int?> tagValue = useState(null);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final saving = ref.watch(savingControllerProvider);
     final font = ref.watch(myTextTheme);
-    final test = ref.watch(targetControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -139,17 +139,13 @@ class SavingAdd extends HookConsumerWidget {
                                 priceController,
                                 tagValue,
                               )) {
-                                final total = test.value!.singleWhere(
-                                    (e) => e.docId == target.docId);
-
                                 await savingCTL.addSaving(
-                                  target.docId,
-                                  tags
-                                      .singleWhere(
-                                          (e) => e.id == tagValue.value)
-                                      .tag,
-                                  priceController.text,
-                                  total.totalSaving,
+                                  index,
+                                  priceController,
+                                  tagValue,
+                                  target,
+                                  saving,
+                                  tags,
                                   () {
                                     context.pop();
                                   },

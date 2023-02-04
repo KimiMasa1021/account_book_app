@@ -13,7 +13,6 @@ class UsersState with _$UsersState {
     @Default("") String name,
     @Default([]) List<String> friends,
     @Default([]) List<String> friendsApproval,
-    @Default([]) List<String> friendsRequest,
     @Default("") String img,
   }) = _UsersState;
 

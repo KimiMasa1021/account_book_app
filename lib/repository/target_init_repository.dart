@@ -13,7 +13,7 @@ abstract class TargetInitRepository {
   Future<void> createTarget(TargetState state);
   Future<void> updateTarget(TargetState state, String docId);
   Future<void> updateMember(List<String> member, String docId);
-  Future<void> updateTotalSaving(int newTotalSaving, String docId);
+  Future<void> updateTotalSaving(bool isCompleted, String docId);
 }
 
 class TargetInitRepositoryImpl implements TargetInitRepository {
@@ -56,10 +56,10 @@ class TargetInitRepositoryImpl implements TargetInitRepository {
   }
 
   @override
-  Future<void> updateTotalSaving(int newTotalSaving, String docId) async {
+  Future<void> updateTotalSaving(bool isCompleted, String docId) async {
     try {
       await collectionReference!.doc(docId).update({
-        "totalSaving": newTotalSaving,
+        "isCompleted": isCompleted,
       });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);

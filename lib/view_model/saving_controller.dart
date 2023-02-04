@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/saving/saving_state.dart';
+import '../model/saving/tags_state.dart';
+import '../model/target/target_state.dart';
 import '../utility/price_formatter.dart';
 import 'auth_controller.dart';
 
@@ -20,29 +22,45 @@ class SavingController extends StateNotifier<List<SavingState>> {
     });
   }
   Future<void> addSaving(
-    String productId,
-    String memo,
-    String price,
-    int totalSaving,
-    Function() fucntion,
+    int index,
+    TextEditingController priceController,
+    ValueNotifier<int?> tagValue,
+    TargetState target,
+    List<SavingState> saving,
+    List<Tags> tags,
+    Function() function,
   ) async {
-    final priceInt = int.parse(price.replaceAll(",", ""));
-    final uid = ref.read(authControllerProvider)!.uid;
-    final state = SavingState(
-      createdAt: DateTime.now(),
-      price: priceInt,
-      productId: productId,
-      userId: uid,
-      memo: memo,
-    );
-
-    final newTotalSaving = totalSaving + priceInt;
-    await ref.read(targetRepositoryProvider).addSaving(state);
-    await ref
-        .read(targetInitRepositoryProvider)
-        .updateTotalSaving(newTotalSaving, productId);
-
-    fucntion();
+    if (index != 4) return;
+    if (checkSavingAdd(
+      priceController,
+      tagValue,
+    )) {
+      final priceList = saving
+          .where((e) => e.productId == target.docId)
+          .map((e) => e.price)
+          .toList();
+      int sum;
+      if (priceList.isEmpty) {
+        sum = 0;
+      } else {
+        sum = priceList.reduce((a, b) => a + b);
+      }
+      final priceInt = int.parse(priceController.text.replaceAll(",", ""));
+      final uid = ref.read(authControllerProvider)!.uid;
+      final state = SavingState(
+        createdAt: DateTime.now(),
+        price: priceInt,
+        productId: target.docId,
+        userId: uid,
+        memo: tags.singleWhere((e) => e.id == tagValue.value).tag,
+      );
+      await ref.read(targetRepositoryProvider).addSaving(state);
+      await ref.read(targetInitRepositoryProvider).updateTotalSaving(
+            target.targetPrice > sum + priceInt ? false : true,
+            target.docId,
+          );
+      function();
+    }
   }
 
   String formatYen(int targetPrice) {
@@ -67,19 +85,14 @@ class SavingController extends StateNotifier<List<SavingState>> {
     List<SavingState> savingList,
     ValueNotifier<DateTime> date,
   ) async {
-    //週初め？？
     final startWeekDate =
         date.value.subtract(Duration(days: date.value.weekday - 1));
-
-    //週末
     final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
-
     final weekSavingList = savingList.where(
       (e) =>
           e.createdAt.isBefore(endWeekDate) &&
           e.createdAt.isAfter(startWeekDate),
     );
-
     return List.generate(7, (index) {
       final weeklySaving = weekSavingList
           .where((e) => e.createdAt.weekday == index + 1)

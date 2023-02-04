@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../view_model/friend_controller.dart';
-import '../../../../../view_model/target_members_controller.dart';
+import '../../../../../view_model/search_users_controller.dart';
 import '../../../../../view_model/users_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 
@@ -14,7 +14,7 @@ class FriendApproval extends ConsumerWidget {
     final font = ref.watch(myTextTheme);
     final userState = ref.watch(usersControllerProvider);
     final targetMembers = ref.watch(
-      targetMembersControllerProvider(userState!.friendsApproval.isNotEmpty
+      searchUsersControllerProvider(userState!.friendsApproval.isNotEmpty
           ? userState.friendsApproval
           : ["abc"]),
     );
@@ -54,14 +54,14 @@ class FriendApproval extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         border: Border.all(
                           color: Theme.of(context).colorScheme.onSecondary,
-                          width: 3,
+                          width: 2,
                         ),
                         shape: BoxShape.circle,
                       ),
@@ -72,22 +72,22 @@ class FriendApproval extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      height: 50,
+                      height: 45,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 23,
+                        horizontal: 20,
                       ),
                       decoration: BoxDecoration(
                         color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(200),
                         border: Border.all(
                           color: Theme.of(context).colorScheme.onSecondary,
-                          width: 3,
+                          width: 2,
                         ),
                       ),
                       child: Center(
                         child: Text(
                           "承認",
-                          style: font.fs19.copyWith(
+                          style: font.fs16.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),

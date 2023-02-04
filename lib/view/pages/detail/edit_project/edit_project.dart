@@ -162,6 +162,7 @@ class EditProject extends HookConsumerWidget {
                           hintText: "達成したい目標を入力してね",
                           inputType: TextInputType.text,
                           controller: targetInit.targetController!,
+                          editable: true,
                         ),
                         NormalTextField(
                           topTitle: "目標金額",
@@ -172,6 +173,7 @@ class EditProject extends HookConsumerWidget {
                           formatter: [
                             CustomTextInputFormatter(),
                           ],
+                          editable: true,
                         ),
                         LargeTextField(
                           topTitle: "詳細",

@@ -185,7 +185,6 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
       members: target.members,
       img: url,
       docId: target.docId,
-      totalSaving: target.totalSaving,
     );
     await ref
         .read(targetInitRepositoryProvider)

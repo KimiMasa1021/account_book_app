@@ -30,7 +30,6 @@ mixin _$TargetState {
   @TimestampConverter()
   DateTime get targetDate => throw _privateConstructorUsedError;
   String get img => throw _privateConstructorUsedError;
-  int get totalSaving => throw _privateConstructorUsedError;
   bool get isCompleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,7 +53,6 @@ abstract class $TargetStateCopyWith<$Res> {
       int targetPrice,
       @TimestampConverter() DateTime targetDate,
       String img,
-      int totalSaving,
       bool isCompleted});
 }
 
@@ -79,7 +77,6 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
     Object? targetPrice = null,
     Object? targetDate = null,
     Object? img = null,
-    Object? totalSaving = null,
     Object? isCompleted = null,
   }) {
     return _then(_value.copyWith(
@@ -115,10 +112,6 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String,
-      totalSaving: null == totalSaving
-          ? _value.totalSaving
-          : totalSaving // ignore: cast_nullable_to_non_nullable
-              as int,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -144,7 +137,6 @@ abstract class _$$_TargetStateCopyWith<$Res>
       int targetPrice,
       @TimestampConverter() DateTime targetDate,
       String img,
-      int totalSaving,
       bool isCompleted});
 }
 
@@ -167,7 +159,6 @@ class __$$_TargetStateCopyWithImpl<$Res>
     Object? targetPrice = null,
     Object? targetDate = null,
     Object? img = null,
-    Object? totalSaving = null,
     Object? isCompleted = null,
   }) {
     return _then(_$_TargetState(
@@ -203,10 +194,6 @@ class __$$_TargetStateCopyWithImpl<$Res>
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
               as String,
-      totalSaving: null == totalSaving
-          ? _value.totalSaving
-          : totalSaving // ignore: cast_nullable_to_non_nullable
-              as int,
       isCompleted: null == isCompleted
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
@@ -227,7 +214,6 @@ class _$_TargetState extends _TargetState {
       this.targetPrice = 0,
       @TimestampConverter() required this.targetDate,
       this.img = "",
-      this.totalSaving = 0,
       this.isCompleted = false})
       : _members = members,
         super._();
@@ -266,14 +252,11 @@ class _$_TargetState extends _TargetState {
   final String img;
   @override
   @JsonKey()
-  final int totalSaving;
-  @override
-  @JsonKey()
   final bool isCompleted;
 
   @override
   String toString() {
-    return 'TargetState(docId: $docId, registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img, totalSaving: $totalSaving, isCompleted: $isCompleted)';
+    return 'TargetState(docId: $docId, registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img, isCompleted: $isCompleted)';
   }
 
   @override
@@ -293,8 +276,6 @@ class _$_TargetState extends _TargetState {
             (identical(other.targetDate, targetDate) ||
                 other.targetDate == targetDate) &&
             (identical(other.img, img) || other.img == img) &&
-            (identical(other.totalSaving, totalSaving) ||
-                other.totalSaving == totalSaving) &&
             (identical(other.isCompleted, isCompleted) ||
                 other.isCompleted == isCompleted));
   }
@@ -311,7 +292,6 @@ class _$_TargetState extends _TargetState {
       targetPrice,
       targetDate,
       img,
-      totalSaving,
       isCompleted);
 
   @JsonKey(ignore: true)
@@ -338,7 +318,6 @@ abstract class _TargetState extends TargetState {
       final int targetPrice,
       @TimestampConverter() required final DateTime targetDate,
       final String img,
-      final int totalSaving,
       final bool isCompleted}) = _$_TargetState;
   _TargetState._() : super._();
 
@@ -363,8 +342,6 @@ abstract class _TargetState extends TargetState {
   DateTime get targetDate;
   @override
   String get img;
-  @override
-  int get totalSaving;
   @override
   bool get isCompleted;
   @override

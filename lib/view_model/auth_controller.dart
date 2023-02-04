@@ -32,7 +32,7 @@ class AuthController extends StateNotifier<User?> {
       }
       return credential.additionalUserInfo!.isNewUser;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("ログイン失敗$e");
       throw e.toString();
     }
   }

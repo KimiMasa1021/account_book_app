@@ -53,6 +53,7 @@ class TargetAddDetails extends ConsumerWidget {
                 hintText: "達成したい目標を入力してね",
                 inputType: TextInputType.text,
                 controller: targetInit.targetController!,
+                editable: true,
               ),
               NormalTextField(
                 topTitle: "目標金額",
@@ -63,6 +64,7 @@ class TargetAddDetails extends ConsumerWidget {
                 formatter: [
                   CustomTextInputFormatter(),
                 ],
+                editable: true,
               ),
               LargeTextField(
                 topTitle: "詳細",

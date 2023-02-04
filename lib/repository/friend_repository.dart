@@ -16,7 +16,9 @@ abstract class FriendRepository {
   Future<FrendRequestResult> addFriend(String user1Uid, String user2Uid);
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachFriends();
   Stream<List<QueryDocumentSnapshot<UsersState>>> feachTargetMembers(
-      List<String> members);
+    List<String> members,
+  );
+  Future<UsersState?> feachSearchUser(String uid);
 }
 
 class FriendRepositoryImple implements FriendRepository {
@@ -96,6 +98,28 @@ class FriendRepositoryImple implements FriendRepository {
     } catch (e) {
       debugPrint(e.toString());
       return FrendRequestResult.error;
+    }
+  }
+
+  @override
+  Future<UsersState?> feachSearchUser(String uid) async {
+    try {
+      final stateRef = collectionReference!
+          .where("uid", isEqualTo: uid)
+          .withConverter<UsersState>(
+            fromFirestore: (snapshot, _) =>
+                UsersState.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          );
+      final aa = await stateRef.get();
+      if (aa.docs.isEmpty) {
+        return null;
+      } else {
+        return aa.docs.first.data();
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
     }
   }
 }

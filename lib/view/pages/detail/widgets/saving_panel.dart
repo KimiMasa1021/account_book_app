@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
 import '../../../../view_model/saving_controller.dart';
-import '../../../../view_model/target_members_controller.dart';
+import '../../../../view_model/search_users_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import 'dart:math';
 
@@ -27,7 +27,7 @@ class SavingPanel extends HookConsumerWidget {
       return state.where((a) => a.userId == e).toList();
     }).toList();
     final targetMembers =
-        ref.watch(targetMembersControllerProvider(target.members));
+        ref.watch(searchUsersControllerProvider(target.members));
 
     final nameList = byUserList
         .map(

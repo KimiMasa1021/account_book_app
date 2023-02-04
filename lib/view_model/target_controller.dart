@@ -26,8 +26,7 @@ class TargetController extends StateNotifier<AsyncValue<List<TargetState>>> {
               img: data.img,
               targetPrice: data.targetPrice,
               docId: doc.id,
-              totalSaving: data.totalSaving,
-              isCompleted: data.targetPrice <= data.totalSaving ? true : false,
+              isCompleted: data.isCompleted,
             );
           }).toList(),
         );

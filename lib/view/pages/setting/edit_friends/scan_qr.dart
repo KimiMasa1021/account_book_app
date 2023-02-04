@@ -42,7 +42,6 @@ class ScanQr extends HookConsumerWidget {
                       Tab(text: "スキャン"),
                     ],
                   ),
-                  const SizedBox(height: 2),
                 ],
               ),
             ),
