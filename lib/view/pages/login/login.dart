@@ -1,5 +1,6 @@
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/component/shadow_button.dart';
+import 'package:account_book_app/view/pages/login/widget/login_loading.dart';
 import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -73,15 +74,7 @@ class Login extends HookConsumerWidget {
               ),
             ),
           ),
-          flg.value == true
-              ? Container(
-                  width: size.width,
-                  height: size.height,
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                  ),
-                )
-              : const SizedBox(),
+          LoginLoading(flg: flg),
         ],
       ),
     );

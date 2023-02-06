@@ -39,7 +39,7 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
             TextEditingController(text: target!.targetPrice.toString()),
         targetDescriptionController:
             TextEditingController(text: target!.targetDescription),
-        targetDateController: target!.registeTime,
+        targetDateController: target!.targetDate,
       );
     }
   }

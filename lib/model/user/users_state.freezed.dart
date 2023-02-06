@@ -25,6 +25,7 @@ mixin _$UsersState {
   String get name => throw _privateConstructorUsedError;
   List<String> get friends => throw _privateConstructorUsedError;
   List<String> get friendsApproval => throw _privateConstructorUsedError;
+  List<String> get friendRequest => throw _privateConstructorUsedError;
   String get img => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $UsersStateCopyWith<$Res> {
       String name,
       List<String> friends,
       List<String> friendsApproval,
+      List<String> friendRequest,
       String img});
 }
 
@@ -66,6 +68,7 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
     Object? name = null,
     Object? friends = null,
     Object? friendsApproval = null,
+    Object? friendRequest = null,
     Object? img = null,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +92,10 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
           ? _value.friendsApproval
           : friendsApproval // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      friendRequest: null == friendRequest
+          ? _value.friendRequest
+          : friendRequest // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       img: null == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
@@ -111,6 +118,7 @@ abstract class _$$_UsersStateCopyWith<$Res>
       String name,
       List<String> friends,
       List<String> friendsApproval,
+      List<String> friendRequest,
       String img});
 }
 
@@ -130,6 +138,7 @@ class __$$_UsersStateCopyWithImpl<$Res>
     Object? name = null,
     Object? friends = null,
     Object? friendsApproval = null,
+    Object? friendRequest = null,
     Object? img = null,
   }) {
     return _then(_$_UsersState(
@@ -153,6 +162,10 @@ class __$$_UsersStateCopyWithImpl<$Res>
           ? _value._friendsApproval
           : friendsApproval // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      friendRequest: null == friendRequest
+          ? _value._friendRequest
+          : friendRequest // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       img: null == img
           ? _value.img
           : img // ignore: cast_nullable_to_non_nullable
@@ -170,9 +183,11 @@ class _$_UsersState extends _UsersState {
       this.name = "",
       final List<String> friends = const [],
       final List<String> friendsApproval = const [],
+      final List<String> friendRequest = const [],
       this.img = ""})
       : _friends = friends,
         _friendsApproval = friendsApproval,
+        _friendRequest = friendRequest,
         super._();
 
   factory _$_UsersState.fromJson(Map<String, dynamic> json) =>
@@ -203,13 +218,21 @@ class _$_UsersState extends _UsersState {
     return EqualUnmodifiableListView(_friendsApproval);
   }
 
+  final List<String> _friendRequest;
+  @override
+  @JsonKey()
+  List<String> get friendRequest {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_friendRequest);
+  }
+
   @override
   @JsonKey()
   final String img;
 
   @override
   String toString() {
-    return 'UsersState(email: $email, uid: $uid, name: $name, friends: $friends, friendsApproval: $friendsApproval, img: $img)';
+    return 'UsersState(email: $email, uid: $uid, name: $name, friends: $friends, friendsApproval: $friendsApproval, friendRequest: $friendRequest, img: $img)';
   }
 
   @override
@@ -223,6 +246,8 @@ class _$_UsersState extends _UsersState {
             const DeepCollectionEquality().equals(other._friends, _friends) &&
             const DeepCollectionEquality()
                 .equals(other._friendsApproval, _friendsApproval) &&
+            const DeepCollectionEquality()
+                .equals(other._friendRequest, _friendRequest) &&
             (identical(other.img, img) || other.img == img));
   }
 
@@ -235,6 +260,7 @@ class _$_UsersState extends _UsersState {
       name,
       const DeepCollectionEquality().hash(_friends),
       const DeepCollectionEquality().hash(_friendsApproval),
+      const DeepCollectionEquality().hash(_friendRequest),
       img);
 
   @JsonKey(ignore: true)
@@ -258,6 +284,7 @@ abstract class _UsersState extends UsersState {
       final String name,
       final List<String> friends,
       final List<String> friendsApproval,
+      final List<String> friendRequest,
       final String img}) = _$_UsersState;
   _UsersState._() : super._();
 
@@ -274,6 +301,8 @@ abstract class _UsersState extends UsersState {
   List<String> get friends;
   @override
   List<String> get friendsApproval;
+  @override
+  List<String> get friendRequest;
   @override
   String get img;
   @override

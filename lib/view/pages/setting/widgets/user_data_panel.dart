@@ -68,12 +68,9 @@ class UserDataPanel extends ConsumerWidget {
                     ],
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
               ],
             ),
