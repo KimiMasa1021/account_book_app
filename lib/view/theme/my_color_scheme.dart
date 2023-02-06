@@ -88,3 +88,19 @@ final scheme6 = ColorScheme.fromSwatch(
   tertiary: HexColor("#eebbc3"),
   onTertiary: HexColor("#232946"),
 );
+
+ThemeData get makoGreenTheme {
+  final primaryColor = HexColor("#68dbaf");
+  final secondaryColor = HexColor("#b3ccbf");
+  final tertiaryColor = HexColor("#99d680");
+  return ThemeData.from(
+    colorScheme: const ColorScheme.dark().copyWith(
+      primary: primaryColor,
+      secondary: secondaryColor,
+      tertiary: tertiaryColor,
+    ),
+  ).copyWith(
+    brightness: Brightness.dark,
+    primaryColor: secondaryColor,
+  );
+}
