@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "2.9.0"
   auto_route:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: auto_route
       url: "https://pub.dartlang.org"
@@ -368,13 +368,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_neumorphic:
-    dependency: "direct main"
-    description:
-      name: flutter_neumorphic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.2.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
