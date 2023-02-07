@@ -70,22 +70,19 @@ class EditDesign extends HookConsumerWidget {
                                       Expanded(
                                         child: Container(
                                           color: ExThemeMode.values[index]
-                                              .themeData.backgroundColor,
+                                              .themeData.colorScheme.tertiary,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          color: ExThemeMode.values[index]
+                                              .themeData.colorScheme.background,
                                         ),
                                       ),
                                       Expanded(
                                         child: Container(
                                           color: ExThemeMode.values[index]
                                               .themeData.cardColor,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          color: ExThemeMode
-                                              .values[index]
-                                              .themeData
-                                              .colorScheme
-                                              .tertiaryContainer,
                                         ),
                                       ),
                                     ],

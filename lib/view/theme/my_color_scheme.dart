@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 
 final scheme1 = ColorScheme.fromSwatch(
   brightness: Brightness.light,
-  primarySwatch: Colors.blue,
-  backgroundColor: HexColor("#faeee7"),
-  cardColor: HexColor("#ffc6c7"),
-  accentColor: HexColor("#c3f0ca"),
+  primarySwatch: Colors.orange,
+  backgroundColor: HexColor("#F9EFE6"),
+  cardColor: HexColor("#FFFFFF"),
+  accentColor: HexColor("#FCC750"),
   errorColor: Colors.blue,
 ).copyWith(
   onBackground: HexColor("#33272a"),
   onSurface: HexColor("#33272a"),
   onSecondary: HexColor("#594a4e"),
-  tertiary: HexColor("#ff8ba7"),
-  onTertiary: HexColor("#33272a"),
+  tertiary: HexColor("#F9A46D"),
+  onTertiary: HexColor("#FFF6FB"),
 );
 
 final scheme2 = ColorScheme.fromSwatch(
   brightness: Brightness.light,
-  primarySwatch: Colors.blue,
+  primarySwatch: Colors.yellow,
   backgroundColor: HexColor("#e3f6f5"),
   cardColor: HexColor("#fffffe"),
   accentColor: HexColor("#ffd803"),

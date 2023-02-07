@@ -43,7 +43,7 @@ class PageViewCenter extends HookConsumerWidget {
               child: CustomPaint(
                 painter: DetailPercentPainter(
                   percent: percent >= 1.0 ? 1.0 : percent,
-                  barColor: Theme.of(context).colorScheme.secondary,
+                  barColor: Theme.of(context).colorScheme.tertiary,
                   backColor: Theme.of(context).backgroundColor,
                 ),
                 child: Stack(

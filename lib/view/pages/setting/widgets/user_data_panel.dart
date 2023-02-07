@@ -28,7 +28,7 @@ class UserDataPanel extends ConsumerWidget {
                   height: 60,
                   margin: const EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onBackground,
                     borderRadius: BorderRadius.circular(10),
                     image: userState!.img != ""
                         ? DecorationImage(

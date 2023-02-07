@@ -30,12 +30,12 @@ class SettingPanel extends HookConsumerWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               child: Icon(
                 icon,
                 size: 30,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.onTertiary,
               ),
             ),
             Padding(
@@ -43,14 +43,14 @@ class SettingPanel extends HookConsumerWidget {
               child: Text(
                 text,
                 style: font.fs16.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
               ),
             ),
             const Spacer(),
             Icon(
               Icons.arrow_forward_ios,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.onBackground,
             )
           ],
         ),

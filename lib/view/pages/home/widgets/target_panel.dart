@@ -47,7 +47,7 @@ class TargetPanel extends HookConsumerWidget {
                   height: 120,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     shape: LeftShape(),
                   ),
                 ),
@@ -56,7 +56,7 @@ class TargetPanel extends HookConsumerWidget {
                   child: Container(
                     height: 120,
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.surfaceVariant,
                       shape: RightShape(),
                     ),
                     child: Padding(
@@ -68,14 +68,18 @@ class TargetPanel extends HookConsumerWidget {
                             state.target,
                             style: font.fs16.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
                             ),
                             maxLines: 1,
                           ),
                           Text(
                             state.targetDescription,
                             style: font.fs16.copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -94,7 +98,7 @@ class TargetPanel extends HookConsumerWidget {
               margin: const EdgeInsets.only(top: 10, left: 11),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
+                color: Theme.of(context).colorScheme.surfaceVariant,
                 image: state.img != ""
                     ? DecorationImage(
                         image: NetworkImage(
@@ -107,9 +111,9 @@ class TargetPanel extends HookConsumerWidget {
                   ? FittedBox(
                       fit: BoxFit.fitWidth,
                       child: Text(
-                        state.target.substring(0, 3),
+                        state.target.substring(0, 2),
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     )
@@ -127,41 +131,13 @@ class TargetPanel extends HookConsumerWidget {
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
                 ),
               ),
             ),
-            // percent >= 1.0
-            //     ? Positioned(
-            //         right: 10,
-            //         top: 10,
-            //         child: Transform.rotate(
-            //           angle: -0.2,
-            //           child: Container(
-            //             width: 80,
-            //             height: 80,
-            //             decoration: BoxDecoration(
-            //               shape: BoxShape.circle,
-            //               border: Border.all(
-            //                 color: Colors.red,
-            //                 width: 5,
-            //               ),
-            //             ),
-            //             child: FittedBox(
-            //               child: Text(
-            //                 "済",
-            //                 style: GoogleFonts.yujiBoku(
-            //                   color: Colors.red,
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //       )
-            //     : const SizedBox(),
           ],
         ),
       ),

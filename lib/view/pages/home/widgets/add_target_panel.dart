@@ -29,7 +29,7 @@ class AddTargetPanel extends HookConsumerWidget {
                   height: 120,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     shape: LeftShape(),
                   ),
                 ),
@@ -38,7 +38,7 @@ class AddTargetPanel extends HookConsumerWidget {
                   child: Container(
                     height: 120,
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.surfaceVariant,
                       shape: RightShape(),
                     ),
                     child: Padding(
@@ -50,14 +50,18 @@ class AddTargetPanel extends HookConsumerWidget {
                             "新規プロジェクトの追加",
                             style: font.fs16.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
                             ),
                             maxLines: 1,
                           ),
                           Text(
                             "新しいプロジェクトを作成はこちらから！！",
                             style: font.fs16.copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -76,11 +80,14 @@ class AddTargetPanel extends HookConsumerWidget {
               margin: const EdgeInsets.only(top: 10, left: 11),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
+                color: Theme.of(context).colorScheme.surfaceVariant,
               ),
-              child: const FittedBox(
+              child: FittedBox(
                 fit: BoxFit.fitWidth,
-                child: Icon(Icons.add_circle_outline),
+                child: Icon(
+                  Icons.add_circle_outline,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ),
             Positioned(
@@ -91,11 +98,11 @@ class AddTargetPanel extends HookConsumerWidget {
                 width: size.width - 52,
                 child: FractionallySizedBox(
                   alignment: Alignment.centerLeft,
-                  widthFactor: 0.75,
+                  widthFactor: 0,
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

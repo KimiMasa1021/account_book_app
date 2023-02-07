@@ -23,7 +23,10 @@ class CalculatorButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: index == 4
-              ? const Icon(Icons.keyboard_return)
+              ? Icon(
+                  Icons.keyboard_return,
+                  color: Theme.of(context).colorScheme.onTertiary,
+                )
               : index == 3
                   ? const Icon(
                       Icons.backspace_outlined,

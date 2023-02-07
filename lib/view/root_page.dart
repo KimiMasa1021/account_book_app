@@ -24,14 +24,32 @@ class RootPage extends HookConsumerWidget {
     ];
     final pageState = ref.watch(pageTypeProvider);
     const iconSize = 33.0;
+    final iconColor = Theme.of(context).colorScheme.onBackground;
+
     final tabItems = [
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.savings_outlined, size: iconSize),
-        activeIcon: Icon(Icons.savings, size: iconSize),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.savings_outlined,
+          size: iconSize,
+          color: iconColor,
+        ),
+        activeIcon: Icon(
+          Icons.savings,
+          size: iconSize,
+          color: iconColor,
+        ),
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.settings_outlined, size: iconSize),
-        activeIcon: Icon(Icons.settings, size: iconSize),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.settings_outlined,
+          size: iconSize,
+          color: iconColor,
+        ),
+        activeIcon: Icon(
+          Icons.settings,
+          size: iconSize,
+          color: iconColor,
+        ),
       ),
     ];
     return MediaQuery(
@@ -39,7 +57,7 @@ class RootPage extends HookConsumerWidget {
       child: Scaffold(
         body: pageList[pageState.index],
         bottomNavigationBar: CustomNavBar(
-          backgroundColor: Theme.of(context).cardColor,
+          backgroundColor: Colors.white,
           items: tabItems,
           currentIndex: pageState.index,
           onTap: (index) {
