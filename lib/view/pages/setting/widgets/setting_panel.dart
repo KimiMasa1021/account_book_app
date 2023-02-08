@@ -30,12 +30,12 @@ class SettingPanel extends HookConsumerWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.tertiary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               child: Icon(
                 icon,
                 size: 30,
-                color: Theme.of(context).colorScheme.onTertiary,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
             Padding(

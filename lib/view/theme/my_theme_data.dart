@@ -6,7 +6,15 @@ class MyThemeData {
     required this.theme,
   });
   final ThemeData theme;
-
+  factory MyThemeData.themeData() {
+    return MyThemeData(
+      theme: ThemeData.from(
+        colorScheme: scheme,
+        textTheme: textTheme,
+        useMaterial3: true,
+      ),
+    );
+  }
   factory MyThemeData.themeData1() {
     return MyThemeData(
       theme: ThemeData.from(

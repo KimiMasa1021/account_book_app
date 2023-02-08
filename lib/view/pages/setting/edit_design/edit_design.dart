@@ -56,8 +56,8 @@ class EditDesign extends HookConsumerWidget {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     width: 3,
-                                    color: ExThemeMode
-                                        .values[index].themeData.cardColor,
+                                    color: ExThemeMode.values[index].themeData
+                                        .colorScheme.tertiary,
                                   ),
                                 ),
                                 child: Container(
@@ -69,20 +69,22 @@ class EditDesign extends HookConsumerWidget {
                                     children: [
                                       Expanded(
                                         child: Container(
+                                            color: ExThemeMode
+                                                .values[index]
+                                                .themeData
+                                                .colorScheme
+                                                .secondary),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          color: ExThemeMode.values[index]
+                                              .themeData.backgroundColor,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
                                           color: ExThemeMode.values[index]
                                               .themeData.colorScheme.tertiary,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          color: ExThemeMode.values[index]
-                                              .themeData.colorScheme.background,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          color: ExThemeMode.values[index]
-                                              .themeData.cardColor,
                                         ),
                                       ),
                                     ],

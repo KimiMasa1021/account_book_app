@@ -31,10 +31,14 @@ class CustomNavBar extends StatelessWidget {
           items.length,
           (index) => InkWell(
             onTap: () async => await onTap(index),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 15,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: currentIndex == index
+                    ? Theme.of(context).colorScheme.tertiary
+                    : null,
               ),
               child: currentIndex == index
                   ? items[index].activeIcon

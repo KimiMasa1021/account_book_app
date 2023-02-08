@@ -86,7 +86,7 @@ class TargetAddMember extends ConsumerWidget {
                           Text(
                             "あなた",
                             style: font.fs16.copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           )
                         ],

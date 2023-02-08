@@ -66,14 +66,14 @@ class LottieDialog extends ConsumerWidget {
                         textColor: Theme.of(context).colorScheme.onBackground,
                         backgroundColor:
                             Theme.of(context).colorScheme.background,
-                        borderColor: Theme.of(context).cardColor,
+                        borderColor: Theme.of(context).colorScheme.surface,
                         fucntion: () async => await onTap1(),
                       ),
                       const SizedBox(height: 10),
                       PaintedButton(
                         text: 'キャンセル',
-                        textColor: Theme.of(context).colorScheme.onSecondary,
-                        backgroundColor: Theme.of(context).cardColor,
+                        textColor: Theme.of(context).colorScheme.onSurface,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         borderColor: Theme.of(context).cardColor,
                         fucntion: () => onTap2(),
                       ),

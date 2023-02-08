@@ -67,6 +67,7 @@ class AuthRepositoryImpl implements AuthRepository {
         "email": credential.user!.email,
         "img": credential.user?.photoURL ?? "",
         "friendsApproval": [],
+        "friendRequest": []
       });
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code);

@@ -24,7 +24,7 @@ class RootPage extends HookConsumerWidget {
     ];
     final pageState = ref.watch(pageTypeProvider);
     const iconSize = 33.0;
-    final iconColor = Theme.of(context).colorScheme.onBackground;
+    final iconColor = Theme.of(context).colorScheme.onTertiary;
 
     final tabItems = [
       BottomNavigationBarItem(
@@ -57,7 +57,7 @@ class RootPage extends HookConsumerWidget {
       child: Scaffold(
         body: pageList[pageState.index],
         bottomNavigationBar: CustomNavBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           items: tabItems,
           currentIndex: pageState.index,
           onTap: (index) {

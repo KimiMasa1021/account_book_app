@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'my_theme_data.dart';
 
 enum ExThemeMode {
+  theme,
   theme1,
   theme2,
   theme3,
@@ -13,6 +14,8 @@ enum ExThemeMode {
 extension Extension on ExThemeMode {
   int get id {
     switch (this) {
+      case ExThemeMode.theme:
+        return 0000;
       case ExThemeMode.theme1:
         return 0001;
       case ExThemeMode.theme2:
@@ -32,6 +35,8 @@ extension Extension on ExThemeMode {
 
   ThemeData get themeData {
     switch (this) {
+      case ExThemeMode.theme:
+        return MyThemeData.themeData().theme;
       case ExThemeMode.theme1:
         return MyThemeData.themeData1().theme;
       case ExThemeMode.theme2:
@@ -51,6 +56,8 @@ extension Extension on ExThemeMode {
 
   String get themeName {
     switch (this) {
+      case ExThemeMode.theme:
+        return "テーマ0";
       case ExThemeMode.theme1:
         return "テーマ１";
       case ExThemeMode.theme2:

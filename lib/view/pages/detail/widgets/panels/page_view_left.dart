@@ -105,7 +105,7 @@ class PageViewLeft extends HookConsumerWidget {
                             weekText: week[index],
                             percent: percent >= 1 ? 1 : percent,
                             price: doubleList[index],
-                            barColor: Theme.of(context).colorScheme.tertiary,
+                            barColor: Theme.of(context).colorScheme.secondary,
                           );
                         },
                       ),

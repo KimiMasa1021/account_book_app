@@ -14,7 +14,9 @@ class CalculatorButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: index == 4 ? Theme.of(context).colorScheme.tertiary : null,
+      color: index == 4
+          ? Theme.of(context).colorScheme.secondary
+          : Theme.of(context).colorScheme.tertiary,
       child: InkWell(
         onTap: () async {
           await onTap();
@@ -25,12 +27,13 @@ class CalculatorButton extends StatelessWidget {
           child: index == 4
               ? Icon(
                   Icons.keyboard_return,
-                  color: Theme.of(context).colorScheme.onTertiary,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 )
               : index == 3
-                  ? const Icon(
+                  ? Icon(
                       Icons.backspace_outlined,
                       size: 30,
+                      color: Theme.of(context).colorScheme.onTertiary,
                     )
                   : FittedBox(
                       child: Text(
@@ -39,6 +42,11 @@ class CalculatorButton extends StatelessWidget {
                             : index == 11
                                 ? "0"
                                 : (index - 1).toString(),
+                        style: TextStyle(
+                          color: index == 4
+                              ? Theme.of(context).colorScheme.onSecondary
+                              : Theme.of(context).colorScheme.onTertiary,
+                        ),
                       ),
                     ),
         ),
