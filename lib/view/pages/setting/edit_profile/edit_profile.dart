@@ -165,7 +165,7 @@ class EditProfile extends HookConsumerWidget {
                                       border: Border.all(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .onSecondary,
+                                            .onSurface,
                                         width: 2,
                                       ),
                                     ),

@@ -150,10 +150,6 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
       shwoToast("目標は３文字以上設定しよう！");
       return false;
     }
-    // if (state.targetPriceController!.text.length ) {
-    //   shwoToast("目標金額は0円以上にしよう!");
-    //   return false;
-    // }
     return true;
   }
 
@@ -189,14 +185,5 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
     await ref
         .read(targetInitRepositoryProvider)
         .updateTarget(targetState, docId);
-  }
-
-  Future<void> updateMember(
-    List<String> preMembers,
-    List<String> newMembers,
-    String docId,
-  ) async {
-    final member = [...preMembers, ...newMembers];
-    await ref.read(targetInitRepositoryProvider).updateMember(member, docId);
   }
 }

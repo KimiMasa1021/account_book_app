@@ -1,6 +1,7 @@
 import 'package:account_book_app/repository/target_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/target/target_state.dart';
+import '../repository/target_init_repository.dart';
 
 final targetControllerProvider =
     StateNotifierProvider<TargetController, AsyncValue<List<TargetState>>>(
@@ -32,5 +33,14 @@ class TargetController extends StateNotifier<AsyncValue<List<TargetState>>> {
         );
       },
     );
+  }
+  // プロジェクトメンバーの追加
+  Future<void> updateMember(
+    List<String> preMembers,
+    List<String> newMembers,
+    String docId,
+  ) async {
+    final member = [...preMembers, ...newMembers];
+    await ref.read(targetInitRepositoryProvider).updateMember(member, docId);
   }
 }

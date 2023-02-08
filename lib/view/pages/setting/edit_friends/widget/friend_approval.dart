@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../../../../view_model/friend_controller.dart';
 import '../../../../../view_model/search_users_controller.dart';
 import '../../../../../view_model/users_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 
-class FriendApproval extends ConsumerWidget {
+class FriendApproval extends HookConsumerWidget {
   const FriendApproval({super.key});
 
   @override
@@ -18,6 +18,10 @@ class FriendApproval extends ConsumerWidget {
           ? userState.friendsApproval
           : ["abc"]),
     );
+    final friendCTL = ref.watch(friendsControllerProvider.notifier);
+
+    final loading = useState(false);
+
     return targetMembers.when(
       data: (val) {
         return Padding(
@@ -35,7 +39,7 @@ class FriendApproval extends ConsumerWidget {
                       height: 60,
                       margin: const EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                           image: NetworkImage(
@@ -53,42 +57,55 @@ class FriendApproval extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Container(
-                      height: 45,
-                      width: 45,
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          width: 2,
+                    !loading.value
+                        ? Container(
+                            height: 45,
+                            width: 45,
+                            margin: const EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.surface,
+                              border: Border.all(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                width: 2,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.close,
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
+                    InkWell(
+                      onTap: () async {
+                        if (loading.value) return;
+                        loading.value = true;
+                        await friendCTL.friendApproval(
+                          val[index].uid,
+                          val[index].name,
+                        );
+                        loading.value = false;
+                      },
+                      child: Container(
+                        height: 45,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
                         ),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.close,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surface,
+                          borderRadius: BorderRadius.circular(200),
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            width: 2,
+                          ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      height: 45,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.circular(200),
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                          width: 2,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "承認",
-                          style: font.fs16.copyWith(
-                            fontWeight: FontWeight.bold,
+                        child: Center(
+                          child: Text(
+                            !loading.value ? "承認" : "承認中",
+                            style: font.fs16.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -101,10 +118,10 @@ class FriendApproval extends ConsumerWidget {
         );
       },
       error: (e, s) {
-        return SizedBox();
+        return const SizedBox();
       },
       loading: () {
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

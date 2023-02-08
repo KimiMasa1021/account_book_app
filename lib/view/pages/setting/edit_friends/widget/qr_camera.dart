@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-
 import '../../../../../view_model/friend_controller.dart';
-import '../../../../../view_model/users_controller.dart';
 
 // ignore: must_be_immutable
 class QrCamera extends ConsumerWidget {
@@ -18,7 +16,6 @@ class QrCamera extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
     final friendCTL = ref.watch(friendsControllerProvider.notifier);
-    final usersState = ref.watch(usersControllerProvider);
     return QRView(
       key: qrKey,
       onQRViewCreated: (controller) async {
@@ -28,8 +25,7 @@ class QrCamera extends ConsumerWidget {
         controller.scannedDataStream.listen(
           (scanData) async {
             loading.value = true;
-            await friendCTL.testFriendAdd(
-              usersState!.uid,
+            await friendCTL.friendRequest(
               scanData.code.toString(),
             );
             loading.value = false;
