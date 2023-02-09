@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/target/target_state.dart';
+import '../../../../utility/lottie_url.dart';
 import '../../../../view_model/saving_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widgets/drawer_info_panel.dart';
@@ -159,7 +160,7 @@ class MyDrawer extends ConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (context) => LottieDialog(
-                      url: "assets/json/warning.json",
+                      url: LottieUrl.catLoading.url,
                       title: '注意',
                       subTitle: '退会した場合はフレンドに招待してもらわなければ再参加出来ません。',
                       button1Title: '退会する',

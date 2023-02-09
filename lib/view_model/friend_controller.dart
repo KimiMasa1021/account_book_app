@@ -55,7 +55,7 @@ class FriendController extends StateNotifier<List<UsersState>> {
     final String body = json.encode(sendJSON);
 
     await http.post(url, headers: headers, body: body);
-    shwoToast("${name}さんと友達になりました！");
+    shwoToast("$nameさんと友達になりました！");
   }
 
   void shwoToast(String msg) {

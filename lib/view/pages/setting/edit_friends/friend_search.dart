@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../utility/lottie_url.dart';
 import '../../../../view_model/search_users_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widget/search_user_panel.dart';
@@ -93,7 +94,7 @@ class FriendSearch extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset(
-                        "assets/json/cat_loading.json",
+                        LottieUrl.catLoading.url,
                         width: 230,
                         height: 230,
                         frameRate: FrameRate(60),

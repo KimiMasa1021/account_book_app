@@ -22,19 +22,19 @@ class SavingController extends StateNotifier<List<SavingState>> {
     });
   }
   Future<void> addSaving(
-    int index,
     TextEditingController priceController,
     ValueNotifier<int?> tagValue,
     TargetState target,
     List<SavingState> saving,
     List<Tags> tags,
+    ValueNotifier<bool> flg,
     Function() function,
   ) async {
-    if (index != 4) return;
     if (checkSavingAdd(
       priceController,
       tagValue,
     )) {
+      flg.value = true;
       final priceList = saving
           .where((e) => e.productId == target.docId)
           .map((e) => e.price)
@@ -59,6 +59,7 @@ class SavingController extends StateNotifier<List<SavingState>> {
             target.targetPrice > sum + priceInt ? false : true,
             target.docId,
           );
+      flg.value = false;
       function();
     }
   }

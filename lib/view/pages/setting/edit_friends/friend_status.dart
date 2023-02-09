@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/route/routes.dart';
-import '../../../../view_model/friend_controller.dart';
-import '../../../theme/app_text_theme.dart';
 import 'widget/friend_approval.dart';
 
 class FriendStatus extends ConsumerWidget {
@@ -12,9 +10,6 @@ class FriendStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final friends = ref.watch(friendsControllerProvider);
-    final font = ref.watch(myTextTheme);
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(

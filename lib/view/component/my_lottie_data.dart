@@ -1,3 +1,5 @@
+import 'package:account_book_app/utility/lottie_url.dart';
+
 class MyLottieData {
   MyLottieData({
     required this.loadingPath,
@@ -13,27 +15,27 @@ class MyLottieData {
 
   factory MyLottieData.addProject() {
     return MyLottieData(
-      loadingPath: 'assets/json/cat_loading.json',
+      loadingPath: LottieUrl.catLoading.url,
       loadingText: '作成中...',
-      resultPath: 'assets/json/complete.json',
+      resultPath: LottieUrl.complete.url,
       resultText: '作成できました',
     );
   }
 
   factory MyLottieData.editProject() {
     return MyLottieData(
-      loadingPath: 'assets/json/yellow_loading.json',
+      loadingPath: LottieUrl.yellowLoading.url,
       loadingText: '編集中...',
-      resultPath: 'assets/json/complete.json',
+      resultPath: LottieUrl.complete.url,
       resultText: '編集できました',
     );
   }
 
   factory MyLottieData.inviteMember() {
     return MyLottieData(
-      loadingPath: 'assets/json/invent_loading.json',
+      loadingPath: LottieUrl.inventLoading.url,
       loadingText: '招待中...',
-      resultPath: 'assets/json/complete.json',
+      resultPath: LottieUrl.complete.url,
       resultText: 'メンバーに追加されました！',
     );
   }
