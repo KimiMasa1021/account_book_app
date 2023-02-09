@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../provider/route/routes.dart';
 import '../../../view_model/saving_controller.dart';
+import '../../theme/app_text_theme.dart';
 import 'widgets/saving_add_button.dart';
 import 'widgets/saving_panel.dart';
 import 'drawer/drawer.dart';
@@ -24,7 +25,7 @@ class HomeDetails extends HookConsumerWidget {
     final saving = ref.watch(savingControllerProvider);
     final targetMembers =
         ref.watch(searchUsersControllerProvider(target.members));
-
+    final font = ref.watch(myTextTheme);
     final pageController = PageController(
       viewportFraction: 0.85,
       initialPage: 1,
@@ -80,7 +81,7 @@ class HomeDetails extends HookConsumerWidget {
                           children: [
                             PageViewLeft(target: target),
                             PageViewCenter(target: target),
-                            const PageViewRight(),
+                            PageViewRight(target: target),
                           ],
                         ),
                       ),
@@ -115,6 +116,7 @@ class HomeDetails extends HookConsumerWidget {
                           .toList();
                       if (index == 0) {
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SavingAddButton(
                               function: () {
@@ -123,6 +125,15 @@ class HomeDetails extends HookConsumerWidget {
                                   extra: target,
                                 );
                               },
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(
+                                "2022年10月",
+                                style: font.fs16
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
                             ),
                             SavingPanel(
                               state: test,

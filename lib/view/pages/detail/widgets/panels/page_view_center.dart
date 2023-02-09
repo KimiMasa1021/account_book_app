@@ -59,13 +59,26 @@ class PageViewCenter extends HookConsumerWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            savingCTL.formatYen(sum),
-                            style: font.fs33.copyWith(
-                              fontWeight: FontWeight.bold,
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.bodyText2,
+                              children: [
+                                TextSpan(
+                                  text: savingCTL.formatYen(sum),
+                                  style: font.fs33.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '円',
+                                  style: font.fs21.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
@@ -81,12 +94,25 @@ class PageViewCenter extends HookConsumerWidget {
                               style: font.fs16,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            Text(
-                              savingCTL.formatYen(target.targetPrice),
-                              style: font.fs21.copyWith(
-                                fontWeight: FontWeight.bold,
+                            RichText(
+                              text: TextSpan(
+                                style: Theme.of(context).textTheme.bodyText2,
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        savingCTL.formatYen(target.targetPrice),
+                                    style: font.fs27.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: '円',
+                                    style: font.fs19.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),

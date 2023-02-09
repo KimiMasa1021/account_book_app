@@ -66,7 +66,7 @@ class SavingController extends StateNotifier<List<SavingState>> {
 
   String formatYen(int targetPrice) {
     final numberFormat = NumberFormat(',###');
-    return '${numberFormat.format(targetPrice)}円';
+    return numberFormat.format(targetPrice);
   }
 
   String formatDate(DateTime date) {

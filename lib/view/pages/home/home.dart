@@ -1,8 +1,9 @@
+import 'package:account_book_app/utility/lottie_url.dart';
 import 'package:account_book_app/view/pages/home/widgets/tab_view_contents.dart';
 import 'package:account_book_app/view/pages/home/widgets/sticky_tab_bar_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:lottie/lottie.dart';
 import '../../../view_model/target_controller.dart';
 import '../../../view_model/users_controller.dart';
 
@@ -46,10 +47,12 @@ class Home extends HookConsumerWidget {
                           ),
                           Align(
                             alignment: Alignment.center,
-                            child: Icon(
-                              Icons.flutter_dash_rounded,
-                              size: 35,
-                              color: Theme.of(context).colorScheme.onSurface,
+                            child: Lottie.asset(
+                              LottieUrl.pig.url,
+                              width: 55,
+                              height: 55,
+                              frameRate: FrameRate(60),
+                              repeat: true,
                             ),
                           ),
                         ],

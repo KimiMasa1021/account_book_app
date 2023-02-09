@@ -94,11 +94,11 @@ class AddTargetPanel extends HookConsumerWidget {
                 width: size.width - 52,
                 child: FractionallySizedBox(
                   alignment: Alignment.centerLeft,
-                  widthFactor: 0,
+                  widthFactor: 0.2,
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.tertiary,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

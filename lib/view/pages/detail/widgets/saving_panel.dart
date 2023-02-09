@@ -44,111 +44,91 @@ class SavingPanel extends HookConsumerWidget {
         .toList()
         .toString();
 
-    final displayName = nameList
-        .substring(1, nameList.length - 1)
-        .replaceAll("null", "")
-        .replaceAll(",", "");
+    final displayName =
+        nameList.substring(1, nameList.length - 1).replaceAll("null", "");
     return InkWell(
       onTap: () {
         isOpen.value = !isOpen.value;
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 8,
-              height: 65,
-              margin: const EdgeInsets.only(right: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Theme.of(context).cardColor,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).cardColor,
-                  // border: Border.all(),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).colorScheme.surface,
+          ),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        savingCTL.formatWeek(state[0].createdAt.weekday),
+                        style: font.fs21,
+                      ),
+                      Text(
+                        state[0].createdAt.day.toString(),
+                        style: font.fs21.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              savingCTL.formatWeek(state[0].createdAt.weekday),
-                              style: font.fs21,
-                            ),
-                            Text(
-                              state[0].createdAt.day.toString(),
-                              style: font.fs21.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                savingCTL.formatYen(price),
-                                style: font.fs21.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              !isOpen.value
-                                  ? Text(
-                                      displayName,
-                                      overflow: TextOverflow.ellipsis,
-                                    )
-                                  : const SizedBox(),
-                            ],
+                        Text(
+                          savingCTL.formatYen(price),
+                          style: font.fs21.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Transform.rotate(
-                          angle: isOpen.value ? 90 * pi / 180 : 0,
-                          child: const Icon(Icons.arrow_forward_ios),
-                        ),
+                        !isOpen.value
+                            ? Text(
+                                displayName,
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            : const SizedBox(),
                       ],
                     ),
-                    isOpen.value
-                        ? Column(
-                            children: List.generate(
-                              target.members.length,
-                              (index) {
-                                if (byUserList[index].isEmpty) {
-                                  return const SizedBox();
-                                } else {
-                                  return SavingPersonPanel(
-                                    name: targetMembers.value!
-                                        .singleWhere((element) =>
-                                            element.uid ==
-                                            target.members[index])
-                                        .name,
-                                    savingState: byUserList[index],
-                                  );
-                                }
-                              },
-                            ),
-                          )
-                        : const SizedBox(),
-                  ],
-                ),
+                  ),
+                  Transform.rotate(
+                    angle: isOpen.value ? 90 * pi / 180 : 0,
+                    child: const Icon(Icons.arrow_forward_ios),
+                  ),
+                ],
               ),
-            ),
-          ],
+              isOpen.value
+                  ? Column(
+                      children: List.generate(
+                        target.members.length,
+                        (index) {
+                          if (byUserList[index].isEmpty) {
+                            return const SizedBox();
+                          } else {
+                            return SavingPersonPanel(
+                              name: targetMembers.value!
+                                  .singleWhere((element) =>
+                                      element.uid == target.members[index])
+                                  .name,
+                              savingState: byUserList[index],
+                            );
+                          }
+                        },
+                      ),
+                    )
+                  : const SizedBox(),
+            ],
+          ),
         ),
       ),
     );

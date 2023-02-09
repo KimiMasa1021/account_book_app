@@ -22,6 +22,5 @@ Future<void> main() async {
 }
 
 /* 
-詳細ページのパネル右側　
 タグのCRUD
 */
