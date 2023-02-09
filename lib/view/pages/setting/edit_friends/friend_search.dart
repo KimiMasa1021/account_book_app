@@ -100,7 +100,12 @@ class FriendSearch extends HookConsumerWidget {
                         frameRate: FrameRate(60),
                         repeat: true,
                       ),
-                      const Text("リクエスト中.."),
+                      Text(
+                        "リクエスト中..",
+                        style: font.fs19.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),

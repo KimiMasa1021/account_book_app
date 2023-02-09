@@ -181,7 +181,12 @@ class SavingAdd extends HookConsumerWidget {
                         frameRate: FrameRate(60),
                         repeat: true,
                       ),
-                      const Text("節約記録追加中..."),
+                      Text(
+                        "節約記録追加中...",
+                        style: font.fs19.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
