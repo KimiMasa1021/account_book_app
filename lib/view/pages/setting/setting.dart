@@ -30,7 +30,7 @@ class Setting extends HookConsumerWidget {
               ),
               const UserDataPanel(),
               SettingPanel(
-                text: 'フレンドの管理',
+                text: '友達の管理',
                 icon: Icons.group_outlined,
                 function: () {
                   context.pushNamed(Routes.name().friendManagement);

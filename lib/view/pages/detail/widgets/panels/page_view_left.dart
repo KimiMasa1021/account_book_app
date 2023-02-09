@@ -114,10 +114,13 @@ class PageViewLeft extends HookConsumerWidget {
                 },
               ),
             ),
-            Text(
-              "１日当たり$dailyPrice円で達成できます",
-              style: font.fs16.copyWith(
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Text(
+                "１日当たり$dailyPrice円で達成できます",
+                style: font.fs16.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],

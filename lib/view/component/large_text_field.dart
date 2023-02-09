@@ -36,6 +36,7 @@ class LargeTextField extends ConsumerWidget {
             color: Theme.of(context).colorScheme.onBackground,
           ),
         ),
+        const SizedBox(height: 5),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           width: double.infinity,

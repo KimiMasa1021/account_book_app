@@ -19,7 +19,7 @@ class FriendStatus extends ConsumerWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("フレンド管理"),
+          title: const Text("友達管理"),
           actions: [
             IconButton(
               onPressed: () {
@@ -33,7 +33,7 @@ class FriendStatus extends ConsumerWidget {
             labelColor: Theme.of(context).colorScheme.onBackground,
             unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
             tabs: const [
-              Tab(text: "フレンドリスト"),
+              Tab(text: "友達リスト"),
               Tab(text: "承認リクエスト"),
             ],
           ),

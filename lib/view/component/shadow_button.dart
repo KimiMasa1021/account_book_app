@@ -27,7 +27,9 @@ class ShadowButton extends HookConsumerWidget {
             width: double.infinity,
             height: 45,
             decoration: BoxDecoration(
-              border: Border.all(),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
               borderRadius: BorderRadius.circular(5),
               color: Theme.of(context).backgroundColor,
             ),
@@ -41,14 +43,18 @@ class ShadowButton extends HookConsumerWidget {
               width: double.infinity,
               height: 45,
               decoration: BoxDecoration(
-                border: Border.all(),
-                color: Theme.of(context).cardColor,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Center(
                 child: Text(
                   text,
-                  style: font.fs19.copyWith(),
+                  style: font.fs19.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               ),
             ),

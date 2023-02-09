@@ -39,7 +39,7 @@ class NormalTextField extends ConsumerWidget {
               color: Theme.of(context).colorScheme.onBackground,
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             width: double.infinity,

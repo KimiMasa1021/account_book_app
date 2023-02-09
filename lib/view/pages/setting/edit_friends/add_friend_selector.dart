@@ -14,7 +14,7 @@ class FriendsAddDescription extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("フレンド追加"),
+        title: const Text("友達追加"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

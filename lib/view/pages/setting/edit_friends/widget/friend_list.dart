@@ -45,7 +45,7 @@ class FriendList extends ConsumerWidget {
                       ),
                     ),
                     Text(
-                      friends[index].uid,
+                      friends[index].email,
                     ),
                   ],
                 )
