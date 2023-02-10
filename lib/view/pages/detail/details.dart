@@ -1,3 +1,4 @@
+import 'package:account_book_app/model/saving/saving_state.dart';
 import 'package:account_book_app/model/target/target_state.dart';
 import 'package:account_book_app/view/pages/detail/widgets/panels/page_view_left.dart';
 import 'package:account_book_app/view/pages/detail/widgets/panels/page_view_right.dart';
@@ -32,6 +33,29 @@ class HomeDetails extends HookConsumerWidget {
     );
     final savingList =
         saving.where((e) => e.productId == target.docId).toList();
+    final dailySavingList = savingList.map((e) {
+      final eDate = e.createdAt;
+      return savingList
+          .map((a) {
+            final aDate = a.createdAt;
+            if (DateTime(
+                  eDate.year,
+                  eDate.month,
+                  eDate.day,
+                ) ==
+                DateTime(
+                  aDate.year,
+                  aDate.month,
+                  aDate.day,
+                )) {
+              return a;
+            }
+          })
+          .whereType<SavingState>()
+          .toList();
+    }).toList();
+    debugPrint(dailySavingList.toString());
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -94,65 +118,45 @@ class HomeDetails extends HookConsumerWidget {
               delegate: targetMembers.when(
                 data: (data) {
                   return SliverChildBuilderDelegate(
-                    childCount: savingList.isEmpty ? 1 : savingList.length,
-                    (_, int index) {
-                      // savingListが空の場合
-                      if (savingList.isEmpty) {
+                    childCount:
+                        dailySavingList.isEmpty ? 1 : dailySavingList.length,
+                    (context, index) {
+                      if (dailySavingList.isEmpty) {
                         return SavingAddButton(
                           function: () {
-                            context.pushNamed(
+                            context.goNamed(
                               Routes.name().addSaving,
                               extra: target,
                             );
                           },
                         );
-                      }
-                      final test = savingList
-                          .where((e) =>
-                              e.createdAt
-                                  .difference(savingList[index].createdAt)
-                                  .inDays ==
-                              0)
-                          .toList();
-                      if (index == 0) {
+                      } else if (index == 0) {
                         return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SavingAddButton(
                               function: () {
-                                context.pushNamed(
+                                context.goNamed(
                                   Routes.name().addSaving,
                                   extra: target,
                                 );
                               },
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
-                                "2022年10月",
-                                style: font.fs16
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                            ),
                             SavingPanel(
-                              state: test,
+                              state: dailySavingList[index],
                               target: target,
                             ),
                           ],
                         );
+                      } else {
+                        if (dailySavingList[index] !=
+                            dailySavingList[index - 1]) {
+                          debugPrint("あああああああああああ");
+                          return SavingPanel(
+                            state: dailySavingList[index],
+                            target: target,
+                          );
+                        }
                       }
-                      if (savingList[index - 1]
-                              .createdAt
-                              .difference(savingList[index].createdAt)
-                              .inDays ==
-                          0) {
-                        return const SizedBox();
-                      }
-                      return SavingPanel(
-                        state: test,
-                        target: target,
-                      );
                     },
                   );
                 },
