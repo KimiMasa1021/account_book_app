@@ -87,33 +87,21 @@ class TargetPanel extends HookConsumerWidget {
                 ),
               ],
             ),
-            Container(
-              height: 70,
-              width: 70,
-              padding: const EdgeInsets.all(15),
-              margin: const EdgeInsets.only(top: 10, left: 11),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.surface,
-                image: state.img != ""
-                    ? DecorationImage(
-                        image: NetworkImage(
-                          state.img,
-                        ),
-                      )
-                    : null,
+            Padding(
+              padding: const EdgeInsets.only(top: 10, left: 11),
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                radius: 35,
+                foregroundImage:
+                    state.img != "" ? NetworkImage(state.img) : null,
+                child: Text(
+                  state.target.substring(0, 2),
+                  style: font.fs19.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
               ),
-              child: state.img == ""
-                  ? FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        state.target.substring(0, 2),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                    )
-                  : const SizedBox(),
             ),
             Positioned(
               bottom: 8.5,

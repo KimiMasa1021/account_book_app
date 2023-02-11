@@ -68,14 +68,14 @@ class SavingPanel extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        savingCTL.formatWeek(state[0].createdAt.weekday),
-                        style: font.fs21,
-                      ),
-                      Text(
                         state[0].createdAt.day.toString(),
                         style: font.fs21.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      Text(
+                        savingCTL.formatWeek(state[0].createdAt.weekday),
+                        style: font.fs21,
                       ),
                     ],
                   ),

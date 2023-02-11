@@ -9,6 +9,7 @@ import '../../../model/enums.dart';
 import '../../../provider/route/routes.dart';
 import '../../../view_model/target_init_controller.dart';
 import '../../component/picture_dialog.dart';
+import '../../theme/app_text_theme.dart';
 
 class TargetAddImage extends HookConsumerWidget {
   const TargetAddImage({super.key});
@@ -20,6 +21,7 @@ class TargetAddImage extends HookConsumerWidget {
     final targetInitCTL =
         ref.watch(targetInitControllerProvider(null).notifier);
     final flg = useState(TargetInitFlg.inputing);
+    final font = ref.watch(myTextTheme);
 
     return Stack(
       children: [
@@ -48,35 +50,23 @@ class TargetAddImage extends HookConsumerWidget {
                   clipBehavior: Clip.none,
                   children: [
                     Center(
-                      child: Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
-                          borderRadius: BorderRadius.circular(10),
-                          image: targetInit.file != null
-                              ? DecorationImage(
-                                  image: FileImage(targetInit.file!),
-                                  fit: BoxFit.fill,
-                                )
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 7, right: 5),
+                        child: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                          radius: (size.width / 3) / 2,
+                          foregroundImage: targetInit.file != null
+                              ? FileImage(targetInit.file!)
                               : null,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              offset: const Offset(0, 0),
-                              blurRadius: 6,
-                            )
-                          ],
+                          child: Text(
+                            targetInit.targetController!.text.substring(0, 2),
+                            style: font.fs27.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
                         ),
-                        child: targetInit.file == null
-                            ? FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text(
-                                  targetInit.targetController!.text
-                                      .substring(0, 3),
-                                ),
-                              )
-                            : const SizedBox(),
                       ),
                     ),
                     Positioned(

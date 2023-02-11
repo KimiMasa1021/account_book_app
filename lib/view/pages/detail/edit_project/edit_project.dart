@@ -80,44 +80,31 @@ class EditProject extends HookConsumerWidget {
                         Stack(
                           clipBehavior: Clip.none,
                           children: [
-                            Container(
-                              width: size.width / 3,
-                              height: size.width / 3,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
-                                borderRadius: BorderRadius.circular(10),
-                                image: targetInit.file != null
-                                    ? DecorationImage(
-                                        image: FileImage(targetInit.file!),
-                                        fit: BoxFit.fill,
-                                      )
+                            Padding(
+                              padding: const EdgeInsets.only(top: 7, right: 5),
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.surface,
+                                radius: (size.width / 3) / 2,
+                                foregroundImage: targetInit.file != null
+                                    ? FileImage(targetInit.file!)
                                     : target.img != ""
-                                        ? DecorationImage(
-                                            image: NetworkImage(target.img),
-                                            fit: BoxFit.fill,
-                                          )
+                                        ? NetworkImage(target.img)
+                                            as ImageProvider
                                         : null,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 6,
-                                  )
-                                ],
+                                child: Text(
+                                  target.target.substring(0, 2),
+                                  style: font.fs19.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                ),
                               ),
-                              child: target.img == "" && targetInit.file == null
-                                  ? FittedBox(
-                                      fit: BoxFit.fitWidth,
-                                      child: Text(
-                                        target.target.substring(0, 3),
-                                      ),
-                                    )
-                                  : const SizedBox(),
                             ),
                             Positioned(
-                              right: -10,
-                              top: -10,
+                              right: -5,
+                              top: -5,
                               child: GestureDetector(
                                 onTap: () async {
                                   showDialog(

@@ -69,19 +69,14 @@ class AddTargetPanel extends HookConsumerWidget {
                 ),
               ],
             ),
-            Container(
-              height: 70,
-              width: 70,
-              padding: const EdgeInsets.all(5),
-              margin: const EdgeInsets.only(top: 10, left: 11),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.surface,
-              ),
-              child: FittedBox(
-                fit: BoxFit.fitWidth,
+            Padding(
+              padding: const EdgeInsets.only(top: 10, left: 11),
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                radius: 35,
                 child: Icon(
-                  Icons.add_circle_outline,
+                  Icons.add,
+                  size: 35,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),

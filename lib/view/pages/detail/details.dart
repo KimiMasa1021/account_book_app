@@ -6,6 +6,7 @@ import 'package:account_book_app/view_model/search_users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import '../../../provider/route/routes.dart';
 import '../../../view_model/saving_controller.dart';
 import '../../theme/app_text_theme.dart';
@@ -26,11 +27,11 @@ class HomeDetails extends HookConsumerWidget {
     final saving = ref.watch(savingControllerProvider);
     final targetMembers =
         ref.watch(searchUsersControllerProvider(target.members));
-    final font = ref.watch(myTextTheme);
     final pageController = PageController(
       viewportFraction: 0.85,
       initialPage: 1,
     );
+    final font = ref.watch(myTextTheme);
     final savingList =
         saving.where((e) => e.productId == target.docId).toList();
     final dailySavingList = savingList.map((e) {
@@ -54,8 +55,6 @@ class HomeDetails extends HookConsumerWidget {
           .whereType<SavingState>()
           .toList();
     }).toList();
-    debugPrint(dailySavingList.toString());
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -132,14 +131,26 @@ class HomeDetails extends HookConsumerWidget {
                         );
                       } else if (index == 0) {
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SavingAddButton(
                               function: () {
-                                context.goNamed(
+                                context.pushNamed(
                                   Routes.name().addSaving,
                                   extra: target,
                                 );
                               },
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(
+                                DateFormat('yyyy年MM月').format(
+                                    dailySavingList[index][0].createdAt),
+                                style: font.fs16.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                             SavingPanel(
                               state: dailySavingList[index],
@@ -148,13 +159,53 @@ class HomeDetails extends HookConsumerWidget {
                           ],
                         );
                       } else {
-                        if (dailySavingList[index] !=
-                            dailySavingList[index - 1]) {
-                          debugPrint("あああああああああああ");
-                          return SavingPanel(
-                            state: dailySavingList[index],
-                            target: target,
+                        final today = dailySavingList[index][0].createdAt;
+                        final yesterday =
+                            dailySavingList[index - 1][0].createdAt;
+                        if (DateTime(today.year, today.month, today.day) !=
+                            DateTime(yesterday.year, yesterday.month,
+                                yesterday.day)) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              today.year != yesterday.year
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      child: Text(
+                                        DateFormat('yyyy年M月').format(
+                                            dailySavingList[index][0]
+                                                .createdAt),
+                                        style: font.fs16.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  : today.month != yesterday.month
+                                      ? Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          child: Text(
+                                            DateFormat('M月').format(
+                                                dailySavingList[index][0]
+                                                    .createdAt),
+                                            style: font.fs16.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                              SavingPanel(
+                                state: dailySavingList[index],
+                                target: target,
+                              ),
+                              index == dailySavingList.length - 1
+                                  ? const SizedBox(height: 50)
+                                  : const SizedBox()
+                            ],
                           );
+                        } else {
+                          return const SizedBox();
                         }
                       }
                     },

@@ -51,37 +51,21 @@ class MyDrawer extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 70,
-                    width: 70,
-                    margin: const EdgeInsets.only(right: 7, bottom: 5),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      shape: BoxShape.circle,
-                      image: target.img != ""
-                          ? DecorationImage(
-                              image: NetworkImage(
-                                target.img,
-                              ),
-                            )
-                          : null,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          offset: const Offset(0, 0),
-                          blurRadius: 3,
-                        )
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 7, right: 5),
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      radius: 35,
+                      foregroundImage:
+                          target.img != "" ? NetworkImage(target.img) : null,
+                      child: Text(
+                        target.target.substring(0, 2),
+                        style: font.fs19.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                     ),
-                    child: target.img == ""
-                        ? FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Text(
-                              target.target.substring(0, 3),
-                            ),
-                          )
-                        : const SizedBox(),
                   ),
                   Expanded(
                     child: Column(
