@@ -71,9 +71,7 @@ class PageViewCenter extends HookConsumerWidget {
                                 ),
                                 TextSpan(
                                   text: '円',
-                                  style: font.fs21.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: font.fs21.copyWith(),
                                 ),
                               ],
                             ),
@@ -107,9 +105,7 @@ class PageViewCenter extends HookConsumerWidget {
                                   ),
                                   TextSpan(
                                     text: '円',
-                                    style: font.fs19.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: font.fs19.copyWith(),
                                   ),
                                 ],
                               ),

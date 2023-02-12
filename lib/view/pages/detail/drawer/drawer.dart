@@ -93,17 +93,85 @@ class MyDrawer extends ConsumerWidget {
               const SizedBox(height: 10),
               DrawerInfoPanel(
                 title: "目標金額",
-                content: savingCTL.formatYen(target.targetPrice),
+                content: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    children: [
+                      TextSpan(
+                        text: savingCTL.formatYen(target.targetPrice),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '円',
+                        style: font.fs16.copyWith(),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Icons.crisis_alert_sharp,
               ),
               DrawerInfoPanel(
                 title: "達成金額",
-                content: savingCTL.formatYen(sum),
+                content: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    children: [
+                      TextSpan(
+                        text: savingCTL.formatYen(sum),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '円',
+                        style: font.fs16.copyWith(),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Icons.stars,
               ),
               DrawerInfoPanel(
                 title: '達成予定日',
-                content: DateFormat('yyyy年MM月dd日').format(target.targetDate),
+                content: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    children: [
+                      TextSpan(
+                        text: DateFormat('yyyy').format(target.targetDate),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '年',
+                        style: font.fs16.copyWith(),
+                      ),
+                      TextSpan(
+                        text: DateFormat('M').format(target.targetDate),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '月',
+                        style: font.fs16.copyWith(),
+                      ),
+                      TextSpan(
+                        text: DateFormat('d').format(target.targetDate),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '日',
+                        style: font.fs16.copyWith(),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Icons.calendar_today,
               ),
               const SizedBox(height: 10),
@@ -144,7 +212,7 @@ class MyDrawer extends ConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (context) => LottieDialog(
-                      url: LottieUrl.catLoading.url,
+                      url: AssetsUrl.warning.url,
                       title: '注意',
                       subTitle: '退会した場合はフレンドに招待してもらわなければ再参加出来ません。',
                       button1Title: '退会する',

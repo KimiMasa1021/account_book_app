@@ -31,7 +31,7 @@ class Setting extends HookConsumerWidget {
               ),
               const UserDataPanel(),
               SettingPanel(
-                text: '友達の管理',
+                text: 'フレンドの管理',
                 icon: Icons.group_outlined,
                 function: () {
                   context.pushNamed(Routes.name().friendManagement);
@@ -71,7 +71,7 @@ class Setting extends HookConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (context) => LottieDialog(
-                      url: LottieUrl.logout.url,
+                      url: AssetsUrl.logout.url,
                       title: 'ログアウト',
                       subTitle: '本当にログアウトしちゃうの?',
                       button1Title: 'ログアウト',

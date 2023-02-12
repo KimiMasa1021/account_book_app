@@ -64,12 +64,12 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
   Future<File?> cropImage(String path) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
-      cropStyle: CropStyle.rectangle,
+      cropStyle: CropStyle.circle,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       compressQuality: 80,
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: '画像の位置選択',
+          toolbarTitle: '画像の切り取り',
           toolbarColor: const Color.fromARGB(255, 255, 0, 0),
           toolbarWidgetColor: Colors.white,
           lockAspectRatio: true,

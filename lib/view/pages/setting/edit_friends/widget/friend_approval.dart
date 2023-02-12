@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../../utility/lottie_url.dart';
 import '../../../../../view_model/friend_controller.dart';
 import '../../../../../view_model/search_users_controller.dart';
 import '../../../../../view_model/users_controller.dart';
@@ -19,16 +21,15 @@ class FriendApproval extends HookConsumerWidget {
           : ["abc"]),
     );
     final friendCTL = ref.watch(friendsControllerProvider.notifier);
-
+    final size = MediaQuery.of(context).size;
     final loading = useState(false);
-
     return targetMembers.when(
       data: (val) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: val.length,
+            itemCount: val.isNotEmpty ? val.length : 1,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
@@ -121,7 +122,33 @@ class FriendApproval extends HookConsumerWidget {
         return const SizedBox();
       },
       loading: () {
-        return const SizedBox();
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                AssetsUrl.empty.url,
+                height: size.width / 3,
+                width: size.width / 3,
+              ),
+              Text(
+                "現在承認リクエストはありません",
+                style: font.fs19.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "ほかのユーザーからフレンドリクエストを受けた場合ここに表示されます",
+                style: font.fs16.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        );
       },
     );
   }

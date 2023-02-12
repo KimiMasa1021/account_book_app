@@ -44,6 +44,7 @@ dependencies:
   lottie:
   path:
   shared_preferences:
+  flutter_svg: ^1.1.6
     
 dev_dependencies:
   flutter_test:

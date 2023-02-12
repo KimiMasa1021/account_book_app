@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../utility/lottie_url.dart';
 import '../../../view_model/friend_controller.dart';
 import '../../../view_model/target_init_controller.dart';
 import '../../../view_model/users_controller.dart';
 import '../../theme/app_text_theme.dart';
 import 'widgets/friend_tile_with_radio.dart';
 import '../../../provider/route/routes.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TargetAddMember extends ConsumerWidget {
   const TargetAddMember({super.key});
@@ -17,6 +20,7 @@ class TargetAddMember extends ConsumerWidget {
     final friends = ref.watch(friendsControllerProvider);
     final targetInit = ref.watch(targetInitControllerProvider(null));
     final font = ref.watch(myTextTheme);
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -145,20 +149,82 @@ class TargetAddMember extends ConsumerWidget {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: ListView.builder(
-                itemCount: friends.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return FriendTileWithRadio(
-                    usersState: friends[index],
-                  );
-                },
-              ),
-            ),
-          ),
+          friends.isNotEmpty
+              ? SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: ListView.builder(
+                        itemCount: friends.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return FriendTileWithRadio(
+                            usersState: friends[index],
+                          );
+                        },
+                      )),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          AssetsUrl.empty.url,
+                          height: size.width / 3,
+                          width: size.width / 3,
+                        ),
+                        Text(
+                          "現在フレンドが登録されてません",
+                          style: font.fs19.copyWith(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "フレンドを登録することでメンバーとして招待することができます！！",
+                          style: font.fs19.copyWith(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            context
+                                .pushNamed(Routes.name().addFriendDescription);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 20,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                            ),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "フレンド登録はこちら！",
+                                style: font.fs16.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
         ],
       ),
     );

@@ -17,7 +17,9 @@ class ScanQr extends HookConsumerWidget {
       child: Stack(
         children: [
           Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Text("QRコードで追加"),
+            ),
             body: SafeArea(
               child: Column(
                 children: [

@@ -175,7 +175,7 @@ class SavingAdd extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset(
-                        LottieUrl.catLoading.url,
+                        AssetsUrl.catLoading.url,
                         width: 230,
                         height: 230,
                         frameRate: FrameRate(60),

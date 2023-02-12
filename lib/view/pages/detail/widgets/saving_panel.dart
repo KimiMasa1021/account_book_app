@@ -51,9 +51,9 @@ class SavingPanel extends HookConsumerWidget {
         isOpen.value = !isOpen.value;
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Theme.of(context).colorScheme.surface,
@@ -69,13 +69,13 @@ class SavingPanel extends HookConsumerWidget {
                     children: [
                       Text(
                         state[0].createdAt.day.toString(),
-                        style: font.fs21.copyWith(
+                        style: font.fs19.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         savingCTL.formatWeek(state[0].createdAt.weekday),
-                        style: font.fs21,
+                        style: font.fs19,
                       ),
                     ],
                   ),
@@ -85,12 +85,22 @@ class SavingPanel extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          savingCTL.formatYen(price),
-                          style: font.fs21.copyWith(
-                            fontWeight: FontWeight.bold,
+                        RichText(
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.bodyText2,
+                            children: [
+                              TextSpan(
+                                text: savingCTL.formatYen(price),
+                                style: font.fs27.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '円',
+                                style: font.fs16.copyWith(),
+                              ),
+                            ],
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                         !isOpen.value
                             ? Text(

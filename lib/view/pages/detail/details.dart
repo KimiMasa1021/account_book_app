@@ -144,11 +144,33 @@ class HomeDetails extends HookConsumerWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
-                              child: Text(
-                                DateFormat('yyyy年MM月').format(
-                                    dailySavingList[index][0].createdAt),
-                                style: font.fs16.copyWith(
-                                  fontWeight: FontWeight.bold,
+                              child: RichText(
+                                text: TextSpan(
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                  children: [
+                                    TextSpan(
+                                      text: DateFormat('yyyy').format(
+                                          dailySavingList[index][0].createdAt),
+                                      style: font.fs21.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '年',
+                                      style: font.fs16.copyWith(),
+                                    ),
+                                    TextSpan(
+                                      text: DateFormat('M').format(
+                                          dailySavingList[index][0].createdAt),
+                                      style: font.fs21.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '月',
+                                      style: font.fs16.copyWith(),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -168,33 +190,46 @@ class HomeDetails extends HookConsumerWidget {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              today.year != yesterday.year
+                              today.year != yesterday.year ||
+                                      today.month != yesterday.month
                                   ? Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
-                                      child: Text(
-                                        DateFormat('yyyy年M月').format(
-                                            dailySavingList[index][0]
-                                                .createdAt),
-                                        style: font.fs16.copyWith(
-                                          fontWeight: FontWeight.bold,
+                                      child: RichText(
+                                        text: TextSpan(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2,
+                                          children: [
+                                            TextSpan(
+                                              text: DateFormat('yyyy').format(
+                                                  dailySavingList[index][0]
+                                                      .createdAt),
+                                              style: font.fs21.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: '年',
+                                              style: font.fs16.copyWith(),
+                                            ),
+                                            TextSpan(
+                                              text: DateFormat('M').format(
+                                                  dailySavingList[index][0]
+                                                      .createdAt),
+                                              style: font.fs21.copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: '月',
+                                              style: font.fs16.copyWith(),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     )
-                                  : today.month != yesterday.month
-                                      ? Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15),
-                                          child: Text(
-                                            DateFormat('M月').format(
-                                                dailySavingList[index][0]
-                                                    .createdAt),
-                                            style: font.fs16.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox(),
+                                  : const SizedBox(),
                               SavingPanel(
                                 state: dailySavingList[index],
                                 target: target,

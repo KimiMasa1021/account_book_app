@@ -12,7 +12,7 @@ class DrawerInfoPanel extends ConsumerWidget {
   });
   final IconData icon;
   final String title;
-  final String content;
+  final Widget content;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,13 +31,7 @@ class DrawerInfoPanel extends ConsumerWidget {
                   style: font.fs16,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Text(
-                  content,
-                  style: font.fs21.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                content
               ],
             ),
           )

@@ -130,7 +130,11 @@ class EditProject extends HookConsumerWidget {
                                   decoration: BoxDecoration(
                                     color:
                                         Theme.of(context).colorScheme.surface,
-                                    border: Border.all(),
+                                    border: Border.all(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(

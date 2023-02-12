@@ -27,7 +27,7 @@ class LoginLoading extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Lottie.asset(
-                  LottieUrl.login.url,
+                  AssetsUrl.login.url,
                   width: 230,
                   height: 230,
                   frameRate: FrameRate(60),

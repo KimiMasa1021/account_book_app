@@ -50,7 +50,7 @@ class Home extends HookConsumerWidget {
                           Align(
                             alignment: Alignment.center,
                             child: Lottie.asset(
-                              LottieUrl.pig.url,
+                              AssetsUrl.pig.url,
                               width: 55,
                               height: 55,
                               frameRate: FrameRate(60),
@@ -129,7 +129,9 @@ class Home extends HookConsumerWidget {
               );
             },
             loading: () {
-              return const CircularProgressIndicator();
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             },
             error: (error, stackTrace) {
               return const SizedBox();

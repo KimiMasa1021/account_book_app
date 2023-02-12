@@ -15,27 +15,27 @@ class MyLottieData {
 
   factory MyLottieData.addProject() {
     return MyLottieData(
-      loadingPath: LottieUrl.catLoading.url,
+      loadingPath: AssetsUrl.catLoading.url,
       loadingText: '作成中...',
-      resultPath: LottieUrl.complete.url,
+      resultPath: AssetsUrl.complete.url,
       resultText: '作成できました',
     );
   }
 
   factory MyLottieData.editProject() {
     return MyLottieData(
-      loadingPath: LottieUrl.yellowLoading.url,
+      loadingPath: AssetsUrl.yellowLoading.url,
       loadingText: '編集中...',
-      resultPath: LottieUrl.complete.url,
+      resultPath: AssetsUrl.complete.url,
       resultText: '編集できました',
     );
   }
 
   factory MyLottieData.inviteMember() {
     return MyLottieData(
-      loadingPath: LottieUrl.inventLoading.url,
+      loadingPath: AssetsUrl.inventLoading.url,
       loadingText: '招待中...',
-      resultPath: LottieUrl.complete.url,
+      resultPath: AssetsUrl.complete.url,
       resultText: 'メンバーに追加されました！',
     );
   }

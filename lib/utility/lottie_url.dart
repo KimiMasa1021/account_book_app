@@ -1,4 +1,4 @@
-enum LottieUrl {
+enum AssetsUrl {
   catLoading,
   complete,
   inventLoading,
@@ -7,27 +7,30 @@ enum LottieUrl {
   pig,
   warning,
   yellowLoading,
+  empty,
 }
 
-extension ExLottieUrl on LottieUrl {
+extension ExAssetsUrl on AssetsUrl {
   String get url {
     switch (this) {
-      case LottieUrl.catLoading:
+      case AssetsUrl.catLoading:
         return "assets/json/cat_loading.json";
-      case LottieUrl.complete:
+      case AssetsUrl.complete:
         return "assets/json/complete.json";
-      case LottieUrl.inventLoading:
+      case AssetsUrl.inventLoading:
         return "assets/json/invent_loading.json";
-      case LottieUrl.login:
+      case AssetsUrl.login:
         return "assets/json/login.json";
-      case LottieUrl.logout:
+      case AssetsUrl.logout:
         return "assets/json/logout.json";
-      case LottieUrl.pig:
+      case AssetsUrl.pig:
         return "assets/json/pig.json";
-      case LottieUrl.warning:
+      case AssetsUrl.warning:
         return "assets/json/warning.json";
-      case LottieUrl.yellowLoading:
+      case AssetsUrl.yellowLoading:
         return "assets/json/yellow_loading.json";
+      case AssetsUrl.empty:
+        return "assets/img/empty.svg";
       default:
         return "assets/json/cat_loading.json";
     }

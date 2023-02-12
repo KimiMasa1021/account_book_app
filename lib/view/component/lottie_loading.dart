@@ -84,12 +84,16 @@ class LottieLoading extends ConsumerWidget {
                               height: 55,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                               child: Center(
                                 child: Text(
                                   "ホームに戻る",
                                   style: font.fs19.copyWith(
                                     fontWeight: FontWeight.bold,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
                                   ),
                                 ),
                               ),
