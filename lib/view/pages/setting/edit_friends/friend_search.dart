@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../utility/lottie_url.dart';
+import '../../../../utility/assets_url.dart';
 import '../../../../view_model/search_users_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widget/search_user_panel.dart';
@@ -53,6 +53,7 @@ class FriendSearch extends HookConsumerWidget {
                         child: TextFormField(
                           controller: controller,
                           keyboardType: TextInputType.emailAddress,
+                          autofocus: true,
                           decoration: InputDecoration(
                             hintText: "IDで検索!",
                             hintStyle: font.fs19,
@@ -65,7 +66,6 @@ class FriendSearch extends HookConsumerWidget {
                       ),
                       IconButton(
                         onPressed: () async {
-                          primaryFocus?.unfocus();
                           user.value =
                               await searchUserCLT.searchUser(controller.text);
                         },
@@ -81,11 +81,11 @@ class FriendSearch extends HookConsumerWidget {
                     ? Column(
                         children: [
                           SvgPicture.asset(
-                            AssetsUrl.empty.url,
+                            SvgUrl.search.url,
                             height: size.width / 3,
                             width: size.width / 3,
                           ),
-                          const Text("見つかりません..."),
+                          const Text("見つかりませんでした"),
                         ],
                       )
                     : const SizedBox(),
@@ -107,7 +107,7 @@ class FriendSearch extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset(
-                        AssetsUrl.catLoading.url,
+                        LottieUrl.catLoading.url,
                         width: 230,
                         height: 230,
                         frameRate: FrameRate(60),

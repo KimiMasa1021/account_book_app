@@ -1,4 +1,4 @@
-import 'package:account_book_app/utility/lottie_url.dart';
+import 'package:account_book_app/utility/assets_url.dart';
 import 'package:account_book_app/view/pages/home/widgets/tab_view_contents.dart';
 import 'package:account_book_app/view/pages/home/widgets/sticky_tab_bar_delegate.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class Home extends HookConsumerWidget {
                           Align(
                             alignment: Alignment.center,
                             child: Lottie.asset(
-                              AssetsUrl.pig.url,
+                              LottieUrl.pig.url,
                               width: 55,
                               height: 55,
                               frameRate: FrameRate(60),

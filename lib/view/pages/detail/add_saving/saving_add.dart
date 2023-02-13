@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../model/target/target_state.dart';
-import '../../../../utility/lottie_url.dart';
+import '../../../../utility/assets_url.dart';
 import '../../../../view_model/saving_controller.dart';
 import '../../../../view_model/tags_controller.dart';
 import '../../../theme/app_text_theme.dart';
@@ -175,7 +175,7 @@ class SavingAdd extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Lottie.asset(
-                        AssetsUrl.catLoading.url,
+                        LottieUrl.catLoading.url,
                         width: 230,
                         height: 230,
                         frameRate: FrameRate(60),

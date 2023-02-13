@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../utility/lottie_url.dart';
+import '../../../../utility/assets_url.dart';
 import '../../../theme/app_text_theme.dart';
 
 class LoginLoading extends ConsumerWidget {
@@ -27,7 +27,7 @@ class LoginLoading extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Lottie.asset(
-                  AssetsUrl.login.url,
+                  LottieUrl.login.url,
                   width: 230,
                   height: 230,
                   frameRate: FrameRate(60),

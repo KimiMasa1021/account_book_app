@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../utility/lottie_url.dart';
+import '../../../../../utility/assets_url.dart';
 import '../../../../../view_model/friend_controller.dart';
 import '../../../../../view_model/search_users_controller.dart';
 import '../../../../../view_model/users_controller.dart';
@@ -127,14 +127,14 @@ class FriendApproval extends HookConsumerWidget {
           child: Column(
             children: [
               SvgPicture.asset(
-                AssetsUrl.empty.url,
+                SvgUrl.empty.url,
                 height: size.width / 3,
                 width: size.width / 3,
               ),
               Text(
                 "現在承認リクエストはありません",
                 style: font.fs19.copyWith(
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -142,7 +142,7 @@ class FriendApproval extends HookConsumerWidget {
               Text(
                 "ほかのユーザーからフレンドリクエストを受けた場合ここに表示されます",
                 style: font.fs16.copyWith(
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
                 textAlign: TextAlign.center,
               ),

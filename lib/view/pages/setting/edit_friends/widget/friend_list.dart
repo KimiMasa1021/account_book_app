@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../utility/lottie_url.dart';
+import '../../../../../utility/assets_url.dart';
 import '../../../../../view_model/friend_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 
@@ -65,14 +65,14 @@ class FriendList extends ConsumerWidget {
             child: Column(
               children: [
                 SvgPicture.asset(
-                  AssetsUrl.empty.url,
+                  SvgUrl.team.url,
                   height: size.width / 3,
                   width: size.width / 3,
                 ),
                 Text(
                   "現在フレンドが登録されてません",
                   style: font.fs19.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondary,
+                    color: Theme.of(context).colorScheme.onBackground,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -84,16 +84,19 @@ class FriendList extends ConsumerWidget {
                       TextSpan(
                         text: '右上の ',
                         style: font.fs16.copyWith(
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
-                      const WidgetSpan(
-                        child: Icon(Icons.person_add),
+                      WidgetSpan(
+                        child: Icon(
+                          Icons.person_add,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
                       ),
                       TextSpan(
                         text: ' アイコンをタップすることでフレンドを登録できます！',
                         style: font.fs16.copyWith(
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                     ],

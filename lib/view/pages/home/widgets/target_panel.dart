@@ -92,8 +92,13 @@ class TargetPanel extends HookConsumerWidget {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 radius: 35,
-                foregroundImage:
-                    state.img != "" ? NetworkImage(state.img) : null,
+                foregroundImage: state.img != ""
+                    ? Image.network(
+                        state.img,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const SizedBox(),
+                      ).image
+                    : null,
                 child: Text(
                   state.target.substring(0, 2),
                   style: font.fs19.copyWith(

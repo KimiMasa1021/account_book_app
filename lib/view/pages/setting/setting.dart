@@ -4,7 +4,7 @@ import 'package:account_book_app/view_model/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../utility/lottie_url.dart';
+import '../../../utility/assets_url.dart';
 import '../../component/lottie_dialog.dart';
 import '../../theme/app_text_theme.dart';
 import 'widgets/setting_panel.dart';
@@ -71,7 +71,7 @@ class Setting extends HookConsumerWidget {
                   showDialog(
                     context: context,
                     builder: (context) => LottieDialog(
-                      url: AssetsUrl.logout.url,
+                      url: LottieUrl.logout.url,
                       title: 'ログアウト',
                       subTitle: '本当にログアウトしちゃうの?',
                       button1Title: 'ログアウト',
