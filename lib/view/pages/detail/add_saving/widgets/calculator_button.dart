@@ -16,7 +16,7 @@ class CalculatorButton extends StatelessWidget {
     return Card(
       color: index == 4
           ? Theme.of(context).colorScheme.secondary
-          : Theme.of(context).colorScheme.tertiary,
+          : Theme.of(context).colorScheme.surface,
       child: InkWell(
         onTap: () async {
           await onTap();

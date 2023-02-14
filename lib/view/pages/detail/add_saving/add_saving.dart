@@ -44,6 +44,16 @@ class AddSaving extends HookConsumerWidget {
                 Icons.arrow_back_ios_new,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  context.pushNamed(Routes.name().addTag);
+                },
+                icon: Icon(
+                  Icons.library_add_outlined,
+                ),
+              )
+            ],
             title: const Text("追加"),
           ),
           body: Column(
@@ -65,43 +75,13 @@ class AddSaving extends HookConsumerWidget {
                             spacing: 5,
                             runSpacing: 10,
                             alignment: WrapAlignment.center,
-                            children: [
-                              ...List.generate(
-                                tags.length,
-                                (index) => Tag(
-                                  tagValue: tagValue,
-                                  tag: tags[index],
-                                ),
+                            children: List.generate(
+                              tags.length,
+                              (index) => Tag(
+                                tagValue: tagValue,
+                                tag: tags[index],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  context.pushNamed(Routes.name().addTag);
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(Icons.add),
-                                        const SizedBox(width: 10),
-                                        Text(
-                                          "タグの追加",
-                                          style: font.fs16,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       );

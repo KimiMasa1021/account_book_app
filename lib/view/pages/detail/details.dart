@@ -240,7 +240,10 @@ class HomeDetails extends HookConsumerWidget {
                             ],
                           );
                         } else {
-                          return const SizedBox();
+                          return SizedBox(
+                            height:
+                                index == dailySavingList.length - 1 ? 50 : 0,
+                          );
                         }
                       }
                     },
