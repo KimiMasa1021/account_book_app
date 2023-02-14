@@ -50,7 +50,7 @@ extension ExSvgUrl on SvgUrl {
       case SvgUrl.team:
         return "assets/img/svg/team.svg";
       default:
-        return "assets/json/cat_loading.json";
+        return "assets/img/svg/empty.svg";
     }
   }
 }
