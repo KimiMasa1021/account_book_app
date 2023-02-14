@@ -1,3 +1,4 @@
+import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/pages/detail/add_saving/widgets/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -12,8 +13,8 @@ import '../../../theme/app_text_theme.dart';
 import 'widgets/calculator_button.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class SavingAdd extends HookConsumerWidget {
-  const SavingAdd({
+class AddSaving extends HookConsumerWidget {
+  const AddSaving({
     super.key,
     required this.target,
   });
@@ -57,18 +58,50 @@ class SavingAdd extends HookConsumerWidget {
                       return SingleChildScrollView(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
+                            horizontal: 5,
+                            vertical: 10,
+                          ),
                           child: Wrap(
                             spacing: 5,
                             runSpacing: 10,
                             alignment: WrapAlignment.center,
-                            children: List.generate(
-                              tags.length,
-                              (index) => Tag(
-                                tagValue: tagValue,
-                                tag: tags[index],
+                            children: [
+                              ...List.generate(
+                                tags.length,
+                                (index) => Tag(
+                                  tagValue: tagValue,
+                                  tag: tags[index],
+                                ),
                               ),
-                            ),
+                              InkWell(
+                                onTap: () {
+                                  context.pushNamed(Routes.name().addTag);
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).cardColor,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.add),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          "タグの追加",
+                                          style: font.fs16,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       );

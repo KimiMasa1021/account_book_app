@@ -38,7 +38,7 @@ class Setting extends HookConsumerWidget {
                 },
               ),
               SettingPanel(
-                text: 'デザインの変更',
+                text: 'テーマの変更',
                 icon: Icons.format_paint_rounded,
                 function: () {
                   context.pushNamed(Routes.name().designManagement);

@@ -1,6 +1,7 @@
 import 'package:account_book_app/model/enums.dart';
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/provider/route/transition_route.dart';
+import 'package:account_book_app/view/pages/detail/add_tag/add_tag.dart';
 import 'package:account_book_app/view/pages/login/login.dart';
 import 'package:account_book_app/view/pages/add_project/target_add_image.dart';
 import 'package:account_book_app/view/pages/detail/details.dart';
@@ -22,7 +23,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../model/target/target_state.dart';
-import '../../view/pages/detail/add_saving/saving_add.dart';
+import '../../view/pages/detail/add_saving/add_saving.dart';
 import 'guard.dart';
 
 final routerProvider = Provider(
@@ -87,7 +88,7 @@ final routerProvider = Provider(
             name: Routes.name().addSaving,
             builder: (context, state) {
               final target = state.extra as TargetState;
-              return SavingAdd(
+              return AddSaving(
                 target: target,
               );
             },
@@ -123,6 +124,13 @@ final routerProvider = Provider(
               return InviteMember(
                 docId: targetId,
               );
+            },
+          ),
+          GoRoute(
+            path: Routes.path().addTag,
+            name: Routes.name().addTag,
+            builder: (context, state) {
+              return const AddTag();
             },
           ),
           //フレンド一覧

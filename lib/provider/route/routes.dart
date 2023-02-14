@@ -17,6 +17,7 @@ class Routes {
     required this.accountManagement,
     required this.webView,
     required this.friendSearch,
+    required this.addTag,
   });
   final String root;
   final String auth;
@@ -35,36 +36,33 @@ class Routes {
   final String accountManagement;
   final String webView;
   final String friendSearch;
-
+  final String addTag;
   factory Routes.name() {
     return const Routes(
-      root: "root",
-      auth: "auth",
-      addProjectMember: "addProjectMember",
-      addProjectDetails: "addProjectDetails",
-      addProjectImage: "addProjectImage",
-      projectDetails: "projectDetails",
-      editProject: "editProject",
-      addSaving: "addSaving",
-      friendManagement: "friendManagement",
-      addFriendDescription: "addFriendDescription",
-      scanQr: "scanQr",
-      memberList: "memberList",
-      inviteMember: "inviteMember",
-      designManagement: "designManagement",
-      accountManagement: "accountManagement",
-      webView: "webView",
-      friendSearch: "friendSearch",
-    );
+        root: "root",
+        auth: "auth",
+        addProjectMember: "addProjectMember",
+        addProjectDetails: "addProjectDetails",
+        addProjectImage: "addProjectImage",
+        projectDetails: "projectDetails",
+        editProject: "editProject",
+        addSaving: "addSaving",
+        friendManagement: "friendManagement",
+        addFriendDescription: "addFriendDescription",
+        scanQr: "scanQr",
+        memberList: "memberList",
+        inviteMember: "inviteMember",
+        designManagement: "designManagement",
+        accountManagement: "accountManagement",
+        webView: "webView",
+        friendSearch: "friendSearch",
+        addTag: "addTag");
   }
 
   factory Routes.path() {
     return const Routes(
-      // ログイン
       auth: "/auth",
-      //ボトムバー
       root: "/root",
-      //　ホームタブ
       addProjectMember: "add_project_member",
       addProjectDetails: "add_project_details",
       addProjectImage: "add_project_image",
@@ -73,15 +71,14 @@ class Routes {
       memberList: "memberList",
       inviteMember: "invite_member/:targetId",
       addSaving: "add_saving",
-      //　設定タブ
       friendManagement: "friend_management",
       addFriendDescription: "add_friend_description",
       scanQr: "scan_qr",
       designManagement: "design_management",
       accountManagement: "account_management",
       friendSearch: "friend_search",
-      //その他
       webView: "web_view",
+      addTag: "add_tag",
     );
   }
 }
