@@ -49,8 +49,8 @@ class AddSaving extends HookConsumerWidget {
                 onPressed: () {
                   context.pushNamed(Routes.name().addTag);
                 },
-                icon: Icon(
-                  Icons.library_add_outlined,
+                icon: const Icon(
+                  Icons.bookmark_add_outlined,
                 ),
               )
             ],

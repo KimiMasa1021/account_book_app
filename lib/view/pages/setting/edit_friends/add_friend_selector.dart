@@ -53,7 +53,9 @@ class FriendsAddDescription extends ConsumerWidget {
                           const SizedBox(width: 5),
                           Text(
                             "IDを使ってフレンド検索",
-                            style: font.fs19.copyWith(color: Colors.grey),
+                            style: font.fs19.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                           )
                         ],
                       ),
@@ -84,7 +86,7 @@ class FriendsAddDescription extends ConsumerWidget {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       "QRコードで追加",
-                      style: font.fs16.copyWith(
+                      style: font.fs19.copyWith(
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),

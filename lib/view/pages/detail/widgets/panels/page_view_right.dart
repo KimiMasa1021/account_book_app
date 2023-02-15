@@ -28,6 +28,7 @@ class PageViewRight extends ConsumerWidget {
 
     final dateDifference = target.targetDate.difference(DateTime.now()).inDays;
     final remainAmount = target.targetPrice - sum;
+    final percent = (sum / target.targetPrice * 100).toStringAsFixed(2);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
@@ -43,6 +44,12 @@ class PageViewRight extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                PanelRightTile(
+                  icon: Icons.percent,
+                  title: '達成度',
+                  content: percent.toString(),
+                  unit: '%',
+                ),
                 PanelRightTile(
                   icon: Icons.calendar_today_outlined,
                   title: '達成予定日まで',
