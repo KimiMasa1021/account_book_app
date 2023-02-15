@@ -5,6 +5,7 @@ class Tags {
   });
   final int id;
   final String tag;
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

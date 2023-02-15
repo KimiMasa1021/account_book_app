@@ -29,25 +29,25 @@ class SavingPanel extends HookConsumerWidget {
     final targetMembers =
         ref.watch(searchUsersControllerProvider(target.members));
 
-    final nameList = byUserList
-        .map(
-          (e) {
-            if (e.isEmpty) {
-              return null;
-            } else {
-              return targetMembers.value!
-                  .singleWhere((element) => element.uid == e[0].userId)
-                  .name;
-            }
-          },
-        )
-        .toList()
-        .toString();
-
-    final displayName =
-        nameList.substring(1, nameList.length - 1).replaceAll("null", "");
     return targetMembers.when(
       data: (data) {
+        final nameList = byUserList
+            .map(
+              (e) {
+                if (e.isEmpty) {
+                  return null;
+                } else {
+                  return targetMembers.value!
+                      .singleWhere((element) => element.uid == e[0].userId)
+                      .name;
+                }
+              },
+            )
+            .toList()
+            .toString();
+
+        final displayName =
+            nameList.substring(1, nameList.length - 1).replaceAll("null", "");
         return InkWell(
           onTap: () {
             isOpen.value = !isOpen.value;
