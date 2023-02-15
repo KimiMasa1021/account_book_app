@@ -1,7 +1,6 @@
 import 'package:account_book_app/model/user/users_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../utility/assets_url.dart';
@@ -21,6 +20,7 @@ class FriendSearch extends HookConsumerWidget {
     final ValueNotifier<UsersState?> user = useState(null);
     final size = MediaQuery.of(context).size;
     final loading = useState(false);
+
     return Stack(
       children: [
         Scaffold(
@@ -66,6 +66,7 @@ class FriendSearch extends HookConsumerWidget {
                       ),
                       IconButton(
                         onPressed: () async {
+                          primaryFocus?.unfocus();
                           user.value =
                               await searchUserCLT.searchUser(controller.text);
                         },
@@ -77,18 +78,6 @@ class FriendSearch extends HookConsumerWidget {
                     ],
                   ),
                 ),
-                controller.text != "" && user.value == null
-                    ? Column(
-                        children: [
-                          SvgPicture.asset(
-                            SvgUrl.search.url,
-                            height: size.width / 3,
-                            width: size.width / 3,
-                          ),
-                          const Text("見つかりませんでした"),
-                        ],
-                      )
-                    : const SizedBox(),
                 SearchUserPanel(
                   user: user,
                   loading: loading,

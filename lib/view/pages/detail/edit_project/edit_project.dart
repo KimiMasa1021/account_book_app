@@ -212,6 +212,7 @@ class EditProject extends HookConsumerWidget {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 50),
                       ],
                     ),
                   ),

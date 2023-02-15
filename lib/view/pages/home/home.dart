@@ -1,6 +1,7 @@
 import 'package:account_book_app/utility/assets_url.dart';
 import 'package:account_book_app/view/pages/home/widgets/tab_view_contents.dart';
 import 'package:account_book_app/view/pages/home/widgets/sticky_tab_bar_delegate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -41,7 +42,7 @@ class Home extends HookConsumerWidget {
                               ),
                               child: CircleAvatar(
                                 backgroundImage: userState?.img != ""
-                                    ? NetworkImage(userState!.img)
+                                    ? CachedNetworkImageProvider(userState!.img)
                                     : null,
                                 radius: 17.0,
                               ),

@@ -116,9 +116,8 @@ class SearchUserPanel extends HookConsumerWidget {
                                   color: Theme.of(context).cardColor,
                                   borderRadius: BorderRadius.circular(200),
                                   border: Border.all(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
                                     width: 2,
                                   ),
                                 ),

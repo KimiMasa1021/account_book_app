@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
@@ -93,11 +94,9 @@ class TargetPanel extends HookConsumerWidget {
                 backgroundColor: Theme.of(context).colorScheme.surface,
                 radius: 35,
                 foregroundImage: state.img != ""
-                    ? Image.network(
+                    ? CachedNetworkImageProvider(
                         state.img,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const SizedBox(),
-                      ).image
+                      )
                     : null,
                 child: Text(
                   state.target.substring(0, 2),

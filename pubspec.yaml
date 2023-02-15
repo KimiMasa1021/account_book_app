@@ -45,6 +45,7 @@ dependencies:
   path:
   shared_preferences:
   flutter_svg: ^1.1.6
+  cached_network_image: 
     
 dev_dependencies:
   flutter_test:
