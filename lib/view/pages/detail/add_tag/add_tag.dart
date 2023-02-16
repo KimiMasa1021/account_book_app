@@ -1,3 +1,4 @@
+import 'package:account_book_app/view/pages/detail/add_tag/widget/tag_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../view_model/tags_controller.dart';
@@ -11,12 +12,28 @@ class AddTag extends ConsumerWidget {
     final font = ref.watch(myTextTheme);
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("タグの追加・編集"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return TagDialog(
+                    dialogTitle: '新しいタグの作成',
+                    enterText: '作成する',
+                    hintText: 'タグの名前',
+                    onTap: (tag) async {
+                      await tagsCTL.createTag(tag);
+                    },
+                  );
+                },
+              );
+            },
             icon: const Icon(
               Icons.add,
               size: 35,
@@ -75,16 +92,29 @@ class AddTag extends ConsumerWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () async {
-                          await tagsCTL.removeTags(tags[index].id);
-                        },
+                        onTap: () async {},
                         child: const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Icon(Icons.delete_outline),
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return TagDialog(
+                                dialogTitle: 'タグの編集',
+                                enterText: '編集する',
+                                hintText: 'タグの名前',
+                                initialText: tags[index].tag,
+                                onTap: (tag) async {
+                                  await tagsCTL.updateTag(tag, tags[index].id);
+                                },
+                              );
+                            },
+                          );
+                        },
                         child: const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Icon(Icons.edit),

@@ -87,7 +87,19 @@ class TagsController extends StateNotifier<List<Tags>> {
     await getTags();
   }
 
-  Future<void> removeTags(int id) async {
+  Future<void> createTag(String tag) async {
+    await database.transaction((txn) async {
+      await txn.rawInsert('INSERT INTO tags(tag) VALUES("$tag")');
+    });
+  }
+
+  Future<void> updateTag(String tag, int id) async {
+    await database.transaction((txn) async {
+      await txn.rawInsert('UPDATE tags SET tag = "$tag" WHERE id = $id');
+    });
+  }
+
+  Future<void> deleteTag(int id) async {
     await database.transaction((txn) async {
       await txn.rawInsert('DELETE FROM tags WHERE id = $id');
     });
