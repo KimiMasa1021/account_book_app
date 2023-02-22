@@ -22,15 +22,17 @@ class SavingPanel extends HookConsumerWidget {
     final font = ref.watch(myTextTheme);
     final isOpen = useState(false);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
-    final price = state.map((e) => e.price).toList().reduce((e, v) => e + v);
-    final byUserList = target.members.map((e) {
-      return state.where((a) => a.userId == e).toList();
-    }).toList();
+
     final targetMembers =
         ref.watch(searchUsersControllerProvider(target.members));
 
     return targetMembers.when(
       data: (data) {
+        final price =
+            state.map((e) => e.price).toList().reduce((e, v) => e + v);
+        final byUserList = target.members.map((e) {
+          return state.where((a) => a.userId == e).toList();
+        }).toList();
         final nameList = byUserList
             .map(
               (e) {

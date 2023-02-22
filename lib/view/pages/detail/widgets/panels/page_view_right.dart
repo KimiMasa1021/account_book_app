@@ -44,38 +44,67 @@ class PageViewRight extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PanelRightTile(
-                  icon: Icons.percent,
-                  title: '達成度',
-                  content: percent.toString(),
-                  unit: '%',
-                ),
-                PanelRightTile(
-                  icon: Icons.calendar_today_outlined,
-                  title: '達成予定日まで',
-                  content: dateDifference.toString(),
-                  unit: '日',
-                ),
-                PanelRightTile(
-                  icon: Icons.attach_money_outlined,
-                  title: '残りの金額',
-                  content: savingCTL.formatYen((remainAmount)),
-                  unit: '円',
-                ),
-                PanelRightTile(
-                  icon: Icons.calendar_month,
-                  title: '1日あたり',
-                  content: savingCTL
-                      .formatYen((remainAmount / dateDifference).ceil()),
-                  unit: '円',
-                ),
-                PanelRightTile(
-                  icon: Icons.person,
-                  title: '1人あたり',
-                  content: savingCTL
-                      .formatYen((remainAmount / target.members.length).ceil()),
-                  unit: '円',
-                ),
+                target.isCompleted
+                    ? const Text("おめでとうございます！\n目標金額に到達しました！")
+                    : target.targetDate.difference(DateTime.now()).inDays <= 0
+                        ? RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              children: [
+                                const TextSpan(
+                                  text: '達成予定日を過ぎてしましました。\n延長するためには右上の ',
+                                ),
+                                WidgetSpan(
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: 'をタップし、"プロジェクトの編集"から延長することが出来ます',
+                                ),
+                              ],
+                            ),
+                          )
+                        : Column(
+                            children: [
+                              PanelRightTile(
+                                icon: Icons.percent,
+                                title: '達成度',
+                                content: percent.toString(),
+                                unit: '%',
+                              ),
+                              PanelRightTile(
+                                icon: Icons.calendar_today_outlined,
+                                title: '達成予定日まで',
+                                content: dateDifference.toString(),
+                                unit: '日',
+                              ),
+                              PanelRightTile(
+                                icon: Icons.attach_money_outlined,
+                                title: '残りの金額',
+                                content: savingCTL.formatYen((remainAmount)),
+                                unit: '円',
+                              ),
+                              PanelRightTile(
+                                icon: Icons.calendar_month,
+                                title: '1日あたり',
+                                content: savingCTL.formatYen(
+                                    (remainAmount / dateDifference).ceil()),
+                                unit: '円',
+                              ),
+                              PanelRightTile(
+                                icon: Icons.person,
+                                title: '1人あたり',
+                                content: savingCTL.formatYen(
+                                    (remainAmount / target.members.length)
+                                        .ceil()),
+                                unit: '円',
+                              ),
+                            ],
+                          ),
               ],
             ),
           ),

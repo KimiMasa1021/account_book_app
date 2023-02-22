@@ -97,13 +97,15 @@ class Home extends HookConsumerWidget {
               final workingOnTarget = data
                   .where(
                     (e) =>
-                        e.targetDate.isAfter(DateTime.now()) && !e.isCompleted,
+                        e.targetDate.difference(DateTime.now()).inDays > 0 &&
+                        !e.isCompleted,
                   )
                   .toList();
               final overdueTarget = data
                   .where(
                     (e) =>
-                        e.targetDate.isBefore(DateTime.now()) && !e.isCompleted,
+                        e.targetDate.difference(DateTime.now()).inDays <= 0 &&
+                        !e.isCompleted,
                   )
                   .toList();
               final achievedTarget = data
