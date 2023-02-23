@@ -25,7 +25,7 @@ class QrCamera extends ConsumerWidget {
         controller.scannedDataStream.listen(
           (scanData) async {
             loading.value = true;
-            await friendCTL.friendRequest(
+            await friendCTL.qrFriendRequest(
               scanData.code.toString(),
             );
             loading.value = false;

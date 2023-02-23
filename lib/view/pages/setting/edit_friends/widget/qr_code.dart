@@ -34,7 +34,7 @@ class QrCode extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            "相手のスマートフォンでこのQRコードをスキャンすることで承認リクエストを受信できます",
+            "相手のスマートフォンでこのQRコードをスキャンすることでフレンドになります",
             style: font.fs19.copyWith(
               color: Theme.of(context).colorScheme.onBackground,
             ),

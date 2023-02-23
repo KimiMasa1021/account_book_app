@@ -26,7 +26,7 @@ class FriendController extends StateNotifier<List<UsersState>> {
 
   Uri requestUrl(String endpoint) => Uri.parse('$baseUrl$endpoint');
 
-  //フレンドリクエスト
+  //検索でのフレンドリクエスト
   Future<void> friendRequest(String uid) async {
     final myUid = ref.read(usersControllerProvider)!.uid;
     const endpoint = '/friendRequest';
@@ -42,7 +42,7 @@ class FriendController extends StateNotifier<List<UsersState>> {
     shwoToast("友達リクエストを送信しました！");
   }
 
-  //フレンドリクエスト
+  //検索でのフレンド承認
   Future<void> friendApproval(String uid, String name) async {
     final myUid = ref.read(usersControllerProvider)!.uid;
     const endpoint = '/friendApproval';
@@ -55,7 +55,35 @@ class FriendController extends StateNotifier<List<UsersState>> {
     final String body = json.encode(sendJSON);
 
     await http.post(url, headers: headers, body: body);
-    shwoToast("$nameさんと友達になりました！");
+    shwoToast("$nameさんと友達になりました!");
+  }
+
+  //検索でのフレンド承認
+  //  いつかアップデートでLINEみたいな機能実装しようかな
+  Future<void> qrFriendRequest(String uid) async {
+    final myUid = ref.read(usersControllerProvider)!.uid;
+    final friens = ref.read(usersControllerProvider)!.friends;
+
+    debugPrint(friens.toString());
+    debugPrint(uid.toString());
+    debugPrint(myUid.toString());
+
+    if (friens.contains(uid)) {
+      return shwoToast("既にに登録済みです");
+    }
+    if (uid.contains("//")) {
+      return shwoToast("無効なQRコードです");
+    }
+    const endpoint = '/qrFriendRequest';
+    final url = requestUrl(endpoint);
+    final sendJSON = {
+      "process": "QRフレンドリクエスト",
+      "user1": {"uid": myUid},
+      "user2": {"uid": uid}
+    };
+    final String body = json.encode(sendJSON);
+    await http.post(url, headers: headers, body: body);
+    shwoToast("フレンド登録が完了しました！");
   }
 
   void shwoToast(String msg) {

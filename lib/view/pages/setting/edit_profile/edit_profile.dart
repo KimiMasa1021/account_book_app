@@ -122,69 +122,6 @@ class EditProfile extends HookConsumerWidget {
                       controller: controller,
                       editable: true,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "ID ※変更できません",
-                            style: font.fs16.copyWith(
-                              color: Theme.of(context).colorScheme.onBackground,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            width: double.infinity,
-                            height: 55,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    userState.uid,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    userCTL.copyTextWithToast(
-                                        userState.uid, "IDをコピーしました。");
-                                  },
-                                  child: Container(
-                                    height: 35,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurface,
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "コピー",
-                                        style: font.fs16.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ],
                 ),
               ),

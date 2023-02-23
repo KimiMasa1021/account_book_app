@@ -1,3 +1,4 @@
+import 'package:account_book_app/view/pages/detail/add_tag/widget/delete_dialog.dart';
 import 'package:account_book_app/view/pages/detail/add_tag/widget/tag_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -92,7 +93,20 @@ class AddTag extends ConsumerWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () async {},
+                        onTap: () async {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return DeleteDialog(
+                                dialogTitle: "タグを削除しますか？",
+                                tagText: tags[index].tag,
+                                onTap: () async {
+                                  await tagsCTL.deleteTag(tags[index].id);
+                                },
+                              );
+                            },
+                          );
+                        },
                         child: const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Icon(Icons.delete_outline),

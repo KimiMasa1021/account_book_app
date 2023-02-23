@@ -28,15 +28,15 @@ class FriendStatus extends ConsumerWidget {
             labelColor: Theme.of(context).colorScheme.onBackground,
             unselectedLabelColor: Theme.of(context).colorScheme.onBackground,
             tabs: const [
-              Tab(text: "承認リクエスト"),
               Tab(text: "フレンドリスト"),
+              Tab(text: "承認リクエスト"),
             ],
           ),
         ),
         body: const TabBarView(
           children: [
-            FriendApproval(),
             FriendList(),
+            FriendApproval(),
           ],
         ),
       ),

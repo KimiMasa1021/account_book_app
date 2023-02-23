@@ -31,6 +31,13 @@ class Setting extends HookConsumerWidget {
               ),
               const UserDataPanel(),
               SettingPanel(
+                text: 'フレンドの追加',
+                icon: Icons.person_add,
+                function: () {
+                  context.pushNamed(Routes.name().addFriendDescription);
+                },
+              ),
+              SettingPanel(
                 text: 'フレンドの管理',
                 icon: Icons.group_outlined,
                 function: () {
@@ -45,22 +52,12 @@ class Setting extends HookConsumerWidget {
                 },
               ),
               SettingPanel(
-                text: 'ヒント',
+                text: '使用上のヒント',
                 icon: Icons.tips_and_updates_outlined,
                 function: () {
                   context.goNamed(
                     Routes.name().webView,
                     extra: WebViewType.appHint,
-                  );
-                },
-              ),
-              SettingPanel(
-                text: 'このアプリについて',
-                icon: Icons.help_outline,
-                function: () {
-                  context.goNamed(
-                    Routes.name().webView,
-                    extra: WebViewType.aboutApp,
                   );
                 },
               ),
