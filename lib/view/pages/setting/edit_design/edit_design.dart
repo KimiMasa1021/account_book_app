@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../view_model/theme_controller.dart';
+import '../../../theme/app_text_theme.dart';
 import '../../../theme/my_theme_mode.dart';
 
 class EditDesign extends HookConsumerWidget {
@@ -12,21 +13,22 @@ class EditDesign extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(themeControllerProvider);
     final modeCTL = ref.watch(themeControllerProvider.notifier);
+    final font = ref.watch(myTextTheme);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("デザインの変更"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         child: Column(
           children: [
             Expanded(
               child: GridView.count(
                 crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 20,
-                childAspectRatio: 1 / 1.35,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
+                childAspectRatio: 1 / 1.3,
                 children: [
                   ...List.generate(
                     ExThemeMode.values.length,
@@ -40,6 +42,8 @@ class EditDesign extends HookConsumerWidget {
                             aspectRatio: 1,
                             child: Container(
                               padding: const EdgeInsets.all(7),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 15),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: ExThemeMode.values[index] == mode
@@ -93,10 +97,9 @@ class EditDesign extends HookConsumerWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 3),
                           Text(
                             ExThemeMode.values[index].themeName,
-                            style: const TextStyle(fontSize: 16),
+                            style: font.fs16,
                           )
                         ],
                       ),

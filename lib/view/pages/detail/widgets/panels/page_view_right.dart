@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../model/target/target_state.dart';
 import '../../../../../view_model/saving_controller.dart';
+import '../../../../theme/app_text_theme.dart';
 import '../panel_right_tile.dart';
 
 class PageViewRight extends ConsumerWidget {
@@ -25,6 +26,7 @@ class PageViewRight extends ConsumerWidget {
     } else {
       sum = priceList.reduce((a, b) => a + b);
     }
+    final font = ref.watch(myTextTheme);
 
     final dateDifference = target.targetDate.difference(DateTime.now()).inDays;
     final remainAmount = target.targetPrice - sum;
@@ -45,11 +47,12 @@ class PageViewRight extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 target.isCompleted
-                    ? const Text("おめでとうございます！\n目標金額に到達しました！")
+                    ? Text("おめでとうございます！\n目標金額に到達しました！", style: font.fs19)
                     : target.targetDate.difference(DateTime.now()).inDays <= 0
                         ? RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
+                              style: font.fs19,
                               children: [
                                 const TextSpan(
                                   text: '達成予定日を過ぎてしましました。\n延長するためには右上の ',

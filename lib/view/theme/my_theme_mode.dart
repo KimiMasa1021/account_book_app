@@ -57,21 +57,21 @@ extension Extension on ExThemeMode {
   String get themeName {
     switch (this) {
       case ExThemeMode.theme:
-        return "テーマ0";
+        return "パステルサマー";
       case ExThemeMode.theme1:
-        return "テーマ１";
+        return "モスグリーン";
       case ExThemeMode.theme2:
-        return "テーマ２";
+        return "チェリーレッド";
       case ExThemeMode.theme3:
-        return "テーマ３";
+        return "ロイヤルパープル";
       case ExThemeMode.theme4:
-        return "テーマ４";
+        return "チョコレート";
       case ExThemeMode.theme5:
-        return "テーマ５";
+        return "ダークイエロー";
       case ExThemeMode.theme6:
-        return "テーマ６";
+        return "ネイビーブルー";
       default:
-        return "テーマ？？";
+        return "エラーテーマ";
     }
   }
 }
