@@ -67,7 +67,7 @@ class FriendController extends StateNotifier<List<UsersState>> {
     if (friens.contains(uid)) {
       return shwoToast("既にに登録済みです");
     }
-    if (uid.contains("//")) {
+    if (uid.contains("//") || uid == myUid) {
       return shwoToast("無効なQRコードです");
     }
     const endpoint = '/qrFriendRequest';

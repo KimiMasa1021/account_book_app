@@ -29,7 +29,8 @@ class WebViewPage extends StatelessWidget {
         url = "https://pub.dev/packages/webview_flutter/example";
         break;
       case WebViewType.appHint:
-        url = "https://colorhunt.co/";
+        url =
+            "https://golden-carriage-07f.notion.site/dd3dafa896694577a4611cfd8cd2de0d";
         break;
 
       default:
