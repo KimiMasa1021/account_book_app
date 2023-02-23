@@ -64,10 +64,6 @@ class FriendController extends StateNotifier<List<UsersState>> {
     final myUid = ref.read(usersControllerProvider)!.uid;
     final friens = ref.read(usersControllerProvider)!.friends;
 
-    debugPrint(friens.toString());
-    debugPrint(uid.toString());
-    debugPrint(myUid.toString());
-
     if (friens.contains(uid)) {
       return shwoToast("既にに登録済みです");
     }
