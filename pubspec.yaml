@@ -58,9 +58,21 @@ dev_dependencies:
   freezed: ^2.1.0+1
   json_serializable: ^6.4.0
   flutter_launcher_icons: ^0.11.0
+  flutter_native_splash: ^2.2.16
+
+flutter_native_splash:
+  color: '#FFFFFF'
+  image: 'assets\img\png_jpg\splash_icon.png'
+  color_dark: '#262626'
+  image_dark: 'assets\img\png_jpg\splash_icon.png'
+  fullscreen: true
+  android_12:
+    icon_background_color: '#FFFFFF'
+    image: 'assets\img\png_jpg\splash_icon.png'
+    icon_background_color_dark: '#262626'
+    image_dark: 'assets\img\png_jpg\splash_icon.png'
 
 flutter:
-
   uses-material-design: true
 
   assets:
