@@ -35,6 +35,7 @@ class EditDesign extends HookConsumerWidget {
                       modeCTL.changeTheme(ExThemeMode.values[index]);
                     },
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         AspectRatio(
                           aspectRatio: 1,

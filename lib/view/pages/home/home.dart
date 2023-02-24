@@ -13,7 +13,7 @@ class Home extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const tabHeight = 55.0;
+    const tabHeight = 50.0;
     final size = MediaQuery.of(context).size;
     final userState = ref.watch(usersControllerProvider);
     final target = ref.watch(targetControllerProvider);
@@ -52,8 +52,8 @@ class Home extends HookConsumerWidget {
                             alignment: Alignment.center,
                             child: Lottie.asset(
                               LottieUrl.pig.url,
-                              width: 55,
-                              height: 55,
+                              width: 50,
+                              height: 50,
                               frameRate: FrameRate(60),
                               repeat: true,
                             ),
