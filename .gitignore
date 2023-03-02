@@ -19,6 +19,7 @@ migrate_working_dir/
 
 **/android/app/src/main/res/mipmap*/
 **/android/app/google-services.json
+.fvm/flutter_sdk
 
 # Flutter/Dart/Pub related
 **/doc/api/

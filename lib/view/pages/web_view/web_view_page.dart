@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:account_book_app/model/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -61,17 +60,16 @@ class WebViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Column(
         children: [
-          Expanded(
-            child: WebView(
-              initialUrl: url,
-              javascriptMode: JavascriptMode.unrestricted,
-              onWebViewCreated: _controller.complete,
-            ),
-          )
+          // Expanded(
+          //   child: WebView(
+          //     initialUrl: url,
+          //     javascriptMode: JavascriptMode.unrestricted,
+          //     onWebViewCreated: _controller.complete,
+          //   ),
+          // )
         ],
       ),
     );
