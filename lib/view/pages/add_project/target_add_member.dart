@@ -194,8 +194,7 @@ class TargetAddMember extends ConsumerWidget {
                         const Spacer(),
                         InkWell(
                           onTap: () {
-                            context
-                                .pushNamed(Routes.name().addFriendDescription);
+                            context.pushNamed(Routes.name().userProfile);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(

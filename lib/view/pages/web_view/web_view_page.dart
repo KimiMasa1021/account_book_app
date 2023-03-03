@@ -64,7 +64,7 @@ class WebViewPage extends StatelessWidget {
       body: Column(
         children: [
           // Expanded(
-          //   child: WebView(
+          //   child: WebViewWidget(
           //     initialUrl: url,
           //     javascriptMode: JavascriptMode.unrestricted,
           //     onWebViewCreated: _controller.complete,

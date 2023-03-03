@@ -29,7 +29,8 @@ class LottieDialog extends ConsumerWidget {
 
     return Dialog(
       clipBehavior: Clip.hardEdge,
-      child: SizedBox(
+      child: Container(
+        color: Theme.of(context).colorScheme.background,
         height: size.height / 1.5,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

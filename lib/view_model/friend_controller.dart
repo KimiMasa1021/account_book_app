@@ -4,8 +4,11 @@ import 'package:account_book_app/repository/friend_repository.dart';
 import 'package:account_book_app/view_model/users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
+
+import '../provider/route/routes.dart';
 
 final friendsControllerProvider =
     StateNotifierProvider<FriendController, List<UsersState>>(
@@ -14,8 +17,16 @@ final friendsControllerProvider =
 class FriendController extends StateNotifier<List<UsersState>> {
   final Ref ref;
 
+  final flavorName = const String.fromEnvironment('flavor');
+
+  //本番用
   final String baseUrl =
       "https://asia-northeast1-account-book-app-af1e7.cloudfunctions.net";
+
+  //デバッグ用
+  final String debugUrl =
+      "https://asia-northeast1-account-book-app-dev.cloudfunctions.net";
+
   final headers = {'content-type': 'application/json'};
 
   FriendController(this.ref) : super([]) {
@@ -24,7 +35,13 @@ class FriendController extends StateNotifier<List<UsersState>> {
     });
   }
 
-  Uri requestUrl(String endpoint) => Uri.parse('$baseUrl$endpoint');
+  Uri requestUrl(String endpoint) {
+    if (flavorName == "dev") {
+      return Uri.parse('$debugUrl$endpoint');
+    } else {
+      return Uri.parse('$baseUrl$endpoint');
+    }
+  }
 
   //検索でのフレンドリクエスト
   Future<void> friendRequest(String uid) async {

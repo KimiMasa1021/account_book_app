@@ -34,7 +34,7 @@ class Setting extends HookConsumerWidget {
                 text: 'フレンドの追加',
                 icon: Icons.person_add,
                 function: () {
-                  context.pushNamed(Routes.name().addFriendDescription);
+                  context.pushNamed(Routes.name().scanQr);
                 },
               ),
               SettingPanel(

@@ -1,30 +1,32 @@
-import 'package:account_book_app/model/enums.dart';
-import 'package:account_book_app/provider/route/routes.dart';
-import 'package:account_book_app/provider/route/transition_route.dart';
-import 'package:account_book_app/view/pages/detail/add_tag/add_tag.dart';
-import 'package:account_book_app/view/pages/login/login.dart';
-import 'package:account_book_app/view/pages/add_project/target_add_image.dart';
-import 'package:account_book_app/view/pages/detail/details.dart';
-import 'package:account_book_app/view/pages/add_project/target_add_details.dart';
-import 'package:account_book_app/view/pages/add_project/target_add_member.dart';
-import 'package:account_book_app/view/pages/detail/edit_project/edit_project.dart';
-import 'package:account_book_app/view/pages/detail/invite_member/invite_member.dart';
-import 'package:account_book_app/view/pages/detail/member_list/member_list.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/friend_search.dart';
-import 'package:account_book_app/view/pages/setting/edit_profile/edit_profile.dart';
-import 'package:account_book_app/view/pages/setting/edit_design/edit_design.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/add_friend_selector.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/friend_status.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/scan_qr.dart';
-import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
-import 'package:account_book_app/view/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../model/enums.dart';
 import '../../model/target/target_state.dart';
+import '../../model/user/users_state.dart';
+import '../../view/pages/add_project/target_add_details.dart';
+import '../../view/pages/add_project/target_add_image.dart';
+import '../../view/pages/add_project/target_add_member.dart';
 import '../../view/pages/detail/add_saving/add_saving.dart';
+import '../../view/pages/detail/add_tag/add_tag.dart';
+import '../../view/pages/detail/details.dart';
+import '../../view/pages/detail/edit_project/edit_project.dart';
+import '../../view/pages/detail/invite_member/invite_member.dart';
+import '../../view/pages/detail/member_list/member_list.dart';
+import '../../view/pages/login/login.dart';
+import '../../view/pages/setting/edit_design/edit_design.dart';
+import '../../view/pages/setting/edit_friends/friend_search.dart';
+import '../../view/pages/setting/edit_friends/friend_status.dart';
+import '../../view/pages/setting/edit_friends/scan_qr.dart';
+import '../../view/pages/setting/edit_friends/user_profile.dart';
+import '../../view/pages/setting/edit_profile/edit_profile.dart';
+import '../../view/pages/web_view/web_view_page.dart';
+import '../../view/root_page.dart';
 import 'guard.dart';
+import 'routes.dart';
+import 'transition_route.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
@@ -73,7 +75,7 @@ final routerProvider = Provider(
             name: Routes.name().projectDetails,
             pageBuilder: (context, state) {
               final target = state.extra as TargetState;
-              return buildPageWithDefaultTransition<void>(
+              return horizontalSlideTransition<void>(
                 context: context,
                 state: state,
                 child: HomeDetails(
@@ -143,10 +145,13 @@ final routerProvider = Provider(
             routes: [
               //フレンド登録手段の選択　QR or Search
               GoRoute(
-                path: Routes.path().addFriendDescription,
-                name: Routes.name().addFriendDescription,
+                path: Routes.path().userProfile,
+                name: Routes.name().userProfile,
                 builder: (context, state) {
-                  return const FriendsAddDescription();
+                  final friendState = state.extra as UsersState;
+                  return UserProfile(
+                    friendState: friendState,
+                  );
                 },
                 routes: [
                   // QR SCAN
@@ -155,14 +160,6 @@ final routerProvider = Provider(
                     name: Routes.name().scanQr,
                     builder: (context, state) {
                       return const ScanQr();
-                    },
-                  ),
-                  // フレンド検索
-                  GoRoute(
-                    path: Routes.path().friendSearch,
-                    name: Routes.name().friendSearch,
-                    builder: (context, state) {
-                      return const FriendSearch();
                     },
                   ),
                 ],

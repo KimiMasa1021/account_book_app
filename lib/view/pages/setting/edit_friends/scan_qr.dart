@@ -29,10 +29,10 @@ class ScanQr extends HookConsumerWidget {
                     flex: 5,
                     child: TabBarView(
                       children: [
-                        const QrCode(),
                         QrCamera(
                           loading: loading,
-                        )
+                        ),
+                        const QrCode(),
                       ],
                     ),
                   ),
@@ -66,8 +66,14 @@ class ScanQr extends HookConsumerWidget {
                             unselectedLabelColor:
                                 Theme.of(context).colorScheme.onTertiary,
                             tabs: const [
-                              Tab(text: "マイQRコード"),
-                              Tab(text: "スキャン"),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Tab(text: "スキャン"),
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Tab(text: "マイQRコード"),
+                              ),
                             ],
                           ),
                         ),

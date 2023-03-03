@@ -28,9 +28,6 @@ class SearchUsersController
 
   Future<UsersState?> searchUser(String uid) async {
     final user = await ref.read(friendRepositoryProvider).feachSearchUser(uid);
-    if (user == null) {
-      showToast("見つかりませんでした");
-    }
     return user;
   }
 
