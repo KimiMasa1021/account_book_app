@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/route/routes.dart';
 import '../../../../view_model/friend_controller.dart';
 import '../../../theme/app_text_theme.dart';
-import 'widget/friend_approval.dart';
 
 class FriendStatus extends ConsumerWidget {
   const FriendStatus({super.key});

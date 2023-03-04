@@ -4,11 +4,8 @@ import 'package:account_book_app/repository/friend_repository.dart';
 import 'package:account_book_app/view_model/users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
-
-import '../provider/route/routes.dart';
 
 final friendsControllerProvider =
     StateNotifierProvider<FriendController, List<UsersState>>(
@@ -43,38 +40,6 @@ class FriendController extends StateNotifier<List<UsersState>> {
     }
   }
 
-  //検索でのフレンドリクエスト
-  Future<void> friendRequest(String uid) async {
-    final myUid = ref.read(usersControllerProvider)!.uid;
-    const endpoint = '/friendRequest';
-    final url = requestUrl(endpoint);
-    final sendJSON = {
-      "process": "フレンドリクエスト",
-      "user1": {"uid": myUid},
-      "user2": {"uid": uid}
-    };
-    final String body = json.encode(sendJSON);
-
-    await http.post(url, headers: headers, body: body);
-    shwoToast("友達リクエストを送信しました！");
-  }
-
-  //検索でのフレンド承認
-  Future<void> friendApproval(String uid, String name) async {
-    final myUid = ref.read(usersControllerProvider)!.uid;
-    const endpoint = '/friendApproval';
-    final url = requestUrl(endpoint);
-    final sendJSON = {
-      "process": "承認リクエスト",
-      "user1": {"uid": myUid},
-      "user2": {"uid": uid}
-    };
-    final String body = json.encode(sendJSON);
-
-    await http.post(url, headers: headers, body: body);
-    shwoToast("$nameさんと友達になりました!");
-  }
-
   //検索でのフレンド承認
   //  いつかアップデートでLINEみたいな機能実装しようかな
   Future<void> qrFriendRequest(String uid) async {
@@ -83,9 +48,6 @@ class FriendController extends StateNotifier<List<UsersState>> {
 
     if (friens.contains(uid)) {
       return shwoToast("既にに登録済みです");
-    }
-    if (uid.contains("//") || uid == myUid) {
-      return shwoToast("無効なQRコードです");
     }
     const endpoint = '/qrFriendRequest';
     final url = requestUrl(endpoint);

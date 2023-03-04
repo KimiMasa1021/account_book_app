@@ -17,7 +17,6 @@ import '../../view/pages/detail/invite_member/invite_member.dart';
 import '../../view/pages/detail/member_list/member_list.dart';
 import '../../view/pages/login/login.dart';
 import '../../view/pages/setting/edit_design/edit_design.dart';
-import '../../view/pages/setting/edit_friends/friend_search.dart';
 import '../../view/pages/setting/edit_friends/friend_status.dart';
 import '../../view/pages/setting/edit_friends/scan_qr.dart';
 import '../../view/pages/setting/edit_friends/user_profile.dart';
