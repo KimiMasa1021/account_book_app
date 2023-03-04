@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../theme/app_text_theme.dart';
+
 // ignore: must_be_immutable
-class LargeTextField extends HookConsumerWidget {
+class LargeTextField extends ConsumerWidget {
   LargeTextField({
     super.key,
     required this.topTitle,
@@ -22,21 +24,25 @@ class LargeTextField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
         Text(
           topTitle,
-          // style: theme.textTheme.fs16,
+          style: font.fs16.copyWith(
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
         ),
+        const SizedBox(height: 5),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           width: double.infinity,
           height: 90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            // color: HexColor("#E1EBFF"),
             color: Theme.of(context).colorScheme.surface,
           ),
           child: TextFormField(
@@ -46,7 +52,6 @@ class LargeTextField extends HookConsumerWidget {
             maxLines: 3,
             decoration: InputDecoration(
               hintText: hintText,
-              // hintStyle: theme.textTheme.fs19,
               contentPadding: EdgeInsets.zero,
               isCollapsed: true,
               focusedBorder: InputBorder.none,
@@ -57,7 +62,6 @@ class LargeTextField extends HookConsumerWidget {
         bottomTitle != ""
             ? Text(
                 bottomTitle,
-                // style: theme.textTheme.fs16,
               )
             : const SizedBox(),
       ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../theme/app_text_theme.dart';
+
 class PaintedButton extends HookConsumerWidget {
   const PaintedButton({
     super.key,
@@ -18,13 +20,15 @@ class PaintedButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return InkWell(
       onTap: () async {
         await fucntion();
       },
       child: Container(
         width: double.infinity,
-        height: 55,
+        height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
           color: backgroundColor,
@@ -36,7 +40,10 @@ class PaintedButton extends HookConsumerWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(color: textColor),
+            style: font.fs16.copyWith(
+              color: textColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

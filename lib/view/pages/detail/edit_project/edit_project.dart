@@ -14,6 +14,7 @@ import '../../../../view_model/target_init_controller.dart';
 import '../../../component/picture_dialog.dart';
 import '../../../component/large_text_field.dart';
 import '../../../component/normal_text_field.dart';
+import '../../../theme/app_text_theme.dart';
 
 class EditProject extends HookConsumerWidget {
   const EditProject({
@@ -26,6 +27,7 @@ class EditProject extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final target = ref.watch(targetControllerProvider);
+    final font = ref.watch(myTextTheme);
 
     return target.when(
       data: (data) {
@@ -41,7 +43,6 @@ class EditProject extends HookConsumerWidget {
               appBar: AppBar(
                 title: const Text(
                   "プロジェクトの編集",
-                  // style: theme.textTheme.fs19,
                 ),
                 leading: InkWell(
                   onTap: () {
@@ -63,12 +64,7 @@ class EditProject extends HookConsumerWidget {
                       }
                     },
                     padding: const EdgeInsets.only(right: 10),
-                    icon: const Text(
-                      "編集",
-                      // style: theme.textTheme.fs16.copyWith(
-                      //   color: Colors.black,
-                      // ),
-                    ),
+                    icon: const Text("編集"),
                   ),
                 ],
               ),
@@ -84,44 +80,31 @@ class EditProject extends HookConsumerWidget {
                         Stack(
                           clipBehavior: Clip.none,
                           children: [
-                            Container(
-                              width: size.width / 3,
-                              height: size.width / 3,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.surface,
-                                borderRadius: BorderRadius.circular(10),
-                                image: targetInit.file != null
-                                    ? DecorationImage(
-                                        image: FileImage(targetInit.file!),
-                                        fit: BoxFit.fill,
-                                      )
+                            Padding(
+                              padding: const EdgeInsets.only(top: 7, right: 5),
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.surface,
+                                radius: (size.width / 3) / 2,
+                                foregroundImage: targetInit.file != null
+                                    ? FileImage(targetInit.file!)
                                     : target.img != ""
-                                        ? DecorationImage(
-                                            image: NetworkImage(target.img),
-                                            fit: BoxFit.fill,
-                                          )
+                                        ? NetworkImage(target.img)
+                                            as ImageProvider
                                         : null,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 6,
-                                  )
-                                ],
+                                child: Text(
+                                  target.target.substring(0, 2),
+                                  style: font.fs19.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                ),
                               ),
-                              child: target.img == "" && targetInit.file == null
-                                  ? FittedBox(
-                                      fit: BoxFit.fitWidth,
-                                      child: Text(
-                                        target.target.substring(0, 3),
-                                      ),
-                                    )
-                                  : const SizedBox(),
                             ),
                             Positioned(
-                              right: -10,
-                              top: -10,
+                              right: -5,
+                              top: -5,
                               child: GestureDetector(
                                 onTap: () async {
                                   showDialog(
@@ -147,7 +130,11 @@ class EditProject extends HookConsumerWidget {
                                   decoration: BoxDecoration(
                                     color:
                                         Theme.of(context).colorScheme.surface,
-                                    border: Border.all(),
+                                    border: Border.all(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
@@ -166,6 +153,7 @@ class EditProject extends HookConsumerWidget {
                           hintText: "達成したい目標を入力してね",
                           inputType: TextInputType.text,
                           controller: targetInit.targetController!,
+                          editable: true,
                         ),
                         NormalTextField(
                           topTitle: "目標金額",
@@ -176,6 +164,7 @@ class EditProject extends HookConsumerWidget {
                           formatter: [
                             CustomTextInputFormatter(),
                           ],
+                          editable: true,
                         ),
                         LargeTextField(
                           topTitle: "詳細",
@@ -188,9 +177,12 @@ class EditProject extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            const Text(
+                            Text(
                               "達成予定年月日",
-                              // style: theme.textTheme.fs16,
+                              style: font.fs16.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                              ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -203,7 +195,6 @@ class EditProject extends HookConsumerWidget {
                                 width: double.infinity,
                                 height: 45,
                                 decoration: BoxDecoration(
-                                  // color: HexColor("#E1EBFF"),
                                   color: Theme.of(context).colorScheme.surface,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -221,6 +212,7 @@ class EditProject extends HookConsumerWidget {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 50),
                       ],
                     ),
                   ),

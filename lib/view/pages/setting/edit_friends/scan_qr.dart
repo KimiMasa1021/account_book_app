@@ -1,216 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import '../../../../view_model/friend_controller.dart';
-import '../../../../view_model/users_controller.dart';
+import '../../../theme/app_text_theme.dart';
+import 'widget/qr_camera.dart';
+import 'widget/qr_code.dart';
 
 // ignore: must_be_immutable
 class ScanQr extends HookConsumerWidget {
-  ScanQr({super.key});
-
-  QRViewController? controller;
+  const ScanQr({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
     final loading = useState(false);
-    final friendCTL = ref.watch(friendsControllerProvider.notifier);
-    final usersState = ref.watch(usersControllerProvider);
+    final font = ref.watch(myTextTheme);
 
-    return Stack(
-      children: [
-        Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                size: 30,
+    return DefaultTabController(
+      length: 2,
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: AppBar(
+              title: const Text("QRコードで追加"),
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: TabBarView(
+                      children: [
+                        QrCamera(
+                          loading: loading,
+                        ),
+                        const QrCode(),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 56,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 10,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.tertiary,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: TabBar(
+                            indicator: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 5,
+                            ),
+                            labelStyle: font.fs16,
+                            labelColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            unselectedLabelColor:
+                                Theme.of(context).colorScheme.onTertiary,
+                            tabs: const [
+                              SizedBox(
+                                width: double.infinity,
+                                child: Tab(text: "スキャン"),
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                child: Tab(text: "マイQRコード"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          body: SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      QRView(
-                        key: qrKey,
-                        onQRViewCreated: (controller) async {
-                          this.controller = controller;
-                          controller.pauseCamera();
-                          controller.resumeCamera();
-                          controller.scannedDataStream.listen(
-                            (scanData) async {
-                              loading.value = true;
-                              await friendCTL.testFriendAdd(
-                                usersState!.uid,
-                                scanData.code.toString(),
-                              );
-                              loading.value = false;
-                            },
-                          );
-                        },
-                        overlay: QrScannerOverlayShape(
-                          borderColor: Colors.white,
-                          overlayColor: Colors.black.withOpacity(0.6),
-                          borderRadius: 10,
-                          borderLength: 30,
-                          borderWidth: 10,
-                          cutOutSize: 270,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Stack(
-                                  children: [
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.6,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.white),
-                                            ),
-                                            child: Center(
-                                              child: QrImage(
-                                                size: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    2,
-                                                data:
-                                                    usersState!.uid.toString(),
-                                                version: QrVersions.auto,
-                                                foregroundColor: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 40),
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 90),
-                                            child: Text(
-                                              "QRコードを読み取って、友達を追加しましょう。",
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Icon(
-                                            Icons.close,
-                                            size: 40,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            height: 45,
-                            width: 200,
-                            padding: const EdgeInsets.only(left: 12),
-                            margin: const EdgeInsets.only(bottom: 40),
-                            decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.circular(300),
-                            ),
-                            child: Center(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Icon(
-                                    Icons.qr_code,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    "マイQRコード",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 170,
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(1, 1),
-                        color: Colors.grey,
-                        blurRadius: 3,
-                      ),
-                    ],
-                  ),
+          loading.value
+              ? Container(
+                  color: Colors.grey.withOpacity(0.5),
                   child: const Center(
-                    child: Text(
-                      "QRコードをスキャンして友達追加などの機能を利用できます。",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+                    child: CircularProgressIndicator(),
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        loading.value
-            ? Container(
-                color: Colors.grey.withOpacity(0.5),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-            : const SizedBox(),
-      ],
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 }

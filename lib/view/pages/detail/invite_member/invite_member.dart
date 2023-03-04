@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/enums.dart';
 import '../../../../view_model/friend_controller.dart';
 import '../../../../view_model/target_controller.dart';
-import '../../../../view_model/target_init_controller.dart';
 import 'widgets/member_tile.dart';
 import '../../../component/lottie_loading.dart';
 
@@ -23,8 +22,7 @@ class InviteMember extends HookConsumerWidget {
     final target = ref.watch(targetControllerProvider);
     final ValueNotifier<List<String>> newMembers = useState([]);
     final flg = useState(TargetInitFlg.inputing);
-    final targetInitCTL =
-        ref.watch(targetInitControllerProvider(null).notifier);
+    final targetCTL = ref.watch(targetControllerProvider.notifier);
 
     return target.when(
       data: (data) {
@@ -44,7 +42,7 @@ class InviteMember extends HookConsumerWidget {
                     onPressed: () async {
                       if (newMembers.value.isNotEmpty) {
                         flg.value = TargetInitFlg.creating;
-                        await targetInitCTL.updateMember(
+                        await targetCTL.updateMember(
                           target.members,
                           newMembers.value,
                           docId,
@@ -54,14 +52,7 @@ class InviteMember extends HookConsumerWidget {
                       }
                     },
                     padding: const EdgeInsets.only(right: 10),
-                    icon: const Text(
-                      "追加",
-                      // style: theme.textTheme.fs16.copyWith(
-                      //   color: newMembers.value.isNotEmpty
-                      //       ? Colors.white
-                      //       : const Color.fromARGB(255, 205, 205, 205),
-                      // ),
-                    ),
+                    icon: const Text("追加"),
                   ),
                 ],
               ),

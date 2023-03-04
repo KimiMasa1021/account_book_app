@@ -1,6 +1,6 @@
+import 'package:account_book_app/view/component/custom_nav_bar.dart';
 import 'package:account_book_app/view/pages/home/home.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/enums.dart';
@@ -23,29 +23,46 @@ class RootPage extends HookConsumerWidget {
       const Setting(),
     ];
     final pageState = ref.watch(pageTypeProvider);
+    const iconSize = 33.0;
+    final iconColor = Theme.of(context).colorScheme.onTertiary;
+
     final tabItems = [
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.savings_outlined),
-        activeIcon: Icon(Icons.savings),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.savings_outlined,
+          size: iconSize,
+          color: iconColor,
+        ),
+        activeIcon: Icon(
+          Icons.savings,
+          size: iconSize,
+          color: iconColor,
+        ),
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.settings_outlined),
-        activeIcon: Icon(Icons.settings),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.settings_outlined,
+          size: iconSize,
+          color: iconColor,
+        ),
+        activeIcon: Icon(
+          Icons.settings,
+          size: iconSize,
+          color: iconColor,
+        ),
       ),
     ];
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
       child: Scaffold(
         body: pageList[pageState.index],
-        bottomNavigationBar: CupertinoTabBar(
+        bottomNavigationBar: CustomNavBar(
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          items: tabItems,
           currentIndex: pageState.index,
-          height: 60,
           onTap: (index) {
             ref.watch(pageTypeProvider.notifier).state = PageType.values[index];
           },
-          items: tabItems,
-          border: const Border(),
-          iconSize: 33,
         ),
       ),
     );

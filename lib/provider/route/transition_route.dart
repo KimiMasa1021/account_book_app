@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-//  スライドアニメーション
-CustomTransitionPage buildPageWithDefaultTransition<T>({
+//  横スライドアニメーション
+CustomTransitionPage horizontalSlideTransition<T>({
   required BuildContext context,
   required GoRouterState state,
   required Widget child,

@@ -20,7 +20,7 @@ enum TargetInitFlg {
   complete,
 }
 
-// ユーザーの操作の状態
+// ユーザーの操作の状態 lottie loadingで使う
 enum WebViewType {
   privacyPolicy,
   appHint,

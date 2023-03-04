@@ -1,8 +1,9 @@
 import 'package:account_book_app/model/saving/tags_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../theme/app_text_theme.dart';
 
-class Tag extends HookConsumerWidget {
+class Tag extends ConsumerWidget {
   const Tag({
     super.key,
     required this.tagValue,
@@ -13,14 +14,16 @@ class Tag extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return InkWell(
       onTap: () {
         tagValue.value = tag.id;
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Row(
@@ -40,7 +43,7 @@ class Tag extends HookConsumerWidget {
             const SizedBox(width: 10),
             Text(
               tag.tag,
-              // style: theme.textTheme.fs19,
+              style: font.fs16,
             )
           ],
         ),

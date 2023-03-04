@@ -68,11 +68,14 @@ class SavingPersonPanel extends HookConsumerWidget {
                       ],
                     ),
                   ),
-                  Transform.rotate(
-                    angle: isOpen.value ? 90 * pi / 180 : 0,
-                    child: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Transform.rotate(
+                      angle: isOpen.value ? 90 * pi / 180 : 0,
+                      child: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
                     ),
                   ),
                 ],

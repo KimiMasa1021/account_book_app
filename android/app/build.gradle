@@ -26,23 +26,14 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
-def dartEnvironmentVariables = [:];
-if (project.hasProperty('dart-defines')) {
-    dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
-        .split(',')
-        .collectEntries { entry ->
-            def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
-            [(pair.first()): pair.last()]
-        }
-}
-
+// アプリアイコンのコピペ
 task copySources(type: Copy) {
-   from "src/${dartEnvironmentVariables.FLAVOR}/res"
+   from "src/$flavor/res"
    into 'src/main/res'
 }
-
+// google services.jsonのコピペ
 task selectGoogleServicesJson(type: Copy) {
-    from "src/${dartEnvironmentVariables.FLAVOR}/google-services.json"
+    from "src/$flavor/google-services.json"
     into './'
 }
 
@@ -53,13 +44,12 @@ tasks.whenTaskAdded { task ->
     }
 }
 
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
+
 android {  
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
@@ -78,20 +68,17 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.kmass.account_book_app"
+        applicationIdSuffix appIdSuffix
         minSdkVersion 23
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-
-        if (dartEnvironmentVariables.FLAVOR != 'prod') {
-            applicationIdSuffix ".${dartEnvironmentVariables.FLAVOR}"
-        }
-        resValue "string", "app_name", "FlutterAT" + 
-            (dartEnvironmentVariables.FLAVOR == 'prod' ? '' : ".${dartEnvironmentVariables.FLAVOR}")
+        multiDexEnabled true
+        resValue "string", "app_name", appName
 
     }
-     signingConfigs {
+
+    signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
@@ -99,7 +86,6 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-
     buildTypes {
         release {
             shrinkResources false
@@ -118,6 +104,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.airbnb.android:lottie:5.2.0' 
-    implementation "androidx.constraintlayout:constraintlayout:2.1.0"
 }
+apply plugin: 'com.google.gms.google-services' 

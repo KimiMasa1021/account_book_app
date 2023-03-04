@@ -26,14 +26,14 @@ class SavingAddButton extends HookConsumerWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Theme.of(context).colorScheme.tertiaryContainer,
+          color: Theme.of(context).colorScheme.secondary,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.add_box_outlined,
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onSecondary,
               size: 35,
             ),
             const SizedBox(width: 10),
@@ -41,7 +41,7 @@ class SavingAddButton extends HookConsumerWidget {
               "節約記録追加",
               style: font.fs21.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
           ],

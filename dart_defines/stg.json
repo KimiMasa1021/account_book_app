@@ -1,0 +1,7 @@
+{
+    "flavor": "stg",
+    "appId": "com.kmass.account_book_app",
+    "appIdSuffix": "stg",
+    "appName": "共同貯金箱-Savegy(サベジー)-stg",
+    "bundleIdentifier": "com.kmass.account_book_app.stg"
+}

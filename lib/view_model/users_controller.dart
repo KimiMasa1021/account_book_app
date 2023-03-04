@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import '../model/enums.dart';
 import '../model/user/users_state.dart';
 import '../repository/users_repository.dart';
+import '../view/component/picture_dialog.dart';
 
 final usersControllerProvider =
     StateNotifierProvider.autoDispose<UsersController, UsersState?>(
@@ -22,7 +25,7 @@ class UsersController extends StateNotifier<UsersState> {
         .listen((data) => state = data!);
   }
 
-  void shwoToast(String msg) {
+  void showToast(String msg) {
     Fluttertoast.showToast(
       msg: msg,
       toastLength: Toast.LENGTH_LONG,
@@ -35,20 +38,19 @@ class UsersController extends StateNotifier<UsersState> {
   }
 
   final picker = ImagePicker();
-  Future<void> getImage(ValueNotifier<File?> value, ImageSource source) async {
+  Future<File?> getImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(
       source: source,
       imageQuality: 80,
     );
     if (pickedFile == null) {
-      value.value = null;
-      return;
+      return null;
     }
     final croppedFile = await cropImage(pickedFile.path);
     if (croppedFile == null) {
-      return;
+      return null;
     }
-    value.value = File(croppedFile.path);
+    return File(croppedFile.path);
   }
 
   Future<File?> cropImage(String path) async {
@@ -74,14 +76,53 @@ class UsersController extends StateNotifier<UsersState> {
     return File(croppedFile.path);
   }
 
-  Future<void> updateImage(File image, Function() function) async {
-    final url = await ref.read(usersRepositoryProvider).uploadImage(image);
-    await ref.read(usersRepositoryProvider).saveImageUrl(url);
-    function();
+  Future<void> editProfile(
+    File? image,
+    String newUserName,
+    ValueNotifier<File?> imageFile,
+    String preUserName,
+    TextEditingController controller,
+    ValueNotifier<TargetInitFlg> flg,
+  ) async {
+    primaryFocus?.unfocus();
+    if (imageFile.value == null && preUserName == controller.text) {
+      return;
+    }
+    flg.value = TargetInitFlg.creating;
+    String? imageUrl;
+    if (image != null) {
+      imageUrl = await ref.read(usersRepositoryProvider).uploadImage(image);
+    }
+    await ref.read(usersRepositoryProvider).editProfile(imageUrl, newUserName);
+    await Future.delayed(const Duration(seconds: 2));
+    flg.value = TargetInitFlg.complete;
   }
 
-  Future<void> reName(String newName, Function() function) async {
-    await ref.read(usersRepositoryProvider).reName(newName);
-    function();
+  Future<void> pickEditImage(
+    BuildContext context,
+    ValueNotifier<File?> imageFile,
+  ) async {
+    showDialog(
+      context: context,
+      builder: (context) => PictureDialog(
+        cameraFunction: () async {
+          imageFile.value = await getImage(ImageSource.camera);
+        },
+        galleryFunction: () async {
+          imageFile.value = await getImage(ImageSource.gallery);
+        },
+        deleteFunction: () {
+          imageFile.value = null;
+        },
+      ),
+    );
+  }
+
+  void copyTextWithToast(
+    String copyText,
+    String message,
+  ) {
+    Clipboard.setData(ClipboardData(text: copyText));
+    showToast(message);
   }
 }

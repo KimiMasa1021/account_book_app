@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../utility/hex_color.dart';
+import '../theme/app_text_theme.dart';
 
 class ShadowButton extends HookConsumerWidget {
   const ShadowButton({
@@ -14,6 +14,8 @@ class ShadowButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return InkWell(
       onTap: () async {
         await function();
@@ -25,9 +27,11 @@ class ShadowButton extends HookConsumerWidget {
             width: double.infinity,
             height: 45,
             decoration: BoxDecoration(
-              border: Border.all(),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
               borderRadius: BorderRadius.circular(5),
-              color: HexColor("#00F741"),
+              color: Theme.of(context).backgroundColor,
             ),
           ),
           Positioned(
@@ -39,14 +43,18 @@ class ShadowButton extends HookConsumerWidget {
               width: double.infinity,
               height: 45,
               decoration: BoxDecoration(
-                border: Border.all(),
-                color: Colors.white,
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Center(
                 child: Text(
                   text,
-                  // style: theme.textTheme.fs19,
+                  style: font.fs19.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               ),
             ),

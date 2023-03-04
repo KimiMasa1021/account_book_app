@@ -1,14 +1,17 @@
-import 'package:account_book_app/utility/hex_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../utility/assets_url.dart';
 import '../../../view_model/friend_controller.dart';
 import '../../../view_model/target_init_controller.dart';
 import '../../../view_model/users_controller.dart';
+import '../../theme/app_text_theme.dart';
 import 'widgets/friend_tile_with_radio.dart';
 import '../../../provider/route/routes.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class TargetAddMember extends HookConsumerWidget {
+class TargetAddMember extends ConsumerWidget {
   const TargetAddMember({super.key});
 
   @override
@@ -16,39 +19,26 @@ class TargetAddMember extends HookConsumerWidget {
     final userState = ref.watch(usersControllerProvider);
     final friends = ref.watch(friendsControllerProvider);
     final targetInit = ref.watch(targetInitControllerProvider(null));
+    final font = ref.watch(myTextTheme);
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text(
-          "メンバーを選択",
-          // style: theme.textTheme.fs19,
-        ),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-        ),
+        title: const Text("メンバーを選択"),
         leading: InkWell(
           onTap: () {
             context.pop();
           },
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
+          child: const Icon(Icons.arrow_back),
         ),
-        backgroundColor: HexColor("#70D4F7"),
         actions: [
           IconButton(
             onPressed: () {
               context.pushNamed(Routes.name().addProjectDetails);
             },
             padding: const EdgeInsets.only(right: 10),
-            icon: const Text(
-              "次へ",
-              // style: theme.textTheme.fs16.copyWith(
-              //   color: Colors.black,
-              // ),
-            ),
+            icon: const Text("次へ"),
           ),
         ],
       ),
@@ -57,10 +47,10 @@ class TargetAddMember extends HookConsumerWidget {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: HexColor("#70D4F7"),
+              color: Theme.of(context).cardColor,
               borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
               ),
             ),
             child: SingleChildScrollView(
@@ -97,50 +87,60 @@ class TargetAddMember extends HookConsumerWidget {
                               ],
                             ),
                           ),
-                          const Text(
+                          Text(
                             "あなた",
-                            // style: theme.textTheme.fs16,
+                            style: font.fs16.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
                           )
                         ],
                       ),
                     ),
                     ...List.generate(
                       targetInit.selectedUserList.length,
-                      (index) => SizedBox(
-                        width: 60,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 55,
-                              height: 55,
-                              margin: const EdgeInsets.only(bottom: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                image:
-                                    targetInit.selectedUserList[index].img != ""
-                                        ? DecorationImage(
-                                            image: NetworkImage(
-                                              targetInit
-                                                  .selectedUserList[index].img,
-                                            ),
-                                          )
-                                        : null,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 6,
-                                  )
-                                ],
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: SizedBox(
+                          width: 60,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 55,
+                                height: 55,
+                                margin: const EdgeInsets.only(bottom: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                  image:
+                                      targetInit.selectedUserList[index].img !=
+                                              ""
+                                          ? DecorationImage(
+                                              image: NetworkImage(
+                                                targetInit
+                                                    .selectedUserList[index]
+                                                    .img,
+                                              ),
+                                            )
+                                          : null,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      offset: const Offset(0, 0),
+                                      blurRadius: 6,
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            Text(
-                              targetInit.selectedUserList[index].name,
-                              // style: theme.textTheme.fs16,
-                              overflow: TextOverflow.ellipsis,
-                            )
-                          ],
+                              Text(
+                                targetInit.selectedUserList[index].name,
+                                style: font.fs16.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     )
@@ -149,20 +149,81 @@ class TargetAddMember extends HookConsumerWidget {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: ListView.builder(
-                itemCount: friends.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return FriendTileWithRadio(
-                    usersState: friends[index],
-                  );
-                },
-              ),
-            ),
-          ),
+          friends.isNotEmpty
+              ? SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      child: ListView.builder(
+                        itemCount: friends.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return FriendTileWithRadio(
+                            usersState: friends[index],
+                          );
+                        },
+                      )),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          SvgUrl.team.url,
+                          height: size.width / 3,
+                          width: size.width / 3,
+                        ),
+                        Text(
+                          "現在フレンドが登録されてません",
+                          style: font.fs19.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "フレンドを登録することでメンバーとして招待することができます！！",
+                          style: font.fs19.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
+                            context.pushNamed(Routes.name().userProfile);
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              vertical: 20,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                            ),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "フレンド登録はこちら！",
+                                style: font.fs16.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color:
+                                      Theme.of(context).colorScheme.onSecondary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
         ],
       ),
     );

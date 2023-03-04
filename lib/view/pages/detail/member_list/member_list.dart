@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
-import '../../../../view_model/target_members_controller.dart';
+import '../../../../view_model/search_users_controller.dart';
 import '../../../component/friend_tile.dart';
 
 class MemberList extends HookConsumerWidget {
@@ -14,7 +14,7 @@ class MemberList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final targetMembers =
-        ref.watch(targetMembersControllerProvider(target.members));
+        ref.watch(searchUsersControllerProvider(target.members));
     return Scaffold(
       appBar: AppBar(
         title: const Text("メンバーリスト"),

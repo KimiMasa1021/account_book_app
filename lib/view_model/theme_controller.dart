@@ -16,10 +16,10 @@ class ThemeController extends StateNotifier<ExThemeMode> {
   int? id;
   static String key = "theme_key";
 
-  ThemeController(this.ref, this.id) : super(ExThemeMode.tea) {
+  ThemeController(this.ref, this.id) : super(ExThemeMode.theme1) {
     state = ExThemeMode.values.firstWhere(
       (e) => e.id == id,
-      orElse: () => ExThemeMode.tea,
+      orElse: () => ExThemeMode.theme1,
     );
   }
 

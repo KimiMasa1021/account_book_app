@@ -14,8 +14,7 @@ final usersRepositoryProvider =
 abstract class UsersRepository {
   Stream<UsersState?> feachGenreList();
   Future<String> uploadImage(File image);
-  Future<void> saveImageUrl(String url);
-  Future<void> reName(String newName);
+  Future<void> editProfile(String? url, String newName);
 }
 
 class GenreRepositoryImple implements UsersRepository {
@@ -51,18 +50,18 @@ class GenreRepositoryImple implements UsersRepository {
   }
 
   @override
-  Future<void> saveImageUrl(String url) async {
-    await collectionReference!.doc(userId).update({
-      'img': url,
-    });
-  }
-
-  @override
-  Future<void> reName(String newName) async {
+  Future<void> editProfile(String? url, String newName) async {
     try {
-      await collectionReference!.doc(userId).update({
-        'name': newName,
-      });
+      if (url != null) {
+        await collectionReference!.doc(userId).update({
+          'img': url,
+          'name': newName,
+        });
+      } else {
+        await collectionReference!.doc(userId).update({
+          'name': newName,
+        });
+      }
     } on FirebaseAuthException catch (e) {
       debugPrint(e.code.toString());
     }

@@ -39,7 +39,7 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
             TextEditingController(text: target!.targetPrice.toString()),
         targetDescriptionController:
             TextEditingController(text: target!.targetDescription),
-        targetDateController: target!.registeTime,
+        targetDateController: target!.targetDate,
       );
     }
   }
@@ -64,12 +64,12 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
   Future<File?> cropImage(String path) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
-      cropStyle: CropStyle.rectangle,
+      cropStyle: CropStyle.circle,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       compressQuality: 80,
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: '画像の位置選択',
+          toolbarTitle: '画像の切り取り',
           toolbarColor: const Color.fromARGB(255, 255, 0, 0),
           toolbarWidgetColor: Colors.white,
           lockAspectRatio: true,
@@ -150,10 +150,6 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
       shwoToast("目標は３文字以上設定しよう！");
       return false;
     }
-    // if (state.targetPriceController!.text.length ) {
-    //   shwoToast("目標金額は0円以上にしよう!");
-    //   return false;
-    // }
     return true;
   }
 
@@ -172,7 +168,7 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
   Future<void> updateTarget(TargetState target, String docId) async {
     final url = state.file != null
         ? await ref.read(usersRepositoryProvider).uploadImage(state.file!)
-        : "";
+        : target.img;
     final price =
         int.parse(state.targetPriceController!.text.replaceAll(",", ""));
 
@@ -184,18 +180,10 @@ class TargetInitCntroller extends StateNotifier<TargetInit> {
       targetDate: state.targetDateController!,
       members: target.members,
       img: url,
+      docId: target.docId,
     );
     await ref
         .read(targetInitRepositoryProvider)
         .updateTarget(targetState, docId);
-  }
-
-  Future<void> updateMember(
-    List<String> preMembers,
-    List<String> newMembers,
-    String docId,
-  ) async {
-    final member = [...preMembers, ...newMembers];
-    await ref.read(targetInitRepositoryProvider).updateMember(member, docId);
   }
 }

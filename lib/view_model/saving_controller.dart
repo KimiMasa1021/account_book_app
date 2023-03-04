@@ -1,9 +1,12 @@
+import 'package:account_book_app/repository/target_init_repository.dart';
 import 'package:account_book_app/repository/target_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/saving/saving_state.dart';
+import '../model/saving/tags_state.dart';
+import '../model/target/target_state.dart';
 import '../utility/price_formatter.dart';
 import 'auth_controller.dart';
 
@@ -19,27 +22,51 @@ class SavingController extends StateNotifier<List<SavingState>> {
     });
   }
   Future<void> addSaving(
-    String productId,
-    String memo,
-    String price,
-    Function() fucntion,
+    TextEditingController priceController,
+    ValueNotifier<int?> tagValue,
+    TargetState target,
+    List<SavingState> saving,
+    List<Tags> tags,
+    ValueNotifier<bool> flg,
+    Function() function,
   ) async {
-    final priceInt = int.parse(price.replaceAll(",", ""));
-    final uid = ref.read(authControllerProvider)!.uid;
-    final state = SavingState(
-      createdAt: DateTime.now(),
-      price: priceInt,
-      productId: productId,
-      userId: uid,
-      memo: memo,
-    );
-    await ref.read(targetRepositoryProvider).addSaving(state);
-    fucntion();
+    if (checkSavingAdd(
+      priceController,
+      tagValue,
+    )) {
+      flg.value = true;
+      final priceList = saving
+          .where((e) => e.productId == target.docId)
+          .map((e) => e.price)
+          .toList();
+      int sum;
+      if (priceList.isEmpty) {
+        sum = 0;
+      } else {
+        sum = priceList.reduce((a, b) => a + b);
+      }
+      final priceInt = int.parse(priceController.text.replaceAll(",", ""));
+      final uid = ref.read(authControllerProvider)!.uid;
+      final state = SavingState(
+        createdAt: DateTime.now(),
+        price: priceInt,
+        productId: target.docId,
+        userId: uid,
+        memo: tags.singleWhere((e) => e.id == tagValue.value).tag,
+      );
+      await ref.read(targetRepositoryProvider).addSaving(state);
+      await ref.read(targetInitRepositoryProvider).updateTotalSaving(
+            target.targetPrice > sum + priceInt ? false : true,
+            target.docId,
+          );
+      flg.value = false;
+      function();
+    }
   }
 
   String formatYen(int targetPrice) {
     final numberFormat = NumberFormat(',###');
-    return '${numberFormat.format(targetPrice)}円';
+    return numberFormat.format(targetPrice);
   }
 
   String formatDate(DateTime date) {
@@ -59,19 +86,14 @@ class SavingController extends StateNotifier<List<SavingState>> {
     List<SavingState> savingList,
     ValueNotifier<DateTime> date,
   ) async {
-    //週初め？？
     final startWeekDate =
         date.value.subtract(Duration(days: date.value.weekday - 1));
-
-    //週末
     final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
-
     final weekSavingList = savingList.where(
       (e) =>
           e.createdAt.isBefore(endWeekDate) &&
           e.createdAt.isAfter(startWeekDate),
     );
-
     return List.generate(7, (index) {
       final weeklySaving = weekSavingList
           .where((e) => e.createdAt.weekday == index + 1)
@@ -118,13 +140,15 @@ class SavingController extends StateNotifier<List<SavingState>> {
     int index,
     TextEditingController priceController,
   ) {
-    if (index != 3) {
+    if (index != 3 && index != 4) {
       final preText = priceController.text;
-      final tapedText = index >= 4 && index <= 9
-          ? index.toString()
-          : index == 10
-              ? "0"
-              : (index + 1).toString();
+      final tapedText = index >= 0 && index <= 2
+          ? (index + 1).toString()
+          : index >= 5 && index <= 10
+              ? (index - 1).toString()
+              : index == 11
+                  ? 0.toString()
+                  : "0";
       final newText = preText + tapedText;
 
       priceController.value = CustomTextInputFormatter().formatEditUpdate(
@@ -140,6 +164,8 @@ class SavingController extends StateNotifier<List<SavingState>> {
         TextEditingValue(text: preText),
         TextEditingValue(text: newText),
       );
+      return;
+    } else if (index == 4) {
       return;
     }
   }

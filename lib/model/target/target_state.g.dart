@@ -21,6 +21,7 @@ _$_TargetState _$$_TargetStateFromJson(Map<String, dynamic> json) =>
       targetDate:
           const TimestampConverter().fromJson(json['targetDate'] as Timestamp),
       img: json['img'] as String? ?? "",
+      isCompleted: json['isCompleted'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_TargetStateToJson(_$_TargetState instance) =>
@@ -33,4 +34,5 @@ Map<String, dynamic> _$$_TargetStateToJson(_$_TargetState instance) =>
       'targetPrice': instance.targetPrice,
       'targetDate': const TimestampConverter().toJson(instance.targetDate),
       'img': instance.img,
+      'isCompleted': instance.isCompleted,
     };

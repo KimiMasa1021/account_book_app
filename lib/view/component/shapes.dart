@@ -33,13 +33,13 @@ class RightShape extends ShapeBorder {
       ..lineTo(rect.left + gap, rect.bottom - edge)
       ..lineTo(rect.right - 20, rect.bottom - edge)
       ..arcToPoint(
-        Offset(rect.right - 20, rect.bottom - edge - 20),
+        Offset(rect.right - 20, rect.bottom - edge - 25),
         radius: const Radius.circular(5),
         clockwise: false,
       )
-      ..lineTo(rect.left + gap, rect.bottom - 25)
       ..lineTo(rect.left + gap, rect.bottom - 30)
-      ..lineTo(rect.left, rect.bottom - 30)
+      ..lineTo(rect.left + gap, rect.bottom - 35)
+      ..lineTo(rect.left, rect.bottom - 35)
       ..arcToPoint(
         Offset(rect.left, rect.top + edge),
         radius: const Radius.circular(36),
@@ -82,13 +82,13 @@ class LeftShape extends ShapeBorder {
       ..lineTo(rect.right - gap, rect.top + edge)
       ..lineTo(rect.right, rect.top + edge)
       ..arcToPoint(
-        Offset(rect.right, rect.bottom - 30),
+        Offset(rect.right, rect.bottom - 35),
         radius: const Radius.circular(36),
         clockwise: false,
       )
+      ..lineTo(rect.right - gap, rect.bottom - 35)
       ..lineTo(rect.right - gap, rect.bottom - 30)
-      ..lineTo(rect.right - gap, rect.bottom - 25)
-      ..lineTo(rect.left + 20, rect.bottom - 25)
+      ..lineTo(rect.left + 20, rect.bottom - 30)
       ..arcToPoint(
         Offset(rect.left + 20, rect.bottom - 5),
         radius: const Radius.circular(5),

@@ -9,13 +9,14 @@ class Routes {
     required this.editProject,
     required this.addSaving,
     required this.friendManagement,
-    required this.addFriendDescription,
+    required this.userProfile,
     required this.scanQr,
     required this.memberList,
     required this.inviteMember,
     required this.designManagement,
     required this.accountManagement,
     required this.webView,
+    required this.addTag,
   });
   final String root;
   final String auth;
@@ -26,42 +27,39 @@ class Routes {
   final String editProject;
   final String addSaving;
   final String friendManagement;
-  final String addFriendDescription;
+  final String userProfile;
   final String scanQr;
   final String memberList;
   final String inviteMember;
   final String designManagement;
   final String accountManagement;
   final String webView;
-
+  final String addTag;
   factory Routes.name() {
     return const Routes(
-      root: "root",
-      auth: "auth",
-      addProjectMember: "addProjectMember",
-      addProjectDetails: "addProjectDetails",
-      addProjectImage: "addProjectImage",
-      projectDetails: "projectDetails",
-      editProject: "editProject",
-      addSaving: "addSaving",
-      friendManagement: "friendManagement",
-      addFriendDescription: "addFriendDescription",
-      scanQr: "scanQr",
-      memberList: "memberList",
-      inviteMember: "inviteMember",
-      designManagement: "designManagement",
-      accountManagement: "accountManagement",
-      webView: "webView",
-    );
+        root: "root",
+        auth: "auth",
+        addProjectMember: "addProjectMember",
+        addProjectDetails: "addProjectDetails",
+        addProjectImage: "addProjectImage",
+        projectDetails: "projectDetails",
+        editProject: "editProject",
+        addSaving: "addSaving",
+        friendManagement: "friendManagement",
+        userProfile: "userProfile",
+        scanQr: "scanQr",
+        memberList: "memberList",
+        inviteMember: "inviteMember",
+        designManagement: "designManagement",
+        accountManagement: "accountManagement",
+        webView: "webView",
+        addTag: "addTag");
   }
 
   factory Routes.path() {
     return const Routes(
-      // ログイン
       auth: "/auth",
-      //ボトムバー
       root: "/root",
-      //　ホームタブ
       addProjectMember: "add_project_member",
       addProjectDetails: "add_project_details",
       addProjectImage: "add_project_image",
@@ -69,15 +67,14 @@ class Routes {
       editProject: "edit_project/:targetId",
       memberList: "memberList",
       inviteMember: "invite_member/:targetId",
-      addSaving: "add_saving/:targetId",
-      //　設定タブ
+      addSaving: "add_saving",
       friendManagement: "friend_management",
-      addFriendDescription: "add_friend_description",
+      userProfile: "userProfile",
       scanQr: "scan_qr",
       designManagement: "design_management",
       accountManagement: "account_management",
-      //その他
       webView: "web_view",
+      addTag: "add_tag",
     );
   }
 }

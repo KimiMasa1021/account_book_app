@@ -31,6 +31,3 @@ class MyApp extends HookConsumerWidget {
     );
   }
 }
-//GoRouter.of(context).push('/tab'); // スタックで操作する場合
-// GoRouter.of(context).go('/tab'); // 現ルートと入れ替える場合
-// context.go('/tab'); // 現ルートと入れ替える場合

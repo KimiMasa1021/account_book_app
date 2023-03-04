@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:account_book_app/model/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -29,7 +28,8 @@ class WebViewPage extends StatelessWidget {
         url = "https://pub.dev/packages/webview_flutter/example";
         break;
       case WebViewType.appHint:
-        url = "https://colorhunt.co/";
+        url =
+            "https://golden-carriage-07f.notion.site/dd3dafa896694577a4611cfd8cd2de0d";
         break;
 
       default:
@@ -60,18 +60,16 @@ class WebViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
       ),
       body: Column(
         children: [
-          Expanded(
-            child: WebView(
-              initialUrl: url,
-              javascriptMode: JavascriptMode.unrestricted,
-              onWebViewCreated: _controller.complete,
-            ),
-          )
+          // Expanded(
+          //   child: WebViewWidget(
+          //     initialUrl: url,
+          //     javascriptMode: JavascriptMode.unrestricted,
+          //     onWebViewCreated: _controller.complete,
+          //   ),
+          // )
         ],
       ),
     );

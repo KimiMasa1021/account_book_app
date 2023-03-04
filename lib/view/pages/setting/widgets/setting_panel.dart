@@ -23,27 +23,34 @@ class SettingPanel extends HookConsumerWidget {
         await function();
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               child: Icon(
                 icon,
-                size: 35,
-                color: Theme.of(context).colorScheme.onSurface,
+                size: 30,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
-            Text(
-              text,
-              style: font.fs16.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                text,
+                style: font.fs16.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
             ),
             const Spacer(),
             Icon(
               Icons.arrow_forward_ios,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Theme.of(context).colorScheme.onBackground,
             )
           ],
         ),

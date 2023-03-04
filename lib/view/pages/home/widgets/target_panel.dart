@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
 import '../../../../view_model/saving_controller.dart';
@@ -38,26 +38,26 @@ class TargetPanel extends HookConsumerWidget {
       },
       child: Container(
         width: double.infinity,
-        height: 115,
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        height: 120,
+        margin: const EdgeInsets.symmetric(vertical: 5),
         child: Stack(
           children: [
             Row(
               children: [
                 Container(
-                  height: 115,
+                  height: 120,
                   width: 45,
                   decoration: ShapeDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.surface,
                     shape: LeftShape(),
                   ),
                 ),
                 const SizedBox(width: 2),
                 Expanded(
                   child: Container(
-                    height: 115,
+                    height: 120,
                     decoration: ShapeDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.surface,
                       shape: RightShape(),
                     ),
                     child: Padding(
@@ -76,7 +76,7 @@ class TargetPanel extends HookConsumerWidget {
                           Text(
                             state.targetDescription,
                             style: font.fs16.copyWith(
-                              color: Theme.of(context).colorScheme.onSecondary,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -88,82 +88,44 @@ class TargetPanel extends HookConsumerWidget {
                 ),
               ],
             ),
-            Container(
-              height: 70,
-              width: 70,
-              padding: const EdgeInsets.all(15),
-              margin: const EdgeInsets.only(top: 10, left: 11),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
-                image: state.img != ""
-                    ? DecorationImage(
-                        image: NetworkImage(
-                          state.img,
-                        ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, left: 11),
+              child: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                radius: 35,
+                foregroundImage: state.img != ""
+                    ? CachedNetworkImageProvider(
+                        state.img,
                       )
                     : null,
+                child: Text(
+                  state.target.substring(0, 2),
+                  style: font.fs19.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
               ),
-              child: state.img == ""
-                  ? FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text(
-                        state.target.substring(0, 1),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                      ),
-                    )
-                  : const SizedBox(),
             ),
             Positioned(
               bottom: 8.5,
-              left: 14,
+              left: 11,
               child: SizedBox(
-                height: 13,
-                width: size.width - 58,
+                height: 18,
+                width: size.width - 52,
                 child: FractionallySizedBox(
                   alignment: Alignment.centerLeft,
                   widthFactor: percent >= 1.0 ? 1.0 : percent,
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.tertiary,
                       borderRadius: BorderRadius.circular(100),
-                      // border: Border.all(),
                     ),
                   ),
                 ),
               ),
             ),
-            percent >= 1.0
-                ? Positioned(
-                    right: 10,
-                    top: 10,
-                    child: Transform.rotate(
-                      angle: -0.2,
-                      child: Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 5,
-                          ),
-                        ),
-                        child: FittedBox(
-                          child: Text(
-                            "済",
-                            style: GoogleFonts.yujiBoku(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
           ],
         ),
       ),

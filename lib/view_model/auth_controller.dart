@@ -32,13 +32,18 @@ class AuthController extends StateNotifier<User?> {
       }
       return credential.additionalUserInfo!.isNewUser;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("ログイン失敗$e");
       throw e.toString();
     }
   }
 
   Future<void> signOut(Function() function) async {
     await ref.read(authRepositoryProvider).signOut();
+    function();
+  }
+
+  Future<void> deryFuture(Function() function) async {
+    await Future.delayed(const Duration(seconds: 2));
     function();
   }
 

@@ -1,15 +1,17 @@
 import 'package:account_book_app/provider/route/routes.dart';
-import 'package:account_book_app/view/pages/detail/widgets/warning_dialog.dart';
+import 'package:account_book_app/view/component/lottie_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/target/target_state.dart';
+import '../../../../utility/assets_url.dart';
 import '../../../../view_model/saving_controller.dart';
+import '../../../theme/app_text_theme.dart';
 import 'widgets/drawer_info_panel.dart';
 import 'widgets/drawer_action_panel.dart';
 
-class MyDrawer extends HookConsumerWidget {
+class MyDrawer extends ConsumerWidget {
   const MyDrawer({super.key, required this.target});
   final TargetState target;
 
@@ -18,6 +20,7 @@ class MyDrawer extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final saving = ref.watch(savingControllerProvider);
+    final font = ref.watch(myTextTheme);
 
     final priceList = saving
         .where((e) => e.productId == target.docId)
@@ -48,37 +51,21 @@ class MyDrawer extends HookConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 70,
-                    width: 70,
-                    margin: const EdgeInsets.only(right: 7, bottom: 5),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      shape: BoxShape.circle,
-                      image: target.img != ""
-                          ? DecorationImage(
-                              image: NetworkImage(
-                                target.img,
-                              ),
-                            )
-                          : null,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          offset: const Offset(0, 0),
-                          blurRadius: 3,
-                        )
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 7, right: 5),
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      radius: 35,
+                      foregroundImage:
+                          target.img != "" ? NetworkImage(target.img) : null,
+                      child: Text(
+                        target.target.substring(0, 2),
+                        style: font.fs19.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                     ),
-                    child: target.img == ""
-                        ? FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: Text(
-                              target.target.substring(0, 3),
-                            ),
-                          )
-                        : const SizedBox(),
                   ),
                   Expanded(
                     child: Column(
@@ -86,13 +73,15 @@ class MyDrawer extends HookConsumerWidget {
                       children: [
                         Text(
                           "${target.target} ",
-                          // style: theme.textTheme.fs19.copyWith(
-                          //   fontWeight: FontWeight.bold,
-                          // ),
+                          style: font.fs19.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           target.targetDescription,
-                          // style: theme.textTheme.fs16,
+                          style: font.fs16,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -101,23 +90,91 @@ class MyDrawer extends HookConsumerWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               DrawerInfoPanel(
                 title: "目標金額",
-                content: savingCTL.formatYen(target.targetPrice),
+                content: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    children: [
+                      TextSpan(
+                        text: savingCTL.formatYen(target.targetPrice),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '円',
+                        style: font.fs16.copyWith(),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Icons.crisis_alert_sharp,
               ),
               DrawerInfoPanel(
                 title: "達成金額",
-                content: savingCTL.formatYen(sum),
+                content: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    children: [
+                      TextSpan(
+                        text: savingCTL.formatYen(sum),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '円',
+                        style: font.fs16.copyWith(),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Icons.stars,
               ),
               DrawerInfoPanel(
                 title: '達成予定日',
-                content: DateFormat('yyyy年MM月dd日').format(target.targetDate),
+                content: RichText(
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyText2,
+                    children: [
+                      TextSpan(
+                        text: DateFormat('yyyy').format(target.targetDate),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '年',
+                        style: font.fs16.copyWith(),
+                      ),
+                      TextSpan(
+                        text: DateFormat('M').format(target.targetDate),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '月',
+                        style: font.fs16.copyWith(),
+                      ),
+                      TextSpan(
+                        text: DateFormat('d').format(target.targetDate),
+                        style: font.fs27.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: '日',
+                        style: font.fs16.copyWith(),
+                      ),
+                    ],
+                  ),
+                ),
                 icon: Icons.calendar_today,
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
               DrawerActionPanel(
                 title: "プロジェクトの編集",
                 icon: Icons.settings,
@@ -154,7 +211,18 @@ class MyDrawer extends HookConsumerWidget {
                 function: () {
                   showDialog(
                     context: context,
-                    builder: (context) => const WarningDialog(),
+                    builder: (context) => LottieDialog(
+                      url: LottieUrl.warning.url,
+                      title: '注意',
+                      subTitle: '退会した場合はフレンドに招待してもらわなければ再参加出来ません。',
+                      button1Title: '退会する',
+                      onTap1: () {
+                        context.go(Routes.path().root);
+                      },
+                      onTap2: () {
+                        context.pop();
+                      },
+                    ),
                   );
                 },
               ),

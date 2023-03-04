@@ -1,36 +1,37 @@
-import 'package:account_book_app/model/enums.dart';
-import 'package:account_book_app/provider/route/routes.dart';
-import 'package:account_book_app/provider/route/transition_route.dart';
-import 'package:account_book_app/view/pages/login/login.dart';
-import 'package:account_book_app/view/pages/add_project/target_add_image.dart';
-import 'package:account_book_app/view/pages/detail/details.dart';
-import 'package:account_book_app/view/pages/add_project/target_add_details.dart';
-import 'package:account_book_app/view/pages/add_project/target_add_member.dart';
-import 'package:account_book_app/view/pages/detail/edit_project/edit_project.dart';
-import 'package:account_book_app/view/pages/detail/invite_member/invite_member.dart';
-import 'package:account_book_app/view/pages/detail/member_list/member_list.dart';
-import 'package:account_book_app/view/pages/setting/edit_profile/accunt_management.dart';
-import 'package:account_book_app/view/pages/setting/edit_design/design_management.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/add_friend_selector.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/friend_list.dart';
-import 'package:account_book_app/view/pages/setting/edit_friends/scan_qr.dart';
-import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
-import 'package:account_book_app/view/root_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../model/enums.dart';
 import '../../model/target/target_state.dart';
-import '../../view/pages/detail/add_saving/saving_add.dart';
+import '../../model/user/users_state.dart';
+import '../../view/pages/add_project/target_add_details.dart';
+import '../../view/pages/add_project/target_add_image.dart';
+import '../../view/pages/add_project/target_add_member.dart';
+import '../../view/pages/detail/add_saving/add_saving.dart';
+import '../../view/pages/detail/add_tag/add_tag.dart';
+import '../../view/pages/detail/details.dart';
+import '../../view/pages/detail/edit_project/edit_project.dart';
+import '../../view/pages/detail/invite_member/invite_member.dart';
+import '../../view/pages/detail/member_list/member_list.dart';
+import '../../view/pages/login/login.dart';
+import '../../view/pages/setting/edit_design/edit_design.dart';
+import '../../view/pages/setting/edit_friends/friend_status.dart';
+import '../../view/pages/setting/edit_friends/scan_qr.dart';
+import '../../view/pages/setting/edit_friends/user_profile.dart';
+import '../../view/pages/setting/edit_profile/edit_profile.dart';
+import '../../view/pages/web_view/web_view_page.dart';
+import '../../view/root_page.dart';
 import 'guard.dart';
+import 'routes.dart';
+import 'transition_route.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
     refreshListenable: authStateNotifier,
-    redirect: (context, state) => noAuthGuard(ref, state),
     initialLocation: Routes.path().root,
     routes: [
-      //　ログイン画面
       GoRoute(
         path: Routes.path().auth,
         name: Routes.name().auth,
@@ -44,8 +45,6 @@ final routerProvider = Provider(
         },
         redirect: (context, state) => authGuard(ref, state),
         routes: [
-          //　プロジェクトの追加
-          // メンバー
           GoRoute(
             path: Routes.path().addProjectMember,
             name: Routes.name().addProjectMember,
@@ -74,9 +73,8 @@ final routerProvider = Provider(
             path: Routes.path().projectDetails,
             name: Routes.name().projectDetails,
             pageBuilder: (context, state) {
-              // final target = state.params['docId']! as TargetState;
               final target = state.extra as TargetState;
-              return buildPageWithDefaultTransition<void>(
+              return horizontalSlideTransition<void>(
                 context: context,
                 state: state,
                 child: HomeDetails(
@@ -90,9 +88,9 @@ final routerProvider = Provider(
             path: Routes.path().addSaving,
             name: Routes.name().addSaving,
             builder: (context, state) {
-              String targetId = state.params['targetId']!;
-              return SavingAdd(
-                docId: targetId,
+              final target = state.extra as TargetState;
+              return AddSaving(
+                target: target,
               );
             },
           ),
@@ -129,20 +127,30 @@ final routerProvider = Provider(
               );
             },
           ),
+          GoRoute(
+            path: Routes.path().addTag,
+            name: Routes.name().addTag,
+            builder: (context, state) {
+              return const AddTag();
+            },
+          ),
           //フレンド一覧
           GoRoute(
             path: Routes.path().friendManagement,
             name: Routes.name().friendManagement,
             builder: (context, state) {
-              return const FriendList();
+              return const FriendStatus();
             },
             routes: [
               //フレンド登録手段の選択　QR or Search
               GoRoute(
-                path: Routes.path().addFriendDescription,
-                name: Routes.name().addFriendDescription,
+                path: Routes.path().userProfile,
+                name: Routes.name().userProfile,
                 builder: (context, state) {
-                  return const FriendsAddDescription();
+                  final friendState = state.extra as UsersState;
+                  return UserProfile(
+                    friendState: friendState,
+                  );
                 },
                 routes: [
                   // QR SCAN
@@ -150,7 +158,7 @@ final routerProvider = Provider(
                     path: Routes.path().scanQr,
                     name: Routes.name().scanQr,
                     builder: (context, state) {
-                      return ScanQr();
+                      return const ScanQr();
                     },
                   ),
                 ],
@@ -161,14 +169,14 @@ final routerProvider = Provider(
             path: Routes.path().designManagement,
             name: Routes.name().designManagement,
             builder: (context, state) {
-              return const DesignManagement();
+              return const EditDesign();
             },
           ),
           GoRoute(
             path: Routes.path().accountManagement,
             name: Routes.name().accountManagement,
             builder: (context, state) {
-              return const AccountManagement();
+              return const EditProfile();
             },
           ),
           GoRoute(
