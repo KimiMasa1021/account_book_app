@@ -34,7 +34,7 @@ class SettingPanel extends HookConsumerWidget {
               ),
               child: Icon(
                 icon,
-                size: 30,
+                size: 25,
                 color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
@@ -50,6 +50,7 @@ class SettingPanel extends HookConsumerWidget {
             const Spacer(),
             Icon(
               Icons.arrow_forward_ios,
+              size: 20,
               color: Theme.of(context).colorScheme.onBackground,
             )
           ],

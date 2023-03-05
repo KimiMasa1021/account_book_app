@@ -58,33 +58,18 @@ class UserDataPanel extends ConsumerWidget {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "ID:${userState.uid}",
-                          style: font.fs16,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      InkWell(
-                        onTap: () {
-                          userCTL.copyTextWithToast(
-                              userState.uid, "IDをコピーしました。");
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.copy,
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    userState.email,
+                    style: font.fs16,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
           ],
         ),
