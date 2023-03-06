@@ -11,7 +11,6 @@ import '../../../../view_model/saving_controller.dart';
 import '../../../../view_model/tags_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widgets/calculator_button.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class AddSaving extends HookConsumerWidget {
   const AddSaving({
@@ -24,7 +23,7 @@ class AddSaving extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
-    final priceController = useTextEditingController(text: "");
+    final priceCTL = useTextEditingController(text: "");
     final ValueNotifier<int?> tagValue = useState(null);
     final savingCTL = ref.watch(savingControllerProvider.notifier);
     final saving = ref.watch(savingControllerProvider);
@@ -102,7 +101,7 @@ class AddSaving extends HookConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(
-                          controller: priceController,
+                          controller: priceCTL,
                           autofocus: true,
                           keyboardType: TextInputType.none,
                           style: font.fs27,
@@ -120,11 +119,167 @@ class AddSaving extends HookConsumerWidget {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     horizontal: 10,
-              //     vertical: 10,
-              //   ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 6,
+                  vertical: 6,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 1,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 4,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 7,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 2,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 5,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 8,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 3,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 6,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 9,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          CalculatorButton(
+                            aspectRatio: 1 / 2,
+                            keyType: KeyType.backSpeace,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                          CalculatorButton(
+                            aspectRatio: 1,
+                            value: 0,
+                            keyType: KeyType.number,
+                            priceCTL: priceCTL,
+                            target: target,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: CalculatorButton(
+                        aspectRatio: 1 / 3,
+                        keyType: KeyType.enter,
+                        priceCTL: priceCTL,
+                        tagValue: tagValue,
+                        target: target,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+        // flg.value
+        //     ? Material(
+        //         child: Container(
+        //           width: size.width,
+        //           height: size.height,
+        //           decoration: const BoxDecoration(),
+        //           child: Column(
+        //             mainAxisAlignment: MainAxisAlignment.center,
+        //             children: [
+        //               Lottie.asset(
+        //                 LottieUrl.catLoading.url,
+        //                 width: 230,
+        //                 height: 230,
+        //                 frameRate: FrameRate(60),
+        //                 repeat: true,
+        //               ),
+        //               Text(
+        //                 "節約記録追加中...",
+        //                 style: font.fs19.copyWith(
+        //                   fontWeight: FontWeight.bold,
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       )
+        //     : const SizedBox()
+
+
+
+                      // Padding(
+                // padding: const EdgeInsets.symmetric(
+                //   horizontal: 10,
+                //   vertical: 10,
+                // ),
               //   child: StaggeredGrid.count(
               //     crossAxisCount: 5,
               //     mainAxisSpacing: 4,
@@ -170,37 +325,3 @@ class AddSaving extends HookConsumerWidget {
               //     ),
               //   ),
               // )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-        // flg.value
-        //     ? Material(
-        //         child: Container(
-        //           width: size.width,
-        //           height: size.height,
-        //           decoration: const BoxDecoration(),
-        //           child: Column(
-        //             mainAxisAlignment: MainAxisAlignment.center,
-        //             children: [
-        //               Lottie.asset(
-        //                 LottieUrl.catLoading.url,
-        //                 width: 230,
-        //                 height: 230,
-        //                 frameRate: FrameRate(60),
-        //                 repeat: true,
-        //               ),
-        //               Text(
-        //                 "節約記録追加中...",
-        //                 style: font.fs19.copyWith(
-        //                   fontWeight: FontWeight.bold,
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       )
-        //     : const SizedBox()

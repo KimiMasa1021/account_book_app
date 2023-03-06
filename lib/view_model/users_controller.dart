@@ -94,7 +94,6 @@ class UsersController extends StateNotifier<UsersState> {
       imageUrl = await ref.read(usersRepositoryProvider).uploadImage(image);
     }
     await ref.read(usersRepositoryProvider).editProfile(imageUrl, newUserName);
-    await Future.delayed(const Duration(seconds: 2));
     flg.value = TargetInitFlg.complete;
   }
 
