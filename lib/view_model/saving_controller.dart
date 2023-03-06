@@ -38,15 +38,21 @@ class SavingController extends StateNotifier<List<SavingState>> {
     final startWeekDate =
         date.value.subtract(Duration(days: date.value.weekday - 1));
     final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
-    final weekSavingList = savingList.where(
-      (e) =>
-          e.createdAt.isBefore(endWeekDate) &&
-          e.createdAt.isAfter(startWeekDate),
-    );
+    final weekSavingList = savingList
+        .where(
+          (e) =>
+              e.createdAt
+                  .isAfter(startWeekDate.add(const Duration(days: -1))) &&
+              e.createdAt.isBefore(endWeekDate),
+        )
+        .toList();
     return List.generate(7, (index) {
       final weeklySaving = weekSavingList
           .where((e) => e.createdAt.weekday == index + 1)
-          .map((e) => e.price);
+          .map((e) => e.price)
+          .toList();
+      debugPrint("あああ${startWeekDate.isAfter(startWeekDate)}");
+
       if (weeklySaving.isEmpty) {
         return 0;
       }
