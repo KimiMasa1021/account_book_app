@@ -1,5 +1,5 @@
 {
-    "flavor": "prd",
+    "flavor": "prod",
     "appId": "com.kmass.account_book_app",
     "appIdSuffix": "",
     "appName": "共同貯金箱-Savegy(サベジー)",
