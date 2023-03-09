@@ -5,7 +5,7 @@ description: A new Flutter project.
 publish_to: 'none' 
 
 
-version: 2.1.2+18
+version: 1.0.0+1
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
@@ -43,7 +43,6 @@ dependencies:
   shared_preferences: ^2.0.18
   flutter_svg: ^2.0.0
   cached_network_image: ^3.2.3 
-  facebook_audience_network: ^1.0.1
     
 dev_dependencies:
   flutter_test:

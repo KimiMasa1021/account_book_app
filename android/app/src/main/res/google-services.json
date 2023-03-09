@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "17189190744",
+    "project_id": "account-book-app-f7754",
+    "storage_bucket": "account-book-app-f7754.appspot.com"
+  },
+  "client": [{
+    "client_info": {
+      "mobilesdk_app_id": "1:17189190744:android:64455626481f2939211e2d",
+      "android_client_info": {
+        "package_name": "com.kmass.account_book_app"
+      }
+    },
+    "oauth_client": [{
+        "client_id": "17189190744-t7up99estpe3pi574n3hr4eob772ap2i.apps.googleusercontent.com",
+        "client_type": 1,
+        "android_info": {
+          "package_name": "com.kmass.account_book_app",
+          "certificate_hash": "fd02b1c1527a48453466e9bd6729acef5cbd9618"
+        }
+      },
+      {
+        "client_id": "17189190744-af7jquu360v1rj92upib3m5astieeec9.apps.googleusercontent.com",
+        "client_type": 3
+      }
+    ],
+    "api_key": [{
+      "current_key": "AIzaSyAU9F3tPj-Qx_NzRhNM-ngo_TYoJXBbXeU"
+    }],
+    "services": {
+      "appinvite_service": {
+        "other_platform_oauth_client": [{
+          "client_id": "17189190744-af7jquu360v1rj92upib3m5astieeec9.apps.googleusercontent.com",
+          "client_type": 3
+        }]
+      }
+    }
+  }],
+  "configuration_version": "1"
+}
