@@ -39,14 +39,13 @@ class TagsController extends StateNotifier<List<Tags>> {
     );
   }
   final List<String> tagList = [
+    "通信費",
+    "光熱費",
+    "食費",
     "お菓子",
     "課金",
     "ジュース",
-    "食費",
-    "たばこ",
-    "酒",
-    "外食費",
-    "日用品",
+    "外食を控えた！",
     "被服費・美容費",
     "娯楽",
     "交通費",

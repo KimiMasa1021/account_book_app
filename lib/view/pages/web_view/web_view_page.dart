@@ -11,13 +11,13 @@ extension ExWebViewType on WebViewType {
   String get url {
     switch (this) {
       case WebViewType.privacyPolicy:
-        return "https://www.youtube.com/";
+        return "https://www.notion.so/7fb4049e6848412bbc8f84215c22498b";
       case WebViewType.aboutApp:
-        return "https://pub.dev/packages/webview_flutter/example";
+        return "https://www.notion.so/Savegy-dd3dafa896694577a4611cfd8cd2de0d";
       case WebViewType.appHint:
         return "https://golden-carriage-07f.notion.site/dd3dafa896694577a4611cfd8cd2de0d";
       default:
-        return "https://www.youtube.com/";
+        return "https://www.notion.so/Savegy-dd3dafa896694577a4611cfd8cd2de0d";
     }
   }
 }
