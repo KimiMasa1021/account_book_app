@@ -19,10 +19,3 @@ enum TargetInitFlg {
   creating,
   complete,
 }
-
-// ユーザーの操作の状態 lottie loadingで使う
-enum WebViewType {
-  privacyPolicy,
-  appHint,
-  aboutApp,
-}

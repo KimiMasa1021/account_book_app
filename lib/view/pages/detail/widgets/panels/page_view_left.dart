@@ -22,7 +22,7 @@ class PageViewLeft extends HookConsumerWidget {
     final date = useState(DateTime.now());
     final savingList =
         saving.where((e) => e.productId == target.docId).toList();
-    final priceList = saving
+    final priceList = savingList
         .where((e) => e.productId == target.docId)
         .map((e) => e.price)
         .toList();
@@ -48,6 +48,7 @@ class PageViewLeft extends HookConsumerWidget {
         date.value.subtract(Duration(days: date.value.weekday - 1));
     final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
     final remainAmount = target.targetPrice - sum;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
@@ -108,6 +109,9 @@ class PageViewLeft extends HookConsumerWidget {
                         (index) {
                           double percent = doubleList[index] /
                               (remainAmount / dateDifference);
+                          // debugPrint("$remainAmount");
+                          // debugPrint("$dateDifference");
+                          // debugPrint("${doubleList[index]}");
 
                           return GraphBar(
                             weekText: week[index],

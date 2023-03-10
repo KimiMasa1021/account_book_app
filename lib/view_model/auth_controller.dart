@@ -3,6 +3,7 @@ import 'package:account_book_app/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 final authControllerProvider =
     StateNotifierProvider.autoDispose<AuthController, User?>(
@@ -51,5 +52,17 @@ class AuthController extends StateNotifier<User?> {
   void dispose() {
     authStateChangesSubscription?.cancel();
     super.dispose();
+  }
+
+  void shwoToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      textColor: const Color.fromARGB(255, 255, 255, 255),
+      fontSize: 16.0,
+    );
   }
 }

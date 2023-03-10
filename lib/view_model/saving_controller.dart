@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:account_book_app/repository/target_init_repository.dart';
 import 'package:account_book_app/repository/target_repository.dart';
+import 'package:account_book_app/view/pages/detail/add_saving/widgets/calculator_button.dart';
+import 'package:account_book_app/view_model/tags_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -21,65 +25,10 @@ class SavingController extends StateNotifier<List<SavingState>> {
       state = data.map((doc) => doc.data()).toList();
     });
   }
-  Future<void> addSaving(
-    TextEditingController priceController,
-    ValueNotifier<int?> tagValue,
-    TargetState target,
-    List<SavingState> saving,
-    List<Tags> tags,
-    ValueNotifier<bool> flg,
-    Function() function,
-  ) async {
-    if (checkSavingAdd(
-      priceController,
-      tagValue,
-    )) {
-      flg.value = true;
-      final priceList = saving
-          .where((e) => e.productId == target.docId)
-          .map((e) => e.price)
-          .toList();
-      int sum;
-      if (priceList.isEmpty) {
-        sum = 0;
-      } else {
-        sum = priceList.reduce((a, b) => a + b);
-      }
-      final priceInt = int.parse(priceController.text.replaceAll(",", ""));
-      final uid = ref.read(authControllerProvider)!.uid;
-      final state = SavingState(
-        createdAt: DateTime.now(),
-        price: priceInt,
-        productId: target.docId,
-        userId: uid,
-        memo: tags.singleWhere((e) => e.id == tagValue.value).tag,
-      );
-      await ref.read(targetRepositoryProvider).addSaving(state);
-      await ref.read(targetInitRepositoryProvider).updateTotalSaving(
-            target.targetPrice > sum + priceInt ? false : true,
-            target.docId,
-          );
-      flg.value = false;
-      function();
-    }
-  }
 
   String formatYen(int targetPrice) {
     final numberFormat = NumberFormat(',###');
     return numberFormat.format(targetPrice);
-  }
-
-  String formatDate(DateTime date) {
-    final week = [
-      "月",
-      "火",
-      "水",
-      "木",
-      "金",
-      "土",
-      "日",
-    ];
-    return "${DateFormat("MM月dd日(").format(date)}${week[date.weekday - 1]})";
   }
 
   Future<List<int>> culcWeeklyList(
@@ -89,15 +38,21 @@ class SavingController extends StateNotifier<List<SavingState>> {
     final startWeekDate =
         date.value.subtract(Duration(days: date.value.weekday - 1));
     final endWeekDate = date.value.add(Duration(days: 7 - date.value.weekday));
-    final weekSavingList = savingList.where(
-      (e) =>
-          e.createdAt.isBefore(endWeekDate) &&
-          e.createdAt.isAfter(startWeekDate),
-    );
+    final weekSavingList = savingList
+        .where(
+          (e) =>
+              e.createdAt
+                  .isAfter(startWeekDate.add(const Duration(days: -1))) &&
+              e.createdAt.isBefore(endWeekDate),
+        )
+        .toList();
     return List.generate(7, (index) {
       final weeklySaving = weekSavingList
           .where((e) => e.createdAt.weekday == index + 1)
-          .map((e) => e.price);
+          .map((e) => e.price)
+          .toList();
+      debugPrint("あああ${startWeekDate.isAfter(startWeekDate)}");
+
       if (weeklySaving.isEmpty) {
         return 0;
       }
@@ -105,23 +60,86 @@ class SavingController extends StateNotifier<List<SavingState>> {
     });
   }
 
-  bool checkSavingAdd(
+  Future<void> calcButtonFunction(
+    KeyType keyType,
+    int? value,
+    TextEditingController priceController,
+    ValueNotifier<int?>? tagValue,
+    TargetState target,
+    List<SavingState> saving,
+    Function() function,
+  ) async {
+    switch (keyType) {
+      //数字
+      case KeyType.number:
+        final preText = priceController.text;
+        priceController.value = CustomTextInputFormatter().formatEditUpdate(
+          TextEditingValue(text: preText),
+          TextEditingValue(text: preText + value.toString()),
+        );
+        break;
+      //削除
+      case KeyType.backSpeace:
+        if (priceController.text.isEmpty) return;
+        final preText = priceController.text;
+        priceController.value = CustomTextInputFormatter().formatEditUpdate(
+          TextEditingValue(text: preText),
+          TextEditingValue(text: preText.substring(0, preText.length - 1)),
+        );
+        break;
+      //エンター
+      case KeyType.enter:
+        if (isSavingErr(priceController, tagValue!)) return;
+        final uid = ref.read(authControllerProvider)!.uid;
+        final tags = ref.read(tagsControllerProvider);
+
+        final priceList = saving
+            .where((e) => e.productId == target.docId)
+            .map((e) => e.price)
+            .toList();
+        int sum;
+        if (priceList.isEmpty) {
+          sum = 0;
+        } else {
+          sum = priceList.reduce((a, b) => a + b);
+        }
+        final priceInt = int.parse(priceController.text.replaceAll(",", ""));
+        final state = SavingState(
+          createdAt: DateTime.now(),
+          price: priceInt,
+          productId: target.docId,
+          userId: uid,
+          memo: tags.singleWhere((e) => e.id == tagValue.value).tag,
+        );
+        await ref.read(targetRepositoryProvider).addSaving(state);
+        await ref.read(targetInitRepositoryProvider).updateTotalSaving(
+              target.targetPrice > sum + priceInt ? false : true,
+              target.docId,
+            );
+        function();
+        break;
+      default:
+        break;
+    }
+  }
+
+  bool isSavingErr(
     TextEditingController priceController,
     ValueNotifier<int?> tagValue,
   ) {
     if (priceController.text == "" && tagValue.value == null) {
       showToast("すべて入力してね");
-      return false;
+      return true;
     }
     if (priceController.text == "") {
       showToast("金額を入力してね");
-      return false;
+      return true;
     }
     if (tagValue.value == null) {
       showToast("タグを選択してね");
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 
   void showToast(String msg) {
@@ -136,40 +154,6 @@ class SavingController extends StateNotifier<List<SavingState>> {
     );
   }
 
-  void calcButtonFunction(
-    int index,
-    TextEditingController priceController,
-  ) {
-    if (index != 3 && index != 4) {
-      final preText = priceController.text;
-      final tapedText = index >= 0 && index <= 2
-          ? (index + 1).toString()
-          : index >= 5 && index <= 10
-              ? (index - 1).toString()
-              : index == 11
-                  ? 0.toString()
-                  : "0";
-      final newText = preText + tapedText;
-
-      priceController.value = CustomTextInputFormatter().formatEditUpdate(
-        TextEditingValue(text: preText),
-        TextEditingValue(text: newText),
-      );
-      return;
-    } else if (index == 3 && priceController.text.isNotEmpty) {
-      final preText = priceController.text;
-      final newText = preText.substring(0, preText.length - 1);
-
-      priceController.value = CustomTextInputFormatter().formatEditUpdate(
-        TextEditingValue(text: preText),
-        TextEditingValue(text: newText),
-      );
-      return;
-    } else if (index == 4) {
-      return;
-    }
-  }
-
   String formatWeek(int weekIndex) {
     final week = [
       "月",
@@ -181,5 +165,18 @@ class SavingController extends StateNotifier<List<SavingState>> {
       "日",
     ];
     return week[weekIndex - 1];
+  }
+
+  String formatDate(DateTime date) {
+    final week = [
+      "月",
+      "火",
+      "水",
+      "木",
+      "金",
+      "土",
+      "日",
+    ];
+    return "${DateFormat("MM月dd日(").format(date)}${week[date.weekday - 1]})";
   }
 }

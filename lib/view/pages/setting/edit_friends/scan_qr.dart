@@ -13,6 +13,7 @@ class ScanQr extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = useState(false);
     final font = ref.watch(myTextTheme);
+    final flg = useState(true);
 
     return DefaultTabController(
       length: 2,
@@ -22,66 +23,19 @@ class ScanQr extends HookConsumerWidget {
             appBar: AppBar(
               title: const Text("QRコードで追加"),
             ),
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: TabBarView(
-                      children: [
-                        QrCamera(
+            body: Column(
+              children: [
+                Expanded(
+                  child: flg.value
+                      ? QrCamera(
                           loading: loading,
+                          flg: flg,
+                        )
+                      : QrCode(
+                          flg: flg,
                         ),
-                        const QrCode(),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 56,
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.tertiary,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: TabBar(
-                            indicator: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 5,
-                            ),
-                            labelStyle: font.fs16,
-                            labelColor:
-                                Theme.of(context).colorScheme.onSecondary,
-                            unselectedLabelColor:
-                                Theme.of(context).colorScheme.onTertiary,
-                            tabs: const [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Tab(text: "スキャン"),
-                              ),
-                              SizedBox(
-                                width: double.infinity,
-                                child: Tab(text: "マイQRコード"),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           loading.value

@@ -1,7 +1,7 @@
 {
     "flavor": "dev",
-    "appId": "com.kmass.account_book_app",
+    "appId": "com.kmass.group_saving_app",
     "appIdSuffix": "dev",
     "appName": "共同貯金箱-Savegy(サベジー) 開発版",
-    "bundleIdentifier": "com.kmass.account_book_app.dev"
+    "bundleIdentifier": "com.kmass.group_saving_app.dev"
 }

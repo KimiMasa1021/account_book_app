@@ -82,17 +82,19 @@ final routerProvider = Provider(
                 ),
               );
             },
-          ),
-          //　節約記録の追加画面
-          GoRoute(
-            path: Routes.path().addSaving,
-            name: Routes.name().addSaving,
-            builder: (context, state) {
-              final target = state.extra as TargetState;
-              return AddSaving(
-                target: target,
-              );
-            },
+            routes: [
+              //　節約記録の追加画面
+              GoRoute(
+                path: Routes.path().addSaving,
+                name: Routes.name().addSaving,
+                builder: (context, state) {
+                  final target = state.extra as TargetState;
+                  return AddSaving(
+                    target: target,
+                  );
+                },
+              ),
+            ],
           ),
           //　プロジェクトの編集画面
           GoRoute(

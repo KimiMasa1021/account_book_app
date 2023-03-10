@@ -1,4 +1,3 @@
-import 'package:account_book_app/model/enums.dart';
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view_model/auth_controller.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../utility/assets_url.dart';
 import '../../component/lottie_dialog.dart';
 import '../../theme/app_text_theme.dart';
+import '../web_view/web_view_page.dart';
 import 'widgets/setting_panel.dart';
 import 'widgets/user_data_panel.dart';
 
@@ -25,10 +25,6 @@ class Setting extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "設定",
-                style: font.fs21,
-              ),
               const UserDataPanel(),
               SettingPanel(
                 text: 'フレンドの追加',

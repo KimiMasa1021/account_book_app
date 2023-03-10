@@ -47,7 +47,7 @@ class TargetAddMember extends ConsumerWidget {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
@@ -135,7 +135,7 @@ class TargetAddMember extends ConsumerWidget {
                                 targetInit.selectedUserList[index].name,
                                 style: font.fs16.copyWith(
                                   color:
-                                      Theme.of(context).colorScheme.onSecondary,
+                                      Theme.of(context).colorScheme.onSurface,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               )
@@ -194,7 +194,7 @@ class TargetAddMember extends ConsumerWidget {
                         const Spacer(),
                         InkWell(
                           onTap: () {
-                            context.pushNamed(Routes.name().userProfile);
+                            context.pushNamed(Routes.name().scanQr);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(

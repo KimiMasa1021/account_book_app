@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../model/enums.dart';
 import '../../../view_model/auth_controller.dart';
 import '../../../view_model/tags_controller.dart';
+import '../../theme/app_text_theme.dart';
 
 class Login extends HookConsumerWidget {
   const Login({super.key});
@@ -19,6 +19,8 @@ class Login extends HookConsumerWidget {
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
     final flg = useState(false);
+    final size = MediaQuery.of(context).size;
+    final font = ref.watch(myTextTheme);
 
     return Scaffold(
       body: Stack(
@@ -27,8 +29,28 @@ class Login extends HookConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Image(
+                      width: size.width / 5,
+                      image:
+                          const AssetImage("assets/img/png_jpg/login_icon.png"),
+                    ),
+                  ),
+                  Text(
+                    "Savegy(サベジー)へようこそ！",
+                    style: font.fs19.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Savegyは、共同貯金箱アプリであり、目標と目標金額を設定し、日々の節約を記録して目標達成を目指すことができます。",
+                    style: font.fs19.copyWith(),
+                  ),
                   const Spacer(),
                   ShadowButton(
                     text: "Googleでサインアップ",
