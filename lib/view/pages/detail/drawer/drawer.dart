@@ -18,20 +18,11 @@ class MyDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
-    final saving = ref.watch(savingControllerProvider);
+    final savingCTL =
+        ref.watch(savingControllerProvider(target.docId).notifier);
+
     final font = ref.watch(myTextTheme);
 
-    final priceList = saving
-        .where((e) => e.productId == target.docId)
-        .map((e) => e.price)
-        .toList();
-    int sum;
-    if (priceList.isEmpty) {
-      sum = 0;
-    } else {
-      sum = priceList.reduce((a, b) => a + b);
-    }
     return SafeArea(
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -95,7 +86,7 @@ class MyDrawer extends ConsumerWidget {
                 title: "目標金額",
                 content: RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     children: [
                       TextSpan(
                         text: savingCTL.formatYen(target.targetPrice),
@@ -116,10 +107,10 @@ class MyDrawer extends ConsumerWidget {
                 title: "達成金額",
                 content: RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     children: [
                       TextSpan(
-                        text: savingCTL.formatYen(sum),
+                        text: savingCTL.formatYen(target.currentPrice),
                         style: font.fs27.copyWith(
                           fontWeight: FontWeight.bold,
                         ),

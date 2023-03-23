@@ -28,6 +28,7 @@ class TargetController extends StateNotifier<AsyncValue<List<TargetState>>> {
               targetPrice: data.targetPrice,
               docId: doc.id,
               isCompleted: data.isCompleted,
+              currentPrice: data.currentPrice,
             );
           }).toList(),
         );

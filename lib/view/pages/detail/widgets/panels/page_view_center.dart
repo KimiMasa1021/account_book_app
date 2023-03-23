@@ -14,113 +14,127 @@ class PageViewCenter extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final saving = ref.watch(savingControllerProvider);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
-    final priceList = saving
-        .where((e) => e.productId == target.docId)
-        .map((e) => e.price)
-        .toList();
+    final saving = ref.watch(savingControllerProvider(target.docId));
+    final savingCTL =
+        ref.watch(savingControllerProvider(target.docId).notifier);
+
     final font = ref.watch(myTextTheme);
-    int sum;
-    if (priceList.isEmpty) {
-      sum = 0;
-    } else {
-      sum = priceList.reduce((a, b) => a + b);
-    }
-    final percent = sum / target.targetPrice;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: CustomPaint(
-                painter: DetailPercentPainter(
-                  percent: percent >= 1.0 ? 1.0 : percent,
-                  barColor: Theme.of(context).colorScheme.secondary,
-                  backColor: Theme.of(context).backgroundColor,
-                ),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "達成金額",
-                            style: font.fs19.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyText2,
-                              children: [
-                                TextSpan(
-                                  text: savingCTL.formatYen(sum),
-                                  style: font.fs33.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+    final percent = target.currentPrice / target.targetPrice;
+
+    return saving.when(
+      data: (data) {
+        final priceList = data
+            .where((e) => e.productId == target.docId)
+            .map((e) => e.price)
+            .toList();
+        int sum;
+        if (priceList.isEmpty) {
+          sum = 0;
+        } else {
+          sum = priceList.reduce((a, b) => a + b);
+        }
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: CustomPaint(
+                    painter: DetailPercentPainter(
+                      percent: percent >= 1.0 ? 1.0 : percent,
+                      barColor: Theme.of(context).colorScheme.secondary,
+                      backColor: Theme.of(context).colorScheme.background,
+                    ),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "達成金額",
+                                style: font.fs19.copyWith(
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                TextSpan(
-                                  text: '円',
-                                  style: font.fs21.copyWith(),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  children: [
+                                    TextSpan(
+                                      text: savingCTL.formatYen(sum),
+                                      style: font.fs33.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: '円',
+                                      style: font.fs21.copyWith(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                            ],
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "目標金額",
+                                  style: font.fs16,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                    children: [
+                                      TextSpan(
+                                        text: savingCTL
+                                            .formatYen(target.targetPrice),
+                                        style: font.fs27.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: '円',
+                                        style: font.fs19.copyWith(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "目標金額",
-                              style: font.fs16,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                style: Theme.of(context).textTheme.bodyText2,
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        savingCTL.formatYen(target.targetPrice),
-                                    style: font.fs27.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: '円',
-                                    style: font.fs19.copyWith(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          )
-        ],
-      ),
+              )
+            ],
+          ),
+        );
+      },
+      loading: () {
+        return const SizedBox();
+      },
+      error: (e, s) {
+        return const SizedBox();
+      },
     );
   }
 }

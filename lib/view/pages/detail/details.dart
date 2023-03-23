@@ -24,7 +24,7 @@ class HomeDetails extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final saving = ref.watch(savingControllerProvider);
+    final saving = ref.watch(savingControllerProvider(target.docId));
     final targetMembers =
         ref.watch(searchUsersControllerProvider(target.members));
     final pageController = PageController(
@@ -32,29 +32,7 @@ class HomeDetails extends HookConsumerWidget {
       initialPage: 1,
     );
     final font = ref.watch(myTextTheme);
-    final savingList =
-        saving.where((e) => e.productId == target.docId).toList();
-    final dailySavingList = savingList.map((e) {
-      final eDate = e.createdAt;
-      return savingList
-          .map((a) {
-            final aDate = a.createdAt;
-            if (DateTime(
-                  eDate.year,
-                  eDate.month,
-                  eDate.day,
-                ) ==
-                DateTime(
-                  aDate.year,
-                  aDate.month,
-                  aDate.day,
-                )) {
-              return a;
-            }
-          })
-          .whereType<SavingState>()
-          .toList();
-    }).toList();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -92,7 +70,7 @@ class HomeDetails extends HookConsumerWidget {
                 background: Container(
                   height: size.height * 0.4,
                   width: size.width,
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -116,136 +94,185 @@ class HomeDetails extends HookConsumerWidget {
             SliverList(
               delegate: targetMembers.when(
                 data: (data) {
-                  return SliverChildBuilderDelegate(
-                    childCount:
-                        dailySavingList.isEmpty ? 1 : dailySavingList.length,
-                    (context, index) {
-                      if (dailySavingList.isEmpty) {
-                        return SavingAddButton(
-                          function: () {
-                            context.goNamed(
-                              Routes.name().addSaving,
-                              extra: target,
-                            );
-                          },
-                        );
-                      } else if (index == 0) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SavingAddButton(
+                  return saving.when(
+                    data: (data) {
+                      final dailySavingList = data.map((e) {
+                        final eDate = e.createdAt;
+                        return data
+                            .map((a) {
+                              final aDate = a.createdAt;
+                              if (DateTime(
+                                    eDate.year,
+                                    eDate.month,
+                                    eDate.day,
+                                  ) ==
+                                  DateTime(
+                                    aDate.year,
+                                    aDate.month,
+                                    aDate.day,
+                                  )) {
+                                return a;
+                              }
+                            })
+                            .whereType<SavingState>()
+                            .toList();
+                      }).toList();
+                      return SliverChildBuilderDelegate(
+                        childCount: dailySavingList.isEmpty
+                            ? 1
+                            : dailySavingList.length,
+                        (context, index) {
+                          if (dailySavingList.isEmpty) {
+                            return SavingAddButton(
                               function: () {
-                                context.pushNamed(
+                                context.goNamed(
                                   Routes.name().addSaving,
                                   extra: target,
                                 );
                               },
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: RichText(
-                                text: TextSpan(
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                  children: [
-                                    TextSpan(
-                                      text: DateFormat('yyyy').format(
-                                          dailySavingList[index][0].createdAt),
-                                      style: font.fs21.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: '年',
-                                      style: font.fs16.copyWith(),
-                                    ),
-                                    TextSpan(
-                                      text: DateFormat('M').format(
-                                          dailySavingList[index][0].createdAt),
-                                      style: font.fs21.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: '月',
-                                      style: font.fs16.copyWith(),
-                                    ),
-                                  ],
+                            );
+                          } else if (index == 0) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SavingAddButton(
+                                  function: () {
+                                    context.pushNamed(
+                                      Routes.name().addSaving,
+                                      extra: target,
+                                    );
+                                  },
                                 ),
-                              ),
-                            ),
-                            SavingPanel(
-                              state: dailySavingList[index],
-                              target: target,
-                            ),
-                          ],
-                        );
-                      } else {
-                        final today = dailySavingList[index][0].createdAt;
-                        final yesterday =
-                            dailySavingList[index - 1][0].createdAt;
-                        if (DateTime(today.year, today.month, today.day) !=
-                            DateTime(yesterday.year, yesterday.month,
-                                yesterday.day)) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              today.year != yesterday.year ||
-                                      today.month != yesterday.month
-                                  ? Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
-                                      child: RichText(
-                                        text: TextSpan(
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2,
-                                          children: [
-                                            TextSpan(
-                                              text: DateFormat('yyyy').format(
-                                                  dailySavingList[index][0]
-                                                      .createdAt),
-                                              style: font.fs21.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: '年',
-                                              style: font.fs16.copyWith(),
-                                            ),
-                                            TextSpan(
-                                              text: DateFormat('M').format(
-                                                  dailySavingList[index][0]
-                                                      .createdAt),
-                                              style: font.fs21.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: '月',
-                                              style: font.fs16.copyWith(),
-                                            ),
-                                          ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
+                                      children: [
+                                        TextSpan(
+                                          text: DateFormat('yyyy').format(
+                                              dailySavingList[index][0]
+                                                  .createdAt),
+                                          style: font.fs21.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  : const SizedBox(),
-                              SavingPanel(
-                                state: dailySavingList[index],
-                                target: target,
-                              ),
-                              index == dailySavingList.length - 1
-                                  ? const SizedBox(height: 50)
-                                  : const SizedBox()
-                            ],
-                          );
-                        } else {
-                          return SizedBox(
-                            height:
-                                index == dailySavingList.length - 1 ? 50 : 0,
-                          );
-                        }
-                      }
+                                        TextSpan(
+                                          text: '年',
+                                          style: font.fs16.copyWith(),
+                                        ),
+                                        TextSpan(
+                                          text: DateFormat('M').format(
+                                              dailySavingList[index][0]
+                                                  .createdAt),
+                                          style: font.fs21.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: '月',
+                                          style: font.fs16.copyWith(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SavingPanel(
+                                  state: dailySavingList[index],
+                                  target: target,
+                                ),
+                              ],
+                            );
+                          } else {
+                            final today = dailySavingList[index][0].createdAt;
+                            final yesterday =
+                                dailySavingList[index - 1][0].createdAt;
+                            if (DateTime(today.year, today.month, today.day) !=
+                                DateTime(yesterday.year, yesterday.month,
+                                    yesterday.day)) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  today.year != yesterday.year ||
+                                          today.month != yesterday.month
+                                      ? Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium,
+                                              children: [
+                                                TextSpan(
+                                                  text: DateFormat('yyyy')
+                                                      .format(
+                                                          dailySavingList[index]
+                                                                  [0]
+                                                              .createdAt),
+                                                  style: font.fs21.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: '年',
+                                                  style: font.fs16.copyWith(),
+                                                ),
+                                                TextSpan(
+                                                  text: DateFormat('M').format(
+                                                      dailySavingList[index][0]
+                                                          .createdAt),
+                                                  style: font.fs21.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: '月',
+                                                  style: font.fs16.copyWith(),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                  SavingPanel(
+                                    state: dailySavingList[index],
+                                    target: target,
+                                  ),
+                                  index == dailySavingList.length - 1
+                                      ? const SizedBox(height: 50)
+                                      : const SizedBox()
+                                ],
+                              );
+                            } else {
+                              return SizedBox(
+                                height: index == dailySavingList.length - 1
+                                    ? 50
+                                    : 0,
+                              );
+                            }
+                          }
+                        },
+                      );
+                    },
+                    loading: () {
+                      return SliverChildBuilderDelegate(
+                        childCount: 0,
+                        (_, int index) {
+                          return null;
+                        },
+                      );
+                      ;
+                    },
+                    error: (e, s) {
+                      return SliverChildBuilderDelegate(
+                        childCount: 0,
+                        (_, int index) {
+                          return null;
+                        },
+                      );
                     },
                   );
                 },

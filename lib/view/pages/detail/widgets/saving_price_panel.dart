@@ -14,7 +14,7 @@ class SavingPricePanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final savingCTL = ref.watch(savingControllerProvider("").notifier);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),

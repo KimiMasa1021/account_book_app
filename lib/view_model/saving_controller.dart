@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:account_book_app/repository/target_init_repository.dart';
 import 'package:account_book_app/repository/target_repository.dart';
 import 'package:account_book_app/view/pages/detail/add_saving/widgets/calculator_button.dart';
@@ -9,20 +7,21 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../model/saving/saving_state.dart';
-import '../model/saving/tags_state.dart';
 import '../model/target/target_state.dart';
 import '../utility/price_formatter.dart';
 import 'auth_controller.dart';
 
-final savingControllerProvider =
-    StateNotifierProvider<SavingController, List<SavingState>>(
-        (ref) => SavingController(ref));
+final savingControllerProvider = StateNotifierProvider.family<
+    SavingController,
+    AsyncValue<List<SavingState>>,
+    String>((ref, String docId) => SavingController(ref, docId));
 
-class SavingController extends StateNotifier<List<SavingState>> {
+class SavingController extends StateNotifier<AsyncValue<List<SavingState>>> {
   final Ref ref;
-  SavingController(this.ref) : super([]) {
-    ref.read(targetRepositoryProvider).feachSaving().listen((data) {
-      state = data.map((doc) => doc.data()).toList();
+  final String docId;
+  SavingController(this.ref, this.docId) : super(const AsyncValue.loading()) {
+    ref.read(targetRepositoryProvider).feachSaving(docId).listen((data) {
+      state = AsyncValue.data(data.map((doc) => doc.data()).toList());
     });
   }
 
@@ -51,7 +50,6 @@ class SavingController extends StateNotifier<List<SavingState>> {
           .where((e) => e.createdAt.weekday == index + 1)
           .map((e) => e.price)
           .toList();
-      debugPrint("あああ${startWeekDate.isAfter(startWeekDate)}");
 
       if (weeklySaving.isEmpty) {
         return 0;
@@ -114,6 +112,7 @@ class SavingController extends StateNotifier<List<SavingState>> {
         await ref.read(targetRepositoryProvider).addSaving(state);
         await ref.read(targetInitRepositoryProvider).updateTotalSaving(
               target.targetPrice > sum + priceInt ? false : true,
+              sum + priceInt,
               target.docId,
             );
         function();

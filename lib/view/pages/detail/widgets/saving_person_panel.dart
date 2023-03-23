@@ -24,7 +24,7 @@ class SavingPersonPanel extends HookConsumerWidget {
     final isOpen = useState(false);
     final price =
         savingState.map((e) => e.price).toList().reduce((e, v) => e + v);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final savingCTL = ref.watch(savingControllerProvider("").notifier);
 
     return InkWell(
       onTap: () {

@@ -12,7 +12,7 @@ final targetRepositoryProvider =
 
 abstract class TargetRepository {
   Stream<List<QueryDocumentSnapshot<TargetState>>> feachTarget();
-  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving();
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving(String docId);
   Future<void> addSaving(SavingState state);
 }
 
@@ -48,11 +48,16 @@ class TargetRepositoryImple implements TargetRepository {
   }
 
   @override
-  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving() async* {
+  Stream<List<QueryDocumentSnapshot<SavingState>>> feachSaving(
+    String docId,
+  ) async* {
     try {
+      if (docId == "") return;
       final stateRef = ref
           .read(firebaseFireStoreProvider)
-          .collectionGroup("saving")
+          .collection("targets")
+          .doc(docId)
+          .collection("saving")
           .orderBy(
             "createdAt",
             descending: true,

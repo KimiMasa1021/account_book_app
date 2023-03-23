@@ -11,13 +11,13 @@ extension ExWebViewType on WebViewType {
   String get url {
     switch (this) {
       case WebViewType.privacyPolicy:
-        return "https://golden-carriage-07f.notion.site/7fb4049e6848412bbc8f84215c22498b";
+        return "https://app-dev.boo.jp/2023/03/22/%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%83%bc%e3%83%9d%e3%83%aa%e3%82%b7%e3%83%bc/";
       case WebViewType.aboutApp:
-        return "https://golden-carriage-07f.notion.site/Savegy-6b77f4ec0f554caebd1e78d9713a97b1";
+        return "https://app-dev.boo.jp/2023/03/23/%e5%85%b1%e5%90%8c%e8%b2%af%e9%87%91%e7%ae%b1-savegy%e3%82%b5%e3%83%99%e3%82%b8%e3%83%bc/";
       case WebViewType.appHint:
-        return "https://golden-carriage-07f.notion.site/Savegy-dd3dafa896694577a4611cfd8cd2de0d";
+        return "https://app-dev.boo.jp/2023/03/23/%e5%85%b1%e5%90%8c%e8%b2%af%e9%87%91%e7%ae%b1-savegy%e3%82%b5%e3%83%99%e3%82%b8%e3%83%bc/";
       default:
-        return "https://golden-carriage-07f.notion.site/Savegy-6b77f4ec0f554caebd1e78d9713a97b1";
+        return "https://app-dev.boo.jp/2023/03/23/%e5%85%b1%e5%90%8c%e8%b2%af%e9%87%91%e7%ae%b1-savegy%e3%82%b5%e3%83%99%e3%82%b8%e3%83%bc/";
     }
   }
 }
