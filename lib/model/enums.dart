@@ -10,7 +10,6 @@ enum FrendRequestResult {
 //　ボトムバーの状態
 enum PageType {
   home,
-  graph,
   setting,
 }
 

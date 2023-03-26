@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/enums.dart';
 import '../view_model/auth_controller.dart';
 import '../view_model/users_controller.dart';
-import 'pages/graph/graph.dart';
 
 final pageTypeProvider =
     StateProvider.autoDispose<PageType>((ref) => PageType.home);
@@ -21,7 +20,6 @@ class RootPage extends HookConsumerWidget {
 
     final List<Widget> pageList = <Widget>[
       const Home(),
-      const Graph(),
       const Setting(),
     ];
     final pageState = ref.watch(pageTypeProvider);
@@ -37,18 +35,6 @@ class RootPage extends HookConsumerWidget {
         ),
         activeIcon: Icon(
           Icons.savings,
-          size: iconSize,
-          color: iconColor,
-        ),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(
-          Icons.bar_chart,
-          size: iconSize,
-          color: iconColor,
-        ),
-        activeIcon: Icon(
-          Icons.bar_chart_outlined,
           size: iconSize,
           color: iconColor,
         ),
