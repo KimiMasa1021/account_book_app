@@ -11,13 +11,13 @@ extension ExWebViewType on WebViewType {
   String get url {
     switch (this) {
       case WebViewType.privacyPolicy:
-        return "https://www.notion.so/7fb4049e6848412bbc8f84215c22498b";
+        return "https://app-dev.boo.jp/2023/03/22/%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%83%bc%e3%83%9d%e3%83%aa%e3%82%b7%e3%83%bc/";
       case WebViewType.aboutApp:
-        return "https://www.notion.so/Savegy-dd3dafa896694577a4611cfd8cd2de0d";
+        return "https://app-dev.boo.jp/2023/03/23/%e5%85%b1%e5%90%8c%e8%b2%af%e9%87%91%e7%ae%b1-savegy%e3%82%b5%e3%83%99%e3%82%b8%e3%83%bc/";
       case WebViewType.appHint:
-        return "https://golden-carriage-07f.notion.site/dd3dafa896694577a4611cfd8cd2de0d";
+        return "http://app-dev.boo.jp/2023/03/26/%e4%bd%bf%e7%94%a8%e4%b8%8a%e3%81%ae%e3%83%92%e3%83%b3%e3%83%88/";
       default:
-        return "https://www.notion.so/Savegy-dd3dafa896694577a4611cfd8cd2de0d";
+        return "https://app-dev.boo.jp/2023/03/23/%e5%85%b1%e5%90%8c%e8%b2%af%e9%87%91%e7%ae%b1-savegy%e3%82%b5%e3%83%99%e3%82%b8%e3%83%bc/";
     }
   }
 }
@@ -57,9 +57,7 @@ class WebViewPage extends StatelessWidget {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
+          onProgress: (int progress) {},
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'target_state.dart';
 
@@ -31,6 +31,7 @@ mixin _$TargetState {
   DateTime get targetDate => throw _privateConstructorUsedError;
   String get img => throw _privateConstructorUsedError;
   bool get isCompleted => throw _privateConstructorUsedError;
+  int get currentPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +54,8 @@ abstract class $TargetStateCopyWith<$Res> {
       int targetPrice,
       @TimestampConverter() DateTime targetDate,
       String img,
-      bool isCompleted});
+      bool isCompleted,
+      int currentPrice});
 }
 
 /// @nodoc
@@ -78,6 +80,7 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
     Object? targetDate = null,
     Object? img = null,
     Object? isCompleted = null,
+    Object? currentPrice = null,
   }) {
     return _then(_value.copyWith(
       docId: null == docId
@@ -116,6 +119,10 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      currentPrice: null == currentPrice
+          ? _value.currentPrice
+          : currentPrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -137,7 +144,8 @@ abstract class _$$_TargetStateCopyWith<$Res>
       int targetPrice,
       @TimestampConverter() DateTime targetDate,
       String img,
-      bool isCompleted});
+      bool isCompleted,
+      int currentPrice});
 }
 
 /// @nodoc
@@ -160,6 +168,7 @@ class __$$_TargetStateCopyWithImpl<$Res>
     Object? targetDate = null,
     Object? img = null,
     Object? isCompleted = null,
+    Object? currentPrice = null,
   }) {
     return _then(_$_TargetState(
       docId: null == docId
@@ -198,6 +207,10 @@ class __$$_TargetStateCopyWithImpl<$Res>
           ? _value.isCompleted
           : isCompleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      currentPrice: null == currentPrice
+          ? _value.currentPrice
+          : currentPrice // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -214,7 +227,8 @@ class _$_TargetState extends _TargetState {
       this.targetPrice = 0,
       @TimestampConverter() required this.targetDate,
       this.img = "",
-      this.isCompleted = false})
+      this.isCompleted = false,
+      this.currentPrice = 0})
       : _members = members,
         super._();
 
@@ -231,6 +245,7 @@ class _$_TargetState extends _TargetState {
   @override
   @JsonKey()
   List<String> get members {
+    if (_members is EqualUnmodifiableListView) return _members;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_members);
   }
@@ -253,10 +268,13 @@ class _$_TargetState extends _TargetState {
   @override
   @JsonKey()
   final bool isCompleted;
+  @override
+  @JsonKey()
+  final int currentPrice;
 
   @override
   String toString() {
-    return 'TargetState(docId: $docId, registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img, isCompleted: $isCompleted)';
+    return 'TargetState(docId: $docId, registeTime: $registeTime, members: $members, target: $target, targetDescription: $targetDescription, targetPrice: $targetPrice, targetDate: $targetDate, img: $img, isCompleted: $isCompleted, currentPrice: $currentPrice)';
   }
 
   @override
@@ -277,7 +295,9 @@ class _$_TargetState extends _TargetState {
                 other.targetDate == targetDate) &&
             (identical(other.img, img) || other.img == img) &&
             (identical(other.isCompleted, isCompleted) ||
-                other.isCompleted == isCompleted));
+                other.isCompleted == isCompleted) &&
+            (identical(other.currentPrice, currentPrice) ||
+                other.currentPrice == currentPrice));
   }
 
   @JsonKey(ignore: true)
@@ -292,7 +312,8 @@ class _$_TargetState extends _TargetState {
       targetPrice,
       targetDate,
       img,
-      isCompleted);
+      isCompleted,
+      currentPrice);
 
   @JsonKey(ignore: true)
   @override
@@ -318,7 +339,8 @@ abstract class _TargetState extends TargetState {
       final int targetPrice,
       @TimestampConverter() required final DateTime targetDate,
       final String img,
-      final bool isCompleted}) = _$_TargetState;
+      final bool isCompleted,
+      final int currentPrice}) = _$_TargetState;
   _TargetState._() : super._();
 
   factory _TargetState.fromJson(Map<String, dynamic> json) =
@@ -344,6 +366,8 @@ abstract class _TargetState extends TargetState {
   String get img;
   @override
   bool get isCompleted;
+  @override
+  int get currentPrice;
   @override
   @JsonKey(ignore: true)
   _$$_TargetStateCopyWith<_$_TargetState> get copyWith =>

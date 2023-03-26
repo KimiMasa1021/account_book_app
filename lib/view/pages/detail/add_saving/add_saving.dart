@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lottie/lottie.dart';
 import '../../../../model/target/target_state.dart';
-import '../../../../utility/assets_url.dart';
-import '../../../../view_model/saving_controller.dart';
 import '../../../../view_model/tags_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widgets/calculator_button.dart';
@@ -25,11 +22,8 @@ class AddSaving extends HookConsumerWidget {
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
     final priceCTL = useTextEditingController(text: "");
     final ValueNotifier<int?> tagValue = useState(null);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
-    final saving = ref.watch(savingControllerProvider);
     final font = ref.watch(myTextTheme);
-    final flg = useState(false);
-    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

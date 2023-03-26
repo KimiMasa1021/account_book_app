@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
-import '../../../../view_model/saving_controller.dart';
 import '../../../theme/app_text_theme.dart';
 import '../../../component/shapes.dart';
 
@@ -18,20 +17,8 @@ class TargetPanel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final saving = ref.watch(savingControllerProvider);
     final size = MediaQuery.of(context).size;
     final font = ref.watch(myTextTheme);
-    final priceList = saving
-        .where((e) => e.productId == state.docId)
-        .map((e) => e.price)
-        .toList();
-    int sum;
-    if (priceList.isEmpty) {
-      sum = 0;
-    } else {
-      sum = priceList.reduce((a, b) => a + b);
-    }
-    final percent = sum / state.targetPrice;
     return InkWell(
       onTap: () async {
         await function();
@@ -115,7 +102,9 @@ class TargetPanel extends HookConsumerWidget {
                 width: size.width - 52,
                 child: FractionallySizedBox(
                   alignment: Alignment.centerLeft,
-                  widthFactor: percent >= 1.0 ? 1.0 : percent,
+                  widthFactor: state.currentPrice / state.targetPrice >= 1
+                      ? 1
+                      : state.currentPrice / state.targetPrice,
                   heightFactor: 1,
                   child: Container(
                     decoration: BoxDecoration(

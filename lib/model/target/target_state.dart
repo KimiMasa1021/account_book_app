@@ -18,6 +18,7 @@ class TargetState with _$TargetState {
     @TimestampConverter() required DateTime targetDate,
     @Default("") String img,
     @Default(false) bool isCompleted,
+    @Default(0) int currentPrice,
   }) = _TargetState;
 
   factory TargetState.fromJson(Map<String, dynamic> json) =>

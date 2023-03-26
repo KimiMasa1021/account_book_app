@@ -21,7 +21,7 @@ class SavingPanel extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
     final isOpen = useState(false);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final savingCTL = ref.watch(savingControllerProvider("").notifier);
 
     final targetMembers =
         ref.watch(searchUsersControllerProvider(target.members));

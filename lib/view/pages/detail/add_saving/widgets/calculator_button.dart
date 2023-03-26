@@ -32,50 +32,61 @@ class CalculatorButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
-    final saving = ref.watch(savingControllerProvider);
+    final savingCTL =
+        ref.watch(savingControllerProvider(target.docId).notifier);
+    final saving = ref.watch(savingControllerProvider(target.docId));
 
-    return AspectRatio(
-      aspectRatio: aspectRatio,
-      child: InkWell(
-        onTap: () async {
-          await savingCTL.calcButtonFunction(
-            keyType,
-            value,
-            priceCTL,
-            tagValue,
-            target,
-            saving,
-            () {
-              context.pop();
+    return saving.when(
+      data: (data) {
+        return AspectRatio(
+          aspectRatio: aspectRatio,
+          child: InkWell(
+            onTap: () async {
+              await savingCTL.calcButtonFunction(
+                keyType,
+                value,
+                priceCTL,
+                tagValue,
+                target,
+                data,
+                () {
+                  context.pop();
+                },
+              );
             },
-          );
-        },
-        child: Card(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 4,
-            vertical: 4,
-          ),
-          child: Center(
-            child: keyType == KeyType.number
-                ? Text(
-                    value.toString(),
-                    style: font.fs27,
-                  )
-                : keyType == KeyType.backSpeace
-                    ? const Icon(
-                        Icons.backspace_outlined,
+            child: Card(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 4,
+                vertical: 4,
+              ),
+              child: Center(
+                child: keyType == KeyType.number
+                    ? Text(
+                        value.toString(),
+                        style: font.fs27,
                       )
-                    : keyType == KeyType.enter
+                    : keyType == KeyType.backSpeace
                         ? const Icon(
-                            Icons.keyboard_return,
+                            Icons.backspace_outlined,
                           )
-                        : const Icon(
-                            Icons.error,
-                          ),
+                        : keyType == KeyType.enter
+                            ? const Icon(
+                                Icons.keyboard_return,
+                              )
+                            : const Icon(
+                                Icons.error,
+                              ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
+      loading: () {
+        return const SizedBox();
+      },
+      error: (e, s) {
+        return const SizedBox();
+      },
     );
   }
 }

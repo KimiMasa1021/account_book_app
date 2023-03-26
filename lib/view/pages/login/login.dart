@@ -65,11 +65,11 @@ class Login extends HookConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 20),
-                  ShadowButton(
-                    text: "Appleでサインアップ",
-                    function: () {},
-                  ),
-                  const SizedBox(height: 10),
+                  // ShadowButton(
+                  //   text: "Appleでサインアップ",
+                  //   function: () {},
+                  // ),
+                  // const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
                       Navigator.push(

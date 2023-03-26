@@ -18,7 +18,7 @@ class GraphBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final savingCTL = ref.watch(savingControllerProvider.notifier);
+    final savingCTL = ref.watch(savingControllerProvider("").notifier);
     final font = ref.watch(myTextTheme);
 
     return Tooltip(
@@ -43,7 +43,7 @@ class GraphBar extends HookConsumerWidget {
                   Container(
                     width: 20,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.background,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),

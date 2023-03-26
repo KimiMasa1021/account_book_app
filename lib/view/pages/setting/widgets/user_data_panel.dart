@@ -20,7 +20,7 @@ class UserDataPanel extends ConsumerWidget {
         context.pushNamed(Routes.name().accountManagement);
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(),
         child: Row(
           children: [
             Container(
