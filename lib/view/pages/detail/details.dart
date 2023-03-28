@@ -148,8 +148,9 @@ class HomeDetails extends HookConsumerWidget {
                                       horizontal: 15),
                                   child: RichText(
                                     text: TextSpan(
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
                                       children: [
                                         TextSpan(
                                           text: DateFormat('yyyy').format(

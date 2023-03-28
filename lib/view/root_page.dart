@@ -1,6 +1,7 @@
 import 'package:account_book_app/view/component/custom_nav_bar.dart';
 import 'package:account_book_app/view/pages/home/home.dart';
 import 'package:account_book_app/view/pages/setting/setting.dart';
+import 'package:account_book_app/view/pages/statistic/statistic.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/enums.dart';
@@ -20,6 +21,7 @@ class RootPage extends HookConsumerWidget {
 
     final List<Widget> pageList = <Widget>[
       const Home(),
+      const Statistic(),
       const Setting(),
     ];
     final pageState = ref.watch(pageTypeProvider);
@@ -35,6 +37,18 @@ class RootPage extends HookConsumerWidget {
         ),
         activeIcon: Icon(
           Icons.savings,
+          size: iconSize,
+          color: iconColor,
+        ),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(
+          Icons.bar_chart,
+          size: iconSize,
+          color: iconColor,
+        ),
+        activeIcon: Icon(
+          Icons.bar_chart_outlined,
           size: iconSize,
           color: iconColor,
         ),
