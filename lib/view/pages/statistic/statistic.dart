@@ -16,17 +16,27 @@ class Statistic extends HookConsumerWidget {
     return SingleChildScrollView(
       child: allSaving.when(
         data: (data) {
+          final taglist = [];
+
           //合計金額
           final sum = data.map((e) => e.price).reduce((v, e) => v + e);
           //節約回数
           final savedTimes = data.length;
-          //タグ別のリスト
+          //タグ別のリスト(重複あり)
           final listByTag = data.map((e) {
-            final list = data.where((f) => f.memo == e.memo).toList();
-            if (list.isNotEmpty) {
-              return list;
+            if (taglist.contains(e.memo)) {
+              return [];
             }
+            final list = data.where((f) => f.memo == e.memo).toList();
+            taglist.add(e.memo);
+            return list;
           }).toList();
+          listByTag.removeWhere((e) => e.isEmpty);
+          listByTag.sort((a, b) {
+            final aSum = a.map((e) => e.price).reduce((v, e) => v + e);
+            final bSum = b.map((e) => e.price).reduce((v, e) => v + e);
+            return bSum.compareTo(aSum);
+          });
 
           return SafeArea(
             child: Padding(
@@ -60,14 +70,12 @@ class Statistic extends HookConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // const TagPanel(),
-                  ...List.generate(
-                    listByTag.length,
-                    (index) => TagPanel(
-                      text: listByTag[index]![0].memo,
-                      state: [],
-                    ),
-                  ),
+                  ...List.generate(listByTag.length, (index) {
+                    return TagPanel(
+                      text: listByTag[index][0].memo,
+                      state: listByTag[index] as List<SavingState>,
+                    );
+                  }),
                 ],
               ),
             ),

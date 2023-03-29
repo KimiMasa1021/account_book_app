@@ -16,6 +16,7 @@ class TagPanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
+    final sum = state.map((e) => e.price).reduce((v, e) => v + e);
 
     return Container(
       width: double.infinity,
@@ -45,8 +46,8 @@ class TagPanel extends HookConsumerWidget {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                   children: [
-                    const TextSpan(
-                      text: '600',
+                    TextSpan(
+                      text: sum.toString(),
                     ),
                     TextSpan(
                       text: '円',
