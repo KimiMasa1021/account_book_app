@@ -96,7 +96,8 @@ class QrCamera extends ConsumerWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
                 ),

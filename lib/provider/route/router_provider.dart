@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../model/enums.dart';
 import '../../model/target/target_state.dart';
 import '../../model/user/users_state.dart';
 import '../../view/pages/add_project/target_add_details.dart';

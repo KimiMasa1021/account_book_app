@@ -31,7 +31,7 @@ class ShadowButton extends HookConsumerWidget {
                 color: Theme.of(context).colorScheme.onSurface,
               ),
               borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).colorScheme.background,
             ),
           ),
           Positioned(
