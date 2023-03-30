@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/saving/saving_state.dart';
-import '../../../../view_model/saving_controller.dart';
+import '../../../../utility/format_yen.dart';
 import '../../../theme/app_text_theme.dart';
 import 'saving_price_panel.dart';
 
@@ -24,7 +24,6 @@ class SavingPersonPanel extends HookConsumerWidget {
     final isOpen = useState(false);
     final price =
         savingState.map((e) => e.price).toList().reduce((e, v) => e + v);
-    final savingCTL = ref.watch(savingControllerProvider("").notifier);
 
     return InkWell(
       onTap: () {
@@ -59,7 +58,7 @@ class SavingPersonPanel extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          savingCTL.formatYen(price),
+                          FormatText.formatYen(price),
                           style: font.fs21.copyWith(
                             fontWeight: FontWeight.bold,
                           ),

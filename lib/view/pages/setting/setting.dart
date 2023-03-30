@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../utility/assets_url.dart';
 import '../../component/lottie_dialog.dart';
-import '../../theme/app_text_theme.dart';
 import '../web_view/web_view_page.dart';
 import 'widgets/setting_panel.dart';
 import 'widgets/user_data_panel.dart';
@@ -16,7 +15,6 @@ class Setting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authCTL = ref.watch(authControllerProvider.notifier);
-    final font = ref.watch(myTextTheme);
 
     return SafeArea(
       child: SingleChildScrollView(

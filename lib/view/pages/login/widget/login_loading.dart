@@ -21,7 +21,7 @@ class LoginLoading extends ConsumerWidget {
         ? Container(
             width: size.width,
             height: size.height,
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).colorScheme.background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

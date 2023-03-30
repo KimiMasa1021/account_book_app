@@ -132,10 +132,10 @@ class PageViewLeft extends HookConsumerWidget {
         );
       },
       loading: () {
-        return SizedBox();
+        return const SizedBox();
       },
       error: (e, s) {
-        return SizedBox();
+        return const SizedBox();
       },
     );
   }

@@ -13,7 +13,6 @@ class UserDataPanel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userState = ref.watch(usersControllerProvider);
     final font = ref.watch(myTextTheme);
-    final userCTL = ref.watch(usersControllerProvider.notifier);
 
     return InkWell(
       onTap: () {

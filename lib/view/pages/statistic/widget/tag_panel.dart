@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/saving/saving_state.dart';
+import '../../../../utility/format_yen.dart';
 import '../../../theme/app_text_theme.dart';
 
 class TagPanel extends HookConsumerWidget {
@@ -9,14 +10,17 @@ class TagPanel extends HookConsumerWidget {
     super.key,
     required this.text,
     required this.state,
+    required this.total,
   });
   final String text;
   final List<SavingState> state;
+  final int total;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
     final sum = state.map((e) => e.price).reduce((v, e) => v + e);
+    final percent = sum / total;
 
     return Container(
       width: double.infinity,
@@ -47,7 +51,7 @@ class TagPanel extends HookConsumerWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: sum.toString(),
+                      text: FormatText.formatYen(sum),
                     ),
                     TextSpan(
                       text: '円',
@@ -65,8 +69,8 @@ class TagPanel extends HookConsumerWidget {
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                   children: [
-                    const TextSpan(
-                      text: '22',
+                    TextSpan(
+                      text: (percent * 100).toStringAsFixed(1).toString(),
                     ),
                     TextSpan(
                       text: '%',

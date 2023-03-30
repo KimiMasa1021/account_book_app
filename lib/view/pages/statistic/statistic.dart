@@ -2,6 +2,7 @@ import 'package:account_book_app/view/pages/statistic/widget/info_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/saving/saving_state.dart';
+import '../../../utility/format_yen.dart';
 import '../../../view_model/all_saving_controller.dart';
 import '../../theme/app_text_theme.dart';
 import 'widget/tag_panel.dart';
@@ -54,7 +55,7 @@ class Statistic extends HookConsumerWidget {
                   InfoPanel(
                     icon: Icons.savings_outlined,
                     title: '節約合計金額',
-                    text: sum.toString(),
+                    text: FormatText.formatYen(sum),
                     unit: "円",
                   ),
                   InfoPanel(
@@ -70,19 +71,28 @@ class Statistic extends HookConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  ...List.generate(listByTag.length, (index) {
-                    return TagPanel(
-                      text: listByTag[index][0].memo,
-                      state: listByTag[index] as List<SavingState>,
-                    );
-                  }),
+                  ...List.generate(
+                    listByTag.length,
+                    (index) {
+                      return TagPanel(
+                        text: listByTag[index][0].memo,
+                        state: listByTag[index] as List<SavingState>,
+                        total: sum,
+                      );
+                    },
+                  ),
+                  //ads
                 ],
               ),
             ),
           );
         },
-        loading: () {},
-        error: (e, s) {},
+        loading: () {
+          return null;
+        },
+        error: (e, s) {
+          return null;
+        },
       ),
     );
   }

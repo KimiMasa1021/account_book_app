@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../model/target/target_state.dart';
+import '../../../../../utility/format_yen.dart';
 import '../../../../../view_model/saving_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 import '../panel_right_tile.dart';
@@ -15,11 +16,7 @@ class PageViewRight extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final saving = ref.watch(savingControllerProvider(target.docId));
-    final savingCTL =
-        ref.watch(savingControllerProvider(target.docId).notifier);
-
     final font = ref.watch(myTextTheme);
-
     final dateDifference = target.targetDate.difference(DateTime.now()).inDays;
 
     return saving.when(
@@ -96,21 +93,20 @@ class PageViewRight extends ConsumerWidget {
                                   PanelRightTile(
                                     icon: Icons.attach_money_outlined,
                                     title: '残りの金額',
-                                    content:
-                                        savingCTL.formatYen((remainAmount)),
+                                    content: FormatText.formatYen(remainAmount),
                                     unit: '円',
                                   ),
                                   PanelRightTile(
                                     icon: Icons.calendar_month,
                                     title: '1日あたり',
-                                    content: savingCTL.formatYen(
+                                    content: FormatText.formatYen(
                                         (remainAmount / dateDifference).ceil()),
                                     unit: '円',
                                   ),
                                   PanelRightTile(
                                     icon: Icons.person,
                                     title: '1人あたり',
-                                    content: savingCTL.formatYen(
+                                    content: FormatText.formatYen(
                                         (remainAmount / target.members.length)
                                             .ceil()),
                                     unit: '円',

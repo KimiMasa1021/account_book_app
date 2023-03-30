@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../model/target/target_state.dart';
+import '../../../../utility/format_yen.dart';
 import '../../../../view_model/saving_controller.dart';
 import '../../../../view_model/search_users_controller.dart';
 import '../../../theme/app_text_theme.dart';
@@ -91,10 +92,10 @@ class SavingPanel extends HookConsumerWidget {
                           children: [
                             RichText(
                               text: TextSpan(
-                                style: Theme.of(context).textTheme.bodyText2,
+                                style: Theme.of(context).textTheme.bodyMedium,
                                 children: [
                                   TextSpan(
-                                    text: savingCTL.formatYen(price),
+                                    text: FormatText.formatYen(price),
                                     style: font.fs27.copyWith(
                                       fontWeight: FontWeight.bold,
                                     ),

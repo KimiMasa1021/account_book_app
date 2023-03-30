@@ -265,7 +265,6 @@ class HomeDetails extends HookConsumerWidget {
                           return null;
                         },
                       );
-                      ;
                     },
                     error: (e, s) {
                       return SliverChildBuilderDelegate(

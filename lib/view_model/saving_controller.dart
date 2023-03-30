@@ -25,11 +25,6 @@ class SavingController extends StateNotifier<AsyncValue<List<SavingState>>> {
     });
   }
 
-  String formatYen(int targetPrice) {
-    final numberFormat = NumberFormat(',###');
-    return numberFormat.format(targetPrice);
-  }
-
   Future<List<int>> culcWeeklyList(
     List<SavingState> savingList,
     ValueNotifier<DateTime> date,

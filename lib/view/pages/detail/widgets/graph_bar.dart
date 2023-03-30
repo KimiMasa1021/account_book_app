@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../view_model/saving_controller.dart';
+import '../../../../utility/format_yen.dart';
 import '../../../theme/app_text_theme.dart';
 
 class GraphBar extends HookConsumerWidget {
@@ -18,11 +18,10 @@ class GraphBar extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final savingCTL = ref.watch(savingControllerProvider("").notifier);
     final font = ref.watch(myTextTheme);
 
     return Tooltip(
-      message: savingCTL.formatYen(price),
+      message: "${FormatText.formatYen(price)}円",
       child: Column(
         children: [
           Padding(

@@ -77,7 +77,7 @@ class EditDesign extends HookConsumerWidget {
                                     Expanded(
                                       child: Container(
                                         color: ExThemeMode.values[index]
-                                            .themeData.backgroundColor,
+                                            .themeData.colorScheme.background,
                                       ),
                                     ),
                                     Expanded(
