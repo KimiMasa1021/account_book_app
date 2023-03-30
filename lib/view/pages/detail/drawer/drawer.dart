@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/target/target_state.dart';
 import '../../../../utility/assets_url.dart';
-import '../../../../utility/format_yen.dart';
+import '../../../../utility/format_text.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widgets/drawer_info_panel.dart';
 import 'widgets/drawer_action_panel.dart';

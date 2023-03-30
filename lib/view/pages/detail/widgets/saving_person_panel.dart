@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/saving/saving_state.dart';
-import '../../../../utility/format_yen.dart';
+import '../../../../utility/format_text.dart';
 import '../../../theme/app_text_theme.dart';
 import 'saving_price_panel.dart';
 

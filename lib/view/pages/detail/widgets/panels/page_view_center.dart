@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../model/target/target_state.dart';
-import '../../../../../utility/format_yen.dart';
+import '../../../../../utility/format_text.dart';
 import '../../../../../view_model/saving_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 import '../detail_percent_painter.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../utility/format_yen.dart';
+import '../../../../utility/format_text.dart';
 import '../../../theme/app_text_theme.dart';
 
 class GraphBar extends HookConsumerWidget {

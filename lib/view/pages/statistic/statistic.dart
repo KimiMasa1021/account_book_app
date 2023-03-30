@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:account_book_app/view/pages/statistic/widget/info_panel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../model/saving/saving_state.dart';
-import '../../../utility/format_yen.dart';
+import '../../../utility/format_text.dart';
 import '../../../view_model/all_saving_controller.dart';
 import '../../theme/app_text_theme.dart';
+import 'widget/bar.dart';
 import 'widget/tag_panel.dart';
 
 class Statistic extends HookConsumerWidget {
@@ -14,6 +18,7 @@ class Statistic extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
     final allSaving = ref.watch(allSavingControllerProvider);
+    final tagFlg = useState(false);
     return SingleChildScrollView(
       child: allSaving.when(
         data: (data) {
@@ -60,7 +65,7 @@ class Statistic extends HookConsumerWidget {
                   ),
                   InfoPanel(
                     icon: Icons.heart_broken_sharp,
-                    title: '節約回数',
+                    title: 'これまでの節約回数',
                     text: savedTimes.toString(),
                     unit: "回",
                   ),
@@ -72,7 +77,9 @@ class Statistic extends HookConsumerWidget {
                     ),
                   ),
                   ...List.generate(
-                    listByTag.length,
+                    tagFlg.value
+                        ? listByTag.length
+                        : listByTag.sublist(0, 3).length,
                     (index) {
                       return TagPanel(
                         text: listByTag[index][0].memo,
@@ -81,7 +88,45 @@ class Statistic extends HookConsumerWidget {
                       );
                     },
                   ),
-                  //ads
+                  InkWell(
+                    onTap: () {
+                      tagFlg.value = !tagFlg.value;
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          !tagFlg.value ? "すべてみる" : "とじる",
+                          style: font.fs16.copyWith(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "曜日別の傾向",
+                    style: font.fs16.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: AspectRatio(
+                      aspectRatio: 1.7 / 1,
+                      child: SizedBox(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(
+                            7,
+                            (index) => Bar(
+                              percent: Random().nextDouble(),
+                              index: index,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
