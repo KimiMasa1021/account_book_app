@@ -20,7 +20,6 @@ import '../../view/pages/setting/edit_friends/friend_status.dart';
 import '../../view/pages/setting/edit_friends/scan_qr.dart';
 import '../../view/pages/setting/edit_friends/user_profile.dart';
 import '../../view/pages/setting/edit_profile/edit_profile.dart';
-import '../../view/pages/web_view/web_view_page.dart';
 import '../../view/root_page.dart';
 import 'guard.dart';
 import 'routes.dart';
@@ -178,16 +177,6 @@ final routerProvider = Provider(
             name: Routes.name().accountManagement,
             builder: (context, state) {
               return const EditProfile();
-            },
-          ),
-          GoRoute(
-            path: Routes.path().webView,
-            name: Routes.name().webView,
-            builder: (context, state) {
-              final type = state.extra as WebViewType;
-              return WebViewPage(
-                type: type,
-              );
             },
           ),
         ],

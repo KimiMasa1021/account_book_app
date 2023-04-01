@@ -83,6 +83,7 @@ class TargetAddDetails extends ConsumerWidget {
                       color: Theme.of(context).colorScheme.onBackground,
                     ),
                   ),
+                  const SizedBox(height: 5),
                   InkWell(
                     onTap: () async {
                       primaryFocus?.unfocus();

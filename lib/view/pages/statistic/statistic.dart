@@ -28,7 +28,7 @@ class Statistic extends HookConsumerWidget {
           final sum = data.map((e) => e.price).reduce((v, e) => v + e);
           //節約回数
           final savedTimes = data.length;
-          //タグ別のリスト(重複あり)
+          //タグ別のリスト
           final listByTag = data.map((e) {
             if (taglist.contains(e.memo)) {
               return [];
@@ -43,7 +43,23 @@ class Statistic extends HookConsumerWidget {
             final bSum = b.map((e) => e.price).reduce((v, e) => v + e);
             return bSum.compareTo(aSum);
           });
-
+          //曜日別のリスト
+          final List<List<SavingState>> listByWeek = [];
+          for (int i = 1; i < 8; i++) {
+            listByWeek
+                .add(data.where((e) => e.createdAt.weekday == i).toList());
+          }
+          //曜日別の金額リスト
+          final priceListByWeek = listByWeek.map((e) {
+            if (e.isEmpty) {
+              return 0;
+            } else {
+              return e.map((a) => a.price).reduce((v, s) => v + s);
+            }
+          }).toList();
+          //曜日別最高金額
+          final maxPriceWeekly = priceListByWeek.reduce(max);
+          //
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -88,6 +104,7 @@ class Statistic extends HookConsumerWidget {
                       );
                     },
                   ),
+                  const SizedBox(height: 5),
                   InkWell(
                     onTap: () {
                       tagFlg.value = !tagFlg.value;
@@ -119,7 +136,8 @@ class Statistic extends HookConsumerWidget {
                           children: List.generate(
                             7,
                             (index) => Bar(
-                              percent: Random().nextDouble(),
+                              percent:
+                                  (priceListByWeek[index] / maxPriceWeekly),
                               index: index,
                             ),
                           ),
@@ -127,6 +145,7 @@ class Statistic extends HookConsumerWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
