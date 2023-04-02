@@ -4,6 +4,7 @@ import 'package:account_book_app/view_model/users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/assets_url.dart';
 import '../../../utility/web_url.dart';
 import '../../component/lottie_dialog.dart';
@@ -51,8 +52,12 @@ class Setting extends HookConsumerWidget {
                 text: '使用上のヒント',
                 icon: Icons.tips_and_updates_outlined,
                 function: () async {
-                  await usersCTL
-                      .launchInBrowser(Uri.parse(WebViewType.appHint.url));
+                  if (!await launchUrl(
+                    Uri.parse(WebViewType.appHint.url),
+                    mode: LaunchMode.externalApplication,
+                  )) {
+                    throw Exception('Could not launch');
+                  }
                 },
               ),
               SettingPanel(

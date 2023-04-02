@@ -29,28 +29,24 @@ class SavingPanel extends HookConsumerWidget {
 
     return targetMembers.when(
       data: (data) {
+        //合計金額
         final price =
             state.map((e) => e.price).toList().reduce((e, v) => e + v);
+        //メンバー別の2重リスト
         final byUserList = target.members.map((e) {
           return state.where((a) => a.userId == e).toList();
         }).toList();
-        final nameList = byUserList
-            .map(
-              (e) {
-                if (e.isEmpty) {
-                  return null;
-                } else {
-                  return targetMembers.value!
-                      .singleWhere((element) => element.uid == e[0].userId)
-                      .name;
-                }
-              },
-            )
-            .toList()
-            .toString();
+        byUserList.removeWhere((e) => e.isEmpty);
+        //記録があるメンバーの名前リスト
+        final nameList = byUserList.map(
+          (a) {
+            return data.firstWhere((e) => e.uid == a[0].userId).name;
+          },
+        ).toList();
+        //パネル表示用の名前の文字列
+        var displayName = nameList.toString().substring(1);
+        displayName = displayName.substring(0, displayName.length - 1);
 
-        final displayName =
-            nameList.substring(1, nameList.length - 1).replaceAll("null", "");
         return InkWell(
           onTap: () {
             isOpen.value = !isOpen.value;
@@ -125,19 +121,12 @@ class SavingPanel extends HookConsumerWidget {
                   isOpen.value
                       ? Column(
                           children: List.generate(
-                            target.members.length,
+                            byUserList.length,
                             (index) {
-                              if (byUserList[index].isEmpty) {
-                                return const SizedBox();
-                              } else {
-                                return SavingPersonPanel(
-                                  name: targetMembers.value!
-                                      .singleWhere((element) =>
-                                          element.uid == target.members[index])
-                                      .name,
-                                  savingState: byUserList[index],
-                                );
-                              }
+                              return SavingPersonPanel(
+                                name: nameList[index],
+                                savingState: byUserList[index],
+                              );
                             },
                           ),
                         )

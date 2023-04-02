@@ -96,6 +96,7 @@ class HomeDetails extends HookConsumerWidget {
                 data: (data) {
                   return saving.when(
                     data: (data) {
+                      //日付別のリスト
                       final dailySavingList = data.map((e) {
                         final eDate = e.createdAt;
                         return data
@@ -117,6 +118,7 @@ class HomeDetails extends HookConsumerWidget {
                             .whereType<SavingState>()
                             .toList();
                       }).toList();
+                      //
                       return SliverChildBuilderDelegate(
                         childCount: dailySavingList.isEmpty
                             ? 1

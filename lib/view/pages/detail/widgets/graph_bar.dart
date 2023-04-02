@@ -50,7 +50,7 @@ class GraphBar extends HookConsumerWidget {
                     alignment: Alignment.bottomCenter,
                     child: FractionallySizedBox(
                       widthFactor: 1,
-                      heightFactor: percent,
+                      heightFactor: percent >= 1 ? 1 : percent,
                       child: Container(
                         decoration: BoxDecoration(
                           color: barColor,

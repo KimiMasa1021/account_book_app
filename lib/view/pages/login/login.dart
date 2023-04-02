@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/web_url.dart';
 import '../../../view_model/auth_controller.dart';
 import '../../../view_model/tags_controller.dart';
-import '../../../view_model/users_controller.dart';
 import '../../theme/app_text_theme.dart';
 
 class Login extends HookConsumerWidget {
@@ -22,7 +22,6 @@ class Login extends HookConsumerWidget {
     final flg = useState(false);
     final size = MediaQuery.of(context).size;
     final font = ref.watch(myTextTheme);
-    final usersCTL = ref.watch(usersControllerProvider.notifier);
 
     return Scaffold(
       body: Stack(
@@ -74,8 +73,12 @@ class Login extends HookConsumerWidget {
                   // const SizedBox(height: 10),
                   InkWell(
                     onTap: () async {
-                      await usersCTL
-                          .launchInBrowser(Uri.parse(WebViewType.appHint.url));
+                      if (!await launchUrl(
+                        Uri.parse(WebViewType.appHint.url),
+                        mode: LaunchMode.externalApplication,
+                      )) {
+                        throw Exception('Could not launch');
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

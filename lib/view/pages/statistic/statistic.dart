@@ -25,7 +25,9 @@ class Statistic extends HookConsumerWidget {
           final taglist = [];
 
           //合計金額
-          final sum = data.map((e) => e.price).reduce((v, e) => v + e);
+          final sum = data.isEmpty
+              ? 0
+              : data.map((e) => e.price).reduce((v, e) => v + e);
           //節約回数
           final savedTimes = data.length;
           //タグ別のリスト
@@ -60,6 +62,8 @@ class Statistic extends HookConsumerWidget {
           //曜日別最高金額
           final maxPriceWeekly = priceListByWeek.reduce(max);
           //
+
+          debugPrint(listByTag.toString());
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -95,7 +99,9 @@ class Statistic extends HookConsumerWidget {
                   ...List.generate(
                     tagFlg.value
                         ? listByTag.length
-                        : listByTag.sublist(0, 3).length,
+                        : listByTag.length >= 3
+                            ? listByTag.getRange(0, 3).length
+                            : listByTag.length,
                     (index) {
                       return TagPanel(
                         text: listByTag[index][0].memo,
@@ -136,8 +142,9 @@ class Statistic extends HookConsumerWidget {
                           children: List.generate(
                             7,
                             (index) => Bar(
-                              percent:
-                                  (priceListByWeek[index] / maxPriceWeekly),
+                              percent: priceListByWeek[index] == 0
+                                  ? 0
+                                  : (priceListByWeek[index] / maxPriceWeekly),
                               index: index,
                             ),
                           ),
