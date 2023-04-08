@@ -1,3 +1,4 @@
+import 'package:account_book_app/view/pages/init_tags/Init_tags.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,11 @@ final routerProvider = Provider(
         path: Routes.path().auth,
         name: Routes.name().auth,
         builder: (context, state) => const Login(),
+      ),
+      GoRoute(
+        path: Routes.path().initTags,
+        name: Routes.name().initTags,
+        builder: (context, state) => const InitTags(),
       ),
       GoRoute(
         path: Routes.path().root,

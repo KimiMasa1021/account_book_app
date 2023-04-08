@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../model/saving/tags_state.dart';
+
 final authControllerProvider =
     StateNotifierProvider.autoDispose<AuthController, User?>(
         (ref) => AuthController(ref));
@@ -22,19 +24,32 @@ class AuthController extends StateNotifier<User?> {
         .listen((user) => state = user);
   }
 
-  Future<bool> signInWithGoogle() async {
+  Future<String?> signInWithGoogle() async {
     try {
       final credential =
           await ref.read(authRepositoryProvider).signInWithGoogle();
 
-      if (credential == null) return false;
+      if (credential == null) return null;
       if (credential.additionalUserInfo!.isNewUser) {
         await ref.read(authRepositoryProvider).saveUsesrData(credential);
       }
-      return credential.additionalUserInfo!.isNewUser;
+      return credential.user?.uid;
     } catch (e) {
       debugPrint("ログイン失敗$e");
-      throw e.toString();
+      return null;
+    }
+  }
+
+  Future<void> branchBySignin(
+    String? authFlg,
+    List<Tags> tags,
+    Function() emptyTagFunc,
+    Function() notEmptyTagFunc,
+  ) async {
+    if (authFlg != null && tags.isEmpty) {
+      emptyTagFunc();
+    } else {
+      notEmptyTagFunc();
     }
   }
 
@@ -44,7 +59,7 @@ class AuthController extends StateNotifier<User?> {
   }
 
   Future<void> deryFuture(Function() function) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     function();
   }
 

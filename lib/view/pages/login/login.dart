@@ -57,20 +57,21 @@ class Login extends HookConsumerWidget {
                     text: "Googleでサインアップ",
                     function: () async {
                       flg.value = true;
-                      await authCTL.signInWithGoogle();
-                      if (tags.isEmpty) await tagsCTL.insertTags();
-                      await authCTL.deryFuture(() {
-                        flg.value = false;
-                        context.go(Routes.path().root);
-                      });
+                      final authFlg = await authCTL.signInWithGoogle();
+                      await authCTL.branchBySignin(
+                        authFlg,
+                        tags,
+                        () {
+                          context.go(Routes.path().initTags);
+                        },
+                        () {
+                          context.go(Routes.path().root);
+                        },
+                      );
+                      flg.value = false;
                     },
                   ),
                   const SizedBox(height: 20),
-                  // ShadowButton(
-                  //   text: "Appleでサインアップ",
-                  //   function: () {},
-                  // ),
-                  // const SizedBox(height: 10),
                   InkWell(
                     onTap: () async {
                       if (!await launchUrl(
