@@ -1,9 +1,9 @@
+import 'package:account_book_app/view/pages/init_tags/Init_tags.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../model/enums.dart';
 import '../../model/target/target_state.dart';
 import '../../model/user/users_state.dart';
 import '../../view/pages/add_project/target_add_details.dart';
@@ -21,7 +21,6 @@ import '../../view/pages/setting/edit_friends/friend_status.dart';
 import '../../view/pages/setting/edit_friends/scan_qr.dart';
 import '../../view/pages/setting/edit_friends/user_profile.dart';
 import '../../view/pages/setting/edit_profile/edit_profile.dart';
-import '../../view/pages/web_view/web_view_page.dart';
 import '../../view/root_page.dart';
 import 'guard.dart';
 import 'routes.dart';
@@ -36,6 +35,11 @@ final routerProvider = Provider(
         path: Routes.path().auth,
         name: Routes.name().auth,
         builder: (context, state) => const Login(),
+      ),
+      GoRoute(
+        path: Routes.path().initTags,
+        name: Routes.name().initTags,
+        builder: (context, state) => const InitTags(),
       ),
       GoRoute(
         path: Routes.path().root,
@@ -179,16 +183,6 @@ final routerProvider = Provider(
             name: Routes.name().accountManagement,
             builder: (context, state) {
               return const EditProfile();
-            },
-          ),
-          GoRoute(
-            path: Routes.path().webView,
-            name: Routes.name().webView,
-            builder: (context, state) {
-              final type = state.extra as WebViewType;
-              return WebViewPage(
-                type: type,
-              );
             },
           ),
         ],

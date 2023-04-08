@@ -96,6 +96,7 @@ class HomeDetails extends HookConsumerWidget {
                 data: (data) {
                   return saving.when(
                     data: (data) {
+                      //日付別のリスト
                       final dailySavingList = data.map((e) {
                         final eDate = e.createdAt;
                         return data
@@ -117,6 +118,7 @@ class HomeDetails extends HookConsumerWidget {
                             .whereType<SavingState>()
                             .toList();
                       }).toList();
+                      //
                       return SliverChildBuilderDelegate(
                         childCount: dailySavingList.isEmpty
                             ? 1
@@ -148,8 +150,9 @@ class HomeDetails extends HookConsumerWidget {
                                       horizontal: 15),
                                   child: RichText(
                                     text: TextSpan(
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
                                       children: [
                                         TextSpan(
                                           text: DateFormat('yyyy').format(
@@ -264,7 +267,6 @@ class HomeDetails extends HookConsumerWidget {
                           return null;
                         },
                       );
-                      ;
                     },
                     error: (e, s) {
                       return SliverChildBuilderDelegate(

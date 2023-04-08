@@ -95,7 +95,7 @@ class TargetAddImage extends HookConsumerWidget {
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Theme.of(context).backgroundColor,
+                            color: Theme.of(context).colorScheme.background,
                             border: Border.all(
                               color: Theme.of(context).colorScheme.onBackground,
                               width: 3,

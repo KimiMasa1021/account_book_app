@@ -16,7 +16,6 @@ class QrCode extends ConsumerWidget {
     final usersState = ref.watch(usersControllerProvider);
     final font = ref.watch(myTextTheme);
     final userState = ref.watch(usersControllerProvider);
-    final size = MediaQuery.of(context).size;
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),

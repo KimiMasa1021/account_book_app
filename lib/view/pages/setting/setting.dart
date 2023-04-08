@@ -1,12 +1,13 @@
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view_model/auth_controller.dart';
+import 'package:account_book_app/view_model/users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/assets_url.dart';
+import '../../../utility/web_url.dart';
 import '../../component/lottie_dialog.dart';
-import '../../theme/app_text_theme.dart';
-import '../web_view/web_view_page.dart';
 import 'widgets/setting_panel.dart';
 import 'widgets/user_data_panel.dart';
 
@@ -16,7 +17,7 @@ class Setting extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authCTL = ref.watch(authControllerProvider.notifier);
-    final font = ref.watch(myTextTheme);
+    final usersCTL = ref.watch(usersControllerProvider.notifier);
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -50,11 +51,13 @@ class Setting extends HookConsumerWidget {
               SettingPanel(
                 text: '使用上のヒント',
                 icon: Icons.tips_and_updates_outlined,
-                function: () {
-                  context.goNamed(
-                    Routes.name().webView,
-                    extra: WebViewType.appHint,
-                  );
+                function: () async {
+                  if (!await launchUrl(
+                    Uri.parse(WebViewType.appHint.url),
+                    mode: LaunchMode.externalApplication,
+                  )) {
+                    throw Exception('Could not launch');
+                  }
                 },
               ),
               SettingPanel(

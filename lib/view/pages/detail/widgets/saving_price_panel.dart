@@ -1,7 +1,7 @@
 import 'package:account_book_app/model/saving/saving_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../view_model/saving_controller.dart';
+import '../../../../utility/format_text.dart';
 import '../../../theme/app_text_theme.dart';
 
 class SavingPricePanel extends HookConsumerWidget {
@@ -14,7 +14,6 @@ class SavingPricePanel extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
-    final savingCTL = ref.watch(savingControllerProvider("").notifier);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -37,7 +36,7 @@ class SavingPricePanel extends HookConsumerWidget {
                 ),
                 const Spacer(),
                 Text(
-                  savingCTL.formatYen(state.price),
+                  FormatText.formatYen(state.price),
                   style: font.fs16.copyWith(),
                   overflow: TextOverflow.ellipsis,
                 ),

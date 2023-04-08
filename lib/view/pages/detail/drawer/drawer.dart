@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../model/target/target_state.dart';
 import '../../../../utility/assets_url.dart';
-import '../../../../view_model/saving_controller.dart';
+import '../../../../utility/format_text.dart';
 import '../../../theme/app_text_theme.dart';
 import 'widgets/drawer_info_panel.dart';
 import 'widgets/drawer_action_panel.dart';
@@ -18,9 +18,6 @@ class MyDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final savingCTL =
-        ref.watch(savingControllerProvider(target.docId).notifier);
-
     final font = ref.watch(myTextTheme);
 
     return SafeArea(
@@ -34,7 +31,7 @@ class MyDrawer extends ConsumerWidget {
           height: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).colorScheme.background,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +86,7 @@ class MyDrawer extends ConsumerWidget {
                     style: Theme.of(context).textTheme.bodyMedium,
                     children: [
                       TextSpan(
-                        text: savingCTL.formatYen(target.targetPrice),
+                        text: FormatText.formatYen(target.targetPrice),
                         style: font.fs27.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -110,7 +107,7 @@ class MyDrawer extends ConsumerWidget {
                     style: Theme.of(context).textTheme.bodyMedium,
                     children: [
                       TextSpan(
-                        text: savingCTL.formatYen(target.currentPrice),
+                        text: FormatText.formatYen(target.currentPrice),
                         style: font.fs27.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -128,7 +125,7 @@ class MyDrawer extends ConsumerWidget {
                 title: '達成予定日',
                 content: RichText(
                   text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     children: [
                       TextSpan(
                         text: DateFormat('yyyy').format(target.targetDate),

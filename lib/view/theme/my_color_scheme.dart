@@ -31,7 +31,7 @@ final scheme1 = ColorScheme.fromSwatch(
   secondary: HexColor("#078080"),
   onSecondary: HexColor("#fffffe"),
   // ButtomBarIconBack
-  tertiary: HexColor("#F2FFFF"),
+  tertiary: HexColor("#B6F3F3"),
   onTertiary: HexColor("#918080"),
 );
 
@@ -39,10 +39,10 @@ final scheme2 = ColorScheme.fromSwatch(
   brightness: Brightness.light,
 ).copyWith(
   // 背景
-  background: HexColor("#fffffe"),
+  background: HexColor("#f8f5f2"),
   onBackground: HexColor("#232323"),
   // Card AppBar BottomBar
-  surface: HexColor("#f8f5f2"),
+  surface: HexColor("#fffffe"),
   onSurface: HexColor("#232323"),
   // SettingPanel
   secondary: HexColor("#f45d48"),
@@ -85,6 +85,7 @@ final scheme4 = ColorScheme.fromSwatch(
   tertiary: HexColor("#75544A"),
   onTertiary: HexColor("#E2E2E2"),
 );
+
 final scheme5 = ColorScheme.fromSwatch(
   brightness: Brightness.dark,
 ).copyWith(
@@ -101,6 +102,7 @@ final scheme5 = ColorScheme.fromSwatch(
   tertiary: HexColor("#463C10"),
   onTertiary: HexColor("#E2E2E2"),
 );
+
 final scheme6 = ColorScheme.fromSwatch(
   brightness: Brightness.dark,
 ).copyWith(

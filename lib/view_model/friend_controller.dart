@@ -18,7 +18,7 @@ class FriendController extends StateNotifier<List<UsersState>> {
 
   //本番用
   final String baseUrl =
-      "https://asia-northeast1-account-book-app-af1e7.cloudfunctions.net";
+      "https://asia-northeast1-group-saving-app.cloudfunctions.net";
 
   //デバッグ用
   final String debugUrl =

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -9,6 +8,7 @@ import '../model/enums.dart';
 import '../model/user/users_state.dart';
 import '../repository/users_repository.dart';
 import '../view/component/picture_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final usersControllerProvider =
     StateNotifierProvider.autoDispose<UsersController, UsersState?>(
@@ -115,13 +115,5 @@ class UsersController extends StateNotifier<UsersState> {
         },
       ),
     );
-  }
-
-  void copyTextWithToast(
-    String copyText,
-    String message,
-  ) {
-    Clipboard.setData(ClipboardData(text: copyText));
-    showToast(message);
   }
 }

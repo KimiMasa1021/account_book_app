@@ -1,11 +1,12 @@
 import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/component/shadow_button.dart';
 import 'package:account_book_app/view/pages/login/widget/login_loading.dart';
-import 'package:account_book_app/view/pages/web_view/web_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../../utility/web_url.dart';
 import '../../../view_model/auth_controller.dart';
 import '../../../view_model/tags_controller.dart';
 import '../../theme/app_text_theme.dart';
@@ -56,30 +57,29 @@ class Login extends HookConsumerWidget {
                     text: "Googleでサインアップ",
                     function: () async {
                       flg.value = true;
-                      await authCTL.signInWithGoogle();
-                      if (tags.isEmpty) await tagsCTL.insertTags();
-                      await authCTL.deryFuture(() {
-                        flg.value = false;
-                        context.go(Routes.path().root);
-                      });
+                      final authFlg = await authCTL.signInWithGoogle();
+                      await authCTL.branchBySignin(
+                        authFlg,
+                        tags,
+                        () {
+                          context.go(Routes.path().initTags);
+                        },
+                        () {
+                          context.go(Routes.path().root);
+                        },
+                      );
+                      flg.value = false;
                     },
                   ),
                   const SizedBox(height: 20),
-                  // ShadowButton(
-                  //   text: "Appleでサインアップ",
-                  //   function: () {},
-                  // ),
-                  // const SizedBox(height: 10),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WebViewPage(
-                            type: WebViewType.privacyPolicy,
-                          ),
-                        ),
-                      );
+                    onTap: () async {
+                      if (!await launchUrl(
+                        Uri.parse(WebViewType.appHint.url),
+                        mode: LaunchMode.externalApplication,
+                      )) {
+                        throw Exception('Could not launch');
+                      }
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

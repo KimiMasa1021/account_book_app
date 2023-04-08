@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../model/user/users_state.dart';
+import '../provider/firebase/firebase_auth_provider.dart';
 import '../provider/firebase/firebase_firestore_provider.dart';
 import '../view_model/auth_controller.dart';
 
@@ -24,7 +25,7 @@ class GenreRepositoryImple implements UsersRepository {
   GenreRepositoryImple(this.ref) {
     collectionReference =
         ref.read(firebaseFireStoreProvider).collection("users");
-    userId = ref.read(authControllerProvider)!.uid;
+    userId = ref.read(firebaseAuthProvider).currentUser!.uid;
   }
 
   @override

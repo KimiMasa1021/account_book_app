@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../theme/app_text_theme.dart';
 import 'widget/qr_camera.dart';
 import 'widget/qr_code.dart';
 
@@ -12,7 +11,6 @@ class ScanQr extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = useState(false);
-    final font = ref.watch(myTextTheme);
     final flg = useState(true);
 
     return DefaultTabController(

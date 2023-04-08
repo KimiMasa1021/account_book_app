@@ -1,4 +1,6 @@
 import 'package:account_book_app/model/saving/tags_state.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
@@ -52,12 +54,16 @@ class TagsController extends StateNotifier<List<Tags>> {
     "自炊した",
     "コンビニ",
   ];
-  Future<void> insertTags() async {
+  Future<void> insertTags(
+    List<String> tags,
+    Function() fucntion,
+  ) async {
     await database.transaction((txn) async {
-      for (var tag in tagList) {
+      for (var tag in tags) {
         await txn.rawInsert('INSERT INTO tags(tag) VALUES("$tag")');
       }
     });
+    fucntion();
   }
 
   Future<void> getTags() async {
@@ -102,5 +108,17 @@ class TagsController extends StateNotifier<List<Tags>> {
     await database.transaction((txn) async {
       await txn.rawInsert('DELETE FROM tags WHERE id = $id');
     });
+  }
+
+  void shwoToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      textColor: const Color.fromARGB(255, 255, 255, 255),
+      fontSize: 16.0,
+    );
   }
 }

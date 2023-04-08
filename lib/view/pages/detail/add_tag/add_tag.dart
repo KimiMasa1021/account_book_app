@@ -13,7 +13,6 @@ class AddTag extends ConsumerWidget {
     final font = ref.watch(myTextTheme);
     final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(

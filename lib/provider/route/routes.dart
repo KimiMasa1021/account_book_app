@@ -15,8 +15,8 @@ class Routes {
     required this.inviteMember,
     required this.designManagement,
     required this.accountManagement,
-    required this.webView,
     required this.addTag,
+    required this.initTags,
   });
   final String root;
   final String auth;
@@ -33,33 +33,35 @@ class Routes {
   final String inviteMember;
   final String designManagement;
   final String accountManagement;
-  final String webView;
   final String addTag;
+  final String initTags;
   factory Routes.name() {
     return const Routes(
-        root: "root",
-        auth: "auth",
-        addProjectMember: "addProjectMember",
-        addProjectDetails: "addProjectDetails",
-        addProjectImage: "addProjectImage",
-        projectDetails: "projectDetails",
-        editProject: "editProject",
-        addSaving: "addSaving",
-        friendManagement: "friendManagement",
-        userProfile: "userProfile",
-        scanQr: "scanQr",
-        memberList: "memberList",
-        inviteMember: "inviteMember",
-        designManagement: "designManagement",
-        accountManagement: "accountManagement",
-        webView: "webView",
-        addTag: "addTag");
+      root: "root",
+      auth: "auth",
+      initTags: "initTags",
+      addProjectMember: "addProjectMember",
+      addProjectDetails: "addProjectDetails",
+      addProjectImage: "addProjectImage",
+      projectDetails: "projectDetails",
+      editProject: "editProject",
+      addSaving: "addSaving",
+      friendManagement: "friendManagement",
+      userProfile: "userProfile",
+      scanQr: "scanQr",
+      memberList: "memberList",
+      inviteMember: "inviteMember",
+      designManagement: "designManagement",
+      accountManagement: "accountManagement",
+      addTag: "addTag",
+    );
   }
 
   factory Routes.path() {
     return const Routes(
       auth: "/auth",
       root: "/root",
+      initTags: "/init_tags",
       addProjectMember: "add_project_member",
       addProjectDetails: "add_project_details",
       addProjectImage: "add_project_image",
@@ -73,7 +75,6 @@ class Routes {
       scanQr: "scan_qr",
       designManagement: "design_management",
       accountManagement: "account_management",
-      webView: "web_view",
       addTag: "add_tag",
     );
   }

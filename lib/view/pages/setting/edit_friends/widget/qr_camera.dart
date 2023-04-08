@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../../../view_model/friend_controller.dart';
 import '../../../../../view_model/search_users_controller.dart';
+import '../../../../../view_model/users_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 
 // ignore: must_be_immutable
@@ -25,6 +26,7 @@ class QrCamera extends ConsumerWidget {
     final searchUsesr = ref.watch(searchUsersControllerProvider(null).notifier);
     final size = MediaQuery.of(context).size;
     final font = ref.watch(myTextTheme);
+    final usersState = ref.watch(usersControllerProvider);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
@@ -44,7 +46,9 @@ class QrCamera extends ConsumerWidget {
 
                     final friendState =
                         await searchUsesr.searchUser(scanData.code.toString());
-                    if (friendState != null && context.mounted) {
+                    if (scanData.code.toString() == usersState!.uid) {
+                      friendCTL.shwoToast("自分自身を登録することはできません");
+                    } else if (friendState != null && context.mounted) {
                       context.pushNamed(
                         Routes.name().userProfile,
                         extra: friendState,
@@ -96,7 +100,8 @@ class QrCamera extends ConsumerWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 padding: const EdgeInsets.symmetric(
                   vertical: 12,
                 ),

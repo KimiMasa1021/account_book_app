@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../model/target/target_state.dart';
+import '../../../../../utility/format_text.dart';
 import '../../../../../view_model/saving_controller.dart';
 import '../../../../theme/app_text_theme.dart';
 import '../detail_percent_painter.dart';
@@ -15,9 +16,6 @@ class PageViewCenter extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final saving = ref.watch(savingControllerProvider(target.docId));
-    final savingCTL =
-        ref.watch(savingControllerProvider(target.docId).notifier);
-
     final font = ref.watch(myTextTheme);
     final percent = target.currentPrice / target.targetPrice;
 
@@ -69,7 +67,7 @@ class PageViewCenter extends HookConsumerWidget {
                                   style: Theme.of(context).textTheme.bodyMedium,
                                   children: [
                                     TextSpan(
-                                      text: savingCTL.formatYen(sum),
+                                      text: FormatText.formatYen(sum),
                                       style: font.fs33.copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -103,8 +101,8 @@ class PageViewCenter extends HookConsumerWidget {
                                         Theme.of(context).textTheme.bodyMedium,
                                     children: [
                                       TextSpan(
-                                        text: savingCTL
-                                            .formatYen(target.targetPrice),
+                                        text: FormatText.formatYen(
+                                            target.targetPrice),
                                         style: font.fs27.copyWith(
                                           fontWeight: FontWeight.bold,
                                         ),

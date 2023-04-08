@@ -184,6 +184,7 @@ class EditProject extends HookConsumerWidget {
                                     Theme.of(context).colorScheme.onBackground,
                               ),
                             ),
+                            const SizedBox(height: 5),
                             InkWell(
                               onTap: () async {
                                 primaryFocus?.unfocus();

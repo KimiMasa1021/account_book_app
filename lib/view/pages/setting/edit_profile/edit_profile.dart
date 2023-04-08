@@ -9,7 +9,6 @@ import '../../../../provider/route/routes.dart';
 import '../../../../view_model/users_controller.dart';
 import '../../../component/my_lottie_data.dart';
 import '../../../component/normal_text_field.dart';
-import '../../../theme/app_text_theme.dart';
 
 class EditProfile extends HookConsumerWidget {
   const EditProfile({super.key});
@@ -22,7 +21,6 @@ class EditProfile extends HookConsumerWidget {
     final ValueNotifier<File?> imageFile = useState(null);
     final userCTL = ref.watch(usersControllerProvider.notifier);
     final flg = useState(TargetInitFlg.inputing);
-    final font = ref.watch(myTextTheme);
 
     return Stack(
       children: [
