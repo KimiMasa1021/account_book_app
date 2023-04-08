@@ -13,7 +13,6 @@ class InitTags extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
-    final tags = ref.watch(tagsControllerProvider);
     final tagsCTL = ref.watch(tagsControllerProvider.notifier);
     final ValueNotifier<List<String>> selectedTags = useState([]);
 

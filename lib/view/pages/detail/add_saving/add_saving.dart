@@ -29,7 +29,6 @@ class AddSaving extends HookConsumerWidget {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            debugPrint("うんこ");
             context.pop();
           },
           icon: const Icon(

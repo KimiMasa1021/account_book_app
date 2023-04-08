@@ -61,9 +61,7 @@ class Statistic extends HookConsumerWidget {
           }).toList();
           //曜日別最高金額
           final maxPriceWeekly = priceListByWeek.reduce(max);
-          //
 
-          debugPrint(listByTag.toString());
           return SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
