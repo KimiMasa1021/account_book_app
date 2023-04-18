@@ -40,6 +40,7 @@ class TagsController extends StateNotifier<List<Tags>> {
       },
     );
   }
+
   final List<String> tagList = [
     "通信費",
     "光熱費",
@@ -49,11 +50,33 @@ class TagsController extends StateNotifier<List<Tags>> {
     "ジュース",
     "外食を控えた！",
     "被服費・美容費",
-    "娯楽",
+    "娯楽費抑える",
     "交通費",
     "自炊した",
     "コンビニ",
+    "節水した！",
+    "電気代節約",
+    "ショッピング割引",
+    "施設利用",
+    "ポイント還元",
+    "家電省エネ",
+    "不用品売った",
+    "インターネット見直し",
+    "自転車利用",
+    "飲み物持参",
+    "不用品リサイクル",
+    "おやつ持参",
+    "洗濯量減らす",
+    "キャッシュバック活用",
+    "エコバッグ持参",
+    "家庭菜園",
+    "シェアリング利用",
+    "業務スーパー利用",
+    "セール品活用",
+    "飲料水持参",
+    "フリマアプリ利用",
   ];
+
   Future<void> insertTags(
     List<String> tags,
     Function() fucntion,

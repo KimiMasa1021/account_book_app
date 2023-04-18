@@ -27,7 +27,7 @@ class InitTags extends HookConsumerWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    "あなたに合った項目を選択してね",
+                    "あなたに合った節約項目を選択してね",
                     style: font.fs21,
                     maxLines: 1,
                   ),
@@ -52,7 +52,7 @@ class InitTags extends HookConsumerWidget {
                                 selectedTags: selectedTags,
                               ),
                             ),
-                            const SizedBox(height: 120),
+                            const SizedBox(height: 300),
                           ],
                         ),
                       ),
