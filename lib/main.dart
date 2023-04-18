@@ -21,5 +21,16 @@ Future<void> main() async {
   );
 }
 
+// TODO
+
+/*
+
+  MVVMからDDDへの移行
+  AsyncValueあたりのコード汚すぎる
+  GoRouterあたりのコード汚すぎる
+  RiverpodのoverrideWithProvider非推奨対応
+
+ */
+
 
 
