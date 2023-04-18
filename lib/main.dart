@@ -29,7 +29,9 @@ Future<void> main() async {
   AsyncValueあたりのコード汚すぎる
   GoRouterあたりのコード汚すぎる
   RiverpodのoverrideWithProvider非推奨対応
-
+  機能追加
+  広告張り
+  
  */
 
 
