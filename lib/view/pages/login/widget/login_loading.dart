@@ -10,14 +10,14 @@ class LoginLoading extends ConsumerWidget {
     super.key,
     required this.flg,
   });
-  final ValueNotifier<bool> flg;
+  final bool flg;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final font = ref.watch(myTextTheme);
 
-    return flg.value == true
+    return flg == true
         ? Container(
             width: size.width,
             height: size.height,

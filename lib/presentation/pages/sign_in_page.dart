@@ -2,23 +2,21 @@ import 'package:account_book_app/provider/route/routes.dart';
 import 'package:account_book_app/view/component/shadow_button.dart';
 import 'package:account_book_app/view/pages/login/widget/login_loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/web_url.dart';
-import '../../../view_model/auth_controller.dart';
-import '../../../view_model/tags_controller.dart';
+import '../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
+import '../../application/providers/sign_in_provider/provider/sign_in_notifier_provider.dart';
 import '../../view/theme/app_text_theme.dart';
 
-class SignIn extends HookConsumerWidget {
+class SignIn extends ConsumerWidget {
   const SignIn({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authCTL = ref.watch(authControllerProvider.notifier);
-    final tags = ref.watch(tagsControllerProvider);
-    final flg = useState(false);
+    final signIn = ref.watch(signInProvider);
+    final signInCTL = ref.watch(signInProvider.notifier);
+    final profileCTL = ref.watch(profileNotifierProvider.notifier);
     final size = MediaQuery.of(context).size;
     final font = ref.watch(myTextTheme);
 
@@ -55,19 +53,9 @@ class SignIn extends HookConsumerWidget {
                   ShadowButton(
                     text: "Googleでサインアップ",
                     function: () async {
-                      flg.value = true;
-                      final authFlg = await authCTL.signInWithGoogle();
-                      await authCTL.branchBySignin(
-                        authFlg,
-                        tags,
-                        () {
-                          context.go(Routes.path().initTags);
-                        },
-                        () {
-                          context.go(Routes.path().root);
-                        },
+                      await signInCTL.signInWithGoogle(
+                        () => profileCTL.branchScreen(context),
                       );
-                      flg.value = false;
                     },
                   ),
                   const SizedBox(height: 20),
@@ -94,7 +82,7 @@ class SignIn extends HookConsumerWidget {
               ),
             ),
           ),
-          LoginLoading(flg: flg),
+          // LoginLoading(flg: signIn.signInFlg),
         ],
       ),
     );

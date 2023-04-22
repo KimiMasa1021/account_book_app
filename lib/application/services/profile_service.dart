@@ -51,4 +51,8 @@ class ProfileService {
 
     return Result.value(userCredential);
   }
+
+  Future<void> saveUserData(UserCredential credential) async {
+    await _profileRepository.saveUsesrData(credential);
+  }
 }
