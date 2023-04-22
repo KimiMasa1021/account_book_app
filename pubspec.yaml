@@ -44,6 +44,7 @@ dependencies:
   flutter_svg: ^2.0.0
   cached_network_image: ^3.2.3
   url_launcher: ^6.1.10
+  async: ^2.10.0
 
 
 
