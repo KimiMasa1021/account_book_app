@@ -1,9 +1,9 @@
-import 'package:account_book_app/domain/profile/models/profile.dart';
-import 'package:account_book_app/infrastructure/profile_repository.dart';
 import 'package:async/async.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../domain/entity/profile/profile.dart';
+import '../../infrastructure/repositorys/profile_repository.dart';
 
 final profileService = Provider(
   (ref) => ProfileService(

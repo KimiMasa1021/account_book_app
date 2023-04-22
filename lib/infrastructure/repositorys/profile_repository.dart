@@ -1,21 +1,24 @@
 import 'dart:async';
-
-import 'package:account_book_app/domain/profile/models/profile.dart';
 import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../domain/entity/profile/profile.dart';
+import '../../domain/repository/profile_repository_base.dart';
 
-final profileRepository = Provider((ref) => ProfileRepository());
+final profileRepository = Provider((ref) => ProfileRepository(ref));
 
-class ProfileRepository {
+class ProfileRepository implements ProfileRepositoryBase {
+  ProfileRepository(this.ref);
+
   final _db = FirebaseFirestore.instance;
   final _storage = FirebaseStorage.instance;
-
+  final Ref ref;
   late Stream<DocumentSnapshot<Profile>>? _stream;
   late StreamSubscription? _streamListener;
 
+  @override
   void subscribeStream(
     void Function(Profile) onCompleted,
   ) {
@@ -32,6 +35,7 @@ class ProfileRepository {
     });
   }
 
+  @override
   Future<Result<bool>> saveUsesrData(UserCredential credential) async {
     try {
       await _db.doc(credential.user!.uid).set({

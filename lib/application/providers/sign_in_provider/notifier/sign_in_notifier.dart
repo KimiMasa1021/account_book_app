@@ -1,7 +1,6 @@
-import 'package:account_book_app/infrastructure/profile_repository.dart';
-import 'package:account_book_app/application/profile_service.dart';
+import 'package:account_book_app/application/services/profile_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import '../../infrastructure/repositorys/profile_repository.dart';
 import 'states/sign_in_state.dart';
 
 final signInProvider = StateNotifierProvider(
@@ -20,10 +19,6 @@ class SignInNotifier extends StateNotifier<SignInState> {
   final ProfileService service;
   final ProfileRepository repository;
 
-  // void init() {
-  //   service.subscribeUserProfile((p0) {});
-  // }
-
   Future<void> signInWithGoogle() async {
     state = state.copyWith(signInFlg: true);
 
@@ -32,7 +27,6 @@ class SignInNotifier extends StateNotifier<SignInState> {
     if (!result.isError) {
       await repository.saveUsesrData(result.asValue!.value);
     }
-
     state = state.copyWith(signInFlg: false);
   }
 }
