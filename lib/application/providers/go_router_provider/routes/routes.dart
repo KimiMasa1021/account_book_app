@@ -1,8 +1,7 @@
 class Routes {
   const Routes._();
-  static const String auth = "/auth";
-  static const String root = "/root";
-  static const String initTags = "init_tags";
+  static const String signIn = "/signIn";
+  static const String initTags = "/initTags";
   static const String addProjectMember = "add_project_member";
   static const String addProjectDetails = "add_project_details";
   static const String addProjectImage = "add_project_image";

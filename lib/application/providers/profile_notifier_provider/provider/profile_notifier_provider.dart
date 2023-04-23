@@ -5,6 +5,6 @@ import '../notifier/profile_state_notifier.dart';
 
 final profileNotifierProvider = StateNotifierProvider(
   (ref) => ProfileNotifier(
-    profileService: ref.read(profileService),
+    profileService: ref.read(profileServiceProvider),
   )..init(),
 );

@@ -1,21 +1,19 @@
-import 'package:account_book_app/provider/route/routes.dart';
-import 'package:account_book_app/view/pages/init_tags/widget/painted_tag.dart';
-import 'package:account_book_app/view_model/tags_controller.dart';
+import 'package:account_book_app/application/providers/go_router_provider/routes/routes.dart';
+import 'package:account_book_app/application/providers/tags_provider/provider/tags_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../../view/theme/app_text_theme.dart';
+import '../widgets/initialize_tag/painted_tag.dart';
 
-class InitTags extends HookConsumerWidget {
-  const InitTags({super.key});
+class InitTagPage extends ConsumerWidget {
+  const InitTagPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
-    final tagsCTL = ref.watch(tagsControllerProvider.notifier);
-    final ValueNotifier<List<String>> selectedTags = useState([]);
+    final tags = ref.watch(tagsProvider);
+    final tagsCTL = ref.watch(tagsProvider.notifier);
 
     return Scaffold(
       body: SafeArea(
@@ -47,10 +45,9 @@ class InitTags extends HookConsumerWidget {
                           alignment: WrapAlignment.center,
                           children: [
                             ...List.generate(
-                              tagsCTL.tagList.length,
+                              tagsCTL.initTagList.length,
                               (index) => PaintedTag(
-                                title: tagsCTL.tagList[index],
-                                selectedTags: selectedTags,
+                                title: tagsCTL.initTagList[index],
                               ),
                             ),
                             const SizedBox(height: 300),
@@ -65,18 +62,11 @@ class InitTags extends HookConsumerWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: InkWell(
-                onTap: () async {
-                  if (selectedTags.value.length < 3) {
-                    tagsCTL.shwoToast("３つ以上選択してね  ♥");
-                    return;
-                  }
-                  await tagsCTL.insertTags(
-                    selectedTags.value,
-                    () {
-                      context.go(Routes.path().root);
-                    },
-                  );
-                },
+                onTap: () async => tagsCTL.initializeTag(
+                  () {
+                    tagsCTL.goHome(context);
+                  },
+                ),
                 child: Container(
                   width: double.infinity,
                   height: 70,

@@ -1,10 +1,10 @@
 import 'package:account_book_app/presentation/pages/sign_in_page.dart';
 import 'package:account_book_app/presentation/pages/test2.dart';
 import 'package:account_book_app/presentation/pages/test3.dart';
-import 'package:account_book_app/view/pages/init_tags/Init_tags.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../presentation/pages/home_page.dart';
+import '../../../../presentation/pages/init_tag_page.dart';
 import '../../../../presentation/pages/test1.dart';
 import '../../profile_notifier_provider/provider/profile_notifier_provider.dart';
 import '../routes/global_navigator_keys.dart';
@@ -16,22 +16,19 @@ final routerProvider = Provider(
     redirect: (context, state) {
       final uid = ref.watch(profileNotifierProvider.notifier).abc;
       if (uid == null) {
-        return Routes.auth;
+        return Routes.signIn;
       }
       return null;
     },
     routes: [
       GoRoute(
-        path: Routes.auth,
-        name: Routes.auth,
+        path: Routes.signIn,
+        name: Routes.signIn,
         builder: (context, state) => const SignIn(),
-        routes: [
-          GoRoute(
-            path: Routes.initTags,
-            name: Routes.initTags,
-            builder: (context, state) => const InitTags(),
-          ),
-        ],
+      ),
+      GoRoute(
+        path: Routes.initTags,
+        builder: (context, state) => const InitTagPage(),
       ),
       ShellRoute(
         navigatorKey: GlobalNavigatorKeys.shellNavigator,

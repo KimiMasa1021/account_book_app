@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/entity/profile/profile.dart';
 import '../../infrastructure/repositorys/profile_repository.dart';
 
-final profileService = Provider(
+final profileServiceProvider = Provider(
   (ref) => ProfileService(
     profileRepository: ref.read(profileRepository),
   ),

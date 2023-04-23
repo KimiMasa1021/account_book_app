@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/web_url.dart';
 import '../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
-import '../../application/providers/sign_in_provider/provider/sign_in_notifier_provider.dart';
+import '../../application/providers/sign_in_provider/provider/sign_in_provider.dart';
 import '../../view/theme/app_text_theme.dart';
 
 class SignIn extends ConsumerWidget {

@@ -58,4 +58,19 @@ class ProfileRepository implements ProfileRepositoryBase {
     }
     return Result.value(true);
   }
+
+  @override
+  Future<Result<bool>> initializeTag(List<String> tags) async {
+    try {
+      await _db.collection("users").doc(_auth.currentUser?.uid).set(
+        {
+          "tags": tags,
+        },
+        SetOptions(merge: true),
+      );
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+    return Result.value(true);
+  }
 }
