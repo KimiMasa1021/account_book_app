@@ -28,7 +28,7 @@ class ProfileNotifier extends StateNotifier<Profile> {
     if (state.tags.isEmpty) {
       context.go(Routes.initTags);
     } else {
-      context.go(Routes.test1);
+      context.go(Routes.list);
     }
   }
 }

@@ -1,6 +1,6 @@
-import 'package:account_book_app/utility/format_Text.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../common/format_text.dart';
 import '../../../view/theme/app_text_theme.dart';
 
 class Bar extends HookConsumerWidget {

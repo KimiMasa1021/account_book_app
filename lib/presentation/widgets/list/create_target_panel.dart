@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../theme/app_text_theme.dart';
-import '../../../component/shapes.dart';
 
-class AddTargetPanel extends HookConsumerWidget {
-  const AddTargetPanel({
+import '../../../view/theme/app_text_theme.dart';
+import 'shapes.dart';
+
+class CreateTargetPanel extends HookConsumerWidget {
+  const CreateTargetPanel({
     super.key,
     required this.onTap,
   });

@@ -1,19 +1,19 @@
+import 'package:account_book_app/presentation/pages/list_page.dart';
 import 'package:account_book_app/presentation/pages/setting_page.dart';
 import 'package:account_book_app/presentation/pages/sign_in_page.dart';
-import 'package:account_book_app/presentation/pages/test2.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../presentation/pages/home_page.dart';
+import '../../../../presentation/pages/create_target_page.dart';
+import '../../../../presentation/pages/page_root.dart';
 import '../../../../presentation/pages/init_tag_page.dart';
 import '../../../../presentation/pages/statistic_page.dart';
-import '../../../../presentation/pages/test1.dart';
 import '../../profile_notifier_provider/provider/profile_notifier_provider.dart';
 import '../routes/global_navigator_keys.dart';
 import '../routes/routes.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
-    initialLocation: Routes.test1,
+    initialLocation: Routes.list,
     redirect: (context, state) {
       final uid = ref.watch(profileNotifierProvider.notifier).abc;
       if (uid == null) {
@@ -33,14 +33,16 @@ final routerProvider = Provider(
       ),
       ShellRoute(
         navigatorKey: GlobalNavigatorKeys.shellNavigator,
-        builder: (context, state, child) =>
-            HomePage(key: state.pageKey, child: child),
+        builder: (context, state, child) => PageRoot(
+          key: state.pageKey,
+          child: child,
+        ),
         routes: [
           GoRoute(
-            path: Routes.test1,
+            path: Routes.list,
             pageBuilder: (context, state) {
               return NoTransitionPage(
-                child: Test1(
+                child: ListPage(
                   key: state.pageKey,
                 ),
               );
@@ -67,6 +69,10 @@ final routerProvider = Provider(
             },
           ),
         ],
+      ),
+      GoRoute(
+        path: Routes.createTarget,
+        builder: (context, state) => const CreateTargetPage(),
       ),
       // GoRoute(
       //   path: Routes.root,

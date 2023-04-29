@@ -2,8 +2,10 @@ class Routes {
   const Routes._();
   static const String signIn = "/signIn";
   static const String initTags = "/initTags";
+  static const String list = "/list";
   static const String statistic = "/statistic";
   static const String setting = "/setting";
+  static const String createTarget = "/createTarget";
 
   static const String addProjectMember = "add_project_member";
   static const String addProjectDetails = "add_project_details";
@@ -19,7 +21,4 @@ class Routes {
   static const String designManagement = "design_management";
   static const String accountManagement = "account_management";
   static const String addTag = "add_tag";
-
-  static const String test1 = "/test1";
-  static const String test2 = "/test2";
 }

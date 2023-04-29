@@ -3,10 +3,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../application/providers/go_router_provider/routes/routes.dart';
 
-class HomePage extends StatelessWidget {
+class PageRoot extends StatelessWidget {
   final Widget child;
 
-  const HomePage({
+  const PageRoot({
     super.key,
     required this.child,
   });
@@ -18,22 +18,22 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.numbers_sharp),
-            label: "うんこ1",
+            icon: Icon(Icons.list),
+            label: "プロジェクト",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "うんこ2",
+            icon: Icon(Icons.auto_graph),
+            label: "統計",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: "うんこ3",
+            label: "設定",
           ),
         ],
         onTap: (index) {
           switch (index) {
             case 0:
-              context.go(Routes.test1);
+              context.go(Routes.list);
               break;
             case 1:
               context.go(Routes.statistic);

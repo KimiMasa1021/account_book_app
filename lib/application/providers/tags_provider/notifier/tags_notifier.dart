@@ -79,6 +79,6 @@ class TagsNotifier extends StateNotifier<InitializeTag> {
   }
 
   Future<void> goHome(BuildContext context) async {
-    context.go(Routes.test1);
+    context.go(Routes.list);
   }
 }
