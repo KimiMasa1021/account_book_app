@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../utility/timestamp_converter.dart';
+import '../../../../utility/timestamp_converter.dart';
 part 'saving_state.freezed.dart';
 part 'saving_state.g.dart';
 

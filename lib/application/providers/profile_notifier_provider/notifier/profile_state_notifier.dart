@@ -3,13 +3,15 @@ import 'package:account_book_app/application/services/profile_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../domain/entity/profile/profile.dart';
+
+import '../state/profile.dart';
 
 class ProfileNotifier extends StateNotifier<Profile> {
-  ProfileNotifier({required ProfileService profileService})
+  ProfileNotifier({required this.ref, required ProfileService profileService})
       : _profileService = profileService,
         super(Profile());
 
+  final Ref ref;
   final ProfileService _profileService;
 
   String? get abc => _profileService.userId;

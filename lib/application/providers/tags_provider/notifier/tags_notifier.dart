@@ -73,6 +73,7 @@ class TagsNotifier extends StateNotifier<InitializeTag> {
     }
     state = state.copyWith(isLoading: true);
     await _tagsService.initializeTag(state.tags);
+    await Future.delayed(const Duration(seconds: 2));
     state = state.copyWith(isLoading: false);
     goHome();
   }

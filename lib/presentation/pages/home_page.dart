@@ -36,10 +36,10 @@ class HomePage extends StatelessWidget {
               context.go(Routes.test1);
               break;
             case 1:
-              context.go(Routes.test2);
+              context.go(Routes.statistic);
               break;
             case 2:
-              context.go(Routes.test3);
+              context.go(Routes.setting);
               break;
           }
         },

@@ -1,22 +1,19 @@
+import 'package:account_book_app/application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../provider/route/routes.dart';
-import '../../../../view_model/users_controller.dart';
-import '../../../theme/app_text_theme.dart';
+import '../../../view/theme/app_text_theme.dart';
 
 class UserDataPanel extends ConsumerWidget {
   const UserDataPanel({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userState = ref.watch(usersControllerProvider);
+    final profile = ref.watch(profileNotifierProvider);
     final font = ref.watch(myTextTheme);
 
     return InkWell(
       onTap: () {
-        context.pushNamed(Routes.name().accountManagement);
+        // context.pushNamed(Routes.name().accountManagement);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(),
@@ -29,10 +26,10 @@ class UserDataPanel extends ConsumerWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onBackground,
                 borderRadius: BorderRadius.circular(10),
-                image: userState!.img != ""
+                image: profile.img != ""
                     ? DecorationImage(
                         image: NetworkImage(
-                          userState.img,
+                          profile.img,
                         ),
                       )
                     : null,
@@ -50,7 +47,7 @@ class UserDataPanel extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    userState.name,
+                    profile.name,
                     style: font.fs16.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onBackground,
@@ -58,7 +55,7 @@ class UserDataPanel extends ConsumerWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    userState.email,
+                    profile.email,
                     style: font.fs16,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

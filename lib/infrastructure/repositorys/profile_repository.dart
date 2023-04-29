@@ -3,10 +3,11 @@ import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entity/profile/profile.dart';
+import '../../application/providers/profile_notifier_provider/state/profile.dart';
 import '../../domain/repository/profile_repository_base.dart';
 
-final profileRepository = Provider((ref) => ProfileRepository(ref));
+final profileRepository =
+    Provider<ProfileRepositoryBase>((ref) => ProfileRepository(ref));
 
 class ProfileRepository implements ProfileRepositoryBase {
   ProfileRepository(this.ref);

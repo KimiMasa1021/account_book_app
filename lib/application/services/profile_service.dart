@@ -2,8 +2,8 @@ import 'package:async/async.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../domain/entity/profile/profile.dart';
 import '../../infrastructure/repositorys/profile_repository.dart';
+import '../providers/profile_notifier_provider/state/profile.dart';
 
 final profileServiceProvider = Provider(
   (ref) => ProfileService(

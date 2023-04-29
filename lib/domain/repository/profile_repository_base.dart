@@ -1,7 +1,7 @@
 import 'package:async/async.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../entity/profile/profile.dart';
+import '../../application/providers/profile_notifier_provider/state/profile.dart';
 
 abstract class ProfileRepositoryBase {
   void subscribeStream(void Function(Profile) onCompleted);

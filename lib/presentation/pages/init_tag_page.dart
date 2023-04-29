@@ -1,9 +1,8 @@
-import 'package:account_book_app/application/providers/go_router_provider/routes/routes.dart';
 import 'package:account_book_app/application/providers/tags_provider/provider/tags_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../view/theme/app_text_theme.dart';
+import '../widgets/common/loading.dart';
 import '../widgets/initialize_tag/painted_tag.dart';
 
 class InitTagPage extends ConsumerWidget {
@@ -87,6 +86,7 @@ class InitTagPage extends ConsumerWidget {
                 ),
               ),
             ),
+            Loading(flg: tags.isLoading)
           ],
         ),
       ),

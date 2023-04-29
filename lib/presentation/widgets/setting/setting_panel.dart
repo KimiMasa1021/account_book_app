@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../theme/app_text_theme.dart';
+import '../../../view/theme/app_text_theme.dart';
 
 class SettingPanel extends HookConsumerWidget {
   const SettingPanel({

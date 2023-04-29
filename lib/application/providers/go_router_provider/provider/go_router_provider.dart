@@ -1,10 +1,11 @@
+import 'package:account_book_app/presentation/pages/setting_page.dart';
 import 'package:account_book_app/presentation/pages/sign_in_page.dart';
 import 'package:account_book_app/presentation/pages/test2.dart';
-import 'package:account_book_app/presentation/pages/test3.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../presentation/pages/home_page.dart';
 import '../../../../presentation/pages/init_tag_page.dart';
+import '../../../../presentation/pages/statistic_page.dart';
 import '../../../../presentation/pages/test1.dart';
 import '../../profile_notifier_provider/provider/profile_notifier_provider.dart';
 import '../routes/global_navigator_keys.dart';
@@ -46,20 +47,20 @@ final routerProvider = Provider(
             },
           ),
           GoRoute(
-            path: Routes.test2,
+            path: Routes.statistic,
             pageBuilder: (context, state) {
               return NoTransitionPage(
-                child: Test2(
+                child: StatisticPage(
                   key: state.pageKey,
                 ),
               );
             },
           ),
           GoRoute(
-            path: Routes.test3,
+            path: Routes.setting,
             pageBuilder: (context, state) {
               return NoTransitionPage(
-                child: Test3(
+                child: SettingPage(
                   key: state.pageKey,
                 ),
               );
