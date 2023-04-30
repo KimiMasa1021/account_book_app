@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../theme/app_text_theme.dart';
+import '../../../view/theme/app_text_theme.dart';
 
-// ignore: must_be_immutable
 class NormalTextField extends ConsumerWidget {
-  NormalTextField({
+  const NormalTextField({
     super.key,
     required this.topTitle,
-    required this.bottomTitle,
     required this.hintText,
     required this.inputType,
     required this.controller,
     this.formatter,
     required this.editable,
+    required this.onChanged,
   });
   final String topTitle;
-  final String bottomTitle;
   final String hintText;
   final TextInputType inputType;
   final TextEditingController controller;
-  List<TextInputFormatter>? formatter;
+  final List<TextInputFormatter>? formatter;
   final bool editable;
+  final Function(String val) onChanged;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -61,15 +60,10 @@ class NormalTextField extends ConsumerWidget {
                   focusedBorder: InputBorder.none,
                   border: InputBorder.none,
                 ),
+                onChanged: (val) => onChanged(val),
               ),
             ),
           ),
-          bottomTitle != ""
-              ? Text(
-                  bottomTitle,
-                  // style: theme.textTheme.fs16,
-                )
-              : const SizedBox(),
         ],
       ),
     );

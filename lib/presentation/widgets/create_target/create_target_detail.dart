@@ -1,81 +1,38 @@
+import 'package:account_book_app/presentation/widgets/common/normal_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../view/theme/app_text_theme.dart';
+import '../../../application/providers/create_target_provider/provider/create_target_provider.dart';
+import '../../../utility/price_formatter.dart';
 
 class CreateTargetDetail extends ConsumerWidget {
   const CreateTargetDetail({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final font = ref.watch(myTextTheme);
+    final targetController = TextEditingController();
+    final priceController = TextEditingController();
+    final createTargetCTL = ref.watch(createTargetNotifierProvider.notifier);
 
     return Column(
       children: [
-        // NormalTextField(
-        //   topTitle: "目標",
-        //   bottomTitle: "",
-        //   hintText: "達成したい目標を入力してね",
-        //   inputType: TextInputType.text,
-        //   controller: targetInit.targetController!,
-        //   editable: true,
-        // ),
-        // NormalTextField(
-        //   topTitle: "目標金額",
-        //   bottomTitle: "",
-        //   hintText: "目標金額",
-        //   inputType: TextInputType.number,
-        //   controller: targetInit.targetPriceController!,
-        //   formatter: [
-        //     CustomTextInputFormatter(),
-        //   ],
-        //   editable: true,
-        // ),
-        // LargeTextField(
-        //   topTitle: "詳細",
-        //   bottomTitle: "",
-        //   hintText: "簡単な説明を入力してね",
-        //   inputType: TextInputType.text,
-        //   controller: targetInit.targetDescriptionController!,
-        // ),
-        // Column(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [
-        //     const SizedBox(height: 10),
-        //     Text(
-        //       "達成予定年月日",
-        //       style: font.fs16.copyWith(
-        //         color: Theme.of(context).colorScheme.onBackground,
-        //       ),
-        //     ),
-        //     const SizedBox(height: 5),
-        //     InkWell(
-        //       onTap: () async {
-        //         primaryFocus?.unfocus();
-        //         await targetInitCTL.pickTargetDate(context);
-        //       },
-        //       child: Container(
-        //         padding: const EdgeInsets.symmetric(horizontal: 10),
-        //         width: double.infinity,
-        //         height: 55,
-        //         decoration: BoxDecoration(
-        //           color: Theme.of(context).colorScheme.surface,
-        //           borderRadius: BorderRadius.circular(10),
-        //         ),
-        //         child: Row(
-        //           children: [
-        //             Text(
-        //               targetInit.targetDateController == null
-        //                   ? "タップで選択"
-        //                   : DateFormat('yyyy年MM月dd日')
-        //                       .format(targetInit.targetDateController!),
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
+        NormalTextField(
+          topTitle: "目標",
+          hintText: "達成目標を入力してね",
+          inputType: TextInputType.name,
+          controller: targetController,
+          editable: true,
+          onChanged: (val) => createTargetCTL.updateTarget(val),
+        ),
+        NormalTextField(
+          topTitle: "金額",
+          hintText: "金額を入力してね",
+          inputType: TextInputType.number,
+          controller: priceController,
+          editable: true,
+          formatter: [CustomTextInputFormatter()],
+          onChanged: (val) => createTargetCTL.updatePrice(val),
+        ),
       ],
     );
   }

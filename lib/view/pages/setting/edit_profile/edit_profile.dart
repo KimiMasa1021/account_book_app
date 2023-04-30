@@ -8,7 +8,7 @@ import '../../../../model/enums.dart';
 import '../../../../provider/route/routes.dart';
 import '../../../../view_model/users_controller.dart';
 import '../../../component/my_lottie_data.dart';
-import '../../../component/normal_text_field.dart';
+import '../../../../presentation/widgets/common/normal_text_field.dart';
 
 class EditProfile extends HookConsumerWidget {
   const EditProfile({super.key});
@@ -111,14 +111,6 @@ class EditProfile extends HookConsumerWidget {
                           ),
                         ),
                       ],
-                    ),
-                    NormalTextField(
-                      topTitle: "名前",
-                      bottomTitle: "",
-                      hintText: "新しい名前",
-                      inputType: TextInputType.text,
-                      controller: controller,
-                      editable: true,
                     ),
                   ],
                 ),

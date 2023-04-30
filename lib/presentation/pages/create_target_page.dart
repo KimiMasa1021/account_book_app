@@ -25,18 +25,75 @@ class CreateTargetPage extends ConsumerWidget {
                 onStepCancel: () => createTargetCTL.onStepCancel(),
                 steps: const [
                   Step(
-                    title: Text('メンバーを選択してください'),
+                    title: Text('メンバーを選択してね'),
                     content: CreateTargetMember(),
                   ),
                   Step(
-                    title: Text('プロジェクトの詳細'),
+                    title: Text('詳細を教えてね'),
                     content: CreateTargetDetail(),
                   ),
                   Step(
-                    title: Text('画像の設定'),
+                    title: Text('画像はどうする？'),
                     content: CreateTargetImage(),
                   ),
                 ],
+                controlsBuilder: (context, details) {
+                  switch (details.currentStep) {
+                    case 0:
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          FilledButton(
+                            onPressed: () {
+                              details.onStepContinue!.call();
+                            },
+                            child: const Text("つぎへ"),
+                          )
+                        ],
+                      );
+                    case 1:
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              details.onStepCancel!.call();
+                            },
+                            child: const Text("もどる"),
+                          ),
+                          FilledButton(
+                            onPressed: () {
+                              if (!createTarget.target.isValid) return;
+                              details.onStepContinue!.call();
+                            },
+                            child: const Text("つぎへ"),
+                          ),
+                        ],
+                      );
+                    case 2:
+                      return Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  details.onStepCancel!.call();
+                                },
+                                child: const Text("もどる"),
+                              ),
+                              FilledButton(
+                                onPressed: () {},
+                                child: const Text("作成する！"),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    default:
+                      return const SizedBox();
+                  }
+                },
               ),
             )
           ],
