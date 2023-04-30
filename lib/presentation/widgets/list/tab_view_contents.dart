@@ -40,7 +40,7 @@ class TabViewContents extends ConsumerWidget {
             ),
             CreateTargetPanel(
               onTap: () {
-                context.go(Routes.createTarget);
+                context.push("${Routes.list}/${Routes.createTarget}");
               },
             ),
             const SizedBox(height: 30),

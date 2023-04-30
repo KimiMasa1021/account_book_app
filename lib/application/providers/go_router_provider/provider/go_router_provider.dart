@@ -14,6 +14,7 @@ import '../routes/routes.dart';
 final routerProvider = Provider(
   (ref) => GoRouter(
     initialLocation: Routes.list,
+    navigatorKey: GlobalNavigatorKeys.rootNavigator,
     redirect: (context, state) {
       final uid = ref.watch(profileNotifierProvider.notifier).abc;
       if (uid == null) {
@@ -31,6 +32,7 @@ final routerProvider = Provider(
         path: Routes.initTags,
         builder: (context, state) => const InitTagPage(),
       ),
+
       ShellRoute(
         navigatorKey: GlobalNavigatorKeys.shellNavigator,
         builder: (context, state, child) => PageRoot(
@@ -47,6 +49,15 @@ final routerProvider = Provider(
                 ),
               );
             },
+            routes: [
+              GoRoute(
+                path: Routes.createTarget,
+                parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                builder: (context, state) => CreateTargetPage(
+                  key: state.pageKey,
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: Routes.statistic,
@@ -70,10 +81,7 @@ final routerProvider = Provider(
           ),
         ],
       ),
-      GoRoute(
-        path: Routes.createTarget,
-        builder: (context, state) => const CreateTargetPage(),
-      ),
+
       // GoRoute(
       //   path: Routes.root,
       //   name: Routes.root,

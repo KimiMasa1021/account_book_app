@@ -5,7 +5,7 @@ class Routes {
   static const String list = "/list";
   static const String statistic = "/statistic";
   static const String setting = "/setting";
-  static const String createTarget = "/createTarget";
+  static const String createTarget = "createTarget";
 
   static const String addProjectMember = "add_project_member";
   static const String addProjectDetails = "add_project_details";
