@@ -74,4 +74,33 @@ class ProfileRepository implements ProfileRepositoryBase {
     }
     return Result.value(true);
   }
+
+  late Stream<QuerySnapshot<Profile>>? _searchUserStream;
+  late StreamSubscription? _searchUserstreamListener;
+  @override
+  void subscribeSearchUserStream(
+    void Function(List<Profile> p1) onCompleted,
+    List<String> userList,
+  ) {
+    try {
+      _searchUserStream = _db
+          .collection("users")
+          .where("uid", whereIn: userList)
+          .withConverter<Profile>(
+            fromFirestore: (snapshot, _) => Profile.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          )
+          .snapshots();
+      _searchUserstreamListener = _searchUserStream?.listen((event) {
+        if (event.docs.isNotEmpty) {
+          final userList = event.docs.map((e) => e.data()).toList();
+          onCompleted(userList);
+        } else {
+          onCompleted([]);
+        }
+      });
+    } on Exception catch (e) {
+      return;
+    }
+  }
 }

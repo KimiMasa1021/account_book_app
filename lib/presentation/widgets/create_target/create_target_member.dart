@@ -1,3 +1,4 @@
+import 'package:account_book_app/application/providers/search_user_provider/provider/search_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,7 @@ class CreateTargetMember extends ConsumerWidget {
     final font = ref.watch(myTextTheme);
     final size = MediaQuery.of(context).size;
     final profile = ref.watch(profileNotifierProvider);
+    final searchUser = ref.watch(searchUserNotifierProvider(profile.friends));
 
     return Column(
       children: [
@@ -63,54 +65,67 @@ class CreateTargetMember extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  // ...List.generate(
-                  //   targetInit.selectedUserList.length,
-                  //   (index) => Padding(
-                  //     padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //     child: SizedBox(
-                  //       width: 60,
-                  //       child: Column(
-                  //         children: [
-                  //           Container(
-                  //             width: 55,
-                  //             height: 55,
-                  //             margin: const EdgeInsets.only(bottom: 5),
-                  //             decoration: BoxDecoration(
-                  //               borderRadius: BorderRadius.circular(10),
-                  //               color: Colors.white,
-                  //               image:
-                  //                   targetInit.selectedUserList[index].img !=
-                  //                           ""
-                  //                       ? DecorationImage(
-                  //                           image: NetworkImage(
-                  //                             targetInit
-                  //                                 .selectedUserList[index]
-                  //                                 .img,
-                  //                           ),
-                  //                         )
-                  //                       : null,
-                  //               boxShadow: [
-                  //                 BoxShadow(
-                  //                   color: Colors.black.withOpacity(0.3),
-                  //                   offset: const Offset(0, 0),
-                  //                   blurRadius: 6,
-                  //                 )
-                  //               ],
-                  //             ),
-                  //           ),
-                  //           Text(
-                  //             targetInit.selectedUserList[index].name,
-                  //             style: font.fs16.copyWith(
-                  //               color:
-                  //                   Theme.of(context).colorScheme.onSurface,
-                  //             ),
-                  //             overflow: TextOverflow.ellipsis,
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
+                  searchUser.when(
+                    data: (data) {
+                      return Row(
+                        children: [
+                          ...List.generate(
+                            data.length,
+                            (index) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: SizedBox(
+                                width: 60,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      margin: const EdgeInsets.only(bottom: 5),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                        image: data[index].img != ""
+                                            ? DecorationImage(
+                                                image: NetworkImage(
+                                                  data[index].img,
+                                                ),
+                                              )
+                                            : null,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.3),
+                                            offset: const Offset(0, 0),
+                                            blurRadius: 6,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Text(
+                                      data[index].name,
+                                      style: font.fs16.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    error: (e, s) {
+                      return SizedBox();
+                    },
+                    loading: () {
+                      return SizedBox();
+                    },
+                  )
                 ],
               ),
             ),

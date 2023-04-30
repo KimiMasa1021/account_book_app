@@ -27,6 +27,16 @@ class ProfileService {
     );
   }
 
+  void subscribeSearchUserProfile(
+    void Function(List<Profile>) onCompleted,
+    List<String> memberList,
+  ) {
+    _profileRepository.subscribeSearchUserStream(
+      onCompleted,
+      memberList,
+    );
+  }
+
   Future<Result<UserCredential>> signInWithGoogle() async {
     late final UserCredential userCredential;
 
