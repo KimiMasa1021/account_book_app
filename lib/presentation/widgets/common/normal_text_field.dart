@@ -60,6 +60,7 @@ class NormalTextField extends ConsumerWidget {
                   focusedBorder: InputBorder.none,
                   border: InputBorder.none,
                 ),
+                style: const TextStyle(fontSize: 19),
                 onChanged: (val) => onChanged(val),
               ),
             ),
