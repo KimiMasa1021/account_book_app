@@ -9,6 +9,8 @@ class StepperController extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final createTarget = ref.watch(createTargetNotifierProvider);
+    final createTargetCTL = ref.watch(createTargetNotifierProvider.notifier);
+
     switch (details.currentStep) {
       case 0:
         return Row(
@@ -77,7 +79,9 @@ class StepperController extends ConsumerWidget {
                   child: const Text("もどる"),
                 ),
                 FilledButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await createTargetCTL.addTarget();
+                  },
                   child: const Text("作成する！"),
                 ),
               ],

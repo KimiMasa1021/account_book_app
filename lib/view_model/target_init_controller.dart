@@ -43,45 +43,8 @@
 //       );
 //     }
 //   }
-//   final picker = ImagePicker();
-//   Future<void> getImage(ImageSource source) async {
-//     final pickedFile = await picker.pickImage(
-//       source: source,
-//       imageQuality: 80,
-//     );
-//     if (pickedFile == null) {
-//       return;
-//     }
-//     final croppedFile = await cropImage(pickedFile.path);
-//     if (croppedFile == null) {
-//       return;
-//     }
-//     state = state.copyWith(
-//       file: File(croppedFile.path),
-//     );
-//   }
 
-//   Future<File?> cropImage(String path) async {
-//     CroppedFile? croppedFile = await ImageCropper().cropImage(
-//       sourcePath: path,
-//       cropStyle: CropStyle.circle,
-//       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-//       compressQuality: 80,
-//       uiSettings: [
-//         AndroidUiSettings(
-//           toolbarTitle: '画像の切り取り',
-//           toolbarColor: const Color.fromARGB(255, 255, 0, 0),
-//           toolbarWidgetColor: Colors.white,
-//           lockAspectRatio: true,
-//           hideBottomControls: true,
-//           showCropGrid: false,
-//         ),
-//       ],
-//     );
-//     if (croppedFile == null) return null;
 
-//     return File(croppedFile.path);
-//   }
 
 //   void addMember(UsersState usersState) {
 //     state = state.copyWith(

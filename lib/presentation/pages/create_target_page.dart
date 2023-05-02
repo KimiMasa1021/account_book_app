@@ -1,3 +1,4 @@
+import 'package:account_book_app/presentation/widgets/common/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -16,40 +17,45 @@ class CreateTargetPage extends ConsumerWidget {
     final createTarget = ref.watch(createTargetNotifierProvider);
     final createTargetCTL = ref.watch(createTargetNotifierProvider.notifier);
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Stepper(
-                currentStep: createTarget.stepperIndex,
-                type: StepperType.vertical,
-                onStepContinue: () => createTargetCTL.onStepContinue(),
-                onStepCancel: () => createTargetCTL.onStepCancel(),
-                steps: const [
-                  Step(
-                    title: Text('メンバーを選択してね'),
-                    content: CreateTargetMember(),
+      body: Stack(
+        children: [
+          SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Stepper(
+                    currentStep: createTarget.stepperIndex,
+                    type: StepperType.vertical,
+                    onStepContinue: () => createTargetCTL.onStepContinue(),
+                    onStepCancel: () => createTargetCTL.onStepCancel(),
+                    steps: const [
+                      Step(
+                        title: Text('メンバーを選択してね'),
+                        content: CreateTargetMember(),
+                      ),
+                      Step(
+                        title: Text('詳細を教えてね'),
+                        content: CreateTargetDetail(),
+                      ),
+                      Step(
+                        title: Text('いつまでに達成したいですか？'),
+                        content: CreateTargetDate(),
+                      ),
+                      Step(
+                        title: Text('画像はどうする？'),
+                        content: CreateTargetImage(),
+                      ),
+                    ],
+                    controlsBuilder: (context, details) => StepperController(
+                      details: details,
+                    ),
                   ),
-                  Step(
-                    title: Text('詳細を教えてね'),
-                    content: CreateTargetDetail(),
-                  ),
-                  Step(
-                    title: Text('いつまでに達成したいですか？'),
-                    content: CreateTargetDate(),
-                  ),
-                  Step(
-                    title: Text('画像はどうする？'),
-                    content: CreateTargetImage(),
-                  ),
-                ],
-                controlsBuilder: (context, details) => StepperController(
-                  details: details,
-                ),
-              ),
-            )
-          ],
-        ),
+                )
+              ],
+            ),
+          ),
+          Loading(flg: createTarget.isLoading),
+        ],
       ),
     );
   }

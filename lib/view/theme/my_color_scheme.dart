@@ -1,4 +1,4 @@
-import 'package:account_book_app/utility/hex_color.dart';
+import 'package:account_book_app/common/hex_color.dart';
 import 'package:flutter/material.dart';
 
 final scheme = ColorScheme.fromSwatch(
