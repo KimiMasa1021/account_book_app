@@ -6,11 +6,10 @@ class Routes {
   static const String statistic = "/statistic";
   static const String setting = "/setting";
   static const String createTarget = "createTarget";
+  static const String projectDetail = "projectDetail";
 
-  static const String addProjectMember = "add_project_member";
   static const String addProjectDetails = "add_project_details";
   static const String addProjectImage = "add_project_image";
-  static const String projectDetails = "project_details";
   static const String editProject = "edit_project/:targetId";
   static const String addSaving = "add_saving";
   static const String friendManagement = "friend_management";

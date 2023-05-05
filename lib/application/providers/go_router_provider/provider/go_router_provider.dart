@@ -1,9 +1,11 @@
+import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
 import 'package:account_book_app/presentation/pages/list_page.dart';
 import 'package:account_book_app/presentation/pages/setting_page.dart';
 import 'package:account_book_app/presentation/pages/sign_in_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../presentation/pages/create_target_page.dart';
+import '../../../../presentation/pages/detail_page.dart';
 import '../../../../presentation/pages/page_root.dart';
 import '../../../../presentation/pages/init_tag_page.dart';
 import '../../../../presentation/pages/statistic_page.dart';
@@ -50,6 +52,17 @@ final routerProvider = Provider(
               );
             },
             routes: [
+              GoRoute(
+                path: Routes.projectDetail,
+                parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                builder: (context, state) {
+                  final project = state.extra as TargetState;
+                  return DetailPage(
+                    key: state.pageKey,
+                    target: project,
+                  );
+                },
+              ),
               GoRoute(
                 path: Routes.createTarget,
                 parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,

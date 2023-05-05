@@ -16,6 +16,39 @@ class TargetRepository implements TargetRepositoryBase {
   final _auth = FirebaseAuth.instance;
 
   final Ref ref;
+  late Stream<QuerySnapshot<TargetState>>? _stream;
+  late StreamSubscription? _streamListener;
+
+  @override
+  void subscribeStream(
+    void Function(List<TargetState> p1) onCompleted,
+  ) {
+    final uid = _auth.currentUser!.uid;
+
+    try {
+      _stream = _db
+          .collection('targets')
+          .where("members", arrayContains: uid)
+          .orderBy("registeTime")
+          .withConverter<TargetState>(
+            fromFirestore: (snapshot, _) =>
+                TargetState.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          )
+          .snapshots();
+
+      _streamListener = _stream?.listen((event) {
+        if (event.docs.isNotEmpty) {
+          final savingList = event.docs.map((e) => e.data()).toList();
+          onCompleted(savingList);
+        } else {
+          onCompleted([]);
+        }
+      });
+    } on Exception catch (e) {
+      return;
+    }
+  }
 
   @override
   Future<Result<bool>> addTarget(TargetState state) async {

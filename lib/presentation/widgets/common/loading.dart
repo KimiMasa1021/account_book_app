@@ -28,10 +28,10 @@ class Loading extends ConsumerWidget {
                   width: 230,
                   height: 230,
                   frameRate: FrameRate(60),
-                  repeat: false,
+                  repeat: true,
                 ),
                 Text(
-                  "ロード中...",
+                  "Loading...",
                   style: font.fs19.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

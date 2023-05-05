@@ -4,13 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/providers/go_router_provider/routes/routes.dart';
+import '../../../application/providers/target_provider/state/target_state.dart';
+import 'target_panel.dart';
 
 class TabViewContents extends ConsumerWidget {
   const TabViewContents({
     super.key,
-    // required this.targetList,
+    required this.targetList,
   });
-  // final List<TargetState> targetList;
+  final List<TargetState> targetList;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,20 +24,20 @@ class TabViewContents extends ConsumerWidget {
             const SizedBox(height: 10),
             Column(
               children: [
-                // ...List.generate(
-                //   targetList.length,
-                //   (index) {
-                //     return TargetPanel(
-                //       state: targetList[index],
-                //       function: () {
-                //         context.pushNamed(
-                //           Routes.name().projectDetails,
-                //           extra: targetList[index],
-                //         );
-                //       },
-                //     );
-                //   },
-                // ),
+                ...List.generate(
+                  targetList.length,
+                  (index) {
+                    return TargetPanel(
+                      state: targetList[index],
+                      function: () {
+                        context.push(
+                          "${Routes.list}/${Routes.projectDetail}",
+                          extra: targetList[index],
+                        );
+                      },
+                    );
+                  },
+                ),
               ],
             ),
             CreateTargetPanel(

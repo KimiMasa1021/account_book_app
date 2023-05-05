@@ -36,13 +36,13 @@
 //   Stream<List<QueryDocumentSnapshot<TargetState>>> feachTarget() async* {
 //     try {
 //       final stateRef = targetCollectionReference!
-//           .where("members", arrayContains: user!.uid)
-//           .orderBy("registeTime")
-//           .withConverter<TargetState>(
-//             fromFirestore: (snapshot, _) =>
-//                 TargetState.fromJson(snapshot.data()!),
-//             toFirestore: (data, _) => data.toJson(),
-//           );
+          // .where("members", arrayContains: user!.uid)
+          // .orderBy("registeTime")
+          // .withConverter<TargetState>(
+          //   fromFirestore: (snapshot, _) =>
+          //       TargetState.fromJson(snapshot.data()!),
+          //   toFirestore: (data, _) => data.toJson(),
+          // );
 
 //       yield* stateRef.snapshots().map((doc) => doc.docs);
 //     } on FirebaseAuthException catch (e) {

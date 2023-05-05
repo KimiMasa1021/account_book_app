@@ -80,7 +80,9 @@ class StepperController extends ConsumerWidget {
                 ),
                 FilledButton(
                   onPressed: () async {
-                    await createTargetCTL.addTarget();
+                    await createTargetCTL.addTarget(
+                      () => createTargetCTL.goHome(context),
+                    );
                   },
                   child: const Text("作成する！"),
                 ),

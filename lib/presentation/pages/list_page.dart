@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
+import '../../application/providers/target_provider/provider/target_notifier_provider.dart';
 import '../widgets/list/tab_view_contents.dart';
 
 class ListPage extends HookConsumerWidget {
@@ -16,11 +17,13 @@ class ListPage extends HookConsumerWidget {
     const tabHeight = 50.0;
     final size = MediaQuery.of(context).size;
     final profile = ref.watch(profileNotifierProvider);
+    final target = ref.watch(targetNotifierProvider);
 
     return DefaultTabController(
       length: 3,
       child: SafeArea(
         child: NestedScrollView(
+          physics: const BouncingScrollPhysics(),
           headerSliverBuilder:
               (BuildContext context, bool innnerBoxIsScrolled) {
             return <Widget>[
@@ -91,65 +94,54 @@ class ListPage extends HookConsumerWidget {
               ),
             ];
           },
-          body: Builder(
-            builder: (context) {
-              return const TabBarView(
-                children: [
-                  TabViewContents(),
-                  TabViewContents(),
-                  TabViewContents(),
-                ],
+          body: target.when(
+            data: (data) {
+              final workingOnTarget = data
+                  .where(
+                    (e) =>
+                        e.targetDate.difference(DateTime.now()).inDays > 0 &&
+                        e.currentPercent < 1,
+                  )
+                  .toList();
+              final overdueTarget = data
+                  .where(
+                    (e) =>
+                        e.targetDate.difference(DateTime.now()).inDays <= 0 &&
+                        e.currentPercent < 1,
+                  )
+                  .toList();
+              final achievedTarget = data
+                  .where(
+                    (e) => e.currentPercent >= 1,
+                  )
+                  .toList();
+              return Builder(
+                builder: (context) {
+                  return TabBarView(
+                    children: [
+                      TabViewContents(
+                        targetList: workingOnTarget,
+                      ),
+                      TabViewContents(
+                        targetList: overdueTarget,
+                      ),
+                      TabViewContents(
+                        targetList: achievedTarget,
+                      ),
+                    ],
+                  );
+                },
               );
             },
+            loading: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            error: (error, stackTrace) {
+              return const SizedBox();
+            },
           ),
-          // body: target.when(
-          //   data: (data) {
-          //     final workingOnTarget = data
-          //         .where(
-          //           (e) =>
-          //               e.targetDate.difference(DateTime.now()).inDays > 0 &&
-          //               !e.isCompleted,
-          //         )
-          //         .toList();
-          //     final overdueTarget = data
-          //         .where(
-          //           (e) =>
-          //               e.targetDate.difference(DateTime.now()).inDays <= 0 &&
-          //               !e.isCompleted,
-          //         )
-          //         .toList();
-          //     final achievedTarget = data
-          //         .where(
-          //           (e) => e.isCompleted,
-          //         )
-          //         .toList();
-          //     return Builder(
-          //       builder: (context) {
-          //         return TabBarView(
-          //           children: [
-          //             TabViewContents(
-          //               targetList: workingOnTarget,
-          //             ),
-          //             TabViewContents(
-          //               targetList: overdueTarget,
-          //             ),
-          //             TabViewContents(
-          //               targetList: achievedTarget,
-          //             ),
-          //           ],
-          //         );
-          //       },
-          //     );
-          //   },
-          //   loading: () {
-          //     return const Center(
-          //       child: CircularProgressIndicator(),
-          //     );
-          //   },
-          //   error: (error, stackTrace) {
-          //     return const SizedBox();
-          //   },
-          // ),
         ),
       ),
     );

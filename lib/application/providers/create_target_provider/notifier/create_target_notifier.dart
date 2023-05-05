@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:account_book_app/application/providers/create_target_provider/state/create_target_state.dart';
+import 'package:account_book_app/application/providers/go_router_provider/routes/routes.dart';
 import 'package:account_book_app/application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
 import 'package:account_book_app/application/providers/profile_notifier_provider/state/profile.dart';
 import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:go_router/go_router.dart';
 
 class CreateTargetNotifier extends StateNotifier<CreateTargetState> {
   CreateTargetNotifier({
@@ -83,7 +85,7 @@ class CreateTargetNotifier extends StateNotifier<CreateTargetState> {
     final dateTime = await DatePicker.showDatePicker(
       context,
       showTitleActions: true,
-      minTime: now,
+      minTime: now.add(const Duration(days: 1)),
       maxTime: DateTime(2100, 12, 31),
       onChanged: (date) {},
       onConfirm: (date) {},
@@ -99,7 +101,7 @@ class CreateTargetNotifier extends StateNotifier<CreateTargetState> {
     );
   }
 
-  Future<void> addTarget() async {
+  Future<void> addTarget(Function() goHome) async {
     state = state.copyWith(isLoading: true);
     final members = state.members.map((e) => e.uid).toList();
     final uid = ref.read(profileNotifierProvider).uid;
@@ -125,6 +127,7 @@ class CreateTargetNotifier extends StateNotifier<CreateTargetState> {
     await _targetService.addTarget(targetState);
     await Future.delayed(const Duration(seconds: 2));
     state = state.copyWith(isLoading: false);
+    goHome();
   }
 
   final picker = ImagePicker();
@@ -165,5 +168,9 @@ class CreateTargetNotifier extends StateNotifier<CreateTargetState> {
     if (croppedFile == null) return null;
 
     return File(croppedFile.path);
+  }
+
+  void goHome(BuildContext context) {
+    context.go(Routes.list);
   }
 }
