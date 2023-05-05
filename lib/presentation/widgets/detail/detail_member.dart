@@ -1,4 +1,5 @@
 import 'package:account_book_app/application/providers/search_user_provider/provider/search_user_provider.dart';
+import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
 import 'package:account_book_app/presentation/widgets/detail/member_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,13 +7,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class DetailMember extends ConsumerWidget {
   const DetailMember({
     super.key,
-    required this.memberList,
+    required this.state,
   });
-  final List<String> memberList;
+  final TargetState state;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchUser = ref.watch(searchUserNotifierProvider(memberList));
+    final searchUser = ref.watch(searchUserNotifierProvider(state.members));
 
     return searchUser.when(
       data: (data) {

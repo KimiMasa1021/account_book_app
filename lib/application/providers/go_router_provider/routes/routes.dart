@@ -7,6 +7,7 @@ class Routes {
   static const String setting = "/setting";
   static const String createTarget = "createTarget";
   static const String projectDetail = "projectDetail";
+  static const String createSaving = "createSaving";
 
   static const String addProjectDetails = "add_project_details";
   static const String addProjectImage = "add_project_image";

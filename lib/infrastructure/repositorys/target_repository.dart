@@ -39,7 +39,19 @@ class TargetRepository implements TargetRepositoryBase {
 
       _streamListener = _stream?.listen((event) {
         if (event.docs.isNotEmpty) {
-          final savingList = event.docs.map((e) => e.data()).toList();
+          final savingList = event.docs.map((e) {
+            final state = e.data();
+            return TargetState(
+              target: state.target,
+              targetPrice: state.targetPrice,
+              imageUrl: state.imageUrl,
+              members: state.members,
+              currentPercent: state.currentPercent,
+              registeTime: state.registeTime,
+              targetDate: state.targetDate,
+              productId: e.id,
+            );
+          }).toList();
           onCompleted(savingList);
         } else {
           onCompleted([]);

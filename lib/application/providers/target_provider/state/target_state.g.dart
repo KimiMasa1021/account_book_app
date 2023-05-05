@@ -8,6 +8,7 @@ part of 'target_state.dart';
 
 _$_TargetState _$$_TargetStateFromJson(Map<String, dynamic> json) =>
     _$_TargetState(
+      productId: json['productId'] as String? ?? "",
       registeTime:
           const TimestampConverter().fromJson(json['registeTime'] as Timestamp),
       targetDate:
@@ -24,6 +25,7 @@ _$_TargetState _$$_TargetStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_TargetStateToJson(_$_TargetState instance) =>
     <String, dynamic>{
+      'productId': instance.productId,
       'registeTime': const TimestampConverter().toJson(instance.registeTime),
       'targetDate': const TimestampConverter().toJson(instance.targetDate),
       'members': instance.members,

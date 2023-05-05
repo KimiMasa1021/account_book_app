@@ -20,6 +20,7 @@ TargetState _$TargetStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TargetState {
+  String get productId => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get registeTime => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -43,7 +44,8 @@ abstract class $TargetStateCopyWith<$Res> {
       _$TargetStateCopyWithImpl<$Res, TargetState>;
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime registeTime,
+      {String productId,
+      @TimestampConverter() DateTime registeTime,
       @TimestampConverter() DateTime targetDate,
       List<String> members,
       String target,
@@ -65,6 +67,7 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? productId = null,
     Object? registeTime = null,
     Object? targetDate = null,
     Object? members = null,
@@ -74,6 +77,10 @@ class _$TargetStateCopyWithImpl<$Res, $Val extends TargetState>
     Object? currentPercent = null,
   }) {
     return _then(_value.copyWith(
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
       registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
@@ -115,7 +122,8 @@ abstract class _$$_TargetStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime registeTime,
+      {String productId,
+      @TimestampConverter() DateTime registeTime,
       @TimestampConverter() DateTime targetDate,
       List<String> members,
       String target,
@@ -135,6 +143,7 @@ class __$$_TargetStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? productId = null,
     Object? registeTime = null,
     Object? targetDate = null,
     Object? members = null,
@@ -144,6 +153,10 @@ class __$$_TargetStateCopyWithImpl<$Res>
     Object? currentPercent = null,
   }) {
     return _then(_$_TargetState(
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
       registeTime: null == registeTime
           ? _value.registeTime
           : registeTime // ignore: cast_nullable_to_non_nullable
@@ -180,7 +193,8 @@ class __$$_TargetStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TargetState extends _TargetState {
   _$_TargetState(
-      {@TimestampConverter() required this.registeTime,
+      {this.productId = "",
+      @TimestampConverter() required this.registeTime,
       @TimestampConverter() required this.targetDate,
       final List<String> members = const [],
       this.target = "",
@@ -193,6 +207,9 @@ class _$_TargetState extends _TargetState {
   factory _$_TargetState.fromJson(Map<String, dynamic> json) =>
       _$$_TargetStateFromJson(json);
 
+  @override
+  @JsonKey()
+  final String productId;
   @override
   @TimestampConverter()
   final DateTime registeTime;
@@ -223,7 +240,7 @@ class _$_TargetState extends _TargetState {
 
   @override
   String toString() {
-    return 'TargetState(registeTime: $registeTime, targetDate: $targetDate, members: $members, target: $target, imageUrl: $imageUrl, targetPrice: $targetPrice, currentPercent: $currentPercent)';
+    return 'TargetState(productId: $productId, registeTime: $registeTime, targetDate: $targetDate, members: $members, target: $target, imageUrl: $imageUrl, targetPrice: $targetPrice, currentPercent: $currentPercent)';
   }
 
   @override
@@ -231,6 +248,8 @@ class _$_TargetState extends _TargetState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TargetState &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
             (identical(other.registeTime, registeTime) ||
                 other.registeTime == registeTime) &&
             (identical(other.targetDate, targetDate) ||
@@ -249,6 +268,7 @@ class _$_TargetState extends _TargetState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      productId,
       registeTime,
       targetDate,
       const DeepCollectionEquality().hash(_members),
@@ -273,7 +293,8 @@ class _$_TargetState extends _TargetState {
 
 abstract class _TargetState extends TargetState {
   factory _TargetState(
-      {@TimestampConverter() required final DateTime registeTime,
+      {final String productId,
+      @TimestampConverter() required final DateTime registeTime,
       @TimestampConverter() required final DateTime targetDate,
       final List<String> members,
       final String target,
@@ -285,6 +306,8 @@ abstract class _TargetState extends TargetState {
   factory _TargetState.fromJson(Map<String, dynamic> json) =
       _$_TargetState.fromJson;
 
+  @override
+  String get productId;
   @override
   @TimestampConverter()
   DateTime get registeTime;

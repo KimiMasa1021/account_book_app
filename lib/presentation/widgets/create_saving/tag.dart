@@ -1,24 +1,24 @@
-import 'package:account_book_app/model/saving/tags_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../theme/app_text_theme.dart';
+import '../../../application/providers/create_saving_provider/provider/create_saving_provider.dart';
+import '../../../view/theme/app_text_theme.dart';
 
 class Tag extends ConsumerWidget {
   const Tag({
     super.key,
-    required this.tagValue,
     required this.tag,
   });
-  final ValueNotifier<int?> tagValue;
-  final Tags tag;
+  final String tag;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
+    final createSaving = ref.watch(createSavingNotifierProvider);
+    final createSavingCTL = ref.watch(createSavingNotifierProvider.notifier);
 
     return InkWell(
       onTap: () {
-        tagValue.value = tag.id;
+        createSavingCTL.changeTag(tag);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -33,16 +33,14 @@ class Tag extends ConsumerWidget {
               height: 10,
               width: 10,
               child: Radio(
-                value: tag.id,
-                onChanged: (val) {
-                  tagValue.value = val;
-                },
-                groupValue: tagValue.value,
+                value: tag,
+                onChanged: (val) => createSavingCTL.changeTag(val!),
+                groupValue: createSaving.tag,
               ),
             ),
             const SizedBox(width: 10),
             Text(
-              tag.tag,
+              tag,
               style: font.fs16,
             )
           ],

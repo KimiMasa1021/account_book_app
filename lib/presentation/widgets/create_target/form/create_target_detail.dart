@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/providers/create_target_provider/provider/create_target_provider.dart';
-import '../../../../utility/price_formatter.dart';
+import '../../../../common/price_formatter.dart';
 
 class CreateTargetDetail extends ConsumerWidget {
   const CreateTargetDetail({super.key});

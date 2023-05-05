@@ -1,4 +1,5 @@
 import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
+import 'package:account_book_app/presentation/pages/create_saving_page.dart';
 import 'package:account_book_app/presentation/pages/list_page.dart';
 import 'package:account_book_app/presentation/pages/setting_page.dart';
 import 'package:account_book_app/presentation/pages/sign_in_page.dart';
@@ -53,16 +54,28 @@ final routerProvider = Provider(
             },
             routes: [
               GoRoute(
-                path: Routes.projectDetail,
-                parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
-                builder: (context, state) {
-                  final project = state.extra as TargetState;
-                  return DetailPage(
-                    key: state.pageKey,
-                    target: project,
-                  );
-                },
-              ),
+                  path: Routes.projectDetail,
+                  parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                  builder: (context, state) {
+                    final project = state.extra as TargetState;
+                    return DetailPage(
+                      key: state.pageKey,
+                      target: project,
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      path: Routes.createSaving,
+                      parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                      builder: (context, state) {
+                        final project = state.extra as TargetState;
+                        return CreateSavingPage(
+                          key: state.pageKey,
+                          target: project,
+                        );
+                      },
+                    ),
+                  ]),
               GoRoute(
                 path: Routes.createTarget,
                 parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,

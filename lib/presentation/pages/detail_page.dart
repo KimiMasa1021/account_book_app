@@ -4,12 +4,10 @@ import 'package:account_book_app/presentation/widgets/detail/detail_member.dart'
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-import '../../../provider/route/routes.dart';
+import '../../application/providers/go_router_provider/routes/routes.dart';
 import '../../application/providers/target_provider/state/target_state.dart';
 import '../../view/pages/home/widgets/sticky_tab_bar_delegate.dart';
 import '../../view/theme/app_text_theme.dart';
-import '../widgets/list/tab_view_contents.dart';
 
 class DetailPage extends HookConsumerWidget {
   const DetailPage({
@@ -66,7 +64,10 @@ class DetailPage extends HookConsumerWidget {
                             bottom: 15,
                             child: InkWell(
                               onTap: () {
-                                debugPrint("unk");
+                                context.push(
+                                  "${Routes.list}/${Routes.projectDetail}/${Routes.createSaving}",
+                                  extra: target,
+                                );
                               },
                               child: Container(
                                 width: size.width - 30,
@@ -120,10 +121,8 @@ class DetailPage extends HookConsumerWidget {
                 return TabBarView(
                   children: [
                     const DetailHome(),
-                    DetailHistory(),
-                    DetailMember(
-                      memberList: target.members,
-                    ),
+                    DetailHistory(state: target),
+                    DetailMember(state: target),
                     Container(),
                   ],
                 );

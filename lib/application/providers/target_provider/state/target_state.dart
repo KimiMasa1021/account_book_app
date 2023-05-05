@@ -10,6 +10,7 @@ part 'target_state.g.dart';
 class TargetState with _$TargetState {
   const TargetState._();
   factory TargetState({
+    @Default("") String productId,
     @TimestampConverter() required DateTime registeTime,
     @TimestampConverter() required DateTime targetDate,
     @Default([]) List<String> members,
