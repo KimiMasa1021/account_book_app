@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:account_book_app/application/providers/saving_provider/state/saving_state.dart';
 import 'package:account_book_app/domain/repository/saving_repository_base.dart';
+import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -83,6 +84,23 @@ class SavingRepository implements SavingRepositoryBase {
       });
     } on Exception catch (e) {
       return;
+    }
+  }
+
+  @override
+  Future<Result> saveSaving(
+    SavingState state,
+    String id,
+  ) async {
+    try {
+      await _db
+          .collection("targets")
+          .doc(id)
+          .collection("saving")
+          .add(state.toJson());
+      return Result.value(true);
+    } on Exception catch (e) {
+      return Result.error(e);
     }
   }
 }

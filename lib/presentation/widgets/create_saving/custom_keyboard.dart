@@ -1,3 +1,4 @@
+import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
 import 'package:account_book_app/presentation/widgets/create_saving/calculator_button.dart';
 import 'package:account_book_app/presentation/widgets/create_saving/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,11 @@ class CustomKeyboard extends ConsumerWidget {
   const CustomKeyboard({
     super.key,
     required this.controller,
+    required this.targetState,
   });
 
   final TextEditingController controller;
+  final TargetState targetState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -102,7 +105,8 @@ class CustomKeyboard extends ConsumerWidget {
           child: Column(
             children: [
               CustomButton(
-                onTap: () async => createSavingCTL.backspeacePrice(controller),
+                onTap: () async =>
+                    createSavingCTL.enterPrice(targetState.productId),
                 aspectRatio: 1 / 3,
                 child: const Icon(Icons.keyboard_return_outlined),
               )

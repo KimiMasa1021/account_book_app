@@ -33,11 +33,11 @@ class StatisticPage extends HookConsumerWidget {
           final savedTimes = data.length;
           //タグ別のリスト
           final listByTag = data.map((e) {
-            if (taglist.contains(e.memo)) {
+            if (taglist.contains(e.tag)) {
               return [];
             }
-            final list = data.where((f) => f.memo == e.memo).toList();
-            taglist.add(e.memo);
+            final list = data.where((f) => f.tag == e.tag).toList();
+            taglist.add(e.tag);
             return list;
           }).toList();
           listByTag.removeWhere((e) => e.isEmpty);
@@ -103,7 +103,7 @@ class StatisticPage extends HookConsumerWidget {
                             : listByTag.length,
                     (index) {
                       return TagPanel(
-                        text: listByTag[index][0].memo,
+                        text: listByTag[index][0].tag,
                         state: listByTag[index] as List<SavingState>,
                         total: sum,
                       );

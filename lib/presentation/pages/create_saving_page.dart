@@ -116,6 +116,7 @@ class CreateSavingPage extends HookConsumerWidget {
                   ),
                   CustomKeyboard(
                     controller: controller,
+                    targetState: target,
                   ),
                 ],
               )

@@ -12,7 +12,7 @@ class SavingState with _$SavingState {
     @TimestampConverter() required DateTime createdAt,
     @Default("") String productId,
     @Default("") String userId,
-    @Default("") String memo,
+    @Default("") String tag,
     @Default(0) int price,
   }) = _SavingState;
 

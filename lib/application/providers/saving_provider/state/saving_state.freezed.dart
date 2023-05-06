@@ -24,7 +24,7 @@ mixin _$SavingState {
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get productId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  String get memo => throw _privateConstructorUsedError;
+  String get tag => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $SavingStateCopyWith<$Res> {
       {@TimestampConverter() DateTime createdAt,
       String productId,
       String userId,
-      String memo,
+      String tag,
       int price});
 }
 
@@ -63,7 +63,7 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
     Object? createdAt = null,
     Object? productId = null,
     Object? userId = null,
-    Object? memo = null,
+    Object? tag = null,
     Object? price = null,
   }) {
     return _then(_value.copyWith(
@@ -79,9 +79,9 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      memo: null == memo
-          ? _value.memo
-          : memo // ignore: cast_nullable_to_non_nullable
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
               as String,
       price: null == price
           ? _value.price
@@ -103,7 +103,7 @@ abstract class _$$_SavingStateCopyWith<$Res>
       {@TimestampConverter() DateTime createdAt,
       String productId,
       String userId,
-      String memo,
+      String tag,
       int price});
 }
 
@@ -121,7 +121,7 @@ class __$$_SavingStateCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? productId = null,
     Object? userId = null,
-    Object? memo = null,
+    Object? tag = null,
     Object? price = null,
   }) {
     return _then(_$_SavingState(
@@ -137,9 +137,9 @@ class __$$_SavingStateCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      memo: null == memo
-          ? _value.memo
-          : memo // ignore: cast_nullable_to_non_nullable
+      tag: null == tag
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
               as String,
       price: null == price
           ? _value.price
@@ -156,7 +156,7 @@ class _$_SavingState extends _SavingState {
       {@TimestampConverter() required this.createdAt,
       this.productId = "",
       this.userId = "",
-      this.memo = "",
+      this.tag = "",
       this.price = 0})
       : super._();
 
@@ -174,14 +174,14 @@ class _$_SavingState extends _SavingState {
   final String userId;
   @override
   @JsonKey()
-  final String memo;
+  final String tag;
   @override
   @JsonKey()
   final int price;
 
   @override
   String toString() {
-    return 'SavingState(createdAt: $createdAt, productId: $productId, userId: $userId, memo: $memo, price: $price)';
+    return 'SavingState(createdAt: $createdAt, productId: $productId, userId: $userId, tag: $tag, price: $price)';
   }
 
   @override
@@ -194,14 +194,14 @@ class _$_SavingState extends _SavingState {
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.tag, tag) || other.tag == tag) &&
             (identical(other.price, price) || other.price == price));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, createdAt, productId, userId, memo, price);
+      Object.hash(runtimeType, createdAt, productId, userId, tag, price);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +222,7 @@ abstract class _SavingState extends SavingState {
       {@TimestampConverter() required final DateTime createdAt,
       final String productId,
       final String userId,
-      final String memo,
+      final String tag,
       final int price}) = _$_SavingState;
   _SavingState._() : super._();
 
@@ -237,7 +237,7 @@ abstract class _SavingState extends SavingState {
   @override
   String get userId;
   @override
-  String get memo;
+  String get tag;
   @override
   int get price;
   @override

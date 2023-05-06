@@ -16,27 +16,29 @@ class Loading extends ConsumerWidget {
     final font = ref.watch(myTextTheme);
 
     return flg
-        ? Container(
-            color: Theme.of(context).colorScheme.background,
-            width: size.width,
-            height: size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Lottie.asset(
-                  "assets/json/cat_loading.json",
-                  width: 230,
-                  height: 230,
-                  frameRate: FrameRate(60),
-                  repeat: true,
-                ),
-                Text(
-                  "Loading...",
-                  style: font.fs19.copyWith(
-                    fontWeight: FontWeight.bold,
+        ? Material(
+            child: Container(
+              color: Theme.of(context).colorScheme.background,
+              width: size.width,
+              height: size.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    "assets/json/cat_loading.json",
+                    width: 230,
+                    height: 230,
+                    frameRate: FrameRate(60),
+                    repeat: true,
                   ),
-                ),
-              ],
+                  Text(
+                    "Loading...",
+                    style: font.fs19.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         : const SizedBox();
