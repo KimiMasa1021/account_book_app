@@ -122,7 +122,7 @@ class DetailPage extends HookConsumerWidget {
                   children: [
                     const DetailHome(),
                     DetailHistory(state: target),
-                    DetailMember(state: target),
+                    DetailMember(targetState: target),
                     Container(),
                   ],
                 );

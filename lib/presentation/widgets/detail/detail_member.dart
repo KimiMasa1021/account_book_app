@@ -7,13 +7,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class DetailMember extends ConsumerWidget {
   const DetailMember({
     super.key,
-    required this.state,
+    required this.targetState,
   });
-  final TargetState state;
+  final TargetState targetState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchUser = ref.watch(searchUserNotifierProvider(state.members));
+    final searchUser =
+        ref.watch(searchUserNotifierProvider(targetState.members));
 
     return searchUser.when(
       data: (data) {
@@ -26,6 +27,7 @@ class DetailMember extends ConsumerWidget {
                 data.length,
                 (index) => MemberPanel(
                   profile: data[index],
+                  targetState: targetState,
                 ),
               ),
             ],
