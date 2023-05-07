@@ -31,6 +31,10 @@ class SavingRepository implements SavingRepositoryBase {
           .collection('targets')
           .doc(productId)
           .collection("saving")
+          .orderBy(
+            "createdAt",
+            descending: true,
+          )
           .withConverter<SavingState>(
             fromFirestore: (snapshot, _) =>
                 SavingState.fromJson(snapshot.data()!),

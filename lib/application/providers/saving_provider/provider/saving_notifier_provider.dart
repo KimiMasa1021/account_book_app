@@ -14,5 +14,5 @@ final savingNotifierProvider = StateNotifierProvider.family<SavingNotifier,
     ref: ref,
     productId: productId,
     savingService: ref.read(savingServiceProvider),
-  ),
+  )..init(),
 );

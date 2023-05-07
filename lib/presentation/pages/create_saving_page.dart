@@ -34,16 +34,12 @@ class CreateSavingPage extends HookConsumerWidget {
               onPressed: () {
                 context.pop();
               },
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-              ),
+              icon: const Icon(Icons.arrow_back_ios_new),
             ),
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(
-                  Icons.bookmark_add_outlined,
-                ),
+                icon: const Icon(Icons.bookmark_add_outlined),
               )
             ],
             title: const Text("追加"),
