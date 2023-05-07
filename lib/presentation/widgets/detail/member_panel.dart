@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/providers/saving_provider/provider/saving_notifier_provider.dart';
+import '../../../common/format_text.dart';
 import '../../../view/theme/app_text_theme.dart';
 
 class MemberPanel extends ConsumerWidget {
@@ -70,7 +71,7 @@ class MemberPanel extends ConsumerWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: sum.toString(),
+                      text: FormatText.formatYen(sum),
                       style: font.fs27.copyWith(
                         height: 0,
                       ),

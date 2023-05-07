@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../view/theme/app_text_theme.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class InfoPanel extends HookConsumerWidget {
   const InfoPanel({
@@ -56,23 +55,23 @@ class InfoPanel extends HookConsumerWidget {
               Text(title, style: font.fs16),
               RichText(
                 text: TextSpan(
-                  style: font.fs27.copyWith(
+                  style: font.fs16.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                   children: [
                     TextSpan(
                       text: text,
+                      style: font.fs27.copyWith(
+                        height: 0,
+                      ),
                     ),
                     TextSpan(
                       text: unit,
-                      style: font.fs16.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
           const Spacer(),

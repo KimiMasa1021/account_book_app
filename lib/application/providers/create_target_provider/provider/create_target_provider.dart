@@ -2,7 +2,6 @@ import 'package:account_book_app/application/providers/create_target_provider/no
 import 'package:account_book_app/application/providers/create_target_provider/state/create_target_state.dart';
 import 'package:account_book_app/application/services/storege_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../services/profile_service.dart';
 import '../../../services/target_service.dart';
 
 final createTargetNotifierProvider =

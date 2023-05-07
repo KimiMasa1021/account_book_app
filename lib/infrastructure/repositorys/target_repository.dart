@@ -71,4 +71,22 @@ class TargetRepository implements TargetRepositoryBase {
     }
     return Result.value(true);
   }
+
+  @override
+  Future<Result> editCurrentPercent(
+    String productId,
+    double newPercent,
+  ) async {
+    try {
+      await _db.collection("targets").doc(productId).set(
+        {
+          "currentPercent": newPercent,
+        },
+        SetOptions(merge: true),
+      );
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+    return Result.value("");
+  }
 }

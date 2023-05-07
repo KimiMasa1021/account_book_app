@@ -37,7 +37,7 @@ class ProfileRepository implements ProfileRepositoryBase {
           onCompleted(event.data()!);
         }
       });
-    } on Exception catch (e) {
+    } on Exception {
       return;
     }
   }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
-import '../../../../view/theme/app_text_theme.dart';
 import '../../common/select_member_panel.dart';
 
 class CreateTargetMember extends ConsumerWidget {
@@ -11,8 +10,6 @@ class CreateTargetMember extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final font = ref.watch(myTextTheme);
-    final size = MediaQuery.of(context).size;
     final profile = ref.watch(profileNotifierProvider);
     final searchUser = ref.watch(searchUserNotifierProvider(profile.friends));
     return searchUser.when(

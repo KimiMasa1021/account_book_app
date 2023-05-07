@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../view/theme/app_text_theme.dart';
 
 class CustomButton extends ConsumerWidget {
   const CustomButton({
@@ -15,8 +14,6 @@ class CustomButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final font = ref.watch(myTextTheme);
-
     return AspectRatio(
       aspectRatio: aspectRatio,
       child: InkWell(

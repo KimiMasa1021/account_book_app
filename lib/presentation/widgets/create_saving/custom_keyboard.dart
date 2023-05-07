@@ -105,8 +105,7 @@ class CustomKeyboard extends ConsumerWidget {
           child: Column(
             children: [
               CustomButton(
-                onTap: () async =>
-                    createSavingCTL.enterPrice(targetState.productId),
+                onTap: () async => createSavingCTL.enterPrice(targetState),
                 aspectRatio: 1 / 3,
                 child: const Icon(Icons.keyboard_return_outlined),
               )

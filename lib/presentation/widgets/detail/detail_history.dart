@@ -3,7 +3,6 @@ import 'package:account_book_app/presentation/widgets/detail/history_panel.dart'
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../application/providers/target_provider/state/target_state.dart';
-import '../../../view/theme/app_text_theme.dart';
 import 'history_date.dart';
 
 class DetailHistory extends ConsumerWidget {
@@ -16,7 +15,6 @@ class DetailHistory extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final saving = ref.watch(savingNotifierProvider(state.productId));
-    final font = ref.watch(myTextTheme);
 
     return saving.when(
       data: (data) {

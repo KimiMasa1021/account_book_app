@@ -1,5 +1,3 @@
-import 'package:account_book_app/application/providers/create_target_provider/notifier/create_target_notifier.dart';
-import 'package:account_book_app/application/providers/create_target_provider/state/create_target_state.dart';
 import 'package:account_book_app/application/providers/profile_notifier_provider/state/profile.dart';
 import 'package:account_book_app/application/providers/search_user_provider/notifier/search_user_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

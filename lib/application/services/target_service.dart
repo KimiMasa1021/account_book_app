@@ -27,4 +27,8 @@ class TargetService {
   Future<Result> addTarget(TargetState state) async {
     return await _targetRepository.addTarget(state);
   }
+
+  Future<Result> editCurrentPercent(String productId, double newPercent) async {
+    return await _targetRepository.editCurrentPercent(productId, newPercent);
+  }
 }

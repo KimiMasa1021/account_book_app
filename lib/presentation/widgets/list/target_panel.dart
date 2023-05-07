@@ -61,25 +61,6 @@ class TargetPanel extends HookConsumerWidget {
                             ),
                             maxLines: 2,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 35,
-                              right: 10,
-                            ),
-                            child: Row(
-                              children: [
-                                const Spacer(),
-                                Text(
-                                  "残り500,000円",
-                                  style: font.fs16.copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
-                                  ),
-                                  maxLines: 2,
-                                ),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),

@@ -1,6 +1,8 @@
 import 'package:account_book_app/application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
 import 'package:account_book_app/application/providers/saving_provider/state/saving_state.dart';
+import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
 import 'package:account_book_app/application/services/saving_service.dart';
+import 'package:account_book_app/application/services/target_service.dart';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,10 +13,13 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
   CreateSavingNotifier({
     required this.ref,
     required savingService,
+    required targetService,
   })  : _savingService = savingService,
+        _targetService = targetService,
         super(const CreateSavingState());
 
   final SavingService _savingService;
+  final TargetService _targetService;
   final Ref ref;
 
   void changeTag(String val) {
@@ -50,9 +55,13 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
     savePrice(priceController);
   }
 
-  Future<void> enterPrice(String productId) async {
+  Future<void> enterPrice(TargetState targetState) async {
     state = state.copyWith(isLoading: true);
-    final result = await saveSaving(productId);
+    final result = await saveSaving(targetState.productId);
+    if (!result.isError) {
+      //targetを更新
+      await editCurrentPercent(targetState);
+    }
     await Future.delayed(const Duration(seconds: 1));
     state = state.copyWith(isLoading: false);
   }
@@ -67,5 +76,16 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
       createdAt: DateTime.now(),
     );
     return await _savingService.saveSaving(savingState, productId);
+  }
+
+  Future<Result> editCurrentPercent(TargetState targetState) async {
+    final price = state.price;
+    final nowSum = targetState.targetPrice * targetState.currentPercent;
+    final newSum = price + nowSum;
+    final newPercent = newSum / targetState.targetPrice;
+    return await _targetService.editCurrentPercent(
+      targetState.productId,
+      newPercent,
+    );
   }
 }

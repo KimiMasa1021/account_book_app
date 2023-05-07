@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../../application/providers/saving_provider/provider/saving_notifier_provider.dart';
+import '../../../common/format_text.dart';
 import '../../../view/theme/app_text_theme.dart';
 
 class DetailHome extends ConsumerWidget {
@@ -40,7 +41,7 @@ class DetailHome extends ConsumerWidget {
                 InfoPanel(
                   title: "現在の達成金額",
                   icon: Icons.savings_outlined,
-                  text: sum.toString(),
+                  text: FormatText.formatYen(sum),
                   unit: "円",
                   rightWidget: CircularPercentIndicator(
                     radius: 30.0,
@@ -59,7 +60,7 @@ class DetailHome extends ConsumerWidget {
                 InfoPanel(
                   title: "残り",
                   icon: Icons.rocket_launch_outlined,
-                  text: remain.toString(),
+                  text: FormatText.formatYen(remain),
                   unit: "円",
                 ),
                 InfoPanel(
