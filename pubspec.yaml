@@ -46,6 +46,7 @@ dependencies:
   url_launcher: ^6.1.10
   async: ^2.10.0
   flutter_datetime_picker: ^1.5.1
+  percent_indicator: ^4.2.3
 
 
 

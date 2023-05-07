@@ -120,7 +120,7 @@ class DetailPage extends HookConsumerWidget {
               builder: (context) {
                 return TabBarView(
                   children: [
-                    const DetailHome(),
+                    DetailHome(targetState: target),
                     DetailHistory(state: target),
                     DetailMember(targetState: target),
                     Container(),

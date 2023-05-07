@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../view/theme/app_text_theme.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class InfoPanel extends HookConsumerWidget {
   const InfoPanel({
@@ -9,12 +10,14 @@ class InfoPanel extends HookConsumerWidget {
     required this.icon,
     required this.text,
     required this.unit,
+    this.rightWidget = const SizedBox(),
   });
 
   final String title;
   final IconData icon;
   final String text;
   final String unit;
+  final Widget rightWidget;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,12 +53,7 @@ class InfoPanel extends HookConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: font.fs16.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              Text(title, style: font.fs16),
               RichText(
                 text: TextSpan(
                   style: font.fs27.copyWith(
@@ -77,6 +75,8 @@ class InfoPanel extends HookConsumerWidget {
               )
             ],
           ),
+          const Spacer(),
+          rightWidget,
         ],
       ),
     );
