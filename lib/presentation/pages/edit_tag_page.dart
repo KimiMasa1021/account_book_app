@@ -19,7 +19,7 @@ class EditTagPage extends ConsumerWidget {
         title: const Text("タグの追加・編集"),
         actions: [
           IconButton(
-            onPressed: () async => editTagCTL.addTag(),
+            onPressed: () async => await editTagCTL.addTag(context),
             icon: const Icon(Icons.add, size: 35),
           )
         ],
@@ -34,8 +34,10 @@ class EditTagPage extends ConsumerWidget {
             child: EditTagPanel(
               index: index,
               tag: profile.tags[index],
-              deleteFuc: () async => await editTagCTL.deleteTag(),
-              editFuc: () async => await editTagCTL.editTagName(),
+              deleteFuc: () async =>
+                  await editTagCTL.deleteTag(context, profile.tags[index]),
+              editFuc: () async =>
+                  await editTagCTL.editTagName(context, profile.tags[index]),
             ),
           );
         },

@@ -105,7 +105,7 @@ class ProfileRepository implements ProfileRepositoryBase {
   }
 
   @override
-  Future<Result> sortTag(List<String> tags) async {
+  Future<Result> updateTag(List<String> tags) async {
     try {
       await _db.collection("users").doc(_auth.currentUser?.uid).set(
         {
