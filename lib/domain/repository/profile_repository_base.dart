@@ -11,4 +11,5 @@ abstract class ProfileRepositoryBase {
   );
   Future<Result<bool>> saveUsesrData(UserCredential credential);
   Future<Result<bool>> initializeTag(List<String> tags);
+  Future<Result> sortTag(List<String> tags);
 }

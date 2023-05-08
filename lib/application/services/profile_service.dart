@@ -65,4 +65,8 @@ class ProfileService {
   Future<void> saveUserData(UserCredential credential) async {
     await _profileRepository.saveUsesrData(credential);
   }
+
+  Future<Result> sortTags(List<String> tags) async {
+    return await _profileRepository.sortTag(tags);
+  }
 }
