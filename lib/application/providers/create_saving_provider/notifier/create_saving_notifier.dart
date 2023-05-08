@@ -5,6 +5,7 @@ import 'package:account_book_app/application/services/saving_service.dart';
 import 'package:account_book_app/application/services/target_service.dart';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common/price_formatter.dart';
 import '../state/create_saving_state.dart';
@@ -55,15 +56,15 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
     savePrice(priceController);
   }
 
-  Future<void> enterPrice(TargetState targetState) async {
+  Future<void> enterPrice(TargetState targetState, Function() backFuc) async {
     state = state.copyWith(isLoading: true);
     final result = await saveSaving(targetState.productId);
     if (!result.isError) {
-      //targetを更新
       await editCurrentPercent(targetState);
     }
     await Future.delayed(const Duration(seconds: 1));
     state = state.copyWith(isLoading: false);
+    backFuc();
   }
 
   Future<Result> saveSaving(String productId) async {
@@ -87,5 +88,9 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
       targetState.productId,
       newPercent,
     );
+  }
+
+  void backScreenFuc(BuildContext context) {
+    context.pop();
   }
 }

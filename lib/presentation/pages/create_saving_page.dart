@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../application/providers/go_router_provider/routes/routes.dart';
 import '../../application/providers/target_provider/state/target_state.dart';
 import '../../common/price_formatter.dart';
 import '../../view/theme/app_text_theme.dart';
@@ -38,7 +39,10 @@ class CreateSavingPage extends HookConsumerWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(
+                      "${Routes.list}/${Routes.projectDetail}/${Routes.createSaving}/${Routes.editTag}");
+                },
                 icon: const Icon(Icons.bookmark_add_outlined),
               )
             ],
@@ -98,12 +102,6 @@ class CreateSavingPage extends HookConsumerWidget {
                                 focusedBorder: InputBorder.none,
                                 border: InputBorder.none,
                               ),
-                              // onChanged: (val) {
-                              //   debugPrint(val);
-                              // },
-                              // onEditingComplete: () {
-                              //   debugPrint("aaa");
-                              // },
                             ),
                           ),
                         ),

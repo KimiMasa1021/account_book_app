@@ -22,6 +22,5 @@ class UserSavingNotifier extends StateNotifier<AsyncValue<List<SavingState>>> {
     state = AsyncData(
       savingList,
     );
-    debugPrint(state.toString());
   }
 }

@@ -5,9 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-import '../../../application/providers/saving_provider/provider/saving_notifier_provider.dart';
-import '../../../common/format_text.dart';
-import '../../../view/theme/app_text_theme.dart';
+import '../../../../application/providers/saving_provider/provider/saving_notifier_provider.dart';
+import '../../../../common/format_text.dart';
+import '../../../../view/theme/app_text_theme.dart';
 
 class DetailHome extends ConsumerWidget {
   const DetailHome({

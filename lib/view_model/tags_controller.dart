@@ -1,4 +1,3 @@
-import 'package:account_book_app/model/saving/tags_state.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,10 +5,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
 
 final tagsControllerProvider =
-    StateNotifierProvider<TagsController, List<Tags>>(
-        (ref) => TagsController(ref));
+    StateNotifierProvider<TagsController, List>((ref) => TagsController(ref));
 
-class TagsController extends StateNotifier<List<Tags>> {
+class TagsController extends StateNotifier<List> {
   final Ref ref;
   late Database database;
 
@@ -31,10 +29,10 @@ class TagsController extends StateNotifier<List<Tags>> {
         state = List.generate(
           tags.length,
           (i) {
-            return Tags(
-              id: tags[i]['id'],
-              tag: tags[i]['tag'],
-            );
+            // return Tags(
+            //   id: tags[i]['id'],
+            //   tag: tags[i]['tag'],
+            // );
           },
         );
       },
@@ -89,31 +87,31 @@ class TagsController extends StateNotifier<List<Tags>> {
     fucntion();
   }
 
-  Future<void> getTags() async {
-    final Database db = database;
-    final List<Map<String, dynamic>> tags = await db.query('tags');
-    state = List.generate(
-      tags.length,
-      (i) {
-        return Tags(
-          id: tags[i]['id'],
-          tag: tags[i]['tag'],
-        );
-      },
-    );
-  }
+  // Future<void> getTags() async {
+  //   final Database db = database;
+  //   final List<Map<String, dynamic>> tags = await db.query('tags');
+  //   state = List.generate(
+  //     tags.length,
+  //     (i) {
+  //       return Tags(
+  //         id: tags[i]['id'],
+  //         tag: tags[i]['tag'],
+  //       );
+  //     },
+  //   );
+  // }
 
-  Future<void> sortTags(List<Tags> newTagList) async {
-    final nameList = newTagList.map((e) => e.tag).toList();
+  // Future<void> sortTags(List<Tags> newTagList) async {
+  //   final nameList = newTagList.map((e) => e.tag).toList();
 
-    await database.transaction((txn) async {
-      await txn.rawInsert('DELETE FROM tags');
-      for (var tag in nameList) {
-        await txn.rawInsert('INSERT INTO tags(tag) VALUES("$tag")');
-      }
-    });
-    await getTags();
-  }
+  //   await database.transaction((txn) async {
+  //     await txn.rawInsert('DELETE FROM tags');
+  //     for (var tag in nameList) {
+  //       await txn.rawInsert('INSERT INTO tags(tag) VALUES("$tag")');
+  //     }
+  //   });
+  //   await getTags();
+  // }
 
   Future<void> createTag(String tag) async {
     await database.transaction((txn) async {

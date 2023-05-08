@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../model/saving/tags_state.dart';
-
 final authControllerProvider =
     StateNotifierProvider.autoDispose<AuthController, User?>(
         (ref) => AuthController(ref));
@@ -37,19 +35,6 @@ class AuthController extends StateNotifier<User?> {
     } catch (e) {
       debugPrint("ログイン失敗$e");
       return null;
-    }
-  }
-
-  Future<void> branchBySignin(
-    String? authFlg,
-    List<Tags> tags,
-    Function() emptyTagFunc,
-    Function() notEmptyTagFunc,
-  ) async {
-    if (authFlg != null && tags.isEmpty) {
-      emptyTagFunc();
-    } else {
-      notEmptyTagFunc();
     }
   }
 
