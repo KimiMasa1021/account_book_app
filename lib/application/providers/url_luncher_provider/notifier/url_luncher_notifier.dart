@@ -25,8 +25,8 @@ extension ExWebViewType on WebViewType {
 class UrlLuncherNotifier extends StateNotifier {
   UrlLuncherNotifier() : super(null);
 
-  Future<void> openUrl() async {
-    final flg = await launchUrl(Uri.parse(WebViewType.appHint.url));
+  Future<void> openUrl(WebViewType pageType) async {
+    final flg = await launchUrl(Uri.parse(pageType.url));
 
     if (!flg) {
       throw Exception('Could not launch');

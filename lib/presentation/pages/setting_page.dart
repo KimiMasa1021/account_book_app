@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../application/providers/go_router_provider/routes/routes.dart';
-import '../../common/theme/app_text_theme.dart';
+import '../../application/providers/url_luncher_provider/notifier/url_luncher_notifier.dart';
+import '../../application/providers/url_luncher_provider/provider/url_luncher_provider.dart';
 import '../widgets/setting/user_data_panel.dart';
 
 class SettingPage extends ConsumerWidget {
@@ -12,7 +13,7 @@ class SettingPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final font = ref.watch(myTextTheme);
+    final urlCTL = ref.watch(urlLuncherProvider.notifier);
 
     return Scaffold(
       body: SafeArea(
@@ -47,15 +48,17 @@ class SettingPage extends ConsumerWidget {
                         context.push("${Routes.setting}/${Routes.editTheme}");
                       },
                     ),
-                    SettingPanel(
-                      icon: Icons.language_outlined,
-                      text: "言語の設定",
-                      onTap: () {},
-                    ),
+                    // SettingPanel(
+                    //   icon: Icons.language_outlined,
+                    //   text: "言語の設定",
+                    //   onTap: () {},
+                    // ),
                     SettingPanel(
                       icon: Icons.description,
                       text: "このアプリについて",
-                      onTap: () {},
+                      onTap: () async {
+                        await urlCTL.openUrl(WebViewType.aboutApp);
+                      },
                     ),
                   ],
                 ),

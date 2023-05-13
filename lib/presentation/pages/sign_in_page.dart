@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
 import '../../application/providers/sign_in_provider/provider/sign_in_provider.dart';
+import '../../application/providers/url_luncher_provider/notifier/url_luncher_notifier.dart';
 import '../../common/theme/app_text_theme.dart';
 
 class SignIn extends ConsumerWidget {
@@ -59,7 +60,8 @@ class SignIn extends ConsumerWidget {
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: () async => urlCTL.openUrl(),
+                    onTap: () async =>
+                        await urlCTL.openUrl(WebViewType.privacyPolicy),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
