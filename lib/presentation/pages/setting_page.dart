@@ -1,75 +1,59 @@
+import 'package:account_book_app/presentation/widgets/setting/setting_panel.dart';
+import 'package:account_book_app/presentation/widgets/setting/setting_panel_base.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../widgets/setting/setting_panel.dart';
+import '../../view/theme/app_text_theme.dart';
 import '../widgets/setting/user_data_panel.dart';
 
-class SettingPage extends HookConsumerWidget {
+class SettingPage extends ConsumerWidget {
   const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final font = ref.watch(myTextTheme);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const UserDataPanel(),
-                SettingPanel(
-                  text: 'フレンドの追加',
-                  icon: Icons.person_add,
-                  function: () {
-                    // context.pushNamed(Routes.name().scanQr);
-                  },
+                UserDataPanel(
+                  onTap: () {},
                 ),
-                SettingPanel(
-                  text: 'フレンドの管理',
-                  icon: Icons.group_outlined,
-                  function: () {
-                    // context.pushNamed(Routes.name().friendManagement);
-                  },
+                SettingPanelBase(
+                  widgetList: [
+                    SettingPanel(
+                      icon: Icons.person_add,
+                      text: "フレンドの追加",
+                      onTap: () {},
+                    ),
+                    SettingPanel(
+                      icon: Icons.group_outlined,
+                      text: "フレンドの管理",
+                      onTap: () {},
+                    ),
+                  ],
                 ),
-                SettingPanel(
-                  text: 'テーマの変更',
-                  icon: Icons.format_paint_rounded,
-                  function: () {
-                    // context.pushNamed(Routes.name().designManagement);
-                  },
-                ),
-                SettingPanel(
-                  text: '使用上のヒント',
-                  icon: Icons.tips_and_updates_outlined,
-                  function: () async {
-                    // if (!await launchUrl(
-                    //   Uri.parse(WebViewType.appHint.url),
-                    //   mode: LaunchMode.externalApplication,
-                    // )) {
-                    //   throw Exception('Could not launch');
-                    // }
-                  },
-                ),
-                SettingPanel(
-                  text: 'ログアウト',
-                  icon: Icons.logout_outlined,
-                  function: () async {
-                    // showDialog(
-                    //   context: context,
-                    //   builder: (context) => LottieDialog(
-                    //     url: LottieUrl.logout.url,
-                    //     title: 'ログアウト',
-                    //     subTitle: '本当にログアウトしちゃうの?',
-                    //     button1Title: 'ログアウト',
-                    //     onTap1: () async {
-                    //       await authCTL.signOut(() => {});
-                    //     },
-                    //     onTap2: () {
-                    //       context.pop();
-                    //     },
-                    //   ),
-                    // );
-                  },
+                SettingPanelBase(
+                  widgetList: [
+                    SettingPanel(
+                      icon: Icons.format_paint_outlined,
+                      text: "テーマの変更",
+                      onTap: () {},
+                    ),
+                    SettingPanel(
+                      icon: Icons.language_outlined,
+                      text: "言語の設定",
+                      onTap: () {},
+                    ),
+                    SettingPanel(
+                      icon: Icons.description,
+                      text: "このアプリについて",
+                      onTap: () {},
+                    ),
+                  ],
                 ),
               ],
             ),

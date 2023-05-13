@@ -57,6 +57,7 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
   }
 
   Future<void> enterPrice(TargetState targetState, Function() backFuc) async {
+    if (state.tag == "" || state.price == 0) return;
     state = state.copyWith(isLoading: true);
     final result = await saveSaving(targetState.productId);
     if (!result.isError) {

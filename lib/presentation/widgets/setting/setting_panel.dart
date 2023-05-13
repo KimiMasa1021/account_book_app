@@ -3,56 +3,34 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../view/theme/app_text_theme.dart';
 
-class SettingPanel extends HookConsumerWidget {
+class SettingPanel extends ConsumerWidget {
   const SettingPanel({
     super.key,
-    required this.text,
-    required this.function,
     required this.icon,
+    required this.text,
+    required this.onTap,
   });
-  final String text;
-  final Function() function;
   final IconData icon;
-
+  final String text;
+  final Function() onTap;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
 
     return InkWell(
-      onTap: () async {
-        await function();
-      },
+      onTap: () async => await onTap(),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              child: Icon(
-                icon,
-                size: 25,
-                color: Theme.of(context).colorScheme.onSecondary,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(
-                text,
-                style: font.fs16.copyWith(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-              ),
-            ),
-            const Spacer(),
             Icon(
-              Icons.arrow_forward_ios,
-              size: 20,
-              color: Theme.of(context).colorScheme.onBackground,
-            )
+              icon,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              text,
+              style: font.fs19,
+            ),
           ],
         ),
       ),
