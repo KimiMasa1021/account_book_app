@@ -69,4 +69,8 @@ class ProfileService {
   Future<Result> updateTags(List<String> tags) async {
     return await _profileRepository.updateTag(tags);
   }
+
+  Future<Result<Profile?>> searchUser(String uid) async {
+    return await _profileRepository.searchUser(uid);
+  }
 }

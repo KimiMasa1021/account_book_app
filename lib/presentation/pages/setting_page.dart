@@ -30,7 +30,10 @@ class SettingPage extends ConsumerWidget {
                     SettingPanel(
                       icon: Icons.person_add,
                       text: "フレンドの追加",
-                      onTap: () {},
+                      onTap: () {
+                        context
+                            .push("${Routes.setting}/${Routes.createFriend}");
+                      },
                     ),
                     SettingPanel(
                       icon: Icons.group_outlined,

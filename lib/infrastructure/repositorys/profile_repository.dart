@@ -118,4 +118,25 @@ class ProfileRepository implements ProfileRepositoryBase {
     }
     return Result.value(true);
   }
+
+  @override
+  Future<Result<Profile?>> searchUser(String uid) async {
+    try {
+      final aaa = await _db
+          .collection('users')
+          .doc(uid)
+          .withConverter<Profile>(
+            fromFirestore: (snapshot, _) => Profile.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          )
+          .get();
+      if (aaa.data() != null) {
+        return Result.value(aaa.data()!);
+      } else {
+        return Result.value(null);
+      }
+    } on Exception {
+      return Result.error("");
+    }
+  }
 }
