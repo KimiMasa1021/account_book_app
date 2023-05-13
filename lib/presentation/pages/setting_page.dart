@@ -1,8 +1,10 @@
 import 'package:account_book_app/presentation/widgets/setting/setting_panel.dart';
 import 'package:account_book_app/presentation/widgets/setting/setting_panel_base.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../view/theme/app_text_theme.dart';
+import '../../application/providers/go_router_provider/routes/routes.dart';
+import '../../common/theme/app_text_theme.dart';
 import '../widgets/setting/user_data_panel.dart';
 
 class SettingPage extends ConsumerWidget {
@@ -41,7 +43,9 @@ class SettingPage extends ConsumerWidget {
                     SettingPanel(
                       icon: Icons.format_paint_outlined,
                       text: "テーマの変更",
-                      onTap: () {},
+                      onTap: () {
+                        context.push("${Routes.setting}/${Routes.editTheme}");
+                      },
                     ),
                     SettingPanel(
                       icon: Icons.language_outlined,

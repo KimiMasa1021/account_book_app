@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../application/providers/search_user_provider/provider/search_user_provider.dart';
 import '../../../common/format_text.dart';
-import '../../../view/theme/app_text_theme.dart';
+import '../../../common/theme/app_text_theme.dart';
 
 class HistoryPanel extends ConsumerWidget {
   const HistoryPanel({

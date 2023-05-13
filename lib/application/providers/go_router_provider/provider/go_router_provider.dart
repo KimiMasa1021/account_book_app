@@ -1,6 +1,7 @@
 import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
 import 'package:account_book_app/presentation/pages/create_saving_page.dart';
 import 'package:account_book_app/presentation/pages/edit_tag_page.dart';
+import 'package:account_book_app/presentation/pages/edit_theme_page.dart';
 import 'package:account_book_app/presentation/pages/list_page.dart';
 import 'package:account_book_app/presentation/pages/setting_page.dart';
 import 'package:account_book_app/presentation/pages/sign_in_page.dart';
@@ -115,6 +116,15 @@ final routerProvider = Provider(
                 ),
               );
             },
+            routes: [
+              GoRoute(
+                path: Routes.editTheme,
+                parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                builder: (context, state) {
+                  return const EditThemePage();
+                },
+              ),
+            ],
           ),
         ],
       ),

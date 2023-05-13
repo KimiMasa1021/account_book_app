@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../application/providers/saving_provider/state/saving_state.dart';
 import '../../common/format_text.dart';
-import '../../view/theme/app_text_theme.dart';
+import '../../common/theme/app_text_theme.dart';
 import '../widgets/statistic/bar.dart';
 import '../widgets/statistic/info_panel.dart';
 import '../widgets/statistic/tag_panel.dart';

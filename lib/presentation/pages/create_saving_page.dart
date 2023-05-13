@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../application/providers/go_router_provider/routes/routes.dart';
 import '../../application/providers/target_provider/state/target_state.dart';
 import '../../common/price_formatter.dart';
-import '../../view/theme/app_text_theme.dart';
+import '../../common/theme/app_text_theme.dart';
 import '../widgets/create_saving/tag.dart';
 
 class CreateSavingPage extends HookConsumerWidget {

@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../utility/assets_url.dart';
-import '../../../theme/app_text_theme.dart';
+import '../../../../common/theme/app_text_theme.dart';
 
 class LoginLoading extends ConsumerWidget {
   const LoginLoading({

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import '../../model/enums.dart';
-import '../theme/app_text_theme.dart';
+import '../../common/theme/app_text_theme.dart';
 
 class LottieLoading extends ConsumerWidget {
   const LottieLoading({

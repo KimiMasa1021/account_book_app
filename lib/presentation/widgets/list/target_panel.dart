@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../application/providers/target_provider/state/target_state.dart';
-import '../../../view/theme/app_text_theme.dart';
+import '../../../common/theme/app_text_theme.dart';
 
 class TargetPanel extends HookConsumerWidget {
   const TargetPanel({

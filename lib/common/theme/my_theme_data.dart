@@ -72,7 +72,3 @@ class MyThemeData {
 }
 
 final textTheme = const TextTheme().apply();
-
-// https://m2.material.io/design/material-theming/implementing-your-theme.html#typography
-// https://m2.material.io/design/material-theming/implementing-your-theme.html#color
-

@@ -9,6 +9,7 @@ class Routes {
   static const String projectDetail = "projectDetail";
   static const String createSaving = "createSaving";
   static const String editTag = "editTag";
+  static const String editTheme = "editTheme";
 
   static const String addProjectDetails = "add_project_details";
   static const String addProjectImage = "add_project_image";

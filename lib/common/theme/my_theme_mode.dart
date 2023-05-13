@@ -53,25 +53,4 @@ extension Extension on ExThemeMode {
         return MyThemeData.themeData1().theme;
     }
   }
-
-  String get themeName {
-    switch (this) {
-      case ExThemeMode.theme:
-        return "パステルサマー";
-      case ExThemeMode.theme1:
-        return "モスグリーン";
-      case ExThemeMode.theme2:
-        return "チェリーレッド";
-      case ExThemeMode.theme3:
-        return "ロイヤルパープル";
-      case ExThemeMode.theme4:
-        return "チョコレート";
-      case ExThemeMode.theme5:
-        return "ダークイエロー";
-      case ExThemeMode.theme6:
-        return "ネイビーブルー";
-      default:
-        return "エラーテーマ";
-    }
-  }
 }
