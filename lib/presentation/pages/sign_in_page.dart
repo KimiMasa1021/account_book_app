@@ -1,6 +1,6 @@
 import 'package:account_book_app/application/providers/url_luncher_provider/provider/url_luncher_provider.dart';
 import 'package:account_book_app/presentation/widgets/common/loading.dart';
-import 'package:account_book_app/view/component/shadow_button.dart';
+import 'package:account_book_app/presentation/widgets/common/shadow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';

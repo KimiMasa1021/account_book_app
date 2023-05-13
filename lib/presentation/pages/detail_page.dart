@@ -4,8 +4,8 @@ import 'package:account_book_app/presentation/widgets/detail/tab_view/detail_mem
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../application/providers/target_provider/state/target_state.dart';
-import '../../view/pages/home/widgets/sticky_tab_bar_delegate.dart';
 import '../../common/theme/app_text_theme.dart';
+import '../widgets/common/sticky_tab_bar_delegate.dart';
 import '../widgets/detail/detail_header.dart';
 
 class DetailPage extends HookConsumerWidget {

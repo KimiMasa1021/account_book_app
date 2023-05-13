@@ -8,10 +8,8 @@ import '../../../../common/theme/my_theme_mode.dart';
 
 class ThemeNotifier extends StateNotifier<ExThemeMode> {
   ThemeNotifier({
-    required TagsService tagsService,
     required this.id,
-  })  : _tagsService = tagsService,
-        super(ExThemeMode.theme1) {
+  }) : super(ExThemeMode.theme1) {
     state = ExThemeMode.values.firstWhere(
       (e) => e.id == id,
       orElse: () => ExThemeMode.theme1,
@@ -19,7 +17,6 @@ class ThemeNotifier extends StateNotifier<ExThemeMode> {
   }
 
   final int? id;
-  final TagsService _tagsService;
   final String key = "theme_key";
 
   Future<void> changeTheme(ExThemeMode theme) async {

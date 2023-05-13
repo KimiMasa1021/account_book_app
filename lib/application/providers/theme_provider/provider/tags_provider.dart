@@ -10,7 +10,6 @@ final themeProvider =
 final themeFamilyProvider =
     StateNotifierProvider.family.autoDispose<ThemeNotifier, ExThemeMode, int?>(
   (ref, int? id) => ThemeNotifier(
-    tagsService: ref.read(tagsServiceProvider),
     id: id,
   ),
 );

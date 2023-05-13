@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../utility/assets_url.dart';
 import '../../../../../common/theme/app_text_theme.dart';
 
 class FriendsEmpty extends ConsumerWidget {
@@ -16,11 +14,11 @@ class FriendsEmpty extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Column(
         children: [
-          SvgPicture.asset(
-            SvgUrl.team.url,
-            height: size.width / 3,
-            width: size.width / 3,
-          ),
+          // SvgPicture.asset(
+          //   SvgUrl.team.url,
+          //   height: size.width / 3,
+          //   width: size.width / 3,
+          // ),
           Text(
             "現在フレンドが登録されてません",
             style: font.fs19.copyWith(
