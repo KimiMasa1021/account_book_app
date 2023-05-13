@@ -85,7 +85,7 @@ class ProfileRepository implements ProfileRepositoryBase {
     try {
       _searchUserStream = _db
           .collection("users")
-          .where("uid", whereIn: userList)
+          .where("uid", whereIn: userList.isEmpty ? [""] : userList)
           .withConverter<Profile>(
             fromFirestore: (snapshot, _) => Profile.fromJson(snapshot.data()!),
             toFirestore: (data, _) => data.toJson(),

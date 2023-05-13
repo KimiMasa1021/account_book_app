@@ -54,7 +54,8 @@ class DetailHome extends ConsumerWidget {
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
-                    progressColor: Theme.of(context).colorScheme.tertiary,
+                    progressColor: Theme.of(context).colorScheme.secondary,
+                    backgroundColor: Theme.of(context).colorScheme.background,
                   ),
                 ),
                 InfoPanel(

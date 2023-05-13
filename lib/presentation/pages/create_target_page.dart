@@ -19,39 +19,46 @@ class CreateTargetPage extends ConsumerWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SafeArea(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Stepper(
-                    currentStep: createTarget.stepperIndex,
-                    type: StepperType.vertical,
-                    onStepContinue: () => createTargetCTL.onStepContinue(),
-                    onStepCancel: () => createTargetCTL.onStepCancel(),
-                    steps: const [
-                      Step(
-                        title: Text('メンバーを選択してね'),
-                        content: CreateTargetMember(),
-                      ),
-                      Step(
-                        title: Text('詳細を教えてね'),
-                        content: CreateTargetDetail(),
-                      ),
-                      Step(
-                        title: Text('いつまでに達成したいですか？'),
-                        content: CreateTargetDate(),
-                      ),
-                      Step(
-                        title: Text('画像はどうする？'),
-                        content: CreateTargetImage(),
-                      ),
-                    ],
-                    controlsBuilder: (context, details) => StepperController(
-                      details: details,
-                    ),
+          Theme(
+            data: ThemeData(
+              colorScheme: Theme.of(context).colorScheme.copyWith(
+                    background: Theme.of(context).colorScheme.secondary,
                   ),
-                )
-              ],
+            ),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Stepper(
+                      currentStep: createTarget.stepperIndex,
+                      type: StepperType.vertical,
+                      onStepContinue: () => createTargetCTL.onStepContinue(),
+                      onStepCancel: () => createTargetCTL.onStepCancel(),
+                      steps: const [
+                        Step(
+                          title: Text('メンバーを選択してね'),
+                          content: CreateTargetMember(),
+                        ),
+                        Step(
+                          title: Text('詳細を教えてね'),
+                          content: CreateTargetDetail(),
+                        ),
+                        Step(
+                          title: Text('いつまでに達成したいですか？'),
+                          content: CreateTargetDate(),
+                        ),
+                        Step(
+                          title: Text('画像はどうする？'),
+                          content: CreateTargetImage(),
+                        ),
+                      ],
+                      controlsBuilder: (context, details) => StepperController(
+                        details: details,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Loading(flg: createTarget.isLoading),

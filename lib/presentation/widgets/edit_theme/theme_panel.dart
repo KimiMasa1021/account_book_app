@@ -27,6 +27,11 @@ class ThemePanel extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color:
+                    ExThemeMode.values[index].themeData.colorScheme.secondary,
+                width: 2,
+              ),
             ),
             child: Row(
               children: [
@@ -74,6 +79,11 @@ class ThemePanel extends ConsumerWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Theme.of(context).colorScheme.background,
+              border: Border.all(
+                color:
+                    ExThemeMode.values[index].themeData.colorScheme.secondary,
+                width: 2,
+              ),
             ),
             child: Center(
               child: Container(
@@ -83,7 +93,8 @@ class ThemePanel extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(15),
                   color: theme != ExThemeMode.values[index]
                       ? Theme.of(context).colorScheme.background
-                      : Theme.of(context).colorScheme.secondary,
+                      : ExThemeMode
+                          .values[index].themeData.colorScheme.secondary,
                 ),
               ),
             ),

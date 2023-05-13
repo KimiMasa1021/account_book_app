@@ -50,13 +50,15 @@ class DetailHeader extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     margin: const EdgeInsets.symmetric(horizontal: 15),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(200),
                     ),
                     child: Center(
                       child: Text(
                         "節約記録を追加！",
-                        style: font.fs16,
+                        style: font.fs16.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                       ),
                     ),
                   ),
