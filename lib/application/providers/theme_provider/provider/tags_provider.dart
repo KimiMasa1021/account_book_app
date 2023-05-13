@@ -14,11 +14,3 @@ final themeFamilyProvider =
     id: id,
   ),
 );
-// final themeControllerProvider =
-//     StateNotifierProvider.autoDispose<ThemeController, ExThemeMode>(
-//   (ref) => throw UnimplementedError(),
-// );
-// final themeControllerProviderFamily = StateNotifierProvider.family
-//     .autoDispose<ThemeController, ExThemeMode, int?>(
-//   (ref, int? id) => ThemeController(ref, id),
-// );

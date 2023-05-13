@@ -45,7 +45,6 @@ class TagPanel extends HookConsumerWidget {
               RichText(
                 text: TextSpan(
                   style: font.fs27.copyWith(
-                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                   children: [
@@ -64,7 +63,6 @@ class TagPanel extends HookConsumerWidget {
               RichText(
                 text: TextSpan(
                   style: font.fs21.copyWith(
-                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                   children: [
@@ -73,9 +71,7 @@ class TagPanel extends HookConsumerWidget {
                     ),
                     TextSpan(
                       text: '%',
-                      style: font.fs16.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: font.fs16.copyWith(),
                     ),
                   ],
                 ),

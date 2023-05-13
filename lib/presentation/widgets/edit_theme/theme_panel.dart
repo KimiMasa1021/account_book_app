@@ -73,9 +73,19 @@ class ThemePanel extends ConsumerWidget {
             width: 15,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: theme != ExThemeMode.values[index]
-                  ? Theme.of(context).colorScheme.background
-                  : Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.background,
+            ),
+            child: Center(
+              child: Container(
+                height: 27,
+                width: 8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: theme != ExThemeMode.values[index]
+                      ? Theme.of(context).colorScheme.background
+                      : Theme.of(context).colorScheme.secondary,
+                ),
+              ),
             ),
           ),
         ),
