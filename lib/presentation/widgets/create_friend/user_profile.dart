@@ -1,3 +1,4 @@
+import 'package:account_book_app/application/providers/create_friend_provider/provider/create_friend_provider.dart';
 import 'package:account_book_app/application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
 import 'package:account_book_app/application/providers/profile_notifier_provider/state/profile.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class UserProfile extends HookConsumerWidget {
     final font = ref.watch(myTextTheme);
     final loading = useState(false);
     final profile = ref.watch(profileNotifierProvider);
-
+    final createFriendCTL = ref.watch(createFriendProvider.notifier);
     final isFriend = profile.friends.contains(friendState.uid) ? true : false;
 
     return Stack(
@@ -79,12 +80,8 @@ class UserProfile extends HookConsumerWidget {
                     ),
                     const Spacer(),
                     InkWell(
-                      onTap: () async {
-                        // if (isFriend) return;
-                        // loading.value = true;
-                        // await friendCTL.qrFriendRequest(friendState.uid);
-                        // loading.value = false;
-                      },
+                      onTap: () async => await createFriendCTL
+                          .sendFriendRequest(friendState.uid),
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                           vertical: 20,

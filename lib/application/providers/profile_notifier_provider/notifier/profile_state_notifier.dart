@@ -17,6 +17,7 @@ class ProfileNotifier extends StateNotifier<Profile> {
   String? get abc => _profileService.userId;
 
   void init() {
+    debugPrint("動いていますか！！");
     _profileService.subscribeUserProfile(fetchProfile);
   }
 

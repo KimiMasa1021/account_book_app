@@ -6,6 +6,7 @@ import '../notifier/sign_in_notifier.dart';
 
 final signInProvider = StateNotifierProvider<SignInNotifier, SignInState>(
   (ref) => SignInNotifier(
+    ref,
     service: ref.read(profileServiceProvider),
   ),
 );

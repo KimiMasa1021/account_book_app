@@ -13,9 +13,9 @@ class SignIn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final profileCTL = ref.watch(profileNotifierProvider.notifier);
     final signIn = ref.watch(signInProvider);
     final signInCTL = ref.watch(signInProvider.notifier);
-    final profileCTL = ref.watch(profileNotifierProvider.notifier);
     final size = MediaQuery.of(context).size;
     final font = ref.watch(myTextTheme);
     final urlCTL = ref.watch(urlLuncherProvider.notifier);
