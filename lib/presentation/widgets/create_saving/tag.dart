@@ -1,3 +1,4 @@
+import 'package:account_book_app/application/providers/saving_provider/state/saving_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../application/providers/create_saving_provider/provider/create_saving_provider.dart';
@@ -7,8 +8,10 @@ class Tag extends ConsumerWidget {
   const Tag({
     super.key,
     required this.tag,
+    required this.savingState,
   });
   final String tag;
+  final SavingState? savingState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

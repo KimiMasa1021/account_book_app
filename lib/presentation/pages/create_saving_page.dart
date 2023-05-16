@@ -1,5 +1,6 @@
 import 'package:account_book_app/application/providers/create_saving_provider/provider/create_saving_provider.dart';
 import 'package:account_book_app/application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
+import 'package:account_book_app/application/providers/saving_provider/state/saving_state.dart';
 import 'package:account_book_app/presentation/widgets/common/loading.dart';
 import 'package:account_book_app/presentation/widgets/create_saving/custom_keyboard.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,16 @@ class CreateSavingPage extends HookConsumerWidget {
   const CreateSavingPage({
     super.key,
     required this.target,
+    this.savingState,
   });
   final TargetState target;
+  final SavingState? savingState;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextTheme);
-    final controller = useTextEditingController();
+    final controller =
+        useTextEditingController(text: savingState?.price.toString());
     final profile = ref.watch(profileNotifierProvider);
     final createSaving = ref.watch(createSavingNotifierProvider);
 
@@ -67,6 +71,7 @@ class CreateSavingPage extends HookConsumerWidget {
                         children: List.generate(
                           profile.tags.length,
                           (index) => Tag(
+                            savingState: savingState,
                             tag: profile.tags[index],
                           ),
                         ),

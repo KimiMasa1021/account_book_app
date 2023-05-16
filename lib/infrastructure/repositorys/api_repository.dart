@@ -30,21 +30,8 @@ class ApiRepositroy implements ApiRepositoryBase {
   @override
   Future<Result<String?>> sendFriendRequest(String friendUid) async {
     try {
-      // String endPoint = "/qrFriendRequest";
-      // final myUid = ref.read(profileNotifierProvider).uid;
-      // final sendJSON = {
-      //   "process": "QRフレンドリクエスト",
-      //   "user1": {"uid": myUid},
-      //   "user2": {"uid": friendUid}
-      // };
-      // final url = requestUrl(endPoint);
-      // final String body = json.encode(sendJSON);
-      // await http.post(url, headers: headers, body: body);
-      // return Result.value(friendUid);
       final myUid = ref.read(profileNotifierProvider).uid;
       final friens = ref.read(profileNotifierProvider).friends;
-      debugPrint("myid  " + myUid);
-      debugPrint("friendUid  " + friendUid);
 
       if (friens.contains(friendUid)) {
         return Result.error("");

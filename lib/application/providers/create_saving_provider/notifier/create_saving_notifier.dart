@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common/price_formatter.dart';
+import '../../go_router_provider/routes/routes.dart';
 import '../state/create_saving_state.dart';
 
 class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
@@ -15,13 +16,18 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
     required this.ref,
     required savingService,
     required targetService,
+    this.savingState,
   })  : _savingService = savingService,
         _targetService = targetService,
-        super(const CreateSavingState());
+        super(CreateSavingState(
+          price: savingState == null ? 0 : savingState.price,
+          tag: savingState == null ? "" : savingState.tag,
+        ));
 
   final SavingService _savingService;
   final TargetService _targetService;
   final Ref ref;
+  final SavingState? savingState;
 
   void changeTag(String val) {
     state = state.copyWith(tag: val);
@@ -93,5 +99,47 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
 
   void backScreenFuc(BuildContext context) {
     context.pop();
+  }
+
+  Future showEditSavingDialog(
+    BuildContext context,
+    SavingState savingState,
+    TargetState targetState,
+  ) async {
+    final profile = ref.read(profileNotifierProvider);
+    if (profile.uid != savingState.userId) {
+      return;
+    }
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.delete_forever_outlined),
+              title: const Text("削除する"),
+              onTap: () async {
+                context.pop();
+                state = state.copyWith(isLoading: true);
+                await deleteSaving();
+                state = state.copyWith(isLoading: false);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.cancel_outlined),
+              title: const Text("キャンセル"),
+              onTap: () {
+                context.pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future deleteSaving() async {
+    await Future.delayed(Duration(seconds: 2));
   }
 }

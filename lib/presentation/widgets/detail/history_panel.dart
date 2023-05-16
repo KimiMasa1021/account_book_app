@@ -1,3 +1,5 @@
+import 'package:account_book_app/application/providers/create_saving_provider/provider/create_saving_provider.dart';
+import 'package:account_book_app/application/providers/saving_provider/provider/saving_notifier_provider.dart';
 import 'package:account_book_app/application/providers/saving_provider/state/saving_state.dart';
 import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
 import 'package:flutter/material.dart';
@@ -21,79 +23,86 @@ class HistoryPanel extends ConsumerWidget {
     final font = ref.watch(myTextTheme);
     final searchUser =
         ref.watch(searchUserNotifierProvider(targetState.members));
-
+    final createSavingCTL = ref.watch(createSavingNotifierProvider.notifier);
     return searchUser.when(
       data: (data) {
         final profile = data.singleWhere((e) => e.uid == savingState.userId);
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    savingState.tag,
-                    style: font.fs19.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      style: font.fs16.copyWith(
+        return InkWell(
+          onLongPress: () async => await createSavingCTL.showEditSavingDialog(
+            context,
+            savingState,
+            targetState,
+          ),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      savingState.tag,
+                      style: font.fs19.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onBackground,
                       ),
-                      children: [
-                        TextSpan(
-                          text: FormatText.formatYen(savingState.price),
-                          style: font.fs27.copyWith(
-                            height: 0,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: font.fs16.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: FormatText.formatYen(savingState.price),
+                            style: font.fs27.copyWith(
+                              height: 0,
+                            ),
                           ),
-                        ),
-                        const TextSpan(
-                          text: '円',
-                        ),
-                      ],
+                          const TextSpan(
+                            text: '円',
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    margin: const EdgeInsets.only(right: 10),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      image: profile.img != ""
-                          ? DecorationImage(
-                              image: NetworkImage(
-                                profile.img,
-                              ),
-                            )
-                          : null,
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: 30,
+                      height: 30,
+                      margin: const EdgeInsets.only(right: 10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        image: profile.img != ""
+                            ? DecorationImage(
+                                image: NetworkImage(
+                                  profile.img,
+                                ),
+                              )
+                            : null,
+                      ),
                     ),
-                  ),
-                  Text(
-                    profile.name,
-                    style: font.fs16.copyWith(),
-                  ),
-                  const Spacer(),
-                  Text(
-                    DateFormat("HH:mm").format(savingState.createdAt),
-                    style: font.fs16.copyWith(),
-                  ),
-                ],
-              ),
-              Divider(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-            ],
+                    Text(
+                      profile.name,
+                      style: font.fs16.copyWith(),
+                    ),
+                    const Spacer(),
+                    Text(
+                      DateFormat("HH:mm").format(savingState.createdAt),
+                      style: font.fs16.copyWith(),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+              ],
+            ),
           ),
         );
       },
