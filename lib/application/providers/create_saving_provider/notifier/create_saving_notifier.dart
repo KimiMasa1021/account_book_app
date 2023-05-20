@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common/price_formatter.dart';
-import '../../go_router_provider/routes/routes.dart';
 import '../state/create_saving_state.dart';
 
 class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
@@ -122,7 +121,7 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
               onTap: () async {
                 context.pop();
                 state = state.copyWith(isLoading: true);
-                await deleteSaving();
+                await deleteSaving(targetState, savingState);
                 state = state.copyWith(isLoading: false);
               },
             ),
@@ -139,7 +138,11 @@ class CreateSavingNotifier extends StateNotifier<CreateSavingState> {
     );
   }
 
-  Future deleteSaving() async {
-    await Future.delayed(Duration(seconds: 2));
+  Future deleteSaving(TargetState targetState, SavingState savingState) async {
+    final price = targetState.targetPrice * targetState.currentPercent;
+    final newPercent = (price - savingState.price) / targetState.targetPrice;
+    await _savingService.deleteSaving(savingState);
+    await _targetService.editCurrentPercent(targetState.productId, newPercent);
+    await Future.delayed(const Duration(seconds: 1));
   }
 }

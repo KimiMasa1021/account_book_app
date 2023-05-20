@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import '../../application/providers/profile_notifier_provider/provider/profile_notifier_provider.dart';
 import '../../application/providers/target_provider/provider/target_notifier_provider.dart';
 import '../widgets/common/sticky_tab_bar_delegate.dart';
@@ -47,16 +48,16 @@ class ListPage extends HookConsumerWidget {
                               ),
                             ),
                           ),
-                          // Align(
-                          //   alignment: Alignment.center,
-                          //   child: Lottie.asset(
-                          //     LottieUrl.pig.url,
-                          //     width: 50,
-                          //     height: 50,
-                          //     frameRate: FrameRate(60),
-                          //     repeat: true,
-                          //   ),
-                          // ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Lottie.asset(
+                              "assets/json/pig.json",
+                              width: 50,
+                              height: 50,
+                              frameRate: FrameRate(60),
+                              repeat: true,
+                            ),
+                          ),
                         ],
                       ),
                     ),

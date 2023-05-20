@@ -20,6 +20,7 @@ SavingState _$SavingStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SavingState {
+  String get docId => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get productId => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $SavingStateCopyWith<$Res> {
       _$SavingStateCopyWithImpl<$Res, SavingState>;
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime createdAt,
+      {String docId,
+      @TimestampConverter() DateTime createdAt,
       String productId,
       String userId,
       String tag,
@@ -60,6 +62,7 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? docId = null,
     Object? createdAt = null,
     Object? productId = null,
     Object? userId = null,
@@ -67,6 +70,10 @@ class _$SavingStateCopyWithImpl<$Res, $Val extends SavingState>
     Object? price = null,
   }) {
     return _then(_value.copyWith(
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -100,7 +107,8 @@ abstract class _$$_SavingStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@TimestampConverter() DateTime createdAt,
+      {String docId,
+      @TimestampConverter() DateTime createdAt,
       String productId,
       String userId,
       String tag,
@@ -118,6 +126,7 @@ class __$$_SavingStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? docId = null,
     Object? createdAt = null,
     Object? productId = null,
     Object? userId = null,
@@ -125,6 +134,10 @@ class __$$_SavingStateCopyWithImpl<$Res>
     Object? price = null,
   }) {
     return _then(_$_SavingState(
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -153,7 +166,8 @@ class __$$_SavingStateCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SavingState extends _SavingState {
   _$_SavingState(
-      {@TimestampConverter() required this.createdAt,
+      {this.docId = "",
+      @TimestampConverter() required this.createdAt,
       this.productId = "",
       this.userId = "",
       this.tag = "",
@@ -163,6 +177,9 @@ class _$_SavingState extends _SavingState {
   factory _$_SavingState.fromJson(Map<String, dynamic> json) =>
       _$$_SavingStateFromJson(json);
 
+  @override
+  @JsonKey()
+  final String docId;
   @override
   @TimestampConverter()
   final DateTime createdAt;
@@ -181,7 +198,7 @@ class _$_SavingState extends _SavingState {
 
   @override
   String toString() {
-    return 'SavingState(createdAt: $createdAt, productId: $productId, userId: $userId, tag: $tag, price: $price)';
+    return 'SavingState(docId: $docId, createdAt: $createdAt, productId: $productId, userId: $userId, tag: $tag, price: $price)';
   }
 
   @override
@@ -189,6 +206,7 @@ class _$_SavingState extends _SavingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SavingState &&
+            (identical(other.docId, docId) || other.docId == docId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.productId, productId) ||
@@ -201,7 +219,7 @@ class _$_SavingState extends _SavingState {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, createdAt, productId, userId, tag, price);
+      Object.hash(runtimeType, docId, createdAt, productId, userId, tag, price);
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +237,8 @@ class _$_SavingState extends _SavingState {
 
 abstract class _SavingState extends SavingState {
   factory _SavingState(
-      {@TimestampConverter() required final DateTime createdAt,
+      {final String docId,
+      @TimestampConverter() required final DateTime createdAt,
       final String productId,
       final String userId,
       final String tag,
@@ -229,6 +248,8 @@ abstract class _SavingState extends SavingState {
   factory _SavingState.fromJson(Map<String, dynamic> json) =
       _$_SavingState.fromJson;
 
+  @override
+  String get docId;
   @override
   @TimestampConverter()
   DateTime get createdAt;

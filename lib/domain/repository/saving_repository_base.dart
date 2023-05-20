@@ -12,4 +12,8 @@ abstract class SavingRepositoryBase {
     SavingState state,
     String id,
   );
+  Future<Result> deleteSaving(
+    String targetId,
+    String id,
+  );
 }

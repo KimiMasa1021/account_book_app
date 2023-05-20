@@ -34,4 +34,11 @@ class SavingService {
   Future<Result> saveSaving(SavingState state, String id) async {
     return await _savingRepository.saveSaving(state, id);
   }
+
+  Future<Result> deleteSaving(SavingState savingState) async {
+    return await _savingRepository.deleteSaving(
+      savingState.productId,
+      savingState.docId,
+    );
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:account_book_app/presentation/widgets/common/lottie_dialog.dart';
 import 'package:account_book_app/presentation/widgets/setting/setting_panel.dart';
 import 'package:account_book_app/presentation/widgets/setting/setting_panel_base.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,19 @@ class SettingPage extends ConsumerWidget {
                     SettingPanel(
                       icon: Icons.logout_outlined,
                       text: "ログアウト",
-                      onTap: () {},
+                      onTap: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (context) => LottieDialog(
+                            url: "assets/json/logout.json",
+                            title: "ログアウト",
+                            subTitle: "ログアウトしますか？",
+                            button1Title: "ログアウト",
+                            onTap1: () {},
+                            onTap2: () {},
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

@@ -8,6 +8,7 @@ part of 'saving_state.dart';
 
 _$_SavingState _$$_SavingStateFromJson(Map<String, dynamic> json) =>
     _$_SavingState(
+      docId: json['docId'] as String? ?? "",
       createdAt:
           const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
       productId: json['productId'] as String? ?? "",
@@ -18,6 +19,7 @@ _$_SavingState _$$_SavingStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_SavingStateToJson(_$_SavingState instance) =>
     <String, dynamic>{
+      'docId': instance.docId,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'productId': instance.productId,
       'userId': instance.userId,

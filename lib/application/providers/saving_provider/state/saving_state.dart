@@ -9,6 +9,7 @@ part 'saving_state.g.dart';
 class SavingState with _$SavingState {
   const SavingState._();
   factory SavingState({
+    @Default("") String docId,
     @TimestampConverter() required DateTime createdAt,
     @Default("") String productId,
     @Default("") String userId,

@@ -43,7 +43,18 @@ class SavingRepository implements SavingRepositoryBase {
           .snapshots();
       _streamListener = _savingStream?.listen((event) {
         if (event.docs.isNotEmpty) {
-          final savingList = event.docs.map((e) => e.data()).toList();
+          final savingList = event.docs
+              .map(
+                (e) => SavingState(
+                  docId: e.id,
+                  createdAt: e.data().createdAt,
+                  productId: e.data().productId,
+                  price: e.data().price,
+                  tag: e.data().tag,
+                  userId: e.data().userId,
+                ),
+              )
+              .toList();
           onCompleted(savingList);
         } else {
           onCompleted([]);
@@ -102,6 +113,24 @@ class SavingRepository implements SavingRepositoryBase {
           .doc(id)
           .collection("saving")
           .add(state.toJson());
+      return Result.value(true);
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
+
+  @override
+  Future<Result> deleteSaving(
+    String targetId,
+    String id,
+  ) async {
+    try {
+      await _db
+          .collection("targets")
+          .doc(targetId)
+          .collection("saving")
+          .doc(id)
+          .delete();
       return Result.value(true);
     } on Exception catch (e) {
       return Result.error(e);
