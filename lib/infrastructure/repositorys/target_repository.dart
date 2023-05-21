@@ -89,4 +89,22 @@ class TargetRepository implements TargetRepositoryBase {
     }
     return Result.value("");
   }
+
+  @override
+  Future<Result<bool>> exitProject(
+    String productId,
+    List<String> newMemberList,
+  ) async {
+    try {
+      await _db.collection("targets").doc(productId).set(
+        {
+          "members": newMemberList,
+        },
+        SetOptions(merge: true),
+      );
+      return Result.value(true);
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
 }

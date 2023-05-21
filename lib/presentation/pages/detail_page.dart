@@ -9,6 +9,7 @@ import '../../application/providers/target_provider/state/target_state.dart';
 import '../../common/theme/app_text_theme.dart';
 import '../widgets/common/sticky_tab_bar_delegate.dart';
 import '../widgets/detail/detail_header.dart';
+import '../widgets/detail/tab_view/detail_overview.dart';
 
 class DetailPage extends HookConsumerWidget {
   const DetailPage({
@@ -22,7 +23,7 @@ class DetailPage extends HookConsumerWidget {
     final createSaving = ref.watch(createSavingNotifierProvider);
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Stack(
         children: [
           Scaffold(
@@ -58,7 +59,7 @@ class DetailPage extends HookConsumerWidget {
                             Tab(text: "ホーム"),
                             Tab(text: "履歴"),
                             Tab(text: "メンバー"),
-                            // Tab(text: "概要"),
+                            Tab(text: "概要"),
                           ],
                         ),
                       ),
@@ -72,7 +73,7 @@ class DetailPage extends HookConsumerWidget {
                         DetailHome(targetState: target),
                         DetailHistory(state: target),
                         DetailMember(targetState: target),
-                        // Container(),
+                        DetailOverview(state: target)
                       ],
                     );
                   },

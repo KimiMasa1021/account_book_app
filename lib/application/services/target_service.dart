@@ -31,4 +31,11 @@ class TargetService {
   Future<Result> editCurrentPercent(String productId, double newPercent) async {
     return await _targetRepository.editCurrentPercent(productId, newPercent);
   }
+
+  Future<Result> exitProject(
+    String productId,
+    List<String> newMemberList,
+  ) async {
+    return await _targetRepository.exitProject(productId, newMemberList);
+  }
 }
