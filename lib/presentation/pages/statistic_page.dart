@@ -110,20 +110,22 @@ class StatisticPage extends HookConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 5),
-                  InkWell(
-                    onTap: () {
-                      tagFlg.value = !tagFlg.value;
-                    },
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Center(
-                        child: Text(
-                          !tagFlg.value ? "すべてみる" : "とじる",
-                          style: font.fs16.copyWith(),
-                        ),
-                      ),
-                    ),
-                  ),
+                  listByTag.length > 3
+                      ? InkWell(
+                          onTap: () {
+                            tagFlg.value = !tagFlg.value;
+                          },
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: Center(
+                              child: Text(
+                                !tagFlg.value ? "すべてみる" : "とじる",
+                                style: font.fs16.copyWith(),
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                   const SizedBox(height: 20),
                   Text(
                     "曜日別の傾向",

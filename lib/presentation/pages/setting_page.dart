@@ -53,11 +53,11 @@ class SettingPage extends ConsumerWidget {
                         context.push("${Routes.setting}/${Routes.editTheme}");
                       },
                     ),
-                    SettingPanel(
-                      icon: Icons.language_outlined,
-                      text: "言語の設定",
-                      onTap: () async {},
-                    ),
+                    // SettingPanel(
+                    //   icon: Icons.language_outlined,
+                    //   text: "言語の設定",
+                    //   onTap: () async {},
+                    // ),
                     SettingPanel(
                       icon: Icons.description,
                       text: "このアプリについて",
