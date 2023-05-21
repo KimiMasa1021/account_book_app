@@ -12,4 +12,5 @@ class Routes {
   static const String editTheme = "editTheme";
   static const String createFriend = "createFriend";
   static const String userProfile = "userProfile";
+  static const String addProjectMember = "addProjectMember";
 }

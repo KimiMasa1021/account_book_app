@@ -37,11 +37,11 @@ class SettingPage extends ConsumerWidget {
                             .push("${Routes.setting}/${Routes.createFriend}");
                       },
                     ),
-                    SettingPanel(
-                      icon: Icons.group_outlined,
-                      text: "フレンドの管理",
-                      onTap: () {},
-                    ),
+                    // SettingPanel(
+                    //   icon: Icons.group_outlined,
+                    //   text: "フレンドの管理",
+                    //   onTap: () {},
+                    // ),
                   ],
                 ),
                 SettingPanelBase(

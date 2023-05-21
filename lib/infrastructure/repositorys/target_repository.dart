@@ -91,7 +91,7 @@ class TargetRepository implements TargetRepositoryBase {
   }
 
   @override
-  Future<Result<bool>> exitProject(
+  Future<Result<bool>> editProjectMember(
     String productId,
     List<String> newMemberList,
   ) async {

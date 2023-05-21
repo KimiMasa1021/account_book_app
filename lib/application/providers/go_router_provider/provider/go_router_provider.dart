@@ -1,5 +1,6 @@
 import 'package:account_book_app/application/providers/profile_notifier_provider/state/profile.dart';
 import 'package:account_book_app/application/providers/target_provider/state/target_state.dart';
+import 'package:account_book_app/presentation/pages/add_project_member_page.dart';
 import 'package:account_book_app/presentation/pages/create_friend_page.dart';
 import 'package:account_book_app/presentation/pages/create_saving_page.dart';
 import 'package:account_book_app/presentation/pages/edit_tag_page.dart';
@@ -88,6 +89,17 @@ final routerProvider = Provider(
                         },
                       ),
                     ],
+                  ),
+                  GoRoute(
+                    path: Routes.addProjectMember,
+                    parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                    builder: (context, state) {
+                      final project = state.extra as TargetState;
+
+                      return AddProjectMemberPage(
+                        targetState: project,
+                      );
+                    },
                   ),
                 ],
               ),

@@ -51,6 +51,9 @@ class TargetNotifier extends StateNotifier<AsyncValue<List<TargetState>>> {
     final uid = ref.read(profileNotifierProvider).uid;
     final List<String> newMemberList = List.from(targetState.members);
     newMemberList.remove(uid);
-    await _targetService.exitProject(targetState.productId, newMemberList);
+    await _targetService.editProjectMember(
+      targetState.productId,
+      newMemberList,
+    );
   }
 }

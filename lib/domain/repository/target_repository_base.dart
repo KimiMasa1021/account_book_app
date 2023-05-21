@@ -9,7 +9,7 @@ abstract class TargetRepositoryBase {
     String productId,
     double newPercent,
   );
-  Future<Result<bool>> exitProject(
+  Future<Result<bool>> editProjectMember(
     String productId,
     List<String> newMemberList,
   );

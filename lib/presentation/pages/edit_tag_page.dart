@@ -3,14 +3,12 @@ import 'package:account_book_app/application/providers/profile_notifier_provider
 import 'package:account_book_app/presentation/widgets/edit_tag/edit_tag_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../common/theme/app_text_theme.dart';
 
 class EditTagPage extends ConsumerWidget {
   const EditTagPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final font = ref.watch(myTextTheme);
     final profile = ref.watch(profileNotifierProvider);
     final editTagCTL = ref.watch(editTagsProvider.notifier);
 
