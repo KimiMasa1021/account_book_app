@@ -6,19 +6,19 @@ import '../state/sign_in_state.dart';
 class SignInNotifier extends StateNotifier<SignInState> {
   SignInNotifier(
     this.ref, {
-    required this.service,
+    required this.profileService,
   }) : super(const SignInState());
 
-  final ProfileService service;
+  final ProfileService profileService;
   final Ref ref;
 
   Future<void> signInWithGoogle(Function() branchFnc) async {
     state = state.copyWith(signInFlg: true);
 
-    final result = await service.signInWithGoogle();
+    final result = await profileService.signInWithGoogle();
 
     if (!result.isError) {
-      await service.saveUserData(result.asValue!.value);
+      await profileService.saveUserData(result.asValue!.value);
     }
     ref.read(profileNotifierProvider.notifier).init();
     await Future.delayed(const Duration(seconds: 2));

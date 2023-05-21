@@ -73,4 +73,8 @@ class ProfileService {
   Future<Result<Profile?>> searchUser(String uid) async {
     return await _profileRepository.searchUser(uid);
   }
+
+  Future<void> signOut() async {
+    await _profileRepository.signOut();
+  }
 }

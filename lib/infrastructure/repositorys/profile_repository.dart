@@ -139,4 +139,14 @@ class ProfileRepository implements ProfileRepositoryBase {
       return Result.error("");
     }
   }
+
+  @override
+  Future<Result> signOut() async {
+    try {
+      await _auth.signOut();
+      return Result.value(true);
+    } on Exception {
+      return Result.error("");
+    }
+  }
 }

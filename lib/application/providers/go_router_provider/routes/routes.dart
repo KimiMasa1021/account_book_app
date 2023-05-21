@@ -12,16 +12,4 @@ class Routes {
   static const String editTheme = "editTheme";
   static const String createFriend = "createFriend";
   static const String userProfile = "userProfile";
-
-  static const String addProjectDetails = "add_project_details";
-  static const String addProjectImage = "add_project_image";
-  static const String editProject = "edit_project/:targetId";
-  static const String addSaving = "add_saving";
-  static const String friendManagement = "friend_management";
-  static const String scanQr = "scan_qr";
-  static const String memberList = "memberList";
-  static const String inviteMember = "invite_member/:targetId";
-  static const String designManagement = "design_management";
-  static const String accountManagement = "account_management";
-  static const String addTag = "add_tag";
 }

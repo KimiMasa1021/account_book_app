@@ -1,4 +1,4 @@
-import 'package:account_book_app/presentation/widgets/common/lottie_dialog.dart';
+import 'package:account_book_app/application/providers/setting_provider/provider/setting_provider.dart';
 import 'package:account_book_app/presentation/widgets/setting/setting_panel.dart';
 import 'package:account_book_app/presentation/widgets/setting/setting_panel_base.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +15,7 @@ class SettingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final urlCTL = ref.watch(urlLuncherProvider.notifier);
+    final settingCTL = ref.watch(settingProvider.notifier);
 
     return Scaffold(
       body: SafeArea(
@@ -76,19 +77,13 @@ class SettingPage extends ConsumerWidget {
                     SettingPanel(
                       icon: Icons.logout_outlined,
                       text: "ログアウト",
-                      onTap: () async {
-                        await showDialog(
-                          context: context,
-                          builder: (context) => LottieDialog(
-                            url: "assets/json/logout.json",
-                            title: "ログアウト",
-                            subTitle: "ログアウトしますか？",
-                            button1Title: "ログアウト",
-                            onTap1: () {},
-                            onTap2: () {},
-                          ),
-                        );
-                      },
+                      onTap: () async => await settingCTL.showLogoutDialog(
+                        context,
+                        () {
+                          context.pop();
+                          context.go(Routes.signIn);
+                        },
+                      ),
                     ),
                   ],
                 ),

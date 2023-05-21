@@ -13,4 +13,5 @@ abstract class ProfileRepositoryBase {
   Future<Result<bool>> initializeTag(List<String> tags);
   Future<Result> updateTag(List<String> tags);
   Future<Result<Profile?>> searchUser(String uid);
+  Future<Result> signOut();
 }
