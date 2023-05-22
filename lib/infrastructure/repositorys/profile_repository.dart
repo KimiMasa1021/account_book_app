@@ -149,4 +149,20 @@ class ProfileRepository implements ProfileRepositoryBase {
       return Result.error("");
     }
   }
+
+  @override
+  Future<Result<bool>> editProfile(String name, String imageUrl) async {
+    try {
+      await _db.collection("users").doc(_auth.currentUser?.uid).set(
+        {
+          "name": name,
+          "img": imageUrl,
+        },
+        SetOptions(merge: true),
+      );
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+    return Result.value(true);
+  }
 }

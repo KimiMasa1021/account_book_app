@@ -77,4 +77,8 @@ class ProfileService {
   Future<void> signOut() async {
     await _profileRepository.signOut();
   }
+
+  Future<Result> editProfile(String name, String imageUrl) async {
+    return await _profileRepository.editProfile(name, imageUrl);
+  }
 }

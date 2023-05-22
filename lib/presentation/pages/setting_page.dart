@@ -25,7 +25,9 @@ class SettingPage extends ConsumerWidget {
             child: Column(
               children: [
                 UserDataPanel(
-                  onTap: () {},
+                  onTap: () {
+                    context.push("${Routes.setting}/${Routes.editProfile}");
+                  },
                 ),
                 SettingPanelBase(
                   widgetList: [
@@ -72,7 +74,9 @@ class SettingPage extends ConsumerWidget {
                     SettingPanel(
                       icon: Icons.manage_accounts_outlined,
                       text: "アカウント設定",
-                      onTap: () async {},
+                      onTap: () async {
+                        context.push("${Routes.setting}/${Routes.editProfile}");
+                      },
                     ),
                     SettingPanel(
                       icon: Icons.logout_outlined,
