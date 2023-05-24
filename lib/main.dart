@@ -23,9 +23,9 @@ Future<void> main() async {
 // TODO
 
 /*
-
-  MVVMからDDDへの移行
-  GoRouterあたりのコード汚すぎる
+  QRスキャンの読み取り判定
+  統計ページのローディング
+  言語の設定
   RiverpodのoverrideWithProvider非推奨対応
   機能追加
   広告張り
