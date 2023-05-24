@@ -56,7 +56,7 @@ class SelectMemberPanel extends ConsumerWidget {
                     border: isContained || isMyProfile
                         ? Border.all(
                             width: 3,
-                            color: Theme.of(context).colorScheme.tertiary,
+                            color: Theme.of(context).colorScheme.secondary,
                           )
                         : null,
                   ),
@@ -71,12 +71,12 @@ class SelectMemberPanel extends ConsumerWidget {
                           margin: const EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Theme.of(context).colorScheme.tertiary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                           child: Center(
                             child: Icon(
                               Icons.check,
-                              color: Theme.of(context).colorScheme.onTertiary,
+                              color: Theme.of(context).colorScheme.onSecondary,
                             ),
                           ),
                         ),

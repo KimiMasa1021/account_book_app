@@ -22,7 +22,7 @@ class CreateTargetPage extends ConsumerWidget {
           Theme(
             data: ThemeData(
               colorScheme: Theme.of(context).colorScheme.copyWith(
-                    background: Theme.of(context).colorScheme.secondary,
+                    background: Theme.of(context).colorScheme.surface,
                   ),
             ),
             child: SafeArea(
