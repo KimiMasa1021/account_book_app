@@ -8,9 +8,8 @@ class CreateFriend with _$CreateFriend {
   const factory CreateFriend({
     @Default(false) bool pageType,
     @Default(false) bool isLoading,
+    @Default(false) bool isScanAble,
     QRViewController? controller,
     @Default(null) Profile? user,
-    @Default("") String qrData,
-    @Default("") String qrPrevious,
   }) = _CreateFriend;
 }

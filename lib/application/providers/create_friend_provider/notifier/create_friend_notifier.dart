@@ -36,21 +36,16 @@ class CreateFriendNotifier extends StateNotifier<CreateFriend> {
     final profile = ref.read(profileNotifierProvider);
     controller.scannedDataStream.listen(
       (scanData) async {
-        if (scanData.code == state.qrPrevious) return;
-        state = state.copyWith(isLoading: true, qrData: scanData.code!);
+        if (!state.isScanAble) return;
         final user = await searchUser(scanData.code!);
-        state = state.copyWith(user: user);
+        // ローディング開始　スキャン停止
+        state = state.copyWith(user: user, isLoading: true, isScanAble: false);
         if (scanData.code == profile.uid) {
           // friendCTL.shwoToast("自分自身を登録することはできません");
         } else if (state.user != null) {
           movePage();
-        } else {
-          // friendCTL.shwoToast("ユーザーが見つかりませんでした");
         }
-        state = state.copyWith(
-          isLoading: false,
-          qrPrevious: scanData.code!,
-        );
+        state = state.copyWith(isLoading: false);
       },
     );
   }
@@ -78,5 +73,9 @@ class CreateFriendNotifier extends StateNotifier<CreateFriend> {
     } else {
       _toastMessage.shwoToast("エラーが発生しました。");
     }
+  }
+
+  void changeScanState() {
+    state = state.copyWith(isScanAble: true);
   }
 }

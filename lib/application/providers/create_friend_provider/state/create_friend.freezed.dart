@@ -18,10 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreateFriend {
   bool get pageType => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isScanAble => throw _privateConstructorUsedError;
   QRViewController? get controller => throw _privateConstructorUsedError;
   Profile? get user => throw _privateConstructorUsedError;
-  String get qrData => throw _privateConstructorUsedError;
-  String get qrPrevious => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateFriendCopyWith<CreateFriend> get copyWith =>
@@ -37,10 +36,9 @@ abstract class $CreateFriendCopyWith<$Res> {
   $Res call(
       {bool pageType,
       bool isLoading,
+      bool isScanAble,
       QRViewController? controller,
-      Profile? user,
-      String qrData,
-      String qrPrevious});
+      Profile? user});
 
   $ProfileCopyWith<$Res>? get user;
 }
@@ -60,10 +58,9 @@ class _$CreateFriendCopyWithImpl<$Res, $Val extends CreateFriend>
   $Res call({
     Object? pageType = null,
     Object? isLoading = null,
+    Object? isScanAble = null,
     Object? controller = freezed,
     Object? user = freezed,
-    Object? qrData = null,
-    Object? qrPrevious = null,
   }) {
     return _then(_value.copyWith(
       pageType: null == pageType
@@ -74,6 +71,10 @@ class _$CreateFriendCopyWithImpl<$Res, $Val extends CreateFriend>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isScanAble: null == isScanAble
+          ? _value.isScanAble
+          : isScanAble // ignore: cast_nullable_to_non_nullable
+              as bool,
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
@@ -82,14 +83,6 @@ class _$CreateFriendCopyWithImpl<$Res, $Val extends CreateFriend>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as Profile?,
-      qrData: null == qrData
-          ? _value.qrData
-          : qrData // ignore: cast_nullable_to_non_nullable
-              as String,
-      qrPrevious: null == qrPrevious
-          ? _value.qrPrevious
-          : qrPrevious // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 
@@ -117,10 +110,9 @@ abstract class _$$_CreateFriendCopyWith<$Res>
   $Res call(
       {bool pageType,
       bool isLoading,
+      bool isScanAble,
       QRViewController? controller,
-      Profile? user,
-      String qrData,
-      String qrPrevious});
+      Profile? user});
 
   @override
   $ProfileCopyWith<$Res>? get user;
@@ -139,10 +131,9 @@ class __$$_CreateFriendCopyWithImpl<$Res>
   $Res call({
     Object? pageType = null,
     Object? isLoading = null,
+    Object? isScanAble = null,
     Object? controller = freezed,
     Object? user = freezed,
-    Object? qrData = null,
-    Object? qrPrevious = null,
   }) {
     return _then(_$_CreateFriend(
       pageType: null == pageType
@@ -153,6 +144,10 @@ class __$$_CreateFriendCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isScanAble: null == isScanAble
+          ? _value.isScanAble
+          : isScanAble // ignore: cast_nullable_to_non_nullable
+              as bool,
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
@@ -161,14 +156,6 @@ class __$$_CreateFriendCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as Profile?,
-      qrData: null == qrData
-          ? _value.qrData
-          : qrData // ignore: cast_nullable_to_non_nullable
-              as String,
-      qrPrevious: null == qrPrevious
-          ? _value.qrPrevious
-          : qrPrevious // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -179,10 +166,9 @@ class _$_CreateFriend implements _CreateFriend {
   const _$_CreateFriend(
       {this.pageType = false,
       this.isLoading = false,
+      this.isScanAble = false,
       this.controller,
-      this.user = null,
-      this.qrData = "",
-      this.qrPrevious = ""});
+      this.user = null});
 
   @override
   @JsonKey()
@@ -191,20 +177,17 @@ class _$_CreateFriend implements _CreateFriend {
   @JsonKey()
   final bool isLoading;
   @override
+  @JsonKey()
+  final bool isScanAble;
+  @override
   final QRViewController? controller;
   @override
   @JsonKey()
   final Profile? user;
-  @override
-  @JsonKey()
-  final String qrData;
-  @override
-  @JsonKey()
-  final String qrPrevious;
 
   @override
   String toString() {
-    return 'CreateFriend(pageType: $pageType, isLoading: $isLoading, controller: $controller, user: $user, qrData: $qrData, qrPrevious: $qrPrevious)';
+    return 'CreateFriend(pageType: $pageType, isLoading: $isLoading, isScanAble: $isScanAble, controller: $controller, user: $user)';
   }
 
   @override
@@ -216,17 +199,16 @@ class _$_CreateFriend implements _CreateFriend {
                 other.pageType == pageType) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isScanAble, isScanAble) ||
+                other.isScanAble == isScanAble) &&
             (identical(other.controller, controller) ||
                 other.controller == controller) &&
-            (identical(other.user, user) || other.user == user) &&
-            (identical(other.qrData, qrData) || other.qrData == qrData) &&
-            (identical(other.qrPrevious, qrPrevious) ||
-                other.qrPrevious == qrPrevious));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, pageType, isLoading, controller, user, qrData, qrPrevious);
+      runtimeType, pageType, isLoading, isScanAble, controller, user);
 
   @JsonKey(ignore: true)
   @override
@@ -239,23 +221,20 @@ abstract class _CreateFriend implements CreateFriend {
   const factory _CreateFriend(
       {final bool pageType,
       final bool isLoading,
+      final bool isScanAble,
       final QRViewController? controller,
-      final Profile? user,
-      final String qrData,
-      final String qrPrevious}) = _$_CreateFriend;
+      final Profile? user}) = _$_CreateFriend;
 
   @override
   bool get pageType;
   @override
   bool get isLoading;
   @override
+  bool get isScanAble;
+  @override
   QRViewController? get controller;
   @override
   Profile? get user;
-  @override
-  String get qrData;
-  @override
-  String get qrPrevious;
   @override
   @JsonKey(ignore: true)
   _$$_CreateFriendCopyWith<_$_CreateFriend> get copyWith =>
