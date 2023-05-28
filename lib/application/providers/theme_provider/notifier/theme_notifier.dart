@@ -1,9 +1,5 @@
-import 'package:account_book_app/application/providers/go_router_provider/routes/routes.dart';
-import 'package:account_book_app/application/services/tags_service.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../common/theme/my_theme_mode.dart';
 
 class ThemeNotifier extends StateNotifier<ExThemeMode> {

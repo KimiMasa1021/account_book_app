@@ -41,7 +41,7 @@ class CreateFriendNotifier extends StateNotifier<CreateFriend> {
         // ローディング開始　スキャン停止
         state = state.copyWith(user: user, isLoading: true, isScanAble: false);
         if (scanData.code == profile.uid) {
-          // friendCTL.shwoToast("自分自身を登録することはできません");
+          _toastMessage.shwoToast("自分自身を登録することはできません");
         } else if (state.user != null) {
           movePage();
         }

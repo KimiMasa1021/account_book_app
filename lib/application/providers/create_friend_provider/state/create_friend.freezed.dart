@@ -166,7 +166,7 @@ class _$_CreateFriend implements _CreateFriend {
   const _$_CreateFriend(
       {this.pageType = false,
       this.isLoading = false,
-      this.isScanAble = false,
+      this.isScanAble = true,
       this.controller,
       this.user = null});
 
